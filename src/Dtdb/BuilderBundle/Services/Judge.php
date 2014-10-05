@@ -30,8 +30,6 @@ class Judge
 			$qty = $elt['qty'];
 			$type = $card->getType()->getName();
 			if($type == "Outfit") continue;
-			$influence = 0;
-			$qty_influence = $qty;
 			$elt['gang'] = str_replace(' ', '-', mb_strtolower($card->getGang()->getName()));
 			
 			if(!isset($classeur[$type])) $classeur[$type] = array("qty" => 0, "slots" => array());

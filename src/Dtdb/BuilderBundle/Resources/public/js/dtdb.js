@@ -58,6 +58,10 @@ function getDisplayDescriptions(sort) {
                       id: 'spell',
                       label: 'Spells',
                       icon: 'hearts'
+                  }, {
+                      id: 'joker',
+                      label: 'Jokers',
+                      icon: ''
                   }
                 ]
             ],
@@ -105,24 +109,21 @@ function process_deck_by_type() {
 				 type = "icebreaker";
 			 }
 		}
-		var influence = 0, gang_code = '';
+		var gang_code = '';
 		if(record.gang != Outfit.gang) {
 			gang_code = record.gang_code;
-			influence = record.gangcost * record.indeck;
 		}
 		
 		if(bytype[type] == null) bytype[type] = [];
 		bytype[type].push({
 			card: record,
 			qty: record.indeck,
-			influence: influence,
 			gang: gang_code
 		});
 	});
 	bytype.outfit = [{
 		card: Outfit,
 		qty: 1,
-		influence: 0,
 		gang: ''
 	}];
 	
@@ -178,31 +179,17 @@ function update_deck(options) {
 		}
 	}
 	
-	InfluenceLimit = 0;
 	var cabinet = {};
 	$('#outfit').html('<a href="'+Routing.generate('cards_zoom', {card_code:Outfit.code})+'" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="'+Outfit.code+'">'+Outfit.title+'</a>');
 	$('#img_outfit').prop('src', Outfit.imagesrc);
-	InfluenceLimit = Outfit.influencelimit;
-	if(typeof InfluenceLimit === "undefined") InfluenceLimit = Number.POSITIVE_INFINITY;
-	MinimumDeckSize = Outfit.minimumdecksize;
 
 	var latestpack = DTDB.data.sets({name:Outfit.pack}).first();
 	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order(DisplaySort === 'number' ? 'code' : 'title').each(function(record) {
 		var pack = DTDB.data.sets({name:record.pack}).first();
 		if(latestpack.cyclenumber < pack.cyclenumber || (latestpack.cyclenumber == pack.cyclenumber && latestpack.number < pack.number)) latestpack = pack;
 		
-		var influence = '';
-		if(record.gang != Outfit.gang) {
-			var infcost = record.gangcost * record.indeck;
-			for(var i=0; i<infcost; i++) {
-				if(i%5 == 0) influence+=" ";
-				influence+="&bull;";
-			}
-			influence = ' <span class="influence-'+record.gang_code+'">'+influence+'</span>';
-		}
-
 		var criteria = null;
-		var additional_info = influence;
+		var additional_info = '';
 		
 		if(DisplaySort === 'type') {
 			criteria = record.type_code, keywordss = record.keywords_code ? record.keywords_code.split(" - ") : [];
@@ -226,7 +213,7 @@ function update_deck(options) {
 			criteria = record.pack_code;
 			var number_of_sets = Math.ceil(record.indeck / record.quantity);
 			var alert_number_of_sets = number_of_sets > 1 ? '<small class="text-warning">'+number_of_sets+' sets needed</small> ' : '';
-			additional_info = '(#' + record.number + ') ' + alert_number_of_sets + influence;
+			additional_info = '(#' + record.number + ') ' + alert_number_of_sets;
 		} else if(DisplaySort === 'title') {
 			criteria = 'cards';
 		}
@@ -240,7 +227,6 @@ function update_deck(options) {
 		
 	});
 	$('#latestpack').html('Cards up to <i>'+latestpack.name+'</i>');
-	check_influence();
 	check_decksize();
 	if($('#costChart .highcharts-container').size()) setTimeout(make_cost_graph, 100);
 	if($('#strengthChart .highcharts-container').size()) setTimeout(make_strength_graph, 100);
@@ -250,39 +236,7 @@ function update_deck(options) {
 
 function check_decksize() {
 	DeckSize = DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-	MinimumDeckSize = Outfit.minimumdecksize;
-	$('#cardcount').html(DeckSize+" cards (min "+MinimumDeckSize+")")[DeckSize < MinimumDeckSize ? 'addClass' : 'removeClass']("text-danger");
-}
-
-function check_influence() {
-	InfluenceSpent = 0;
-	var repartition_influence = {};
-	DTDB.data.cards({indeck:{'gt':0},gang_code:{'!is':Outfit.gang_code}}).each(function(record) {
-		if(record.gangcost) {
-			var inf, gang = record.gang_code;
-			if(Outfit.code == "03029" && record.type_code == "program") {
-				inf = record.indeck > 1 ? (record.indeck-1) * record.gangcost : 0;
-			} else {
-				inf = record.indeck * record.gangcost;
-			}
-			if(inf) {
-				InfluenceSpent += inf;
-				repartition_influence[gang] = (repartition_influence[gang] || 0) + inf;
-			}
-		}
-	});
-	var graph = '', displayInfluenceLimit = InfluenceLimit;
-	if(InfluenceLimit !== Number.POSITIVE_INFINITY) {
-		$.each(repartition_influence, function (key, value) {
-			var ronds = '';
-			for(var i=0; i<value; i++) {
-				ronds += '&bull;';
-			}
-			graph += '<span class="influence-'+key+'" title="'+key+': '+value+'">'+ronds+'</span>';
-		})
-	} else {
-		displayInfluenceLimit = "&#8734;";
-	}
+	$('#cardcount').html(DeckSize+" cards (required 54)")[DeckSize !=  RequiredDeckSize ? 'addClass' : 'removeClass']("text-danger");
 }
 
 $(function () {
@@ -356,11 +310,6 @@ function build_bbcode() {
 				var count = deck[type].reduce(function (prev, curr) { return prev + curr.qty; }, 0);
 				lines.push("[b]"+typesstr[n]+"[/b] ("+count+")");
 				$.each(deck[type], function (n, slot) {
-					var inf = "";
-					for(var i=0; i<slot.influence; i++) {
-						if(i%5==0) inf += " ";
-						inf+="•";
-					}
 					lines.push(slot.qty + 'x [url=http://dtdb.com/'+DTDB.locale+'/card/'
 					 + slot.card.code
 					 + ']'
@@ -368,14 +317,12 @@ function build_bbcode() {
 					 + '[/url] [i]('
 					 + slot.card.pack
 					 + ")[/i]"
-					 + ( slot.influence ? '[color=' + GangColors[slot.gang] + ']' + inf + '[/color]' : '' )
 					);
 				});
 				lines.push("");
 			}
 		}
 	});
-	lines.push($('#influence').text().replace(/•/g,''));
 	lines.push($('#cardcount').text());
 	lines.push($('#latestpack').text());
 	lines.push("");
@@ -417,11 +364,6 @@ function build_markdown() {
 				lines.push("## "+typesstr[n]+" ("+count+")");
 				lines.push("");
 				$.each(deck[type], function (n, slot) {
-					var inf = "";
-					for(var i=0; i<slot.influence; i++) {
-						if(i%5==0) inf += " ";
-						inf+="•";
-					}
 					lines.push('* '+ slot.qty + 'x ['
 					 + slot.card.title 
 					 + '](http://dtdb.com/'+DTDB.locale+'/card/'
@@ -429,7 +371,6 @@ function build_markdown() {
 					 + ') _('
 					 + slot.card.pack
 					 + ")_"
-					 + ( slot.influence ? inf : '' )
 					);
 				});
 				
@@ -437,7 +378,6 @@ function build_markdown() {
 		}
 	});
 	lines.push("");
-	lines.push($('#influence').text().replace(/•/g,'') + "  ");
 	lines.push($('#cardcount').text() + "  ");
 	lines.push($('#latestpack').text() + "  ");
 	lines.push("");
@@ -474,17 +414,11 @@ function build_plaintext() {
 				lines.push("");
 				lines.push(typesstr[n]+" ("+count+")");
 				$.each(deck[type], function (n, slot) {
-					var inf = "";
-					for(var i=0; i<slot.influence; i++) {
-						if(i%5==0) inf += " ";
-						inf+="•";
-					}
 					lines.push(slot.qty + 'x '
 					 + slot.card.title
 					 + ' ('
 					 + slot.card.pack
 					 + ")"
-					 + ( slot.influence ? inf : '' )
 					);
 				});
 				
@@ -492,7 +426,6 @@ function build_plaintext() {
 		}
 	});
 	lines.push("");
-	lines.push($('#influence').text().replace(/•/g,''));
 	lines.push($('#cardcount').text());
 	lines.push($('#latestpack').text());
 	lines.push("");

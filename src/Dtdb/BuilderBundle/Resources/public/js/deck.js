@@ -334,7 +334,7 @@ $(function() {
 						container : 'body',
 						placement : 'bottom',
 						trigger : 'click',
-						title : "<h5>Smart filter syntax</h5><ul style=\"text-align:left\"><li>by default, filters on title</li><li>x &ndash; filters on text</li><li>a &ndash; flavor text</li><li>s &ndash; keywords</li><li>o &ndash; cost</li><li>v &ndash; agenda points</li><li>n &ndash; gang cost</li><li>p &ndash; strength</li><li>g &ndash; advancement cost</li><li>h &ndash; trash cost</li><li>y &ndash; quantity in pack</li></ul><code>s:\"code gate\" x:trace</code> to find code gates with trace"
+						title : "<h5>Smart filter syntax</h5><ul style=\"text-align:left\"><li>by default, filters on title</li><li>x &ndash; filters on text</li></ul>"
 					});
 	
 	var converter = new Markdown.Converter();
@@ -435,16 +435,6 @@ function handle_quantity_change(event) {
 		indeck : quantity
 	});
 	if (card.type_code == "outfit") {
-		if (Outfit.gang != card.gang) {
-			DTDB.data.cards({
-				indeck : {
-					'gt' : 0
-				},
-				type_code : 'agenda'
-			}).update({
-				indeck : 0
-			});
-		}
 		DTDB.data.cards({
 			indeck : {
 				'gt' : 0
@@ -563,8 +553,7 @@ function build_div(record) {
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
 				+ record.title + '</a></h4>'
 				+ '    <div class="btn-group" data-toggle="buttons">' + radios
-				+ '</div>' + '    <span class="influence-' + gang + '">'
-				+ influ + '</span>' + '</div>' + '</div>' + '</div>');
+				+ '</div>' + '</div>' + '</div>' + '</div>');
 		break;
 
 	case 3:
@@ -586,8 +575,7 @@ function build_div(record) {
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
 				+ record.title + '</a></h5>'
 				+ '    <div class="btn-group" data-toggle="buttons">' + radios
-				+ '</div>' + '    <span class="influence-' + gang + '">'
-				+ influ + '</span>' + '</div>' + '</div>' + '</div>');
+				+ '</div>' + '</div>' + '</div>' + '</div>');
 		break;
 
 	}

@@ -16,9 +16,6 @@ DTDB.tip = {};
 		if (!card)
 			return;
 		var type = '<p class="card-info">' + DTDB.format.type(card) + '</p>';
-		var influence = '';
-		for (var i = 0; i < card.gangcost; i++)
-			influence += "&bull;";
 		if (card.strength != null)
 			type += '<p>Strength <b>' + card.strength + '</b></p>';
 		var image_svg = ''; 

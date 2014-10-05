@@ -114,6 +114,6 @@ function confirm_delete() {
 
 
 function switch_to_web_view() {
-	$('#deck').html('<div class="row"><div class="col-sm-12"><h3 id="outfit"></h3><div id="influence"></div><div id="agendapoints"></div><div id="cardcount"></div><div id="latestpack"></div></div></div><div class="row" id="deck-content" style="margin-bottom:10px"></div>');
+	$('#deck').html('<div class="row"><div class="col-sm-12"><h3 id="outfit"></h3><div id="cardcount"></div><div id="latestpack"></div></div></div><div class="row" id="deck-content" style="margin-bottom:10px"></div>');
 	update_deck();
 }

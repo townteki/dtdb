@@ -1204,13 +1204,7 @@ class SocialController extends Controller
                 $lines[] = "";
                 $lines[] = $type . " (" . $classement[$type]['qty'] . ")";
                 foreach ($classement[$type]['slots'] as $slot) {
-                    $inf = "";
-                    for ($i = 0; $i < $slot['influence']; $i ++) {
-                        if ($i % 5 == 0)
-                            $inf .= " ";
-                        $inf .= "•";
-                    }
-                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . " (" . $slot['card']->getPack()->getName() . ") " . $inf;
+                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . " (" . $slot['card']->getPack()->getName() . ")";
                 }
             }
         }

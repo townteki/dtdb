@@ -45,16 +45,6 @@ class Deck
     private $deckSize;
 
     /**
-     * @var integer
-     */
-    private $influenceSpent;
-
-    /**
-     * @var integer
-     */
-    private $agendaPoints;
-
-    /**
      * @var string
      */
     private $tags;
@@ -339,52 +329,6 @@ class Deck
     public function getDeckSize()
     {
         return $this->deckSize;
-    }
-
-    /**
-     * Set influenceSpent
-     *
-     * @param integer $influenceSpent
-     * @return Deck
-     */
-    public function setInfluenceSpent($influenceSpent)
-    {
-        $this->influenceSpent = $influenceSpent;
-    
-        return $this;
-    }
-
-    /**
-     * Get influenceSpent
-     *
-     * @return integer
-     */
-    public function getInfluenceSpent()
-    {
-        return $this->influenceSpent;
-    }
-
-    /**
-     * Set agendaPoints
-     *
-     * @param integer $agendaPoints
-     * @return Deck
-     */
-    public function setAgendaPoints($agendaPoints)
-    {
-        $this->agendaPoints = $agendaPoints;
-    
-        return $this;
-    }
-
-    /**
-     * Get agendaPoints
-     *
-     * @return integer
-     */
-    public function getAgendaPoints()
-    {
-        return $this->agendaPoints;
     }
 
     /**

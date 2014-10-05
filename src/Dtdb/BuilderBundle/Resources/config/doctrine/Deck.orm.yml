@@ -65,14 +65,6 @@ Dtdb\BuilderBundle\Entity\Deck:
             type: smallint
             column: deck_size
             nullable: true
-        influenceSpent:
-            type: smallint
-            column: influence_spent
-            nullable: true
-        agendaPoints:
-            type: smallint
-            column: agenda_points
-            nullable: true
         tags:
             type: string
             length: 4000

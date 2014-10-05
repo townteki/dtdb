@@ -121,8 +121,7 @@ DTDB.suggestions = {};
 					+ '</div></td><td><a class="card" href="'
 					+ Routing.generate('cards_zoom', {card_code:record.code})
 					+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-					+ record.title + '</a></td><td class="influence-' + gang
-					+ '">' + influ + '</td><td class="type" title="' + record.type
+					+ record.title + '</a></td><td class="type" title="' + record.type
 					+ '"><img src="/web/bundles/dtdbbuilder/images/types/'
 					+ record.type_code + '.png">'
 					+ '</td><td class="gang" title="' + record.gang + '">'

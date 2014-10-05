@@ -48,9 +48,6 @@ DTDB.card_modal = {};
 				if(index == card.indeck) $(element).addClass('active');
 				else $(element).removeClass('active');
 			});
-			if(card.type_code == "agenda" && card.gang_code != "neutral" && Outfit.gang_code != "neutral" && card.gang_code != Outfit.gang_code) {
-				qtyelt.find('label').addClass("disabled").find('input[type=radio]').attr("disabled", true);
-			}
 			if(card.code == Outfit.code) {
 				qtyelt.find('label').addClass("disabled").find('input[type=radio]').attr("disabled", true);
 			}

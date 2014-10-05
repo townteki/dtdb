@@ -344,18 +344,12 @@ class BuilderController extends Controller
                 $lines[] = "";
                 $lines[] = $type . " (" . $classement[$type]['qty'] . ")";
                 foreach ($classement[$type]['slots'] as $slot) {
-                    $inf = "";
-                    for ($i = 0; $i < $slot['influence']; $i ++) {
-                        if ($i % 5 == 0)
-                            $inf .= " ";
-                        $inf .= "•";
-                    }
-                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . " (" . $slot['card']->getPack()->getName() . ") " . $inf;
+                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . " (" . $slot['card']->getPack()->getName() . ")";
                 }
             }
         }
         $lines[] = "";
-        $lines[] = $deck->getDeckSize() . " cards (min " . $deck->getOutfit()->getMinimumDeckSize() . ")";
+        $lines[] = $deck->getDeckSize() . " cards (must be 54)";
         $lines[] = "Cards up to " . $deck->getLastPack()->getName();
         $content = implode("\r\n", $lines);
         
