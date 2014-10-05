@@ -79,11 +79,6 @@ class Decklist
     private $user;
 
     /**
-     * @var \Dtdb\CardsBundle\Entity\Side
-     */
-    private $side;
-
-    /**
      * @var Dtdb\CardsBundle\Entity\Card
      */
     private $outfit;
@@ -121,7 +116,7 @@ class Decklist
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -167,7 +162,7 @@ class Decklist
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -213,7 +208,7 @@ class Decklist
     /**
      * Get summary
      *
-     * @return string 
+     * @return string
      */
     public function getSummary()
     {
@@ -259,7 +254,7 @@ class Decklist
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -282,7 +277,7 @@ class Decklist
     /**
      * Get creation
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreation()
     {
@@ -305,7 +300,7 @@ class Decklist
     /**
      * Get signature
      *
-     * @return string 
+     * @return string
      */
     public function getSignature()
     {
@@ -405,29 +400,6 @@ class Decklist
     }
 
     /**
-     * Set side
-     *
-     * @param \Dtdb\CardsBundle\Entity\Side $side
-     * @return Deck
-     */
-    public function setSide(\Dtdb\CardsBundle\Entity\Side $side = null)
-    {
-    	$this->side = $side;
-    
-    	return $this;
-    }
-    
-    /**
-     * Get side
-     *
-     * @return \Dtdb\CardsBundle\Entity\Side
-     */
-    public function getSide()
-    {
-    	return $this->side;
-    }
-
-    /**
      * Set outfit
      *
      * @param \Dtdb\CardsBundle\Entity\Card $outfit
@@ -471,7 +443,7 @@ class Decklist
     public function getSlots()
     {
     	return $this->slots;
-    }    
+    }
 
     /**
      * Get cards
@@ -714,7 +686,7 @@ class Decklist
     /**
      * Get parent
      *
-     * @return \Dtdb\BuilderBundle\Entity\Deck 
+     * @return \Dtdb\BuilderBundle\Entity\Deck
      */
     public function getParent()
     {
@@ -757,7 +729,7 @@ class Decklist
     /**
      * Get successors
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSuccessors()
     {
@@ -780,7 +752,7 @@ class Decklist
     /**
      * Get precedent
      *
-     * @return \Dtdb\BuilderBundle\Entity\Decklist 
+     * @return \Dtdb\BuilderBundle\Entity\Decklist
      */
     public function getPrecedent()
     {
@@ -818,7 +790,7 @@ class Decklist
     /**
      * Get children
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {

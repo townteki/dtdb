@@ -163,11 +163,7 @@ class DefaultController extends Controller
 	                $ffg = str_replace('.', '-', $ffg);
 	                $ffg = str_replace('&', '-', $ffg);
 	                $ffg = str_replace('\'', '', $ffg);
-	                if($cycle->getCode() === 'core' || $card->getSide()->getName() === 'Runner' || $card->getKeywords() === 'Division' || $card->getKeywords() === 'Corp') {
-	                    $ffg = preg_replace('/:.*/', '', $ffg);
-	                } else {
-	                    $ffg = str_replace(':', '', $ffg);
-	                }
+                    $ffg = str_replace(':', '', $ffg);
 	                $ffg = strtolower($ffg);
 	                $ffg = iconv('UTF-8', 'ASCII//TRANSLIT', $ffg);
 	                $ffg = preg_replace('/[^a-z0-9\-]/', '', $ffg);

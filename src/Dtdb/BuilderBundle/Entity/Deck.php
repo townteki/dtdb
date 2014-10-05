@@ -72,11 +72,6 @@ class Deck
     private $user;
 
     /**
-     * @var \Dtdb\CardsBundle\Entity\Side
-     */
-    private $side;
-
-    /**
      * @var Dtdb\CardsBundle\Entity\Card
      */
     private $outfit;
@@ -99,7 +94,7 @@ class Deck
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -122,7 +117,7 @@ class Deck
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -145,7 +140,7 @@ class Deck
     /**
      * Get creation
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreation()
     {
@@ -168,7 +163,7 @@ class Deck
     /**
      * Get lastupdate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getLastupdate()
     {
@@ -214,7 +209,7 @@ class Deck
     /**
      * Get problem
      *
-     * @return string 
+     * @return string
      */
     public function getProblem()
     {
@@ -247,7 +242,7 @@ class Deck
     /**
      * Get slots
      *
-     * @return \Dtdb\BuilderBundle\Entity\Deckslot[] 
+     * @return \Dtdb\BuilderBundle\Entity\Deckslot[]
      */
     public function getSlots()
     {
@@ -270,34 +265,11 @@ class Deck
     /**
      * Get user
      *
-     * @return \Dtdb\UserBundle\Entity\User 
+     * @return \Dtdb\UserBundle\Entity\User
      */
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set side
-     *
-     * @param \Dtdb\CardsBundle\Entity\Side $side
-     * @return Deck
-     */
-    public function setSide(\Dtdb\CardsBundle\Entity\Side $side = null)
-    {
-        $this->side = $side;
-    
-        return $this;
-    }
-
-    /**
-     * Get side
-     *
-     * @return \Dtdb\CardsBundle\Entity\Side 
-     */
-    public function getSide()
-    {
-        return $this->side;
     }
 
     /**
@@ -362,7 +334,7 @@ class Deck
     /**
      * Get deckSize
      *
-     * @return integer 
+     * @return integer
      */
     public function getDeckSize()
     {
@@ -385,7 +357,7 @@ class Deck
     /**
      * Get influenceSpent
      *
-     * @return integer 
+     * @return integer
      */
     public function getInfluenceSpent()
     {
@@ -408,7 +380,7 @@ class Deck
     /**
      * Get agendaPoints
      *
-     * @return integer 
+     * @return integer
      */
     public function getAgendaPoints()
     {
@@ -511,7 +483,7 @@ class Deck
     /**
      * Get children
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
@@ -534,7 +506,7 @@ class Deck
     /**
      * Get parent
      *
-     * @return \Dtdb\BuilderBundle\Entity\Decklist 
+     * @return \Dtdb\BuilderBundle\Entity\Decklist
      */
     public function getParent()
     {

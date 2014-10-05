@@ -309,7 +309,6 @@ class ApiController extends Controller
         $decklist->setOutfit($deck->getOutfit());
         $decklist->setGang($deck->getOutfit()
                 ->getGang());
-        $decklist->setSide($deck->getSide());
         $decklist->setLastPack($deck->getLastPack());
         $decklist->setNbvotes(0);
         $decklist->setNbfavorites(0);

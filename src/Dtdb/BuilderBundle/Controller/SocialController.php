@@ -110,7 +110,6 @@ class SocialController extends Controller
         $decklist->setOutfit($deck->getOutfit());
         $decklist->setGang($deck->getOutfit()
             ->getGang());
-        $decklist->setSide($deck->getSide());
         $decklist->setLastPack($deck->getLastPack());
         $decklist->setNbvotes(0);
         $decklist->setNbfavorites(0);
@@ -508,17 +507,8 @@ class SocialController extends Controller
         $decklist_title = filter_var($request->query->get('title'), FILTER_SANITIZE_STRING);
         $sort = $request->query->get('sort');
         
-        if ($gang_code === "Corp" || $gang_code === "Runner") {
-            $side_code = $gang_code;
-            unset($gang_code);
-        }
-        
         $wheres = array();
         $bindings = array();
-        if (! empty($side_code)) {
-            $wheres[] = 's.name=?';
-            $bindings[] = $side_code;
-        }
         if (! empty($gang_code)) {
             $wheres[] = 'f.code=?';
             $bindings[] = $gang_code;
@@ -583,7 +573,6 @@ class SocialController extends Controller
 	            d.nbcomments
 	            from decklist d
 	            join user u on d.user_id=u.id
-	            join side s on d.side_id=s.id
 	            join card c on d.outfit_id=c.id
 				join pack p on d.last_pack_id=p.id
 	            join gang f on d.gang_id=f.id
@@ -728,7 +717,7 @@ class SocialController extends Controller
                     ->getLocale()) . " name,
 				f.code
 				from gang f
-				order by f.side_id asc, f.name asc")
+				order by f.name asc")
             ->fetchAll();
         
         $packs = $dbh->executeQuery(
@@ -1685,7 +1674,7 @@ class SocialController extends Controller
                     ->getLocale()) . " name,
 				f.code
 				from gang f
-				order by f.side_id asc, f.name asc")
+				order by f.name asc")
             ->fetchAll();
         
         $packs = $dbh->executeQuery(

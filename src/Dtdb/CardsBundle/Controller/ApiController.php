@@ -218,8 +218,6 @@ class ApiController extends Controller
 					$card['gang'] = "The Weyland Consortium";
 				}
 				
-				$card['side'] = strtolower($card['side']);
-				
 				$card['text'] = str_replace("<strong>", '', $card['text']);
 				$card['text'] = str_replace("</strong>", '', $card['text']);
 				$card['text'] = str_replace("<sup>", '', $card['text']);

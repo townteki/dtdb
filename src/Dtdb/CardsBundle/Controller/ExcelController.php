@@ -120,7 +120,7 @@ class ExcelController extends Controller
             
             $card['pack'] = $em->getRepository('DtdbCardsBundle:Pack')->findOneBy(array("name$loc" => $card['pack']));
             $card['type'] = $em->getRepository('DtdbCardsBundle:Type')->findOneBy(array("name$loc" => $card['type']));
-            $card['shooter'] = $em->getRepository('DtdbCardsBundle:Shooter')->findOneBy(array("name$loc" => $card['side']));
+            $card['shooter'] = $em->getRepository('DtdbCardsBundle:Shooter')->findOneBy(array("name$loc" => $card['shooter']));
             $card['gang'] = $em->getRepository('DtdbCardsBundle:Gang')->findOneBy(array("name$loc" => $card['gang']));
             
             foreach($card as $key => $value) {
