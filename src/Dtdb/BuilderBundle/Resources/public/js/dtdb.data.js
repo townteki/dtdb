@@ -2,8 +2,8 @@ if (typeof DTDB != "object")
 	var DTDB = { 
 		data_loaded: jQuery.Callbacks(), 
 		api_url: {
-			sets: 'http://dtdb.com/api/sets/',
-			cards: 'http://dtdb.com/api/cards/'
+			sets: 'http://dtdb.co/api/sets/',
+			cards: 'http://dtdb.co/api/cards/'
 		},
 		locale: 'en'
 	};

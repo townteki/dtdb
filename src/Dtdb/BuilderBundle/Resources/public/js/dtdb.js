@@ -298,7 +298,7 @@ function build_bbcode() {
 		if(deck[type] != null) {
 			if(type == "outfit") {
 				var slot = deck[type][0];
-				lines.push('[url=http://dtdb.com/'+DTDB.locale+'/card/'
+				lines.push('[url=http://dtdb.co/'+DTDB.locale+'/card/'
 				 + slot.card.code
 				 + ']'
 				 + slot.card.title
@@ -310,7 +310,7 @@ function build_bbcode() {
 				var count = deck[type].reduce(function (prev, curr) { return prev + curr.qty; }, 0);
 				lines.push("[b]"+typesstr[n]+"[/b] ("+count+")");
 				$.each(deck[type], function (n, slot) {
-					lines.push(slot.qty + 'x [url=http://dtdb.com/'+DTDB.locale+'/card/'
+					lines.push(slot.qty + 'x [url=http://dtdb.co/'+DTDB.locale+'/card/'
 					 + slot.card.code
 					 + ']'
 					 + slot.card.title
@@ -329,7 +329,7 @@ function build_bbcode() {
 	if(typeof Decklist != "undefined" && Decklist != null) {
 		lines.push("Decklist [url="+location.href+"]published on NetrunnerDB[/url].");
 	} else {
-		lines.push("Deck built on [url=http://dtdb.com]NetrunnerDB[/url].");
+		lines.push("Deck built on [url=http://dtdb.co]NetrunnerDB[/url].");
 	}
 	return lines;
 }
@@ -352,7 +352,7 @@ function build_markdown() {
 				var slot = deck[type][0];
 				lines.push('['
 				 + slot.card.title
-				 + '](http://dtdb.com/'+DTDB.locale+'/card/'
+				 + '](http://dtdb.co/'+DTDB.locale+'/card/'
 				 + slot.card.code
 				 + ') _('
 				 + slot.card.pack
@@ -366,7 +366,7 @@ function build_markdown() {
 				$.each(deck[type], function (n, slot) {
 					lines.push('* '+ slot.qty + 'x ['
 					 + slot.card.title 
-					 + '](http://dtdb.com/'+DTDB.locale+'/card/'
+					 + '](http://dtdb.co/'+DTDB.locale+'/card/'
 					 + slot.card.code
 					 + ') _('
 					 + slot.card.pack
@@ -384,7 +384,7 @@ function build_markdown() {
 	if(typeof Decklist != "undefined" && Decklist != null) {
 		lines.push("Decklist [published on NetrunnerDB]("+location.href+").");
 	} else {
-		lines.push("Deck built on [NetrunnerDB](http://dtdb.com).");
+		lines.push("Deck built on [NetrunnerDB](http://dtdb.co).");
 	}
 	return lines;
 }
@@ -430,9 +430,9 @@ function build_plaintext() {
 	lines.push($('#latestpack').text());
 	lines.push("");
 	if(typeof Decklist != "undefined" && Decklist != null) {
-		lines.push("Decklist published on http://dtdb.com.");
+		lines.push("Decklist published on http://dtdb.co.");
 	} else {
-		lines.push("Deck built on http://dtdb.com.");
+		lines.push("Deck built on http://dtdb.co.");
 	}
 	return lines;
 }
