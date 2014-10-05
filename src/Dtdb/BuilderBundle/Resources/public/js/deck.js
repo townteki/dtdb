@@ -543,9 +543,7 @@ function build_div(record) {
 				+ '<a class="pull-left card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-				+ '    <img class="media-object" src="/web/bundles/dtdbcards/images/cards/en/'
-				+ record.code
-				+ '.png">'
+				+ '    <img class="media-object" src="'+record.imagesrc+'">'
 				+ '</a>'
 				+ '<div class="media-body">'
 				+ '    <h4 class="media-heading"><a class="card" href="'
@@ -565,9 +563,7 @@ function build_div(record) {
 				+ '<a class="pull-left card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-				+ '    <img class="media-object" src="/web/bundles/dtdbcards/images/cards/en/'
-				+ record.code
-				+ '.png">'
+				+ '    <img class="media-object" src="'+record.imagesrc+'">'
 				+ '</a>'
 				+ '<div class="media-body">'
 				+ '    <h5 class="media-heading"><a class="card" href="'
