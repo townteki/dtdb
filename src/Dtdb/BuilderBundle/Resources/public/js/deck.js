@@ -107,8 +107,6 @@ DTDB.data_loaded.add(function() {
 			});
 
 	$('input[name=Outfit]').prop("checked", false);
-	if (Outfit.code == "03002")
-		$('input[name=Jinteki]').prop("checked", false);
 
 	$('.filter')
 			.each(

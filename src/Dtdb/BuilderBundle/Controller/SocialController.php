@@ -602,9 +602,7 @@ class SocialController extends Controller
         
         $packs = $dbh->executeQuery(
                 "SELECT
-				p.name" . ($this->getRequest()
-        				        ->getLocale() == "en" ? '' : '_' . $this->getRequest()
-        				        ->getLocale()) . " name,
+				p.name,
 				p.code
 				from pack p
 				where p.released is not null
@@ -1673,10 +1671,9 @@ class SocialController extends Controller
         
         $packs = $dbh->executeQuery(
                 "SELECT
-				p.name" . ($this->getRequest()
-                    ->getLocale() == "en" ? '' : '_' . $this->getRequest()
-                    ->getLocale()) . " name,
-				p.code
+				p.name,
+                p.code,
+                0 selected
 				from pack p
 				where p.released is not null
 				order by p.released desc")
@@ -1690,7 +1687,9 @@ class SocialController extends Controller
                         'gangs' => $gangs,
                         'form' => $this->renderView('DtdbBuilderBundle:Search:form.html.twig',
                             array(
-                                'packs' => $packs
+                                    'packs' => $packs,
+                                    'author' => '',
+                                    'title' => ''
                             )
                         ),
                 ), $response);
