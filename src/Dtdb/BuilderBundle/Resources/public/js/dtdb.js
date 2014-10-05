@@ -236,7 +236,7 @@ function update_deck(options) {
 
 function check_decksize() {
 	DeckSize = DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-	$('#cardcount').html(DeckSize+" cards (required 54)")[DeckSize !=  RequiredDeckSize ? 'addClass' : 'removeClass']("text-danger");
+	$('#cardcount').html(DeckSize+" cards (required 54)")[DeckSize !=  54 ? 'addClass' : 'removeClass']("text-danger");
 }
 
 $(function () {
