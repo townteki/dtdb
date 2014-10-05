@@ -1,0 +1,15 @@
+web/bundles/
+app/bootstrap.php.cache
+app/cache/*
+app/config/parameters.yml
+app/logs/*
+build/
+vendor/
+bin/
+composer.phar
+src/Netrunnerdb/CardsBundle/Resources/public/images/cards
+.settings/
+.buildpath
+.project
+.DS_Store
+.htaccess

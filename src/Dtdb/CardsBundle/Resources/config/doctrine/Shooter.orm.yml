@@ -1,0 +1,20 @@
+Dtdb\CardsBundle\Entity\Shooter:
+    type: entity
+    table: shooter
+    indexes:
+        name_index:
+            columns: [ name ]
+    oneToMany:
+        cards:
+            targetEntity: Card
+            mappedBy: shooter
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

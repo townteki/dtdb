@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ pagetitle|default('Deckbuilder') }} &middot; dtdb.co</title>
+    <link rel="icon" sizes="16x16" href="/favicon.png" />
+    <link rel="icon" sizes="196x196" href="/icon.png" />
+    <link rel="apple-touch-icon" sizes="129x129" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/jquery.qtip.css">
+    <link href='http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('/web/bundles/dtdbbuilder/css/style.css') }}">
+    
+    <script src="{{ asset('/web/bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/jquery.qtip.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/3.0.9/highcharts.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.min.js"></script>
+    <script src="{{ asset('/web/bundles/dtdbbuilder/js/taffy.js') }}"></script>
+    <script src="{{ asset('/web/bundles/dtdbbuilder/js/jquery.textcomplete.min.js') }}"></script>
+    <script type="text/javascript">
+	var DTDB = {
+		data_loaded: $.Callbacks(),
+		api_url: {
+			sets: '{{ path('api_sets')|raw }}',
+			cards: '{{ path('api_cards')|raw }}'
+		},
+		locale: '{{ app.request.locale }}'
+	};
+{% if app.environment == 'prod' %}
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44413511-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  {% endif %}
+    </script>
+    <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.js') }}"></script>
+    <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.user.js') }}"></script>
+    <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.data.js') }}"></script>
+    <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.format.js') }}"></script>
+    <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.tip.js') }}"></script>
+{% block head %}{% endblock %}
+  </head>
+  <body>
+  <div id="wrapper">
+      <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+          {% block navbar %}
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ path('deck_builder_index') }}">DTDB.CO</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{{ path('decks_list') }}">My Decks</a></li>
+            <li><a href="{{ path('decklists_list', {type:'popular'}) }}">Decklists</a></li>
+            <li><a href="{{ path('cards_search') }}">Cards</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="login">
+                <a href="#" class="dropdown-toggle loginname" data-toggle="dropdown">Account <b class="caret"></b></a>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right hidden-xs hidden-sm external" action="{{ path('cards_find') }}" target="_blank">
+            <div class="form-group">
+              <input type="text" placeholder="Card Search" class="form-control" name="q">
+            </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+        {% endblock %}
+      </div>
+    </nav>
+  
+{% block body %}{% endblock %}
+    <div id="push"></div>
+  </div>
+    <div id="footer" class="hidden-print">
+    <div class="container">
+        {% block footer %}
+    <div class="row">
+    <ul class="list-inline pull-right">
+    {% if locales is defined %}
+	{{ locales|raw }}
+	{% endif %}
+    </ul>
+    
+    <ul class="list-inline">
+    <li><a href="{{ path('cards_about') }}">About</a></li>
+    {#<li><a href="{{ path('cards_api') }}">API</a></li>
+    <li><a href="{{ path('tools_demo') }}">Integration</a></li>
+    <li><a href="{{ path('donators') }}">Donators</a> <span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span></li>#}
+    <li><a href="javascript:localStorage.clear()">Clear data</a></li>
+    </ul>
+    </div>
+    
+    <div class="row">
+    <p>
+    Designed and built by <a href="//twitter.com/alsciende">@alsciende</a>
+    </p>
+    </div>
+    {#
+    <div class="row">
+    <p>
+    Source code, Bug reports, Feature Requests and Changelog on <a href="https://github.com/Alsciende/dtdb">GitHub</a>
+    </p>
+    </div>
+    
+    <div class="row">
+    <p>
+    Contribute by giving money on <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4SB7QHB5XRN7Y">Paypal (€)</a> or <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HHBUW2QYG6ZUC">Paypal ($)</a> or directly to <i>alsciende</i> (at) <i>icloud.com</i>.
+    </p>
+    </div>
+    #}
+    <div class="row" style="color:#333">
+    <p>
+    The information presented on this site about Doomtown, both literal and graphical, is copyrighted by AEG.
+    </p>
+{#    <p>
+    This website is not produced, endorsed, supported, or affiliated with AEG.
+    </p>#}
+    </div>
+    <svg width="0" height="0" viewBox="0 0 677 601" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dtdb_svg_hex">
+ 		<defs>
+			<symbol id="hex"><polygon points="623,302.91412353515625 480,550.5973510742188 194,550.5973510742188 51,302.91412353515625 194,55.23085021972656 480,55.23085021972656 623,302.91412353515625 "/></symbol>
+			<symbol id="rect"><rect x="0" y="0" width="677" height="601" fill="white" /></symbol>
+		</defs>
+    </svg>
+    {% endblock %}
+    </div>
+    </div>
+    </body>
+</html>

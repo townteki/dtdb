@@ -1,0 +1,30 @@
+admin_suit:
+    path:     /
+    defaults: { _controller: "DtdbCardsBundle:Suit:index" }
+
+admin_suit_show:
+    path:     /{id}/show
+    defaults: { _controller: "DtdbCardsBundle:Suit:show" }
+
+admin_suit_new:
+    path:     /new
+    defaults: { _controller: "DtdbCardsBundle:Suit:new" }
+
+admin_suit_create:
+    path:     /create
+    defaults: { _controller: "DtdbCardsBundle:Suit:create" }
+    requirements: { _method: post }
+
+admin_suit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtdbCardsBundle:Suit:edit" }
+
+admin_suit_update:
+    path:     /{id}/update
+    defaults: { _controller: "DtdbCardsBundle:Suit:update" }
+    requirements: { _method: post|put }
+
+admin_suit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DtdbCardsBundle:Suit:delete" }
+    requirements: { _method: post|delete }

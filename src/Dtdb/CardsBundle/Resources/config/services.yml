@@ -1,0 +1,8 @@
+parameters:
+    cards_data.class: Dtdb\CardsBundle\Services\CardsData
+
+services:
+    cards_data:
+        class: %cards_data.class%
+        arguments: [@doctrine, @request_stack, @router, %cardimages_dir%]
+

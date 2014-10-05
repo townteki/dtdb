@@ -1,0 +1,122 @@
+Dtdb\BuilderBundle\Entity\Decklist:
+    type: entity
+    table: decklist
+    repositoryClass: Dtdb\BuilderBundle\Entity\DecklistRepository
+    indexes:
+        creation_index:
+            columns: [ creation ]
+    manyToOne:
+        user:
+            targetEntity: Dtdb\UserBundle\Entity\User
+            nullable: false
+            inversedBy: decklists
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        outfit:
+            targetEntity: Dtdb\CardsBundle\Entity\Card
+            nullable: false
+            inversedBy: decklists
+            joinColumn:
+                name: outfit_id
+                referencedColumnName: id
+        gang:
+            targetEntity: Dtdb\CardsBundle\Entity\Gang
+            nullable: false
+            inversedBy: decklists
+            joinColumn:
+                name: gang_id
+                referencedColumnName: id
+        lastPack:
+            targetEntity: Dtdb\CardsBundle\Entity\Pack
+            nullable: false
+            inversedBy: decklists
+            joinColumn:
+                name: last_pack_id
+                referencedColumnName: id
+        parent:
+            targetEntity: Deck
+            nullable: true
+            inversedBy: children
+            joinColumn:
+                name: parent_deck_id
+                referencedColumnName: id
+        precedent:
+            targetEntity: Decklist
+            nullable: true
+            inversedBy: successors
+            joinColumn:
+                name: precedent_decklist_id
+                referencedColumnName: id
+    oneToMany:
+        slots:
+            targetEntity: Decklistslot
+            mappedBy: decklist
+            cascade: ["persist","remove"]
+        comments:
+            targetEntity: Comment
+            mappedBy: decklist
+            cascade: ["persist"]
+        successors:
+            targetEntity: Decklist
+            mappedBy: precedent
+        children:
+            targetEntity: Deck
+            mappedBy: parent
+    manyToMany:
+        favorites:
+            targetEntity: Dtdb\UserBundle\Entity\User
+            inversedBy: favorites
+            joinTable:
+                name: favorite
+                joinColumns:
+                    decklist_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    user_id:
+                        referencedColumnName: id
+            cascade: ["persist"]
+        votes:
+            targetEntity: Dtdb\UserBundle\Entity\User
+            inversedBy: votes
+            joinTable:
+                name: vote
+                joinColumns:
+                    decklist_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    user_id:
+                        referencedColumnName: id
+            cascade: ["persist"]
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        ts:
+            type: datetime
+        name:
+            type: string
+            length: 60
+        prettyname:
+            type: string
+            length: 60
+        rawdescription:
+            type: text
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        creation:
+            type: datetime
+        signature:
+            type: string
+            length: 32
+        nbvotes:
+            type: integer
+        nbfavorites:
+            type: integer
+        nbcomments:
+            type: integer
+    lifecycleCallbacks: {  }

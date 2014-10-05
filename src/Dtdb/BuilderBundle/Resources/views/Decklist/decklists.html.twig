@@ -1,0 +1,111 @@
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
+
+{% block head %}
+<script src="{{ asset('/web/bundles/dtdbbuilder/js/search.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container decklists">
+<div class="row">
+<div class="col-md-3">
+
+<ul class="nav nav-pills nav-stacked">
+{% set linkurl = path('decklists_list', {type:'popular'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Popular</a></li>
+{% set linkurl = path('decklists_list', {type:'recent'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Recent</a></li>
+{% set linkurl = path('decklists_list', {type:'hottopics'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Hot topics</a></li>
+{% set linkurl = path('decklists_list', {type:'halloffame'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Hall of Fame</a></li>
+{% set linkurl = path('decklists_list', {type:'favorites'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">My favorites</a></li>
+{% set linkurl = path('decklists_list', {type:'mine'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">My decklists</a></li>
+{% set linkurl = path('decklists_searchform') %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+</ul>
+
+</div>
+
+<div class="col-md-9">
+
+{{ header|raw }}
+
+<div class="text-center">
+<ul class="pagination pagination-sm" style="margin-top:0">
+{% if prevurl is null %}
+  <li class="disabled"><a href="#">&laquo;</a></li>
+{% else %}
+  <li class=""><a href="{{ prevurl }}">&laquo;</a></li>
+{% endif %}
+{% for page in pages %}
+{% if page.current %}
+  <li class="active"><a href="{{ page.url }}">{{ page.numero }} <span class="sr-only">(current)</span></a></li>
+{% else %}
+  <li><a href="{{ page.url }}">{{ page.numero }}</a></li>
+{% endif %}
+{% endfor %}
+{% if nexturl is null %}
+  <li class="disabled"><a href="#">&raquo;</a></li>
+{% else %}
+  <li class=""><a href="{{ nexturl }}">&raquo;</a></li>
+{% endif %}
+  </ul>
+</div>
+
+<table class="table">
+<thead></thead>
+<tbody>
+
+{% for decklist in decklists %}
+
+<tr>
+<td class="decklist-outfit-image hidden-xs">
+	<img src="/web/bundles/dtdbcards/images/cards/en/{{ decklist.code }}.png" class="card img-responsive" data-toggle="tooltip" data-index="{{ decklist.code }}">
+</td>
+<td>
+	<h4>
+		<small class="pull-right decklist-social">
+			<span class="glyphicon glyphicon-heart social-icon-like"></span> {{ decklist.nbvotes }}
+			<span class="glyphicon glyphicon-star social-icon-favorite"></span> {{ decklist.nbfavorites }}
+			<span class="glyphicon glyphicon-comment social-icon-comment"></span> {{ decklist.nbcomments }}
+		</small>
+		<a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a>
+	</h4>
+	<h5 class="username author">
+		<span class="pull-right decklist-creation">{{ decklist.creation|date('M d') }}</span>
+		<a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
+		{% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+		<small class="reputation">{{ decklist.reputation }}</small>
+		
+	</h5>
+</td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+<div class="text-center">
+<ul class="pagination pagination-sm" style="margin:0">
+{% if prevurl is null %}
+  <li class="disabled"><a href="#">&laquo;</a></li>
+{% else %}
+  <li class=""><a href="{{ prevurl }}">&laquo;</a></li>
+{% endif %}
+{% for page in pages %}
+{% if page.current %}
+  <li class="active"><a href="{{ page.url }}">{{ page.numero }} <span class="sr-only">(current)</span></a></li>
+{% else %}
+  <li><a href="{{ page.url }}">{{ page.numero }}</a></li>
+{% endif %}
+{% endfor %}
+{% if nexturl is null %}
+  <li class="disabled"><a href="#">&raquo;</a></li>
+{% else %}
+  <li class=""><a href="{{ nexturl }}">&raquo;</a></li>
+{% endif %}
+  </ul>
+</div>
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,105 @@
+Dtdb\CardsBundle\Entity\Card:
+    type: entity
+    table: card
+    indexes:
+        code_index:
+            columns: [ code ]
+    manyToOne:
+        pack:
+            targetEntity: Pack
+            inversedBy: cards
+            joinColumn:
+                name: pack_id
+                referencedColumnName: id
+        type:
+            targetEntity: Type
+            inversedBy: cards
+            joinColumn:
+                name: type_id
+                referencedColumnName: id
+        shooter:
+            targetEntity: Shooter
+            inversedBy: cards
+            joinColumn:
+                name: shooter_id
+                referencedColumnName: id
+        gang:
+            targetEntity: Gang
+            inversedBy: cards
+            joinColumn:
+                name: gang_id
+                referencedColumnName: id
+    oneToMany:
+        decklists:
+            targetEntity: Dtdb\BuilderBundle\Entity\Decklist
+            mappedBy: outfit
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        ts:
+            type: datetime
+            nullable: false
+            gedmo:
+                timestampable:
+                    on:  update
+        code:
+            type: string
+            length: '5'
+            nullable: false
+        number:
+            type: smallint
+            nullable: false
+        quantity:
+            type: smallint
+            nullable: false
+        title:
+            type: string
+            length: 255
+            nullable: false
+        keywords:
+            type: string
+            length: 255
+            nullable: true
+        text:
+            type: string
+            length: 1024
+            nullable: true
+        flavor:
+            type: string
+            length: 1024
+            nullable: true
+        illustrator:
+            type: string
+            length: 255
+            nullable: true
+        cost:
+            type: smallint
+            nullable: true
+        value:
+            type: smallint
+            nullable: true
+        upkeep:
+            type: smallint
+            nullable: true
+        production:
+            type: smallint
+            nullable: true
+        bullets:
+            type: smallint
+            nullable: true
+        influence:
+            type: smallint
+            nullable: true
+        control:
+            type: smallint
+            nullable: true
+        wealth:
+            type: smallint
+            nullable: true
+        octgnid:
+            type: string
+            nullable: true
+    lifecycleCallbacks: {  }

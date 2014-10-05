@@ -1,0 +1,160 @@
+dtdb_cards_admin_suit:
+    resource: "@DtdbCardsBundle/Resources/config/routing/suit.yml"
+    prefix:   /admin/suit
+
+dtdb_cards_admin_gang:
+    resource: "@DtdbCardsBundle/Resources/config/routing/gang.yml"
+    prefix:   /admin/gang
+
+dtdb_cards_admin_shooter:
+    resource: "@DtdbCardsBundle/Resources/config/routing/shooter.yml"
+    prefix:   /admin/shooter
+
+dtdb_cards_admin_type:
+    resource: "@DtdbCardsBundle/Resources/config/routing/type.yml"
+    prefix:   /admin/type
+
+dtdb_cards_admin_card:
+    resource: "@DtdbCardsBundle/Resources/config/routing/card.yml"
+    prefix:   /admin/card
+
+DtdbCardsBundle_admin_cycle:
+    resource: "@DtdbCardsBundle/Resources/config/routing/cycle.yml"
+    prefix:   /admin/cycle
+
+DtdbCardsBundle_admin_pack:
+    resource: "@DtdbCardsBundle/Resources/config/routing/pack.yml"
+    prefix:   /admin/pack
+
+DtdbCardsBundle_admin_card:
+    resource: "@DtdbCardsBundle/Resources/config/routing/card.yml"
+    prefix:   /admin/card
+
+cards_list:
+    pattern:  /{_locale}/set/{pack_code}/{view}/{sort}/{page}
+    defaults:
+        _controller: DtdbCardsBundle:Search:list
+        _locale: en
+        view: list
+        sort: set
+        page: 1
+    requirements:
+        _locale: en|fr|de|es|it|pl
+        page: \d+
+
+cards_zoom:
+    pattern:  /{_locale}/card/{card_code}
+    defaults:
+        _controller: DtdbCardsBundle:Search:zoom
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+        card_code: \d+
+
+cards_cycle:
+    pattern:  /{_locale}/cycle/{cycle_code}/{view}/{sort}
+    defaults:
+        _controller: DtdbCardsBundle:Search:cycle
+        _locale: en
+        view: list
+        sort: gang
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+cards_search:
+    pattern:  /{_locale}/search
+    defaults:
+        _controller: DtdbCardsBundle:Default:search
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+cards_find:
+    pattern:  /find/
+    defaults:
+        _controller: DtdbCardsBundle:Search:find
+
+cards_processSearchForm:
+    pattern:  /process/
+    defaults:
+        _controller: DtdbCardsBundle:Search:process
+
+cards_about:
+    pattern:  /{_locale}/about
+    defaults:
+        _controller: DtdbCardsBundle:Default:about
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+cards_api:
+    pattern:  /{_locale}/apidoc
+    defaults:
+        _controller: DtdbCardsBundle:Default:apidoc
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+api_cards:
+    pattern: /api/cards/
+    defaults:
+        _controller: DtdbCardsBundle:Api:cards
+
+api_card:
+    pattern: /api/card/{card_code}.{_format}
+    defaults:
+        _controller: DtdbCardsBundle:Api:card
+        _format: json
+    requirements:
+        _format: json
+        card_code: \d+
+
+api_sets:
+    pattern: /api/sets/
+    defaults:
+        _controller: DtdbCardsBundle:Api:sets
+
+api_set:
+    pattern: /api/set/{pack_code}.{_format}
+    defaults:
+        _controller: DtdbCardsBundle:Api:set
+        _format: json
+    requirements:
+        _format: json|xml|xlsx
+
+DtdbCardsBundle_admin_cards:
+    resource: "@DtdbCardsBundle/Resources/config/routing/cards.yml"
+    prefix:   /admin/cards
+
+DtdbCardsBundle_admin_rulings:
+    resource: "@DtdbCardsBundle/Resources/config/routing/rulings.yml"
+    prefix:   /admin/rulings
+
+DtdbCardsBundle_admin_rxc:
+    resource: "@DtdbCardsBundle/Resources/config/routing/rxc.yml"
+    prefix:   /admin/rxc
+
+ffg:
+    pattern: /ffg
+    defaults:
+        _controller: DtdbCardsBundle:Default:ffg
+
+
+excel_form:
+    pattern: /admin/excel/form
+    defaults:
+        _controller: DtdbCardsBundle:Excel:form
+
+excel_upload:
+    pattern: /admin/excel/upload
+    defaults:
+        _controller: DtdbCardsBundle:Excel:upload
+
+excel_confirm:
+    pattern: /admin/excel/confirm
+    defaults:
+        _controller: DtdbCardsBundle:Excel:confirm
+
+
+
+        

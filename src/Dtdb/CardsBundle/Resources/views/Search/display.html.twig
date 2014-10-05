@@ -1,0 +1,37 @@
+{% extends display_mode_template %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+{% if mode == 'full' %}
+{{ searchbar|raw }}
+{% endif %}
+
+<div id="list">
+
+{% if mode == 'full' or mode == 'fragment' %}
+{{ pagination|raw }}
+{% endif %}
+
+<div class="row">
+
+	{% if cards|length > 0 %}
+
+		{% block main %}{% endblock %}
+
+	{% else %}
+		<div class="col-sm-12" style="margin-top:10px">
+			<p class="alert alert-warning">Your query didn't match any card.</p>
+		</div>
+		
+	{% endif %}
+</div>
+
+{% if mode == 'full' or mode == 'fragment' %}
+{{ pagination|raw }}
+{% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
+
+{% block head %}
+<script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.deck_browser.js') }}"></script>
+<script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.smart_filter.js') }}"></script>
+<script src="{{ asset('/web/bundles/dtdbbuilder/js/index.js') }}"></script>
+
+<script type="text/javascript">
+
+var Outfit = null,
+	Decklist = {{ decklist|json_encode|raw }},
+	DeckDB = TAFFY([Decklist]),
+	SelectedDeck = DeckDB().first(),
+	DisplaySort = 'type';
+	
+</script>
+{% endblock %}
+{% block body %}
+
+    <div class="jumbotron visible-sm visible-xs">
+      <div class="container">
+        <h1>Welcome on DoomtownDB!</h1>
+        <p>You can explore the public <a href="{{ path('decklists_list', {type:'popular'}) }}">decklists</a> or start building your own <a href="{{ path('decks_list') }}">decks</a>.</p>
+      </div>
+    </div>
+
+
+<div class="container" id="index_page">
+<div class="row">
+
+
+<div class="col-md-6">
+<div class="page-header hidden-sm hidden-xs">
+<h1 style="font-size:72px">DoomtownDB</h1>
+<p class="">You can explore the public <a href="{{ path('decklists_list', {type:'popular'}) }}">decklists</a> or start building your own <a href="{{ path('decks_list') }}">decks</a>.</p>
+</div>
+{% if decklist %}
+<div id="highlight" class="decklist">
+
+<h2 class="section">Decklist of the week </h2>
+<h3><a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a></h3>
+	
+<!-- Outfit and Stats -->
+<div class="row">
+    <div class="col-sm-4">
+        <h4 id="outfit"></h4>
+		<div id="influence" class="small"></div>
+		<div id="agendapoints" class="small"></div>
+		<div id="cardcount" class="small"></div>
+		<div id="latestpack" class="small"></div>
+		
+    </div>
+	<div class="col-sm-8" id="deck-content">
+	</div>
+</div><!-- /.row -->
+<!-- Outfit and Stats -->
+
+<div class="row hidden-xs">
+    <div class="col-sm-12" >
+        <table id="deck_browser" class="deck_browser deck_browser_150">
+            <tr>
+                <td id="deck_browser_left">
+                </td>
+                <td id="deck_browser_center">
+                </td>
+                <td id="deck_browser_right">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<h4 class="decklist-author author">
+    Description by the author:
+    <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
+    {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+    <small title="User Reputation">{{ decklist.reputation }}</small>
+</h4>
+{{ decklist.description|raw }}
+</div>
+</div>
+
+</div> <!-- #highlight -->
+{% endif %}
+
+</div>
+
+<div class="col-md-6">
+	<div id="card_search">
+	<h3 class="section">Card search <a href="{{ path('cards_about') }}" class="small">?</a></h3>
+	<form method="GET" action="{{ path('cards_processSearchForm') }}" role="form">
+	<div class="form-group">
+	    <input type="text" class="form-control" id="card_search_form" name="q" placeholder="Enter card name or query" autocomplete="off" tabindex="1">
+	  </div>
+	</form>
+	<table class="table table-condensed table-striped">
+	<tbody id="card_search_results">
+	</tbody>
+	</table>
+	</div><!-- #card_search -->
+
+	<div class="row">
+	<div class="col-md-6" id="recent_decklists">
+	<h3 class="section">Last 10 decklists <a href="{{ path('decklists_list', {type:'recent'}) }}" class="small">more</a></h3>
+	<table class="table">
+	{% for decklist in recent %}
+	<tr>
+	<td>
+		<img src="/web/bundles/dtdbcards/images/cards/en/{{ decklist.code }}.png" style="width:52px">
+	</td>
+	<td class="decklists">
+	<div>
+			<a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a>
+	</div>
+	<div class="small">
+			<i>{{ decklist.lastpack }}</i>
+	</div>
+	<div class="author small">
+		<a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
+		{% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+		<small class="reputation">{{ decklist.reputation }}</small>
+	</div>
+	<div class="small decklist-social">
+		<span class="glyphicon glyphicon-heart social-icon-like"></span> {{ decklist.nbvotes }}
+		<span class="glyphicon glyphicon-star social-icon-favorite"></span> {{ decklist.nbfavorites }}
+		<span class="glyphicon glyphicon-comment social-icon-comment"></span> {{ decklist.nbcomments }}
+	</div>
+	</td>
+	</tr>
+	{% endfor %}
+	</table>
+	</div><!-- #recent_decklists -->
+	
+	<div class="col-md-6" id="recent_other">
+		<h3 class="section">Card reviews <a href="{{ path('decklists_list', {type:'recent'}) }}" class="small">more</a></h3>
+	
+	</div>
+	</div><!-- /.row -->
+
+</div>
+
+</div> <!-- .row -->
+
+</div> <!-- .container -->
+
+{% endblock %}

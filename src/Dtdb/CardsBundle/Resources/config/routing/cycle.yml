@@ -1,0 +1,30 @@
+admin_cycle:
+    pattern:  /
+    defaults: { _controller: "DtdbCardsBundle:Cycle:index" }
+
+admin_cycle_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "DtdbCardsBundle:Cycle:show" }
+
+admin_cycle_new:
+    pattern:  /new
+    defaults: { _controller: "DtdbCardsBundle:Cycle:new" }
+
+admin_cycle_create:
+    pattern:  /create
+    defaults: { _controller: "DtdbCardsBundle:Cycle:create" }
+    requirements: { _method: post }
+
+admin_cycle_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "DtdbCardsBundle:Cycle:edit" }
+
+admin_cycle_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "DtdbCardsBundle:Cycle:update" }
+    requirements: { _method: post|put }
+
+admin_cycle_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DtdbCardsBundle:Cycle:delete" }
+    requirements: { _method: post|delete }

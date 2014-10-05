@@ -1,0 +1,11 @@
+{% extends 'DtdbCardsBundle::main.html.twig' %}
+
+{% block title %}{% trans %}Card Sets{% endtrans %}{% endblock %}
+
+{% block content %}
+
+<h1>{{ block('title') }}</h1>
+
+{{ allsets|raw }}
+
+{% endblock %}

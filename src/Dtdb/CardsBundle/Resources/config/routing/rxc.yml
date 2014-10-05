@@ -1,0 +1,30 @@
+admin_rxc:
+    pattern:  /
+    defaults: { _controller: "DtdbCardsBundle:Rxc:index" }
+
+admin_rxc_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "DtdbCardsBundle:Rxc:show" }
+
+admin_rxc_new:
+    pattern:  /new
+    defaults: { _controller: "DtdbCardsBundle:Rxc:new" }
+
+admin_rxc_create:
+    pattern:  /create
+    defaults: { _controller: "DtdbCardsBundle:Rxc:create" }
+    requirements: { _method: post }
+
+admin_rxc_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "DtdbCardsBundle:Rxc:edit" }
+
+admin_rxc_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "DtdbCardsBundle:Rxc:update" }
+    requirements: { _method: post }
+
+admin_rxc_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DtdbCardsBundle:Rxc:delete" }
+    requirements: { _method: post }

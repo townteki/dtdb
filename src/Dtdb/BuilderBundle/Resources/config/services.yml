@@ -1,0 +1,12 @@
+parameters:
+    judge.class: Dtdb\BuilderBundle\Services\Judge
+    decks.class: Dtdb\BuilderBundle\Services\Decks
+
+services:
+    judge:
+        class: %judge.class%
+        arguments: [@doctrine.orm.entity_manager]
+    decks:
+        class: %decks.class%
+        arguments: [@doctrine.orm.entity_manager, @judge]
+

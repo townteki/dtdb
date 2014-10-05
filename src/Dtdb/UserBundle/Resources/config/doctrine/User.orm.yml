@@ -1,0 +1,97 @@
+Dtdb\UserBundle\Entity\User:
+    type: entity
+    table: user
+    repositoryClass: Dtdb\UserBundle\Entity\UserRepository
+    oneToMany:
+        decks:
+            targetEntity: Dtdb\BuilderBundle\Entity\Deck
+            orderBy: {'lastupdate':'DESC'}
+            mappedBy: user
+            cascade: ["remove"]
+        decklists:
+            targetEntity: Dtdb\BuilderBundle\Entity\Decklist
+            mappedBy: user
+        comments:
+            targetEntity: Dtdb\BuilderBundle\Entity\Comment
+            orderBy: {'creation':'DESC'}
+            mappedBy: author
+    manyToMany:
+        favorites:
+            targetEntity: Dtdb\BuilderBundle\Entity\Decklist
+            mappedBy: favorites
+            cascade: ["remove"]
+        votes:
+            targetEntity: Dtdb\BuilderBundle\Entity\Decklist
+            mappedBy: votes
+            cascade: ["remove"]
+        following:
+            targetEntity: User
+            mappedBy: followers
+        followers:
+            targetEntity: User
+            inversedBy: following
+            joinTable:
+                name: follow
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    follower_id:
+                        referencedColumnName: id
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        reputation:
+            type: integer
+            nullable: true
+        gang:
+            type: string
+            nullable: false
+        creation:
+            type: datetime
+            nullable: true
+        resume:
+            type: text
+            nullable: true
+        role:
+            type: integer
+            nullable: true
+        status:
+            type: integer
+            nullable: true
+        avatar:
+            type: string
+            length: 255
+            nullable: true
+        donation:
+            type: integer
+            nullable: false
+        notif_author:
+            type: boolean
+            nullable: false
+            options:
+                default: TRUE
+        notif_commenter:
+            type: boolean
+            nullable: false
+            options:
+                default: TRUE
+        notif_mention:
+            type: boolean
+            nullable: false
+            options:
+                default: TRUE
+        notif_follow:
+            type: boolean
+            nullable: false
+            options:
+                default: TRUE
+        notif_successor:
+            type: boolean
+            nullable: false
+            options:
+                default: TRUE
+    lifecycleCallbacks: {  }

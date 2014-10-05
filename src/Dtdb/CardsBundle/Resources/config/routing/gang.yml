@@ -1,0 +1,30 @@
+admin_gang:
+    path:     /
+    defaults: { _controller: "DtdbCardsBundle:Gang:index" }
+
+admin_gang_show:
+    path:     /{id}/show
+    defaults: { _controller: "DtdbCardsBundle:Gang:show" }
+
+admin_gang_new:
+    path:     /new
+    defaults: { _controller: "DtdbCardsBundle:Gang:new" }
+
+admin_gang_create:
+    path:     /create
+    defaults: { _controller: "DtdbCardsBundle:Gang:create" }
+    requirements: { _method: post }
+
+admin_gang_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtdbCardsBundle:Gang:edit" }
+
+admin_gang_update:
+    path:     /{id}/update
+    defaults: { _controller: "DtdbCardsBundle:Gang:update" }
+    requirements: { _method: post|put }
+
+admin_gang_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DtdbCardsBundle:Gang:delete" }
+    requirements: { _method: post|delete }

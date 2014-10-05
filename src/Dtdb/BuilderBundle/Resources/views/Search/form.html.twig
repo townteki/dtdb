@@ -1,0 +1,63 @@
+<form method="GET" action="{{ path('decklists_list', {type:'find'}) }}"
+	role="form">
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="form-group">
+				<label for="">Cards used</label>
+				{{ cards|default('')|raw }}
+				<input type="text" class="form-control" id="card" placeholder="Enter card title">
+			</div>
+			<div class="form-group">
+				<label for="">Sort</label> <select class="form-control" id="sort"
+					name="sort">
+					<option value="date"{{ sort_date|default('') }}>by Date</option>
+					<option value="likes"{{ sort_likes|default('') }}>by Number of Likes</option>
+					<option value="reputation"{{ sort_reputation|default('') }}>by Reputation of Author</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="form-group">
+				<label for="">Side or Gang</label> <select class="form-control"
+					id="gang" name="gang">
+					<option value="">any</option>
+					<option value="Corp"{{ gang_C|default('') }}>Corp</option>
+					<option value="haas-bioroid"{{ gang_h|default('') }}>Haas-Bioroid</option>
+					<option value="jinteki"{{ gang_j|default('') }}>Jinteki</option>
+					<option value="nbn"{{ gang_n|default('') }}>NBN</option>
+					<option value="weyland-consortium"{{ gang_w|default('') }}>Weyland</option>
+					<option value="Runner"{{ gang_R|default('') }}>Runner</option>
+					<option value="anarch"{{ gang_a|default('') }}>Anarch</option>
+					<option value="criminal"{{ gang_c|default('') }}>Criminal</option>
+					<option value="shaper"{{ gang_s|default('') }}>Shaper</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="">Last included pack</label> <select
+					class="form-control" id="lastpack" name="lastpack">
+					<option value="">any</option> {% for pack in packs %}
+					<option value="{{ pack.code }}"{{ pack.selected }}>{{ pack.name }}</option> {% endfor
+					%}
+				</select>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="form-group">
+				<label for="">Author name</label> <input type="text"
+					class="form-control" id="author" name="author"
+					placeholder="Enter author name" value="{{ author }}">
+			</div>
+			<div class="form-group">
+				<label for="">Decklist name</label> <input type="text"
+					class="form-control" id="title" name="title" value="{{ title }}"
+					placeholder="Enter text to search in title">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<button type="submit" class="btn btn-primary btn-lg">Search</button>
+		</div>
+
+	</div>
+</form>

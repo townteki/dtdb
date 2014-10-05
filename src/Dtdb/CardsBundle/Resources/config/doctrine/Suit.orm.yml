@@ -1,0 +1,20 @@
+Dtdb\CardsBundle\Entity\Suit:
+    type: entity
+    table: suit
+    indexes:
+        name_index:
+            columns: [ name ]
+    oneToMany:
+        types:
+            targetEntity: Type
+            mappedBy: suit
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

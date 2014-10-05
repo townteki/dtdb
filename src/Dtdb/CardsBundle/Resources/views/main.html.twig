@@ -1,0 +1,14 @@
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
+
+{% block body %}
+
+{#}
+{% render(controller('DtdbCardsBundle:Default:header', {'_locale':app.request.locale})) %}
+#}
+<div class="container">
+{% block content %}{% endblock %}
+</div>
+{#
+{% include 'DtdbCardsBundle::footer.html.twig' %}
+#}
+{% endblock %}

@@ -1,0 +1,28 @@
+<div class="row">
+	<form method="GET" action="{{ path('cards_find') }}" id="search-form" class="form-inline" role="form">
+		<div class="col-sm-4 form-group">
+			<input style="width:70%" class="form-control" size="30" name="q" id="search-input" tabindex="1" value="{{ q|default('') }}" title="Search tips:
+   e: expansion (word)
+   t: type (word)
+   k: keywords (word)
+   g: gang (letter)
+   s: shooter (word)
+   x: text (word)
+   r: cost or wealth (number)
+   v: value (number)
+   u: upkeep (number)
+   p: production (number)
+   b: bullets (number)
+   i: influence (number)
+   c: control (number)
+   q: quantity in pack (number)
+   f: flavor (word)
+   a: artist (word)
+   d: release date (date)
+
+Example: [ t:dude g:l ] displays all Law Dogs dudes">
+			<button class="btn btn-primary" type="submit">{% trans %}Search{% endtrans %}</button>
+		</div>
+		{% include 'DtdbCardsBundle:Default:searchoptions.html.twig' %}
+	</form>
+</div>

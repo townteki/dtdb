@@ -1,0 +1,7 @@
+parameters:
+#    dtdb_user.example.class: Dtdb\UserBundle\Example
+
+services:
+#    dtdb_user.example:
+#        class: %dtdb_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
