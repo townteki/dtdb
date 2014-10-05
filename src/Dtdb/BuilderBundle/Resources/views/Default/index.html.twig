@@ -29,7 +29,7 @@ var Outfit = null,
 <div class="row">
 
 
-<div class="col-md-6">
+<div class="col-md-8">
 <div class="page-header hidden-sm hidden-xs">
 <h1 style="font-size:72px">DoomtownDB</h1>
 <p class="">You can explore the public <a href="{{ path('decklists_list', {type:'popular'}) }}">decklists</a> or start building your own <a href="{{ path('decks_list') }}">decks</a>.</p>
@@ -87,7 +87,7 @@ var Outfit = null,
 
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
 	<div id="card_search">
 	<h3 class="section">Card search <a href="{{ path('cards_about') }}" class="small">?</a></h3>
 	<form method="GET" action="{{ path('cards_processSearchForm') }}" role="form">
@@ -102,7 +102,7 @@ var Outfit = null,
 	</div><!-- #card_search -->
 
 	<div class="row">
-	<div class="col-md-6" id="recent_decklists">
+	<div class="col-md-12" id="recent_decklists">
 	<h3 class="section">Last 10 decklists <a href="{{ path('decklists_list', {type:'recent'}) }}" class="small">more</a></h3>
 	<table class="table">
 	{% for decklist in recent %}
@@ -132,11 +132,11 @@ var Outfit = null,
 	{% endfor %}
 	</table>
 	</div><!-- #recent_decklists -->
-	
+	{#
 	<div class="col-md-6" id="recent_other">
 		<h3 class="section">Card reviews <a href="{{ path('decklists_list', {type:'recent'}) }}" class="small">more</a></h3>
 	
-	</div>
+	</div>#}
 	</div><!-- /.row -->
 
 </div>
