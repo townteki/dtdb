@@ -54,7 +54,7 @@ class EmailCommand extends ContainerAwareCommand
         $message = \Swift_Message::newInstance();
         
         // Give the message a subject
-        $message->setSubject('Your decks on NetrunnerDB');
+        $message->setSubject('Your decks on DoomtownDB');
         
         // Set the From address with an associative array
         $message->setFrom(array('alsciende@icloud.com' => 'Alsciende'));

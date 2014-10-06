@@ -70,7 +70,7 @@
 	<h5 class="username author">
 		<span class="pull-right decklist-creation">{{ decklist.creation|date('M d') }}</span>
 		<a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
-		{% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+		{% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
 		<small class="reputation">{{ decklist.reputation }}</small>
 		
 	</h5>

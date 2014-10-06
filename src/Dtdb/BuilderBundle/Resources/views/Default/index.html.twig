@@ -73,7 +73,7 @@ var Outfit = null,
 <h4 class="decklist-author author">
     Description by the author:
     <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
-    {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+    {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
     <small title="User Reputation">{{ decklist.reputation }}</small>
 </h4>
 {{ decklist.description|raw }}
@@ -117,7 +117,7 @@ var Outfit = null,
 	</div>
 	<div class="author small">
 		<a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
-		{% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+		{% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
 		<small class="reputation">{{ decklist.reputation }}</small>
 	</div>
 	<div class="small decklist-social">

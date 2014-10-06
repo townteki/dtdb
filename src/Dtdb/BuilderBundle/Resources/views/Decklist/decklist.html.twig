@@ -193,7 +193,7 @@ DTDB.user.params.decklist_id = Decklist.id;
 
 <h3 class="decklist-author">
     <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
-    {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+    {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
     <small title="User Reputation">{{ decklist.reputation }}</small>
 </h3>
 <div id="deck-description">{{ decklist.description|raw }}</div>
@@ -208,7 +208,7 @@ DTDB.user.params.decklist_id = Decklist.id;
 <a name="{{ comment.id }}" ></a>
 <span class="comment-date" title="{{ comment.creation|date('r') }}">{{ comment.creation|date('M d, Y') }}</span>
 <a href="{{ path('user_profile_view', {user_id:comment.user_id,user_name:comment.author|e('url')}) }}" class="comment-author username {{ comment.authorcolor }}">{{ comment.author }}</a>
-{% if comment.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+{% if comment.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
 <div class="comment-text">{{ comment.text|raw }}</div>
 </td></tr>
 {% endfor %}

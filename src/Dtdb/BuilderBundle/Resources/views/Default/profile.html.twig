@@ -16,7 +16,7 @@ $(function() {
 <div class="panel panel-default">
   <div class="panel-body">
     <h1><span class="{{ user.gang }}">{{ user.username }}</span>
-    {% if user.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+    {% if user.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
     <small>{{ user.reputation }}</small></h1>
 	<p>Member since {{ user.creation|date('Y-m-d') }}</p>
     {% if user.resume %}<blockquote>

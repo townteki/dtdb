@@ -327,9 +327,9 @@ function build_bbcode() {
 	lines.push($('#latestpack').text());
 	lines.push("");
 	if(typeof Decklist != "undefined" && Decklist != null) {
-		lines.push("Decklist [url="+location.href+"]published on NetrunnerDB[/url].");
+		lines.push("Decklist [url="+location.href+"]published on DoomtownDB[/url].");
 	} else {
-		lines.push("Deck built on [url=http://dtdb.co]NetrunnerDB[/url].");
+		lines.push("Deck built on [url=http://dtdb.co]DoomtownDB[/url].");
 	}
 	return lines;
 }
@@ -382,9 +382,9 @@ function build_markdown() {
 	lines.push($('#latestpack').text() + "  ");
 	lines.push("");
 	if(typeof Decklist != "undefined" && Decklist != null) {
-		lines.push("Decklist [published on NetrunnerDB]("+location.href+").");
+		lines.push("Decklist [published on DoomtownDB]("+location.href+").");
 	} else {
-		lines.push("Deck built on [NetrunnerDB](http://dtdb.co).");
+		lines.push("Deck built on [DoomtownDB](http://dtdb.co).");
 	}
 	return lines;
 }
