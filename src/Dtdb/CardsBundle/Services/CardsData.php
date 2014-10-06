@@ -329,16 +329,16 @@ class CardsData
 					}
 					$qb->andWhere(implode($operator == '!' ? " and " : " or ", $or));
 					break;
-				case 'v': // value
+				case 'v': // rank
 					$or = array();
-					$values = array('A' => 1, 'J' => 11, 'Q' => 12, 'K' => 13, '*' => 'null');
+					$ranks = array('A' => 1, 'J' => 11, 'Q' => 12, 'K' => 13, '*' => 'null');
 					foreach($condition as $arg) {
-					    if(isset($values[$arg])) $arg = $values[$arg];
+					    if(isset($ranks[$arg])) $arg = $ranks[$arg];
 					    switch($operator) {
-							case ':': $or[] = "(c.value = ?$i)"; break;
-							case '!': $or[] = "(c.value != ?$i)"; break;
-							case '<': $or[] = "(c.value < ?$i)"; break;
-							case '>': $or[] = "(c.value > ?$i)"; break;
+							case ':': $or[] = "(c.rank = ?$i)"; break;
+							case '!': $or[] = "(c.rank != ?$i)"; break;
+							case '<': $or[] = "(c.rank < ?$i)"; break;
+							case '>': $or[] = "(c.rank > ?$i)"; break;
 						}
 						$qb->setParameter($i++, $arg);
 					}
@@ -454,7 +454,7 @@ class CardsData
 				"pack_code" => $card->getPack()->getCode(),
 		        "cyclenumber" => $card->getPack()->getCycle()->getNumber(),
 		        "shooter" => $card->getShooter() ? $card->getShooter()->getName() : NULL,
-		        "value" => $card->getValue(),
+		        "rank" => $card->getRank(),
 		        "upkeep" => $card->getUpkeep(),
 		        "production" => $card->getProduction(),
 		        "bullets" => $card->getBullets(),
@@ -463,6 +463,7 @@ class CardsData
 		        "wealth" => $card->getWealth()
 		);
 
+		$cardinfo['value'] = $cardinfo['suit'].$cardinfo['rank'];
 		$cardinfo['url'] = $this->router->generate('cards_zoom', array('card_code' => $card->getCode(), '_locale' => $locale), true);
 
 		$cardinfo['imagesrc'] = "";

@@ -67,7 +67,7 @@ class Card
     /**
      * @var integer
      */
-    private $value;
+    private $rank;
 
     /**
      * @var integer
@@ -368,26 +368,26 @@ class Card
     }
 
     /**
-     * Set value
+     * Set rank
      *
-     * @param integer $value
+     * @param integer $rank
      * @return Card
      */
-    public function setValue($value)
+    public function setRank($rank)
     {
-        $this->value = $value;
+        $this->rank = $rank;
 
         return $this;
     }
 
     /**
-     * Get value
+     * Get rank
      *
      * @return integer
      */
-    public function getValue()
+    public function getRank()
     {
-        return $this->value;
+        return $this->rank;
     }
 
     /**

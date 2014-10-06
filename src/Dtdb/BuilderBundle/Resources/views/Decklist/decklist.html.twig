@@ -12,7 +12,7 @@ var Outfit = null,
 	Commenters = {{ commenters|json_encode|raw }},
 	DeckDB = TAFFY([Decklist]),
 	SelectedDeck = DeckDB().first(),
-	DisplaySort = 'type';
+	DisplaySort = 'value';
 
 DTDB.user.params.decklist_id = Decklist.id;
 	

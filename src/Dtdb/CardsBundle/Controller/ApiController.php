@@ -252,7 +252,7 @@ class ApiController extends Controller
                     "cost" => "Cost",
                     "type" => "Type",
                     "suit" => "Suit",
-                    "value" => "Value",
+                    "rank" => "Rank",
                     "keywords" => "Keywords",
                     "text" => "Text",
                     "gang" => "Gang",

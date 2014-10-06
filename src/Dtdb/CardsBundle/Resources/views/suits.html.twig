@@ -1,3 +1,3 @@
-{% macro display_card_value_and_suit(value, suit) %}
-<span class="card-value-and-suit">{% if value %}<span class="card-value value-{{ value }}">{% if value == 1 %}A{% else %}{% if value == 11 %}J{% else %}{% if value == 12 %}Q{% else %}{% if value == 13 %}K{% else %}{{ value }}{% endif %}{% endif %}{% endif %}{% endif %}</span>{% endif %}{% if suit %}<span class="card-suit suit-{{ suit }}">&{{ suit }};</span>{% endif %}</span>
+{% macro display_card_face(rank, suit) %}
+<span class="card-face">{% if rank %}<span class="card-rank rank-{{ rank }}">{% if rank == 1 %}A{% else %}{% if rank == 11 %}J{% else %}{% if rank == 12 %}Q{% else %}{% if rank == 13 %}K{% else %}{{ rank }}{% endif %}{% endif %}{% endif %}{% endif %}</span>{% endif %}{% if suit %}<span class="card-suit suit-{{ suit }}">&{{ suit }};</span>{% endif %}</span>
 {% endmacro %}

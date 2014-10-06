@@ -13,7 +13,7 @@
 
 <div class="col-sm-3 icon-bg icon-{{ card.gang_code }}">
 		<h5>
-		  {{ suits.display_card_value_and_suit(card.value, card.suit|lower) }}
+		  {{ suits.display_card_face(card.rank, card.suit|lower) }}
 		  <a href="{{ card.url }}" class="card-title{% if card.available == false %} card-preview{% endif %}">{{ card.title }}</a>
 		</h5>
 	<p style="font-family:sans-serif">

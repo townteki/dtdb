@@ -11,7 +11,7 @@
 <th>{% trans %}Gang{% endtrans %}</th>
 <th title="Cost or Wealth">{% trans %}Cost{% endtrans %}</th>
 <th>{% trans %}Type{% endtrans %}</th>
-<th>{% trans %}Value{% endtrans %}</th>
+<th>{% trans %}Rank{% endtrans %}</th>
 <th>{% trans %}Keywords{% endtrans %}</th>
 <th>{% trans %}Set{% endtrans %}</th>
 </tr>
@@ -25,7 +25,7 @@
 	<td data-th="{% trans %}Gang{% endtrans %}">{% if card.gang %}<img src="{{ asset('/web/bundles/dtdbbuilder/images/' ~ card.gang_code ~ '-20.png') }}" title="{{ card.gang }}">{% endif %}</td>
 	<td data-th="Cost">{{ card.cost }}</td>
 	<td data-th="Type" >{{ card.type }}</td>
-	<td data-th="&hellip;">{{ suits.display_card_value_and_suit(card.value, card.suit|lower) }}</td>
+	<td data-th="&hellip;">{{ suits.display_card_face(card.rank, card.suit|lower) }}</td>
 	<td data-th="{% trans %}Keywords{% endtrans %}">{{ card.keywords }}</td>
 	<td data-th="{% trans %}Pack{% endtrans %}">{{ card.pack }} {{ card.number }}</td>
 </tr>

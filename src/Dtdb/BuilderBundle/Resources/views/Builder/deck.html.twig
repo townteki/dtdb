@@ -12,14 +12,14 @@
 var Filters = {},
 	FilterQuery = {},
 	CardDivs = [null, {}, {}, {}],
-	Sort = "type",
+	Sort = "value",
 	Order = 1,
 	Outfit = null,
 	DeckSize = 0,
 	Deck = {{ deck.slots|json_encode|raw }},
 	Url_GangImage = '{{  asset('/web/bundles/dtdbbuilder/images/xxx-20.png') }}',
 	Url_TypeImage = '{{ asset('/web/bundles/dtdbbuilder/images/types/xxx.png') }}',
-	DisplaySort = 'type',
+	DisplaySort = 'value',
 	HideDisabled = true,
 	ShowOnlyDeck = false;
 	
@@ -102,29 +102,6 @@ var Filters = {},
     <div title="Odds to have at least 1 copy of a desired card, after having drawn that many cards from the deck, depending of the number of copies in the deck (1 - 2 - 3)"><span class="small">Odds: <span id="draw-simulator-odds-1">0</span>% &ndash; <span id="draw-simulator-odds-2">0</span>% &ndash; <span id="draw-simulator-odds-3">0</span>% <a href="#oddsModal" id="draw-simulator-more" data-toggle="modal" style="margin:0 10px">more</a></span>
 </td></tr>
 <tr><td id="table-draw-simulator-content"></td></tr>
-</tbody>
-</table>
-
-<!-- Graphs -->
-<table class="table table-condensed" id="table-graph-costs">
-<thead>
-<tr><th colspan="1"><span class="glyphicon glyphicon-stats"></span> Repartition by Cost</th></tr>
-</thead>
-<tbody>
-<tr>
-	<td><div id="costChart" width="100%" height="200"><button type="button" class="btn btn-link" onclick="make_cost_graph()">Display graph</button></div></td>
-</tr>
-</tbody>
-</table>
-
-<table class="table table-condensed" id="table-graph-strengths">
-<thead>
-<tr><th colspan="1"><span class="glyphicon glyphicon-stats"></span> Repartition by Strength</th></tr>
-</thead>
-<tbody>
-<tr>
-	<td><div id="strengthChart" width="100%" height="200"><button type="button" class="btn btn-link" onclick="make_strength_graph()">Display graph</button></div></td>
-</tr>
 </tbody>
 </table>
 

@@ -62,7 +62,7 @@ class Judge
 			$card = $elt['card'];
 			$qty = $elt['qty'];
 			$suit_name = $card->getType()->getSuit() ? $card->getType()->getSuit()->getName() : null;
-			$value = $card->getValue();
+			$rank = $card->getRank();
 			if($card->getType()->getName() == "Outfit") {
 				$outfit = $card;
 			} else if($card->getType()->getName() == "Joker") {
@@ -71,11 +71,11 @@ class Judge
 				$deck[] = $card;
 				$deckSize += $qty;
 			}
-			if($value) {
-			    if(isset($deckComposition[$suit_name][$value])) {
-			        $deckComposition[$suit_name][$value] = $deckComposition[$suit_name][$value] + $qty;
+			if($rank) {
+			    if(isset($deckComposition[$suit_name][$rank])) {
+			        $deckComposition[$suit_name][$rank] = $deckComposition[$suit_name][$rank] + $qty;
 			    } else {
-			        $deckComposition[$suit_name][$value] = $qty;
+			        $deckComposition[$suit_name][$rank] = $qty;
 			    }
 			}
 		}
@@ -98,7 +98,7 @@ class Judge
 		
 		$nb = 0;
 		foreach($deckComposition as $suit => $suitComposition) {
-		    foreach($suitComposition as $value => $qty) {
+		    foreach($suitComposition as $rank => $qty) {
 		        if($qty > 4) {
 		            return 'values';
 		        }

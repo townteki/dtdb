@@ -526,8 +526,8 @@ function build_div(record) {
 				+ '</div></td><td><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-				+ record.title + '</a></td><td class="value-' + record.value
-				+ '">' + record.value + '</td><td class="suit" title="' + record.suit
+				+ record.title + '</a></td><td class="value-' + record.rank
+				+ '">' + record.rank + '</td><td class="suit" title="' + record.suit
 				+ '"><td class="gang" title="' + record.gang + '">'
 				+ imgsrc + '</td></tr>');
 		break;

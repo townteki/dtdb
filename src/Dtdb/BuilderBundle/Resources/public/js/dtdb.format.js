@@ -30,17 +30,17 @@ DTDB.format = {};
 		return '<p>'+text+'</p>';
 	};
 	
-	format.value = function(card) {
+	format.face = function(card) {
 		if(!card.suit) return '';
 		
-		var dvalue = card.value;
-		if(card.value == 1) dvalue = 'A';
-		if(card.value == 11) dvalue = 'J';
-		if(card.value == 12) dvalue = 'Q';
-		if(card.value == 13) dvalue = 'K';
+		var drank = card.rank;
+		if(card.rank == 1) drank = 'A';
+		if(card.rank == 11) drank = 'J';
+		if(card.rank == 12) drank = 'Q';
+		if(card.rank == 13) drank = 'K';
 		
 		var dsuit = card.suit.toLowerCase(); 
-		return '<span class="card-value-and-suit"><span class="card-value value-'+card.value+'">'+dvalue+'</span><span class="card-suit suit-'+dsuit+'">&'+	dsuit+';</span></span>';
+		return '<span class="card-face card-face-'+dsuit+'"><span class="card-rank rank-'+card.rank+'">'+drank+'</span><span class="card-suit suit-'+dsuit+'"></span></span>';
 	};
 
 })(DTDB.format, jQuery);

@@ -65,6 +65,34 @@ function getDisplayDescriptions(sort) {
                   }
                 ]
             ],
+            'value': [
+                     [ // first column
+
+                         {
+                             id: 'Spades',
+                             label: 'Spades',
+                             icon: 'spades'
+                         }, {
+                             id: 'Clubs',
+                             label: 'Clubs',
+                             icon: 'clubs'
+                         }                ],
+                     [ // second column
+                       {
+                           id: 'Diams',
+                           label: 'Diamonds',
+                           icon: 'diams'
+                       }, {
+                           id: 'Hearts',
+                           label: 'Hearts',
+                           icon: 'hearts'
+                       }, {
+                           id: 'Joker',
+                           label: 'Jokers',
+                           icon: ''
+                       }
+                     ]
+                 ],
             'number': [],
             'title': [
                 [{
@@ -191,7 +219,7 @@ function update_deck(options) {
 	$('#img_outfit').prop('src', Outfit.imagesrc);
 
 	var latestpack = DTDB.data.sets({name:Outfit.pack}).first();
-	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order(DisplaySort === 'number' ? 'code' : 'title').each(function(record) {
+	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order(DisplaySort === 'number' ? 'code' : 'value').each(function(record) {
 		var pack = DTDB.data.sets({name:record.pack}).first();
 		if(latestpack.cyclenumber < pack.cyclenumber || (latestpack.cyclenumber == pack.cyclenumber && latestpack.number < pack.number)) latestpack = pack;
 		
@@ -216,6 +244,9 @@ function update_deck(options) {
 			}
 		} else if(DisplaySort === 'gang') {
 			criteria = record.gang_code;
+		} else if(DisplaySort === 'value') {
+			criteria = record.suit;
+			if(record.type_code == 'joker') criteria = 'Joker';
 		} else if(DisplaySort === 'number') {
 			criteria = record.pack_code;
 			var number_of_sets = Math.ceil(record.indeck / record.quantity);
@@ -225,7 +256,9 @@ function update_deck(options) {
 			criteria = 'cards';
 		}
 
-		var item = $('<div>'+record.indeck+'x <a href="'+Routing.generate('cards_zoom', {card_code:record.code})+'" class="card" data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="'+record.code+'">'+record.title+'</a> '+additional_info+'</div>');
+		var face = DTDB.format.face(record);
+		
+		var item = $('<div>'+record.indeck+'x '+face+' <a href="'+Routing.generate('cards_zoom', {card_code:record.code})+'" class="card" data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="'+record.code+'">'+record.title+'</a> '+additional_info+'</div>');
 		item.appendTo($('#deck-content .deck-'+criteria));
 		
 		cabinet[criteria] |= 0;
@@ -233,7 +266,7 @@ function update_deck(options) {
 		$('#deck-content .deck-'+criteria).prev().show().find('span:last').html(cabinet[criteria]);
 		
 		if(record.suit) {
-			DeckDistribution[SuitNumbers[record.suit]][record.value] += record.indeck;
+			DeckDistribution[SuitNumbers[record.suit]][record.rank] += record.indeck;
 		}
 	});
 	$('#latestpack').html('Cards up to <i>'+latestpack.name+'</i>');
@@ -272,7 +305,7 @@ function check_distribution() {
 		if(!legal) break;
 	}
 	if(!legal) {
-		$('#deckdistribution').html("Too many cards with same face value: "+ValueNames[j-1]+" of "+SuitNames[i]).addClass('text-danger');
+		$('#deckdistribution').html("Too many cards with same value: "+RankNames[j-1]+" of "+SuitNames[i]).addClass('text-danger');
 	} else {
 		$('#deckdistribution').empty();
 	}
@@ -280,7 +313,7 @@ function check_distribution() {
 var DeckDistribution = [];
 var SuitNumbers = { Spades: 0, Diams: 1, Hearts: 2, Clubs: 3 };
 var SuitNames = [ 'Spades', 'Diams', 'Hearts', 'Clubs' ];
-var ValueNames = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+var RankNames = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 $(function () {
 	
 	if(Modernizr.touch) {

@@ -9,14 +9,13 @@
 <script type="text/javascript">
 
 var Outfit = null,
-Deck = {{ deck|json_encode|raw }},
-DeckDB = TAFFY([Deck]),
-SelectedDeck = DeckDB().first(),
-DisplaySort = 'type',
+	Deck = {{ deck|json_encode|raw }},
+	DeckDB = TAFFY([Deck]),
+	SelectedDeck = DeckDB().first(),
+	DisplaySort = 'value',
 	Order = 1,
 	Outfit = null,
 	DeckSize = 0,
-	DisplaySort = 'type',
 	HideDisabled = true,
 	ShowOnlyDeck = false;
 	

@@ -19,7 +19,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
     			<h3 class="panel-title card-title">
-    			 <span class="pull-right">{{ suits.display_card_value_and_suit(card.value, card.suit|lower) }}</span>
+    			 <span class="pull-right">{{ suits.display_card_face(card.rank, card.suit|lower) }}</span>
 				<a href="{{ card.url }}" class="card-title{% if card.available == false %} card-preview{% endif %}">{{ card.title }}</a>
 				</h3>
   			</div>

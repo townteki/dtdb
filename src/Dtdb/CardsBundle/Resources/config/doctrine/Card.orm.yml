@@ -78,7 +78,7 @@ Dtdb\CardsBundle\Entity\Card:
         cost:
             type: smallint
             nullable: true
-        value:
+        rank:
             type: smallint
             nullable: true
         upkeep:

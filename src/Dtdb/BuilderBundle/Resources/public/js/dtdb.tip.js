@@ -33,7 +33,7 @@ DTDB.tip = {};
 								+ card.title + '</h4>' + type
 								+ '<div class="card-text">' + DTDB.format.text(card) + '</div>'
 								+ '<p class="card-gang" style="clear:right"><span class="pull-right">' + card.gang + ' &ndash; ' + card.pack + '</span>'
-								+ DTDB.format.value(card)
+								+ DTDB.format.face(card)
 								+ '</p>'
 					},
 					style : {

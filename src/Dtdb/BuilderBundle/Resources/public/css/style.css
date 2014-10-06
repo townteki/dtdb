@@ -1,11 +1,49 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?-mu1mk3');
+	src:url('../fonts/icomoon.eot?#iefix-mu1mk3') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?-mu1mk3') format('woff'),
+		url('../fonts/icomoon.ttf?-mu1mk3') format('truetype'),
+		url('../fonts/icomoon.svg?-mu1mk3#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 h1,h2,h3,h4,h5,h6,a.navbar-brand{font-family: 'IM Fell DW Pica SC', serif;}
+.card-face{font-family: 'Ultra', serif;}
 div.card-text{font-size:14px;border-left:1px solid #888;font-family: serif;}
+
+[class^="suit-"], [class*=" suit-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.suit-spades:before {
+	content: "\e600";
+}
+.suit-clubs:before {
+	content: "\e601";
+}
+.suit-diams:before {
+	content: "\e602";
+}
+.suit-hearts:before {
+	content: "\e603";
+}
 
 #push{clear:both}
 .type-icon,.gang-icon{vertical-align:text-bottom}
 
-.card-value-and-suit { font-family: cursive; font-weight: bold }
-.suit-diams, .suit-hearts { color: red }
+.card-face-diams, .card-face-hearts { color: red }
 
 #tag_toggles button {margin:0 1px 1px 0}
 .label {margin:0 1px 1px 0}

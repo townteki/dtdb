@@ -52,7 +52,7 @@ class ExcelController extends Controller
                 	case 'F': $card['cost'] = $cell->getValue(); break;
                 	case 'G': $card['type'] = $cell->getValue(); break;
                 	case 'H': $card['suit'] = $cell->getValue(); break;
-                	case 'I': $card['value'] = $cell->getValue(); break;
+                	case 'I': $card['rank'] = $cell->getValue(); break;
                 	case 'J': $card['keywords'] = $cell->getValue(); break;
                 	case 'K': $card['text'] = str_replace("\n", "\r\n", $cell->getValue()); break;
                 	case 'L': $card['gang'] = $cell->getValue(); break;
