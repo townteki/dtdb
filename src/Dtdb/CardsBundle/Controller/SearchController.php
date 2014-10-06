@@ -106,7 +106,7 @@ class SearchController extends Controller
 					if(!in_array($op, $operators)) {
 						$op = ":";
 					}
-					if($key == "r") {
+					if($key == "d") {
 						$op = "";
 					}
 					$params[] = "$key$op$val";
