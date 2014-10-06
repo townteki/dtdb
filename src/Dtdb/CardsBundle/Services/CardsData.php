@@ -344,19 +344,6 @@ class CardsData
 					}
 					$qb->andWhere(implode($operator == '!' ? " and " : " or ", $or));
 					break;
-				case 'q': // quantity
-					$or = array();
-					foreach($condition as $arg) {
-						switch($operator) {
-							case ':': $or[] = "(c.quantity = ?$i)"; break;
-							case '!': $or[] = "(c.quantity != ?$i)"; break;
-							case '<': $or[] = "(c.quantity < ?$i)"; break;
-							case '>': $or[] = "(c.quantity > ?$i)"; break;
-						}
-						$qb->setParameter($i++, $arg);
-					}
-					$qb->andWhere(implode($operator == '!' ? " and " : " or ", $or));
-					break;
 				case 'd': // date
 					$or = array();
 					foreach($condition as $arg) {

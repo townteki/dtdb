@@ -91,7 +91,7 @@ class SearchController extends Controller
 		if($request->query->get('q') != "") {
 			$params[] = $request->query->get('q');
 		}
-		$keys = str_split("kxrvupbicfgtaeqs");
+		$keys = str_split("kxrvupbicfgtaes");
 		foreach($keys as $key) {
 			$val = $request->query->get($key);
 			if(isset($val) && $val != "") {
