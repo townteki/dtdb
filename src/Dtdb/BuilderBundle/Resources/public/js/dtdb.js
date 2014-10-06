@@ -139,6 +139,13 @@ function update_deck(options) {
 	Outfit = DTDB.data.cards({indeck:{'gt':0},type_code:'outfit'}).first();
 	if(!Outfit) return;
 
+	for(var i=0; i<4; i++) {
+		DeckDistribution[i] = [];
+		for(var j=1; j<14; j++) {
+			DeckDistribution[i][j] = 0;
+		}
+	}
+	
 	var displayDescription = getDisplayDescriptions(DisplaySort);
 	if(displayDescription == null) return;
 	
@@ -225,20 +232,55 @@ function update_deck(options) {
 		cabinet[criteria] = cabinet[criteria] + record.indeck;
 		$('#deck-content .deck-'+criteria).prev().show().find('span:last').html(cabinet[criteria]);
 		
+		if(record.suit) {
+			DeckDistribution[SuitNumbers[record.suit]][record.value] += record.indeck;
+		}
 	});
 	$('#latestpack').html('Cards up to <i>'+latestpack.name+'</i>');
-	check_decksize();
+	check_composition();
+	check_distribution();
 	if($('#costChart .highcharts-container').size()) setTimeout(make_cost_graph, 100);
 	if($('#strengthChart .highcharts-container').size()) setTimeout(make_strength_graph, 100);
 	$('#deck').show();
 }
 
 
-function check_decksize() {
-	DeckSize = DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-	$('#cardcount').html(DeckSize+" cards (required 54)")[DeckSize !=  54 ? 'addClass' : 'removeClass']("text-danger");
+function check_composition() {
+	var outfits = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'outfit'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+	var jokers = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'joker'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+	var others = DTDB.data.cards({indeck:{'gt':0},suit:{'!is':null}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+	
+	$('#cardcount').html(others+" cards with printed value (required 52)")[others !=  52 ? 'addClass' : 'removeClass']("text-danger");
+	if(outfits != 1) {
+		$('#deckcomposition').html("Must have exactly one outfit.").addClass('text-danger');
+	} else if(jokers > 2) {
+		$('#deckcomposition').html("Must have no more than 2 jokers.").addClass('text-danger');
+	} else {
+		$('#deckcomposition').empty();
+	}
+	
 }
-
+function check_distribution() {
+	var legal = true;
+	for(var i=0; i<4; i++) {
+		for(var j=1; j<14; j++) {
+			if(DeckDistribution[i][j] > 4) {
+				legal = false;
+				break;
+			}
+		}
+		if(!legal) break;
+	}
+	if(!legal) {
+		$('#deckdistribution').html("Too many cards with same face value: "+ValueNames[j-1]+" of "+SuitNames[i]).addClass('text-danger');
+	} else {
+		$('#deckdistribution').empty();
+	}
+}
+var DeckDistribution = [];
+var SuitNumbers = { Spades: 0, Diams: 1, Hearts: 2, Clubs: 3 };
+var SuitNames = [ 'Spades', 'Diams', 'Hearts', 'Clubs' ];
+var ValueNames = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 $(function () {
 	
 	if(Modernizr.touch) {

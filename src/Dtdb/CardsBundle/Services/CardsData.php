@@ -332,9 +332,9 @@ class CardsData
 				case 'v': // value
 					$or = array();
 					$values = array('A' => 1, 'J' => 11, 'Q' => 12, 'K' => 13, '*' => 'null');
-					if(isset($values[$arg])) $arg = $values[$arg];
 					foreach($condition as $arg) {
-						switch($operator) {
+					    if(isset($values[$arg])) $arg = $values[$arg];
+					    switch($operator) {
 							case ':': $or[] = "(c.value = ?$i)"; break;
 							case '!': $or[] = "(c.value != ?$i)"; break;
 							case '<': $or[] = "(c.value < ?$i)"; break;

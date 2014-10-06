@@ -55,15 +55,28 @@ class Judge
 		$outfit = null;
 		$deck = array();
 		$deckSize = 0;
+		$deckComposition = array('Spades' => array(), 'Diams' => array(), 'Hearts' => array(), 'Clubs' => array());
 		
+		$nb_jokers = 0;
 		foreach($cards as $elt) {
 			$card = $elt['card'];
 			$qty = $elt['qty'];
+			$suit_name = $card->getType()->getSuit() ? $card->getType()->getSuit()->getName() : null;
+			$value = $card->getValue();
 			if($card->getType()->getName() == "Outfit") {
 				$outfit = $card;
+			} else if($card->getType()->getName() == "Joker") {
+				$nb_jokers += $qty;
 			} else {
 				$deck[] = $card;
 				$deckSize += $qty;
+			}
+			if($value) {
+			    if(isset($deckComposition[$suit_name][$value])) {
+			        $deckComposition[$suit_name][$value] = $deckComposition[$suit_name][$value] + $qty;
+			    } else {
+			        $deckComposition[$suit_name][$value] = $qty;
+			    }
 			}
 		}
 		
@@ -71,12 +84,29 @@ class Judge
 			return 'outfit';
 		}
 		
+		if($nb_jokers > 2) {
+		    return 'jokers';
+		}
+		
 		foreach($deck as $card) {
 			$qty = $cards[$card->getCode()]['qty'];
 			
-			if($qty > 4 && $outfit->getGang()->getCode() != "neutral") {
+			if($qty > 4) {
 			    return 'copies';
 			}
+		}
+		
+		$nb = 0;
+		foreach($deckComposition as $suit => $suitComposition) {
+		    foreach($suitComposition as $value => $qty) {
+		        if($qty > 4) {
+		            return 'values';
+		        }
+		        $nb += $qty;
+		    }
+		}
+		if($nb != 52) {
+		    return 'deckSize';
 		}
 		
 		return array(
@@ -88,8 +118,10 @@ class Judge
 	{
 		switch($problem) {
 			case 'outfit': return "The deck lacks an Outfit card."; break;
-			case 'deckSize': return "The deck has less cards than the minimum required by the Outfit."; break;
-			case 'copies' : return "The deck has more than 3 copies of a card."; break;
+			case 'deckSize': return "The deck doesn't have exactly 52 cards with value."; break;
+			case 'copies' : return "The deck has more than 4 copies of a card."; break;
+			case 'values': return "The deck has more than 4 cards with a given value."; break;
+			case 'jokers': return "The deck has more than 2 Jokers."; break;
 		}
 	}
 	
