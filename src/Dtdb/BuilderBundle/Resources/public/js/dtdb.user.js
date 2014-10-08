@@ -68,7 +68,7 @@ DTDB.user = {};
 				+ Routing.generate('user_comments',{_locale:user.data.locale})
 				+ '">Comments</a></li><li><a href="'
 				+ Routing.generate('fos_user_security_logout') 
-				+ '" onclick="DTDB.user.wipe()">Jack out</a></li></ul>');
+				+ '" onclick="DTDB.user.wipe()">Saunter off</a></li></ul>');
 	}
 	
 	$(function() {
