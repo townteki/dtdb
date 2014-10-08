@@ -134,12 +134,6 @@ DtdbCardsBundle_admin_rxc:
     resource: "@DtdbCardsBundle/Resources/config/routing/rxc.yml"
     prefix:   /admin/rxc
 
-ffg:
-    pattern: /ffg
-    defaults:
-        _controller: DtdbCardsBundle:Default:ffg
-
-
 excel_form:
     pattern: /admin/excel/form
     defaults:
