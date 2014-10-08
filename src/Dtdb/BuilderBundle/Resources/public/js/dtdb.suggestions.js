@@ -97,11 +97,6 @@ DTDB.suggestions = {};
 	};
 	
 	suggestions.div = function(record) {
-		var gang = record.gang_code;
-		var influ = "";
-		for (var i = 0; i < record.gangcost; i++)
-			influ += "&bull;";
-
 		var radios = '';
 		for (var i = 0; i <= record.maxqty; i++) {
 			radios += '<label class="btn btn-xs btn-default'
@@ -110,22 +105,15 @@ DTDB.suggestions = {};
 					+ '" value="' + i + '">' + i + '</label>';
 		}
 		
-		var imgsrc = record.gang_code == "neutral" ? "" : '<img src="'
-					+ Url_GangImage.replace('xxx', record.gang_code)
-					+ '.png">';
 		var div = $('<tr class="card-container" data-index="'
 					+ record.code
 					+ '"><td><button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></button></td>'
 					+ '<td><div class="btn-group" data-toggle="buttons">'
 					+ radios
-					+ '</div></td><td><a class="card" href="'
+					+ '</div></td><td>'+DTDB.format.face(record)+' <a class="card" href="'
 					+ Routing.generate('cards_zoom', {card_code:record.code})
 					+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-					+ record.title + '</a></td><td class="type" title="' + record.type
-					+ '"><img src="/web/bundles/dtdbbuilder/images/types/'
-					+ record.type_code + '.png">'
-					+ '</td><td class="gang" title="' + record.gang + '">'
-					+ imgsrc + '</td></tr>');
+					+ record.title + '</a></td></tr>');
 		
 		return div;
 	}
