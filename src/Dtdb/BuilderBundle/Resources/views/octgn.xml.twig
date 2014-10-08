@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<deck game="0f38e453-26df-4c04-9d67-6d43de939c77">
-  <section name="Outfit">
-    <card qty="1" id="bc0f047c-01b1-427f-a439-d451eda{{ outfit.index }}">{{ outfit.name }}</card>
+<deck game="7fd3eeac-4916-4644-bd7d-e1f5ff6faaa5" sleeveid="0">
+  <section name="Outfit" shared="False">
+    <card qty="1" id="{{ outfit.id }}">{{ outfit.name }}</card>
   </section>
-  <section name="R&amp;D / Stack">
-{% for card in rd %}
-    <card qty="{{ card.qty }}" id="bc0f047c-01b1-427f-a439-d451eda{{ card.index }}">{{ card.name }}</card>
+  <section name="Deck" shared="False">
+{% for card in deck %}
+    <card qty="{{ card.qty }}" id="{{ card.id }}">{{ card.name }}</card>
 {% endfor %}
   </section>
   <notes><![CDATA[{{ description }}]]></notes>

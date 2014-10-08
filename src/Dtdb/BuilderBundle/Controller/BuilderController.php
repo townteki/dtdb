@@ -183,16 +183,11 @@ class BuilderController extends Controller
         $content = array();
         foreach ($cardcrawler as $domElement) {
             $quantity = intval($domElement->getAttribute('qty'));
-            if (preg_match('/bc0f047c-01b1-427f-a439-d451eda(\d{5})/', $domElement->getAttribute('id'), $matches)) {
-                $card_code = $matches[1];
-            } else {
-                continue;
-            }
             $card = $em->getRepository('DtdbCardsBundle:Card')->findOneBy(array(
-                    'code' => $card_code
+                    'octgnid' => $domElement->getAttribute('id')
             ));
             if ($card) {
-                $content[$card->getCode()] = $quantity;
+                $content[$card->getCode()] = (isset($content[$card->getCode()]) ? $content[$card->getCode()] : 0) + $quantity;
             }
         }
         
@@ -288,12 +283,12 @@ class BuilderController extends Controller
                 ->getType()
                 ->getName() == "Outfit") {
                 $outfit = array(
-                        "index" => $slot->getCard()->getCode(),
+                        "id" => $slot->getCard()->getOctgnid(),
                         "name" => $slot->getCard()->getTitle()
                 );
             } else {
                 $rd[] = array(
-                        "index" => $slot->getCard()->getCode(),
+                        "id" => $slot->getCard()->getOctgnid(),
                         "name" => $slot->getCard()->getTitle(),
                         "qty" => $slot->getQuantity()
                 );
@@ -315,7 +310,7 @@ class BuilderController extends Controller
         $content = $this->renderView('DtdbBuilderBundle::octgn.xml.twig',
                 array(
                         "outfit" => $outfit,
-                        "rd" => $rd,
+                        "deck" => $rd,
                         "description" => strip_tags($description)
                 ));
         
