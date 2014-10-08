@@ -1,6 +1,6 @@
 var InputByTitle = false;
 var DisplayColumns = 1;
-var CoreSets = 3;
+var BaseSets = 1;
 
 DTDB.data_loaded.add(function() {
 	var localStorageDisplayColumns;
@@ -13,14 +13,14 @@ DTDB.data_loaded.add(function() {
 	$('input[name=display-column-' + DisplayColumns + ']')
 			.prop('checked', true);
 
-	var localStorageCoreSets;
+	var localStorageBaseSets;
 	if (localStorage
-			&& (localStorageCoreSets = parseInt(localStorage
-					.getItem('core_sets'), 10)) !== null
-			&& [ 1, 2, 3 ].indexOf(localStorageCoreSets) > -1) {
-		CoreSets = localStorageCoreSets;
+			&& (localStorageBaseSets = parseInt(localStorage
+					.getItem('base_sets'), 10)) !== null
+			&& [ 1, 2 ].indexOf(localStorageBaseSets) > -1) {
+		BaseSets = localStorageBaseSets;
 	}
-	$('input[name=core-set-' + CoreSets + ']').prop('checked', true);
+	$('input[name=base-set-' + BaseSets + ']').prop('checked', true);
 
 	var localStorageSuggestions;
 	if (localStorage
@@ -53,8 +53,8 @@ DTDB.data_loaded.add(function() {
 	update_deck();
 	DTDB.data.cards().each(function(record) {
 		var max_qty = 4;
-		if (record.pack_code == 'dtr')
-			max_qty = Math.min(record.quantity * CoreSets, 4);
+		if (record.pack_code == 'DTR')
+			max_qty = Math.min(record.quantity * BaseSets, 4);
 		if (record.type_code == "outfit")
 			max_qty = 1;
 		DTDB.data.cards(record.___id).update({
@@ -253,36 +253,25 @@ $(function() {
 			refresh_collection();
 		}
 	});
-	$('input[name=core-set-1]').on({
+	$('input[name=base-set-1]').on({
 		change : function(event) {
-			$('input[name=core-set-2]').prop('checked', false);
-			$('input[name=core-set-3]').prop('checked', false);
-			CoreSets = 1;
+			$('input[name=base-set-2]').prop('checked', false);
+			$('input[name=base-set-3]').prop('checked', false);
+			BaseSets = 1;
 			if (localStorage)
-				localStorage.setItem('core_sets', CoreSets);
-			update_core_sets();
+				localStorage.setItem('base_sets', BaseSets);
+			update_base_sets();
 			refresh_collection();
 		}
 	});
-	$('input[name=core-set-2]').on({
+	$('input[name=base-set-2]').on({
 		change : function(event) {
-			$('input[name=core-set-1]').prop('checked', false);
-			$('input[name=core-set-3]').prop('checked', false);
-			CoreSets = 2;
+			$('input[name=base-set-1]').prop('checked', false);
+			$('input[name=base-set-3]').prop('checked', false);
+			BaseSets = 2;
 			if (localStorage)
-				localStorage.setItem('core_sets', CoreSets);
-			update_core_sets();
-			refresh_collection();
-		}
-	});
-	$('input[name=core-set-3]').on({
-		change : function(event) {
-			$('input[name=core-set-1]').prop('checked', false);
-			$('input[name=core-set-2]').prop('checked', false);
-			CoreSets = 3;
-			if (localStorage)
-				localStorage.setItem('core_sets', CoreSets);
-			update_core_sets();
+				localStorage.setItem('base_sets', BaseSets);
+			update_base_sets();
 			refresh_collection();
 		}
 	});
@@ -483,15 +472,14 @@ function handle_quantity_change(event) {
 		$('input[name=title]').typeahead('setQuery', '').focus().blur();
 }
 
-function update_core_sets() {
+function update_base_sets() {
 	CardDivs = [ null, {}, {}, {} ];
 	DTDB.data.cards({
-		pack_code : 'core'
+		pack_code : 'DTR'
 	}).each(function(record) {
-		var max_qty = Math.min(record.quantity * CoreSets, 3);
+		var max_qty = Math.min(record.quantity * BaseSets, 4);
 		if (record.type_code == "outfit" || record.limited)
 			max_qty = 1;
-		if(Outfit.gang_code == "neutral") max_qty = 9;
 		DTDB.data.cards(record.___id).update({
 			maxqty : max_qty
 		});

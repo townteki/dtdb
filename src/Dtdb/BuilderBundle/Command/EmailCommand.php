@@ -31,7 +31,6 @@ class EmailCommand extends ContainerAwareCommand
                     if(!$card) continue;
                     $cardtitle = $card->getTitle();
                     $packname = $card->getPack()->getName();
-                    if($packname == 'Core Set') $packname = 'Core';
                     $qty = $slot['qty'];
                     $content[] = "$cardtitle ($packname) x$qty";
                     $em->detach($card);

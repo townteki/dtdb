@@ -21,7 +21,7 @@
 
 <h3>One Set</h3>
 
-<tt>/api/set/{code}</tt> returns card data about the cards in the set identified by <tt>code</tt> (core for Core Set, etc).
+<tt>/api/set/{code}</tt> returns card data about the cards in the set identified by <tt>code</tt> (DTR for Base Set, etc).
 
 <h3>One Card</h3>
 
@@ -52,7 +52,7 @@ The following API endpoints require a OAuth2 authentication. To get the required
 	<li>description: a string. Optional</li>
 	<li>decklist_id: an integer. Optional. If set, saved decklist will be descendant of it.</li>
 	<li>content: a json array of json objects with 2 keys, "card_code" (string) and "qty" (integer). Mandatory</li>
-</ul>		
+</ul>
 
 <h3>Publish a decklist for an authenticated user</h3>
 
