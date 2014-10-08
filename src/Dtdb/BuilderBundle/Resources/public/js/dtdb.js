@@ -6,6 +6,7 @@ function display_notification()
 	if(!localStorage) return;
 	var Notification = {
 		version: '1.5.0',
+		type: 'info', // success info warning danger
 		message: "Use the options of the deckbuilder to increase the number of Base Sets you own."
 	};
 	if(!Notification.message) return;
