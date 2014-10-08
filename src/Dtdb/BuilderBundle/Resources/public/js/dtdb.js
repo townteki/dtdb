@@ -273,8 +273,6 @@ function update_deck(options) {
 	$('#latestpack').html('Cards up to <i>'+latestpack.name+'</i>');
 	check_composition();
 	check_distribution();
-	if($('#costChart .highcharts-container').size()) setTimeout(make_cost_graph, 100);
-	if($('#strengthChart .highcharts-container').size()) setTimeout(make_strength_graph, 100);
 	$('#deck').show();
 }
 
@@ -324,7 +322,7 @@ $(function () {
 		
 	display_notification();
 	
-	$.each([ 'table-graph-costs', 'table-graph-strengths', 'table-predecessor', 'table-successor', 'table-draw-simulator', 'table-suggestions' ], function (i, table_id) {
+	$.each([ 'table-predecessor', 'table-successor', 'table-draw-simulator', 'table-suggestions' ], function (i, table_id) {
 		var table = $('#'+table_id);
 		if(!table.size()) return;
 		var head = table.find('thead tr th');
@@ -516,129 +514,6 @@ function build_plaintext() {
 function export_plaintext() {
 	$('#export-deck').html(build_plaintext().join("\n"));
 	$('#exportModal').modal('show');
-}
-
-function make_cost_graph() {
-	var costs = [];
-	
-	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).each(function(record) {
-		if(record.cost != null) {
-			if(costs[record.cost] == null) costs[record.cost] = [];
-			if(costs[record.cost][record.type] == null) costs[record.cost][record.type] = 0;
-			costs[record.cost][record.type] += record.indeck;
-		}
-	});
-	
-	// costChart
-	var cost_series = [ { name: 'Event', data: [] }, { name: 'Resource', data: [] }, { name: 'Hardware', data: [] }, { name: 'Program', data: [] } ];
-	var xAxis = [];
-	
-	for(var j=0; j<costs.length; j++) {
-		xAxis.push(j);
-		var data = costs[j];
-		for(var i=0; i<cost_series.length; i++) {
-			var type_name = cost_series[i].name;
-			cost_series[i].data.push(data && data[type_name] ? data[type_name] : 0);
-		}
-	}
-	
-	$('#costChart').highcharts({
-		colors: ['#FFE66F', '#316861', '#97BF63', '#5863CC' ],
-		title: {
-			text: null,
-		},
-		credits: {
-			enabled: false,
-		},
-		chart: {
-            type: 'column'
-        },
-        xAxis: {
-            categories: xAxis,
-        },
-        yAxis: {
-            title: {
-                text: null
-            },
-            allowDecimals: false,
-            minTickInterval: 1,
-            minorTickInterval: 1,
-            endOnTick: false
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-            }
-        },
-        series: cost_series
-	});
-
-}
-
-function make_strength_graph() {
-	var strengths = [];
-	var ice_types = [ 'Barrier', 'Code Gate', 'Sentry', 'Other' ];
-	
-	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).each(function(record) {
-		if(record.strength != null) {
-			if(strengths[record.strength] == null) strengths[record.strength] = [];
-			var ice_type = 'Other';
-			for(var i=0; i<ice_types.length; i++) {
-				if(record.keywords.indexOf(ice_types[i]) != -1) {
-					ice_type = ice_types[i];
-					break;
-				}
-			}
-			if(strengths[record.strength][ice_type] == null) strengths[record.strength][ice_type] = 0;
-			strengths[record.strength][ice_type] += record.indeck;
-		}
-	});
-	
-	// strengthChart
-	var strength_series = [];
-	for(var i=0; i<ice_types.length; i++) strength_series.push({ name: ice_types[i], data: [] });
-	var xAxis = [];
-
-	for(var j=0; j<strengths.length; j++) {
-		xAxis.push(j);
-		var data = strengths[j];
-		for(var i=0; i<strength_series.length; i++) {
-			var type_name = strength_series[i].name;
-			strength_series[i].data.push(data && data[type_name] ? data[type_name] : 0);
-		}
-	}
-
-	$('#strengthChart').highcharts({
-		colors: ['#487BCC', '#B8EB59', '#FF6251', '#CCCCCC'],
-		title: {
-			text: null,
-		},
-		credits: {
-			enabled: false,
-		},
-		chart: {
-            type: 'column'
-        },
-        xAxis: {
-            categories: xAxis
-        },
-        yAxis: {
-            title: {
-                text: null
-            },
-            allowDecimals: false,
-            minTickInterval: 1,
-            minorTickInterval: 1,
-            endOnTick: false
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-            }
-        },
-        series: strength_series
-	});
-	
 }
 
 //binomial coefficient module, shamelessly ripped from https://github.com/pboyer/binomial.js

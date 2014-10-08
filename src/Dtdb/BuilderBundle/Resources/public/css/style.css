@@ -350,3 +350,10 @@ div.no-image-text {
 	position:absolute;
 	text-align:center;
 }
+
+div.deck-composition td.level-0 { background: #FFD3A7; }
+div.deck-composition td.level-1 { background: #E5BE97; }
+div.deck-composition td.level-2 { background: #BF9E7E; }
+div.deck-composition td.level-3 { background: #7F6A54; }
+div.deck-composition td.level-4 { background: #40352A; }
+
