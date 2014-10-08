@@ -393,7 +393,6 @@ function handle_input_change(event) {
 }
 
 function handle_submit(event) {
-	var deck_name = $('input[name=name]').val();
 	var deck_content = {};
 	DTDB.data.cards({
 		indeck : {
@@ -487,11 +486,6 @@ function update_base_sets() {
 }
 
 function build_div(record) {
-	var gang = record.gang_code;
-	var influ = "";
-	for (var i = 0; i < record.gangcost; i++)
-		influ += "&bull;";
-
 	var radios = '';
 	for (var i = 0; i <= record.maxqty; i++) {
 		radios += '<label class="btn btn-xs btn-default'
@@ -515,8 +509,8 @@ function build_div(record) {
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
 				+ record.title + '</a></td><td class="value-' + record.rank
-				+ '">' + record.rank + '</td><td class="suit" title="' + record.suit
-				+ '"><td class="gang" title="' + record.gang + '">'
+				+ '">' + DTDB.format.rank(record) + '</td><td class="suit" title="' + record.suit
+				+ '">' + DTDB.format.suit(record) + '</td><td class="gang" title="' + record.gang + '">'
 				+ imgsrc + '</td></tr>');
 		break;
 
@@ -573,10 +567,18 @@ function update_filtered() {
 	$('#collection-table').empty();
 	$('#collection-grid').empty();
 	
+	var sortType = {
+			'rank': ['asec', 'desc'],
+			'suit': ['asec', 'desc'],
+			'title': ['intl', 'intldesc'],
+			'gang': ['intl', 'intldesc'],
+			'indeck': ['asec', 'desc']
+	};
+	var order = sortType[Sort][Order > 0 ? 0 : 1];
 	var counter = 0, container = $('#collection-table');
 	var SmartFilterQuery = DTDB.smart_filter.get_query(FilterQuery);
 	DTDB.data.cards(SmartFilterQuery)
-			.order(Sort + (Order > 0 ? " intl" : " intldesc") + ',title')
+			.order(Sort + ' ' + order + ',title')
 			.each(
 					function(record) {
 

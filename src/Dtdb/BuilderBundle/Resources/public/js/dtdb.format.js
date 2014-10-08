@@ -43,4 +43,23 @@ DTDB.format = {};
 		return '<span class="card-face card-face-'+dsuit+'"><span class="card-rank rank-'+card.rank+'">'+drank+'</span><span class="card-suit suit-'+dsuit+'"></span></span>';
 	};
 
+	format.rank = function(card) {
+		if(!card.rank) return '';
+		
+		var drank = card.rank;
+		if(card.rank == 1) drank = 'A';
+		if(card.rank == 11) drank = 'J';
+		if(card.rank == 12) drank = 'Q';
+		if(card.rank == 13) drank = 'K';
+		
+		var dsuit = card.suit.toLowerCase(); 
+		return '<span class="card-rank card-face-'+dsuit+' rank-'+card.rank+'">'+drank+'</span>';
+	};
+
+	format.suit = function(card) {
+		if(!card.suit) return '';
+		var dsuit = card.suit.toLowerCase(); 
+		return '<span class="card-suit suit-'+dsuit+'"></span>';
+	};
+
 })(DTDB.format, jQuery);

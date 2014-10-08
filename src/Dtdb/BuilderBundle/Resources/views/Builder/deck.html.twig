@@ -12,7 +12,7 @@
 var Filters = {},
 	FilterQuery = {},
 	CardDivs = [null, {}, {}, {}],
-	Sort = "value",
+	Sort = "suit",
 	Order = 1,
 	Outfit = null,
 	DeckSize = 0,
@@ -188,9 +188,9 @@ var Filters = {},
 				<tr>
 					<th><a href="#" data-sort="indeck">Quantity</a></th>
 					<th><a href="#" data-sort="title">Name</a></th>
-					<th><a href="#" data-sort="gangcost">Inf.</a></th>
-					<th class="type"><a href="#" data-sort="type">Type</a><span class="caret"></span></th>
-					<th class="gang"><a href="#" data-sort="gang">Gang</a></th>
+					<th><a href="#" data-sort="rank">Rank</a></th>
+					<th><a href="#" data-sort="suit">Suit</a><span class="caret"></span></th>
+					<th><a href="#" data-sort="gang">Gang</a></th>
 				</tr>
 			</thead>
 			<tbody id="collection-table" class="collection"></tbody>
