@@ -42,7 +42,6 @@ var Outfit = null,
 		<ul class="dropdown-menu" role="menu">
 			<li><a href="{{ path('deck_import') }}" id="btn-import-paste">Copy/paste</button>
 			<li><a href="#" onclick="$('#fileModal').modal('show')" id="btn-import-file">File</a></li>
-			<li><a href="#" onclick="$('#meteorModal').modal('show')" id="btn-import-meteor">Meteor Decks</a></li>
 		</ul>
 	</div>
 </div>
@@ -375,35 +374,6 @@ var Outfit = null,
 		</div>
 	</div>
 </div>
-<!-- Modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="meteorModal" tabindex="-1" role="dialog" aria-labelledby="meteorModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3 class="modal-title">Import from Meteor Decks</h3>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-12">
-						<form action="{{ path('deck_meteorimport') }}" method="POST" enctype="multipart/form-data">
-							<div class="form-group">
-								<label for="urlmeteor">URL of the page "Your decks" on Meteor Decks</label>
-								<input class="form-control" type="meteor" name="urlmeteor" placeholder="http://netrunner.meteor.com/users/xxxxxxxxxxxxxxxxx">
-							</div>
-							<div class="pull-right">
-								<button type="submit" class="btn btn-success">Import</button>
-								<button type="button" class="btn btn-default" onclick="$('#meteorModal').modal('hide')">Cancel</button>
-							</div>
-						</form>
-					</div><!-- /#modal-info -->
-				</div><!-- /.row -->
-			</div><!-- /.modal-body -->
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 <!-- Modal -->
 
 <!-- Modal -->

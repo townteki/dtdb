@@ -125,15 +125,6 @@ deck_fileimport:
     requirements:
         _locale: en|fr|de|es|it|pl
 
-deck_meteorimport:
-    pattern: /{_locale}/deck/meteorimport
-    methods: [POST]
-    defaults:
-        _controller: DtdbBuilderBundle:Builder:meteorimport
-        _locale: en
-    requirements:
-        _locale: en|fr|de|es|it|pl
-
 decks_download_all:
     pattern: /deck/export/all
     methods: [GET]
