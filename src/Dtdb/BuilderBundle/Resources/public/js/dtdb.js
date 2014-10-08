@@ -12,7 +12,7 @@ function display_notification()
 	if(!Notification.message) return;
 	var localStorageNotification = localStorage.getItem('notification');
 	if(localStorageNotification === Notification.version) return;
-	var alert = $('<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+Notification.message+'</div>');
+	var alert = $('<div class="alert alert-'+Notification.type+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+Notification.message+'</div>');
 	alert.bind('closed.bs.alert', function () {
 		localStorage.setItem('notification', Notification.version);  
 	})
