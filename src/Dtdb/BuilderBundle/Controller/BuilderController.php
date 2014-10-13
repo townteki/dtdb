@@ -64,7 +64,10 @@ class BuilderController extends Controller
             return new Response('card not found.');
         
         $arr = array(
-                $card_code => 1
+                $card_code => array(
+                        'quantity' => 1,
+                        'start' => 0
+                )
         );
         return $this->render('DtdbBuilderBundle:Builder:deck.html.twig',
                 array(
