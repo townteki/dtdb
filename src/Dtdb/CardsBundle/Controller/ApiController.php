@@ -206,10 +206,6 @@ class ApiController extends Controller
 					else $card['memoryunits'] = '';
 				}
 				
-				if(!isset($card['gangcost'])) {
-					$card['gangcost'] = '';
-				}
-				
 				if(!isset($card['flavor'])) {
 					$card['flavor'] = '';
 				}

@@ -505,7 +505,7 @@ function show_deck() {
 	$(this).closest('tr').addClass('active');
 	for(var i=0; i<SelectedDeck.cards.length; i++) {
 		var slot = SelectedDeck.cards[i];
-		DTDB.data.cards({code:slot.card_code}).update({indeck:parseInt(slot.qty,10)});
+		DTDB.data.cards({code:slot.card_code}).update({indeck:slot.qty,start:slot.start});
 	}
 	$('#deck-name').text(SelectedDeck.name);
 	

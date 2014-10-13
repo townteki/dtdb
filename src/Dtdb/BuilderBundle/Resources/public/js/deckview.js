@@ -9,14 +9,15 @@ DTDB.data_loaded.add(function() {
 	}).remove();
 	var sets_in_deck = {};
 	DTDB.data.cards().each(function(record) {
-		var max_qty = 3, indeck = 0;
+		var indeck = 0, start = 0;
 		if (SelectedDeck.slots[record.code]) {
-			indeck = parseInt(SelectedDeck.slots[record.code], 10);
+			indeck = parseInt(SelectedDeck.slots[record.code].quantity, 10);
+			start = SelectedDeck.slots[record.code].start;
 			sets_in_deck[record.pack_code] = 1;
 		}
 		DTDB.data.cards(record.___id).update({
 			indeck : indeck,
-			gangcost : record.gangcost || 0
+			start: start
 		});
 	});
 	update_deck();

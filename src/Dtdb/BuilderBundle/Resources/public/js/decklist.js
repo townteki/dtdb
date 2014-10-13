@@ -14,7 +14,8 @@ DTDB.data_loaded.add(function() {
 		DTDB.data.cards({
 			code : slot.card_code
 		}).update({
-			indeck : parseInt(slot.qty, 10)
+			indeck : parseInt(slot.qty, 10),
+			start: parseInt(slot.start, 10)
 		});
 	}
 	update_deck();

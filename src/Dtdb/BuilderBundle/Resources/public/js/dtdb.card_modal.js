@@ -51,8 +51,12 @@ DTDB.card_modal = {};
 			if(card.code == Outfit.code) {
 				qtyelt.find('label').addClass("disabled").find('input[type=radio]').attr("disabled", true);
 			}
-
 			
+			$('#start').remove();
+			if(card.type_code == 'dude') {
+				var start = $('<div class="btn-group" data-toggle="buttons" id="start" style="margin-left:5px"><label class="btn btn-default'+(card.start ? ' active' : '')+'"><input type="checkbox"'+(card.start ? ' checked' : '')+'>Start</label></div>');
+				qtyelt.after(start);
+			}
 		} else {
 			if(qtyelt) qtyelt.closest('.row').remove();
 		}

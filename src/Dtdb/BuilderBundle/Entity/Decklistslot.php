@@ -108,4 +108,32 @@ class Decklistslot
     	return $this->card;
     }
     
+    /**
+     * @var boolean
+     */
+    private $start;
+
+
+    /**
+     * Set start
+     *
+     * @param boolean $start
+     * @return Decklistslot
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    /**
+     * Get start
+     *
+     * @return boolean 
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
 }

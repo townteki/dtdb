@@ -15,7 +15,7 @@ function display_notification()
 	var alert = $('<div class="alert alert-'+Notification.type+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+Notification.message+'</div>');
 	alert.bind('closed.bs.alert', function () {
 		localStorage.setItem('notification', Notification.version);  
-	})
+	});
 	$('#wrapper>div.container').prepend(alert);
 }
 
@@ -71,7 +71,7 @@ function getDisplayDescriptions(sort) {
 
                          {
                              id: 'Spades',
-                             label: 'Spades',
+                             label: 'Spades <small>(* starting posse)</small> ',
                              icon: 'spades'
                          }, {
                              id: 'Clubs',
@@ -204,13 +204,13 @@ function update_deck(options) {
 		var div = $('<div>').addClass('col-sm-'+cols_size).appendTo($('#deck-content'));
 		for(var rownum=0; rownum<rows.length; rownum++) {
 			var row = rows[rownum];
-			var item = $('<h5> '+row.label+' (<span></span>)</h5>').hide();
+			var item = $('<h4> '+row.label+' (<span></span>)</h4>').hide();
 			if(row.icon) {
 				$('<span>').addClass(DisplaySort+'-icon').html('&'+row.icon+';').prependTo(item);
 			} else if(DisplaySort == "gang") {
 				$('<span class="icon icon-'+row.id+' '+row.id+'"></span>').prependTo(item);
 			}
-			var content = $('<div class="deck-'+row.id+'"></div>')
+			var content = $('<div class="deck-'+row.id+'"></div>');
 			div.append(item).append(content);
 		}
 	}
@@ -258,8 +258,7 @@ function update_deck(options) {
 		}
 
 		var face = DTDB.format.face(record);
-		
-		var item = $('<div>'+record.indeck+'x '+face+' <a href="'+Routing.generate('cards_zoom', {card_code:record.code})+'" class="card" data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="'+record.code+'">'+record.title+'</a> '+additional_info+'</div>');
+		var item = $('<div>'+record.indeck+'x '+face+' <a href="'+Routing.generate('cards_zoom', {card_code:record.code})+'" class="card'+(record.start ? ' card-start' : '')+'" data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="'+record.code+'">'+record.title+'</a> '+additional_info+'</div>');
 		item.appendTo($('#deck-content .deck-'+criteria));
 		
 		cabinet[criteria] |= 0;
@@ -528,7 +527,7 @@ var binomial = {};
 			return 0;
 		}
 		if (k > n - k) {
-        	k = n - k
+        	k = n - k;
         }
 		if ( memo_exists(n,k) ) {
 			return get_memo(n,k);
@@ -624,100 +623,100 @@ var hypergeometric = {};
   // ==============================
 
 var Button = function (element, options) {
-  this.$element  = $(element)
-  this.options   = $.extend({}, Button.DEFAULTS, options)
-  this.isLoading = false
-}
+  this.$element  = $(element);
+  this.options   = $.extend({}, Button.DEFAULTS, options);
+  this.isLoading = false;
+};
 
 Button.DEFAULTS = {
   loadingText: 'loading...'
-}
+};
 
 Button.prototype.setState = function (state) {
-  var d    = 'disabled'
-  var $el  = this.$element
-  var val  = $el.is('input') ? 'val' : 'html'
-  var data = $el.data()
+  var d    = 'disabled';
+  var $el  = this.$element;
+  var val  = $el.is('input') ? 'val' : 'html';
+  var data = $el.data();
 
-  state = state + 'Text'
+  state = state + 'Text';
 
-  if (!data.resetText) $el.data('resetText', $el[val]())
+  if (!data.resetText) $el.data('resetText', $el[val]());
 
-  $el[val](data[state] || this.options[state])
+  $el[val](data[state] || this.options[state]);
 
   // push to event loop to allow forms to submit
   setTimeout($.proxy(function () {
     if (state == 'loadingText') {
-      this.isLoading = true
-      $el.addClass(d).attr(d, d)
+      this.isLoading = true;
+      $el.addClass(d).attr(d, d);
     } else if (this.isLoading) {
-      this.isLoading = false
-      $el.removeClass(d).removeAttr(d)
+      this.isLoading = false;
+      $el.removeClass(d).removeAttr(d);
     }
-  }, this), 0)
-}
+  }, this), 0);
+};
 
 Button.prototype.toggle = function () {
-  var changed = true
-  var $parent = this.$element.closest('[data-toggle="buttons"]')
+  var changed = true;
+  var $parent = this.$element.closest('[data-toggle="buttons"]');
 
   if ($parent.length) {
-    var $input = this.$element.find('input')
+    var $input = this.$element.find('input');
     if ($input.prop('type') == 'radio') {
-      if ($input.prop('checked') && this.$element.hasClass('active')) changed = false
-      else $parent.find('.active').removeClass('active')
+      if ($input.prop('checked') && this.$element.hasClass('active')) changed = false;
+      else $parent.find('.active').removeClass('active');
     }
-    if (changed) $input.prop('checked', !this.$element.hasClass('active')).trigger('change')
+    if (changed) $input.prop('checked', !this.$element.hasClass('active')).trigger('change');
   }
 
-  if (changed) this.$element.toggleClass('active')
-}
+  if (changed) this.$element.toggleClass('active');
+};
 
 Button.prototype.on = function () {
-  var changed = true
-  var $parent = this.$element.closest('[data-toggle="buttons"]')
+  var changed = true;
+  var $parent = this.$element.closest('[data-toggle="buttons"]');
 
   if ($parent.length) {
-    var $input = this.$element.find('input')
+    var $input = this.$element.find('input');
     if ($input.prop('type') == 'radio' || invertOthers) {
-      if ($input.prop('checked') && this.$element.hasClass('active')) changed = false
-      else $parent.find('.active').removeClass('active')
+      if ($input.prop('checked') && this.$element.hasClass('active')) changed = false;
+      else $parent.find('.active').removeClass('active');
     }
-    if (changed) $input.prop('checked', !this.$element.hasClass('active')).trigger('change')
+    if (changed) $input.prop('checked', !this.$element.hasClass('active')).trigger('change');
   }
 
-  if (changed) this.$element.addClass('active')
-}
+  if (changed) this.$element.addClass('active');
+};
 
 Button.prototype.off = function () {
-  var changed = true
-  var $parent = this.$element.closest('[data-toggle="buttons"]')
+  var changed = true;
+  var $parent = this.$element.closest('[data-toggle="buttons"]');
 
   if ($parent.length) {
-    var $input = this.$element.find('input')
+    var $input = this.$element.find('input');
     if ($input.prop('type') == 'radio' || invertOthers) {
-      if ($input.prop('checked') && this.$element.hasClass('active')) changed = false
-      else $parent.find('.active').removeClass('active')
+      if ($input.prop('checked') && this.$element.hasClass('active')) changed = false;
+      else $parent.find('.active').removeClass('active');
     }
-    if (changed) $input.prop('checked', !this.$element.hasClass('active')).trigger('change')
+    if (changed) $input.prop('checked', !this.$element.hasClass('active')).trigger('change');
   }
 
-  if (changed) this.$element.removeClass('active')
-}
+  if (changed) this.$element.removeClass('active');
+};
 
 
   // BUTTON PLUGIN DEFINITION
   // ========================
 
-  var old = $.fn.button
+  var old = $.fn.button;
 
   $.fn.button = function (option, invertOthers) {
     return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.button')
-      var options = typeof option == 'object' && option
+      var $this   = $(this);
+      var data    = $this.data('bs.button');
+      var options = typeof option == 'object' && option;
 
-      if (!data) $this.data('bs.button', (data = new Button(this, options)))
+      if (!data) $this.data('bs.button', (data = new Button(this, options)));
 
       switch(option) {
       	case 'toggle':
@@ -733,18 +732,18 @@ Button.prototype.off = function () {
       		data.setState(option);
       		break;
       }
-    })
-  }
+    });
+  };
 
-  $.fn.button.Constructor = Button
+  $.fn.button.Constructor = Button;
 
 
   // BUTTON NO CONFLICT
   // ==================
 
   $.fn.button.noConflict = function () {
-    $.fn.button = old
-    return this
-  }
+    $.fn.button = old;
+    return this;
+  };
 
 })(window.jQuery);

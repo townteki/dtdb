@@ -24,4 +24,6 @@ Dtdb\BuilderBundle\Entity\Deckslot:
                 strategy: AUTO
         quantity:
             type: smallint
+        start:
+            type: boolean
     lifecycleCallbacks: {  }

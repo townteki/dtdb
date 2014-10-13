@@ -40,14 +40,15 @@ DTDB.data_loaded.add(function() {
 	}).remove();
 	var sets_in_deck = {};
 	DTDB.data.cards().each(function(record) {
-		var indeck = 0;
+		var indeck = 0, start = 0;
 		if (Deck[record.code]) {
-			indeck = parseInt(Deck[record.code], 10);
+			indeck = parseInt(Deck[record.code].quantity, 10);
+			start = Deck[record.code].start;
 			sets_in_deck[record.pack_code] = 1;
 		}
 		DTDB.data.cards(record.___id).update({
 			indeck : indeck,
-			gangcost : record.gangcost || 0
+			start: start
 		});
 	});
 	update_deck();
@@ -202,7 +203,7 @@ $(function() {
 	$('#btn-save-as-copy').on('click', function(event) {
 		$('#deck-save-as-copy').val(1);
 	});
-	$('#collection,#collection2').on({
+	$('#collection').on({
 		change : function(event) {
 			InputByTitle = false;
 			handle_quantity_change.call(this, event);
@@ -211,6 +212,9 @@ $(function() {
 	$('.modal').on({
 		change : handle_quantity_change
 	}, 'input[type=radio]');
+	$('.modal').on({
+		change : handle_start_change
+	}, 'input[type=checkbox]');
 	$('input[name=show-disabled]').on({
 		change : function(event) {
 			HideDisabled = !$(this).prop('checked');
@@ -399,10 +403,25 @@ function handle_submit(event) {
 			'gt' : 0
 		}
 	}).each(function(record) {
-		deck_content[record.code] = record.indeck;
+		deck_content[record.code] = {
+				quantity: record.indeck,
+				start: record.start
+		};
 	});
 	var deck_json = JSON.stringify(deck_content);
 	$('input[name=content]').val(deck_json);
+}
+
+function handle_start_change(event) {
+	var index = $(this).closest('.card-container').data('index') || $(this).closest('div.modal').data('index');
+	var start = $(this).prop('checked');
+	DTDB.data.cards({
+		code : index
+	}).update({
+		start : start ? 1 : 0
+	});
+	$('div.modal').modal('hide');
+	update_deck();
 }
 
 function handle_quantity_change(event) {

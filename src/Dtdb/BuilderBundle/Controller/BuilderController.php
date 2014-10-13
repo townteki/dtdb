@@ -276,6 +276,7 @@ class BuilderController extends Controller
             throw new UnauthorizedHttpException("You don't have access to this deck.");
         
         $rd = array();
+        $start = array();
         $outfit = null;
         /** @var $slot Deckslot */
         foreach ($deck->getSlots() as $slot) {
@@ -286,6 +287,18 @@ class BuilderController extends Controller
                         "id" => $slot->getCard()->getOctgnid(),
                         "name" => $slot->getCard()->getTitle()
                 );
+            } else if($slot->getStart()) {
+                $start[] = array(
+                        "id" => $slot->getCard()->getOctgnid(),
+                        "name" => $slot->getCard()->getTitle()
+                );
+                if($slot->getQuantity() > 1) {
+                    $rd[] = array(
+                            "id" => $slot->getCard()->getOctgnid(),
+                            "name" => $slot->getCard()->getTitle(),
+                            "qty" => $slot->getQuantity()-1
+                    );
+                }
             } else {
                 $rd[] = array(
                         "id" => $slot->getCard()->getOctgnid(),
@@ -300,16 +313,17 @@ class BuilderController extends Controller
         if (empty($outfit)) {
             return new Response('no outfit found');
         }
-        return $this->octgnexport("$name.o8d", $outfit, $rd, $deck->getDescription());
+        return $this->octgnexport("$name.o8d", $outfit, $start, $rd, $deck->getDescription());
     
     }
 
-    public function octgnexport ($filename, $outfit, $rd, $description)
+    public function octgnexport ($filename, $outfit, $start, $rd, $description)
     {
 
         $content = $this->renderView('DtdbBuilderBundle::octgn.xml.twig',
                 array(
                         "outfit" => $outfit,
+                        "start" => $start,
                         "deck" => $rd,
                         "description" => strip_tags($description)
                 ));
@@ -337,7 +351,7 @@ class BuilderController extends Controller
         $decklist_id = filter_var($request->get('decklist_id'), FILTER_SANITIZE_NUMBER_INT);
         $description = filter_var($request->get('description'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
         $tags = filter_var($request->get('tags'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-        $content = (array) json_decode($request->get('content'));
+        $content = (array) json_decode($request->get('content'), TRUE);
         if (! count($content))
             return new Response('Cannot import empty deck');
         
@@ -439,7 +453,8 @@ class BuilderController extends Controller
         
         $rows = $dbh->executeQuery("SELECT
 				c.code,
-				s.quantity
+				s.quantity,
+                s.start
 				from deckslot s
 				join card c on s.card_id=c.id
 				where s.deck_id=?", array(
@@ -448,7 +463,10 @@ class BuilderController extends Controller
         
         $cards = array();
         foreach ($rows as $row) {
-            $cards[$row['code']] = $row['quantity'];
+            $cards[$row['code']] = array(
+                    "quantity" => intval($row['quantity']),
+                    "start" => intval($row['start'])
+            );
         }
         $deck['slots'] = $cards;
         
@@ -499,7 +517,8 @@ class BuilderController extends Controller
         
         $rows = $dbh->executeQuery("SELECT
 				c.code,
-				s.quantity
+				s.quantity,
+                s.start
 				from deckslot s
 				join card c on s.card_id=c.id
 				where s.deck_id=?", array(
@@ -508,7 +527,10 @@ class BuilderController extends Controller
         
         $cards = array();
         foreach ($rows as $row) {
-            $cards[$row['code']] = $row['quantity'];
+            $cards[$row['code']] = array(
+                    "quantity" => intval($row['quantity']),
+                    "start" => intval($row['start'])
+            );
         }
         $deck['slots'] = $cards;
         
@@ -565,7 +587,10 @@ class BuilderController extends Controller
         
         $content = array();
         foreach ($decklist->getSlots() as $slot) {
-            $content[$slot->getCard()->getCode()] = $slot->getQuantity();
+            $content[$slot->getCard()->getCode()] = array(
+                    "quantity" => $slot->getQuantity(),
+                    "start" => $slot->getStart()
+            );
         }
         return $this->forward('DtdbBuilderBundle:Builder:save',
                 array(
@@ -586,7 +611,10 @@ class BuilderController extends Controller
     
         $content = array();
         foreach ($deck->getSlots() as $slot) {
-            $content[$slot->getCard()->getCode()] = $slot->getQuantity();
+            $content[$slot->getCard()->getCode()] = array(
+                    "quantity" => $slot->getQuantity(),
+                    "start" => $slot->getStart()
+            );
         }
         return $this->forward('DtdbBuilderBundle:Builder:save',
                 array(

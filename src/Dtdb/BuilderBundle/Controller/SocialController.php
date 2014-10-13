@@ -118,6 +118,7 @@ class SocialController extends Controller
             $card = $slot->getCard();
             $decklistslot = new Decklistslot();
             $decklistslot->setQuantity($slot->getQuantity());
+            $decklistslot->setStart($slot->getStart());
             $decklistslot->setCard($card);
             $decklistslot->setDecklist($decklist);
             $decklist->getSlots()->add($decklistslot);
@@ -842,7 +843,8 @@ class SocialController extends Controller
 				
         $cards = $dbh->executeQuery("SELECT
 				c.code card_code,
-				s.quantity qty
+				s.quantity qty,
+                s.start start
 				from decklistslot s
 				join card c on s.card_id=c.id
 				where s.decklist_id=?
@@ -1238,19 +1240,30 @@ class SocialController extends Controller
             throw new NotFoundHttpException();
         
         $rd = array();
+        $start = array();
         $outfit = null;
         /** @var $slot Decklistslot */
         foreach ($decklist->getSlots() as $slot) {
-            if ($slot->getCard()
-                ->getType()
-                ->getName() == "Outfit") {
+            if ($slot->getCard()->getType()->getName() == "Outfit") {
                 $outfit = array(
-                        "index" => $slot->getCard()->getCode(),
+                        "id" => $slot->getCard()->getOctgnid(),
                         "name" => $slot->getCard()->getTitle()
                 );
+            } else if($slot->getStart()) {
+                $start[] = array(
+                        "id" => $slot->getCard()->getOctgnid(),
+                        "name" => $slot->getCard()->getTitle()
+                );
+                if($slot->getQuantity() > 1) {
+                    $rd[] = array(
+                            "id" => $slot->getCard()->getOctgnid(),
+                            "name" => $slot->getCard()->getTitle(),
+                            "qty" => $slot->getQuantity()-1
+                    );
+                }
             } else {
                 $rd[] = array(
-                        "index" => $slot->getCard()->getCode(),
+                        "id" => $slot->getCard()->getOctgnid(),
                         "name" => $slot->getCard()->getTitle(),
                         "qty" => $slot->getQuantity()
                 );
@@ -1262,19 +1275,20 @@ class SocialController extends Controller
         if (empty($outfit)) {
             return new Response('no outfit found');
         }
-        return $this->octgnexport("$name.o8d", $outfit, $rd, $decklist->getRawdescription(), $response);
+        return $this->octgnexport("$name.o8d", $outfit, $rd, $start, $decklist->getRawdescription(), $response);
     
     }
     
     /*
 	 * does the "downloadable file" part of the export
 	 */
-    public function octgnexport ($filename, $outfit, $rd, $description, $response)
+    public function octgnexport ($filename, $outfit, $rd, $start, $description, $response)
     {
 
         $content = $this->renderView('DtdbBuilderBundle::octgn.xml.twig', array(
                 "outfit" => $outfit,
-                "rd" => $rd,
+                "start" => $start,
+                "deck" => $rd,
                 "description" => strip_tags($description)
         ));
         
@@ -1737,7 +1751,8 @@ class SocialController extends Controller
         
         $cards = $dbh->executeQuery("SELECT
 				c.code card_code,
-				s.quantity qty
+				s.quantity qty,
+                s.start start
 				from decklistslot s
 				join card c on s.card_id=c.id
 				where s.decklist_id=?

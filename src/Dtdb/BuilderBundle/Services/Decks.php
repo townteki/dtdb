@@ -47,7 +47,8 @@ class Decks
                 "SELECT
 				s.deck_id,
 				c.code card_code,
-				s.quantity qty
+				s.quantity qty,
+                s.start start
 				from deckslot s
 				join card c on s.card_id=c.id
 				join deck d on s.deck_id=d.id
@@ -61,6 +62,7 @@ class Decks
             $deck_id = $row['deck_id'];
             unset($row['deck_id']);
             $row['qty'] = intval($row['qty']);
+            $row['start'] = intval($row['start']);
             if (! isset($cards[$deck_id])) {
                 $cards[$deck_id] = array();
             }
@@ -104,7 +106,8 @@ class Decks
                 "SELECT
 				s.deck_id,
 				c.code card_code,
-				s.quantity qty
+				s.quantity qty,
+                s.start start
 				from deckslot s
 				join card c on s.card_id=c.id
 				join deck d on s.deck_id=d.id
@@ -118,6 +121,7 @@ class Decks
             $deck_id = $row['deck_id'];
             unset($row['deck_id']);
             $row['qty'] = intval($row['qty']);
+            $row['start'] = intval($row['start']);
             $cards[] = $row;
         }
         
@@ -151,7 +155,7 @@ class Decks
         $cards = array();
         /* @var $latestPack \Dtdb\CardsBundle\Entity\Pack */
         $latestPack = null;
-        foreach ($content as $card_code => $qty) {
+        foreach ($content as $card_code => $info) {
             $card = $this->doctrine->getRepository('DtdbCardsBundle:Card')->findOneBy(array(
                     "code" => $card_code
             ));
@@ -189,17 +193,19 @@ class Decks
             $tags = implode(' ', $tags);
         }
         $deck->setTags($tags);
-        foreach ($content as $card_code => $qty) {
+        foreach ($content as $card_code => $info) {
             $card = $cards[$card_code];
             $card = $cards[$card_code];
             $slot = new Deckslot();
-            $slot->setQuantity($qty);
+            $slot->setQuantity($info['quantity']);
+            $slot->setStart($info['start']);
             $slot->setCard($card);
             $slot->setDeck($deck);
             $deck->addSlot($slot);
             $deck_content[$card_code] = array(
                     'card' => $card,
-                    'qty' => $qty
+                    'qty' => $info['quantity'],
+                    'start' => $info['start']
             );
         }
         $analyse = $this->judge->analyse($deck_content);

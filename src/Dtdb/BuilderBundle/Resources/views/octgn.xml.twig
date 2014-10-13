@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<deck game="7fd3eeac-4916-4644-bd7d-e1f5ff6faaa5" sleeveid="0">
+<deck game="b440d120-025a-4fbe-9f8d-3873acacb37b" sleeveid="0">
   <section name="Outfit" shared="False">
     <card qty="1" id="{{ outfit.id }}">{{ outfit.name }}</card>
+  </section>
+  <section name="Starting Cards" shared="False">
+{% for card in start %}
+    <card qty="1" id="{{ card.id }}">{{ card.name }}</card>
+{% endfor %}
   </section>
   <section name="Deck" shared="False">
 {% for card in deck %}

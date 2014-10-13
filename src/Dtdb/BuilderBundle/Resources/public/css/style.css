@@ -357,3 +357,7 @@ div.deck-composition td.level-2 { background: #BF9E7E; }
 div.deck-composition td.level-3 { background: #7F6A54; }
 div.deck-composition td.level-4 { background: #40352A; }
 
+.card-start { font-weight: bold }
+.card-start::after { 
+    content: "*";
+}
