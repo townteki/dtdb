@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-		version: '1.5.0',
+		version: '1.10.0',
 		type: 'info', // success info warning danger
-		message: "Use the options of the deckbuilder to increase the number of Base Sets you own."
+		message: "The starting posse can now be indicated. Select a card and click on 'Starting'."
 	};
 	if(!Notification.message) return;
 	var localStorageNotification = localStorage.getItem('notification');
