@@ -188,8 +188,8 @@ class SearchController extends Controller
 		$pagesizes = array(
 			'list' => 200,
 			'spoiler' => 200,
-			'card' => 20,
-			'scan' => 20,
+			'card' => 21,
+			'scan' => 21,
 			'short' => 1000,
 		);
 		

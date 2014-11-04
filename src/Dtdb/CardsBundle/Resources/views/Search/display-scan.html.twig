@@ -5,18 +5,18 @@
 {% block main %}
 
 
-{% for row in 0..(cards|length-1)//4 %}
+{% for row in 0..(cards|length-1)//3 %}
 <div class="row" style="margin-bottom: 30px">
-{% for col in 0..3 %}{% set index = row*4+col %}
+{% for col in 0..2 %}{% set index = row*3+col %}
 {% if index in cards|keys %}
 
 {% set card = cards[index] %}
 
-<div class="col-sm-3">
+<div class="col-sm-4" style="text-align:center">
 	{% if card.imagesrc %}
-	   <img src="{{ card.imagesrc }}" class="img-responsive" style="width:100%">
+	   <img src="{{ card.imagesrc }}">
 	{% else %}
-	   <div class="no-image" style="width:100%"><div class="no-image-text">No image</div></div>
+	   <div class="no-image" style="width:300px;height:420px"><div class="no-image-text">No image</div></div>
 	{% endif %}
 </div>
 

@@ -46,9 +46,8 @@ class CardsData
 	public function allsetsdata()
 	{
 		$list_cycles = $this->doctrine->getRepository('DtdbCardsBundle:Cycle')->findBy(array(), array("number" => "ASC"));
-		$cycles = array();
+		$packs = array();
 		foreach($list_cycles as $cycle) {
-			$packs = array();
 			$sreal=0; $smax = 0;
 			foreach($cycle->getPacks() as $pack) {
 				$real = count($pack->getCards());
@@ -58,7 +57,6 @@ class CardsData
 				$packs[] = array(
 						"name" => $pack->getName($this->request_stack->getCurrentRequest()->getLocale()),
 						"code" => $pack->getCode(),
-				        "cyclenumber" => $cycle->getNumber(),
 						"available" => $pack->getReleased() ? $pack->getReleased()->format('Y-m-d') : '',
 						"known" => intval($real),
 						"total" => $max,
@@ -67,23 +65,8 @@ class CardsData
 						"packs" => '',
 				);
 			}
-			if(count($packs) == 1 && $packs[0]["name"] == $cycle->getName($this->request_stack->getCurrentRequest()->getLocale())) {
-				$cycles[] = $packs[0];
-			}
-			else {
-				$cycles[] = array(
-						"name" => $cycle->getName($this->request_stack->getCurrentRequest()->getLocale()),
-						"code" => $cycle->getCode(),
-				        "cyclenumber" => $cycle->getNumber(),
-						"known" => intval($sreal),
-						"total" => $smax,
-						"url" => $this->router->generate('cards_cycle', array('cycle_code' => $cycle->getCode()), true),
-						"search" => 'c:'.$cycle->getCode(),
-						"packs" => $packs,
-				);
-			}
 		}
-		return $cycles;
+		return $packs;
 	}
     
 	
