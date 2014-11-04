@@ -6,7 +6,7 @@ DTDB.format = {};
 	format.type = function(card) {
 		var type = '<span class="card-type">'+card.type+'</span>';
 		if(card.keywords) type += '<span class="card-keywords">: '+card.keywords+'</span>';
-		if(card.bullets !== null) type += ' &bull; <span class="card-prop">Bullets '+card.bullets+'</span>';
+		if(card.bullets !== null) type += ' &bull; <span class="card-prop">'+card.shooter+' '+card.bullets+'</span>';
 		if(card.influence !== null) type += ' &bull; <span class="card-prop">Influence '+card.influence+'</span>';
 		if(card.control !== null) type += ' &bull; <span class="card-prop">Control '+card.control+'</span>';
 		if(card.cost !== null) type += ' &bull; <span class="card-prop">Cost '+card.cost+'</span>';

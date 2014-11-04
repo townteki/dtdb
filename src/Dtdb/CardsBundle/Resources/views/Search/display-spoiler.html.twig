@@ -19,7 +19,7 @@
 	<p style="font-family:sans-serif">
 		{{ card.type }}
 		{% if card.keywords %}&bull; {{ card.keywords }}{% endif %}
-		{% if not card.bullets is null %}&bull; Bullets {{ card.bullets }}{% endif %}
+		{% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
 		{% if not card.influence is null %}&bull; Influence {{ card.influence }}{% endif %}
 		{% if not card.control is null %}&bull; Control {{ card.control }}{% endif %}
 		{% if not card.cost is null %}&bull; Cost {{ card.cost }}{% endif %}
