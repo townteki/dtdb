@@ -234,14 +234,27 @@ class CardsData
 					}
 					$qb->andWhere(implode($operator == '!' ? " and " : " or ", $or));
 					break;
-				case 'r': // ghost rock (cost or wealth)
+				case 'r': // ghost rock (cost)
 					$or = array();
 					foreach($condition as $arg) {
 						switch($operator) {
-							case ':': $or[] = "(c.cost = ?$i or c.wealth = ?$i)"; break;
-							case '!': $or[] = "(c.cost != ?$i or c.wealth != ?$i)"; break;
-							case '<': $or[] = "(c.cost < ?$i or c.wealth < ?$i)"; break;
-							case '>': $or[] = "(c.cost > ?$i or c.wealth > ?$i)"; break;
+							case ':': $or[] = "(c.cost = ?$i)"; break;
+							case '!': $or[] = "(c.cost != ?$i)"; break;
+							case '<': $or[] = "(c.cost < ?$i)"; break;
+							case '>': $or[] = "(c.cost > ?$i)"; break;
+						}
+						$qb->setParameter($i++, $arg);
+					}
+					$qb->andWhere(implode($operator == '!' ? " and " : " or ", $or));
+					break;
+				case 'w': // wealth
+					$or = array();
+					foreach($condition as $arg) {
+						switch($operator) {
+							case ':': $or[] = "(c.wealth = ?$i)"; break;
+							case '!': $or[] = "(c.wealth != ?$i)"; break;
+							case '<': $or[] = "(c.wealth < ?$i)"; break;
+							case '>': $or[] = "(c.wealth > ?$i)"; break;
 						}
 						$qb->setParameter($i++, $arg);
 					}

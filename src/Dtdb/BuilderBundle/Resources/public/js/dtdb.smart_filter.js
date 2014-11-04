@@ -24,47 +24,53 @@ DTDB.smart_filter = {};
 			case "e":
 				add_string_sf('pack_code', operator, values);
 				break;
-			case "c":
-				add_integer_sf('cyclenumber', operator, values);
-				break;
-			case "f":
-				add_string_sf('gang_letter', operator, values);
-				break;
 			case "t":
 				add_string_sf('type', operator, values);
 				break;
-			case "":
-				add_string_sf('title', operator, values);
+			case "k":
+				add_string_sf('keywords', operator, values);
+				break;
+			case "g":
+				add_string_sf('gang_letter', operator, values);
+				break;
+			case "s":
+				add_string_sf('shooter', operator, values);
 				break;
 			case "x":
 				add_string_sf('text', operator, values);
 				break;
-			case "a":
-				add_string_sf('flavor', operator, values);
-				break;
-			case "s":
-				add_string_sf('keywords', operator, values);
-				break;
-			case "o":
+			case "r":
 				add_integer_sf('cost', operator, values);
 				break;
 			case "v":
-				add_integer_sf('agendapoints', operator, values);
+				add_integer_sf('rank', operator, values);
 				break;
-			case "n":
-				add_integer_sf('gangcost', operator, values);
+			case "u":
+				add_integer_sf('upkeep', operator, values);
 				break;
 			case "p":
-				add_integer_sf('strength', operator, values);
+				add_integer_sf('production', operator, values);
 				break;
-			case "g":
-				add_integer_sf('advancementcost', operator, values);
+			case "b":
+				add_integer_sf('bullets', operator, values);
 				break;
-			case "h":
-				add_integer_sf('trash', operator, values);
+			case "i":
+				add_integer_sf('influence', operator, values);
 				break;
-			case "y":
-				add_integer_sf('quantity', operator, values);
+			case "c":
+				add_integer_sf('control', operator, values);
+				break;
+			case "w":
+				add_integer_sf('wealth', operator, values);
+				break;
+			case "f":
+				add_string_sf('flavor', operator, values);
+				break;
+			case "a":
+				add_string_sf('artist', operator, values);
+				break;
+			case "":
+				add_string_sf('title', operator, values);
 				break;
 			}
 		}
@@ -101,11 +107,13 @@ DTDB.smart_filter = {};
 		switch (operator) {
 		case ":":
 			SmartFilterQuery[key] = {
+				'isNull': false,
 				'likenocase' : values
 			};
 			break;
 		case "!":
 			SmartFilterQuery[key] = {
+				'isNull': false,
 				'!likenocase' : values
 			};
 			break;
