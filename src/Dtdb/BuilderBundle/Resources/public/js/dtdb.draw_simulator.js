@@ -3,7 +3,7 @@ if (typeof DTDB != "object")
 
 DTDB.draw_simulator = {};
 (function(draw_simulator, $) {
-	var deck = null, initial_size = 0, draw_count = 0, container = null;
+	var deck = null, initial_size = 0, draw_count = 0, container = null, max = 4;
 	
 	draw_simulator.reset = function() {
 		if(container) container.empty();
@@ -25,7 +25,7 @@ DTDB.draw_simulator = {};
 	}
 
 	function update_odds() {
-		for(var i=1; i<=3; i++) {
+		for(var i=1; i<=max; i++) {
 			var odd = hypergeometric.get_cumul(1, initial_size, i, draw_count);
 			$('#draw-simulator-odds-'+i).text(Math.round(100*odd));
 		}
