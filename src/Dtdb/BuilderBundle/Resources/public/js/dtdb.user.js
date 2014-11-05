@@ -62,9 +62,9 @@ DTDB.user = {};
 		user.store();
 		$('#login').addClass('dropdown').append('<ul class="dropdown-menu"><li><a href="'
 				+ Routing.generate('user_profile',{_locale:user.data.locale}) 
-				+ '">Profile page</a></li><li><a href="'
+				+ '">Edit account</a></li><li><a href="'
 				+ user.data.public_profile_url 
-				+ '">Decklists</a></li><li><a href="'
+				+ '">Public profile</a></li><li><a href="'
 				+ Routing.generate('user_comments',{_locale:user.data.locale})
 				+ '">Comments</a></li><li><a href="'
 				+ Routing.generate('fos_user_security_logout') 

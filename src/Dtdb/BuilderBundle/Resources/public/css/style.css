@@ -361,3 +361,42 @@ div.deck-composition td.level-4 { background: #40352A; }
 .card-start::after { 
     content: "*";
 }
+
+
+#list article.review {
+	margin-top: 2em;
+	padding-top: 2em;
+	border-top: 1px solid #ddd;
+}
+#index_page article.review {
+	margin-top: 1em;
+	padding-top: 1em;
+	border-top: 1px solid #ddd;
+}
+article.review:first-child {
+	margin-top: 0 !important;
+}
+article.review  header {
+	font-size: 120%;
+	margin-bottom: 1em;
+	font-family: 'IM Fell DW Pica SC';	
+}
+article.review  a[rel="author"] {
+	font-family: 'IM Fell DW Pica SC';	
+}
+article.review div.review-content {
+	
+}
+.page-header {
+	border-bottom-color: #ddd;
+}
+@media (min-width: 992px) {
+	#recent_decklists {
+		 border-right:1px solid #ddd;
+	}
+}
+@media (min-width: 1200px) {
+	#right-column {
+		 border-left:1px solid #ddd;
+	}
+}

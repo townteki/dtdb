@@ -15,6 +15,10 @@ Dtdb\UserBundle\Entity\User:
             targetEntity: Dtdb\BuilderBundle\Entity\Comment
             orderBy: {'creation':'DESC'}
             mappedBy: author
+        reviews:
+            targetEntity: Dtdb\BuilderBundle\Entity\Review
+            orderBy: {'datecreation':'DESC'}
+            mappedBy: user
     manyToMany:
         favorites:
             targetEntity: Dtdb\BuilderBundle\Entity\Decklist
@@ -22,6 +26,10 @@ Dtdb\UserBundle\Entity\User:
             cascade: ["remove"]
         votes:
             targetEntity: Dtdb\BuilderBundle\Entity\Decklist
+            mappedBy: votes
+            cascade: ["remove"]
+        reviewvotes:
+            targetEntity: Dtdb\BuilderBundle\Entity\Review
             mappedBy: votes
             cascade: ["remove"]
         following:

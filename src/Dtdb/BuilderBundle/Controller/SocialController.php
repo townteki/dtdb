@@ -141,455 +141,6 @@ class SocialController extends Controller
     
     }
 
-    /**
-	 * returns the list of decklist favorited by user
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function favorites ($start = 0, $limit = 30, Request $request)
-    {
-
-        if (! $this->getUser())
-            return array('decklists' => array(), 'count' => 0);
-        
-            
-            /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-					d.id,
-					d.name,
-					d.prettyname,
-					d.creation,
-					d.user_id,
-					u.username,
-					u.gang usercolor,
-					u.reputation,
-				    u.donation,
-					c.code,
-					d.nbvotes,
-					d.nbfavorites,
-					d.nbcomments
-					from decklist d
-					join user u on d.user_id=u.id
-					join card c on d.outfit_id=c.id
-					join favorite f on f.decklist_id=d.id
-					where f.user_id=?
-					order by creation desc
-					limit $start, $limit", array(
-                        $this->getUser()
-                            ->getId()
-                ))
-            ->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-
-    /**
-	 * returns the list of decklists published by user
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function by_author ($user_id, $start = 0, $limit = 30, Request $request)
-    {
-        
-        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-					d.id,
-					d.name,
-					d.prettyname,
-					d.creation,
-					d.user_id,
-					u.username,
-					u.gang usercolor,
-					u.reputation,
-                    u.donation,
-					c.code,
-					d.nbvotes,
-					d.nbfavorites,
-					d.nbcomments
-					from decklist d
-					join user u on d.user_id=u.id
-					join card c on d.outfit_id=c.id
-					where d.user_id=?
-					order by creation desc
-					limit $start, $limit", array(
-                        $user_id
-                ))->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-
-    /**
-	 * returns the list of recent decklists with large number of votes
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function popular ($start = 0, $limit = 30, Request $request)
-    {
-        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-					d.id,
-					d.name,
-					d.prettyname,
-					d.creation,
-					d.user_id,
-					u.username,
-					u.gang usercolor,
-					u.reputation,
-				    u.donation,
-					c.code,
-					d.nbvotes,
-					d.nbfavorites,
-					d.nbcomments,
-					DATEDIFF(CURRENT_DATE, d.creation) nbjours
-					from decklist d
-					join user u on d.user_id=u.id
-					join card c on d.outfit_id=c.id
-				    where d.creation > DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)
-				    order by 2*nbvotes/(1+nbjours*nbjours) DESC, nbvotes desc, nbcomments desc
-					limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-
-    /**
-	 * returns the list of decklists with most number of votes
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function halloffame ($start = 0, $limit = 30, Request $request)
-    {
-        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-				d.id,
-				d.name,
-				d.prettyname,
-				d.creation,
-				d.user_id,
-				u.username,
-				u.gang usercolor,
-				u.reputation,
-		        u.donation,
-				c.code,
-				d.nbvotes,
-				d.nbfavorites,
-				d.nbcomments
-				from decklist d
-				join user u on d.user_id=u.id
-				join card c on d.outfit_id=c.id
-				where nbvotes > 10
-		        order by nbvotes desc, creation desc
-				limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-
-    /**
-	 * returns the list of decklists with large number of recent comments
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function hottopics ($start = 0, $limit = 30, Request $request)
-    {
-        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-				d.id,
-				d.name,
-				d.prettyname,
-				d.creation,
-				d.user_id,
-				u.username,
-				u.gang usercolor,
-				u.reputation,
-				u.donation,
-				c.code,
-				d.nbvotes,
-				d.nbfavorites,
-				d.nbcomments,
-				(select count(*) from comment where comment.decklist_id=d.id and DATEDIFF(CURRENT_DATE, comment.creation)<1) nbrecentcomments
-				from decklist d
-				join user u on d.user_id=u.id
-				join card c on d.outfit_id=c.id
-				where d.nbcomments > 1
-				order by nbrecentcomments desc, creation desc
-				limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-
-    /**
-	 * returns the list of decklists of chosen gang
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function gang ($gang_code, $start = 0, $limit = 30, Request $request)
-    {
-        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-				d.id,
-				d.name,
-				d.prettyname,
-				d.creation,
-				d.user_id,
-				u.username,
-				u.gang usercolor,
-				u.reputation,
-				u.donation,
-				c.code,
-				d.nbvotes,
-				d.nbfavorites,
-				d.nbcomments
-				from decklist d
-				join user u on d.user_id=u.id
-				join card c on d.outfit_id=c.id
-				join gang f on d.gang_id=f.id
-				where f.code=?
-				order by creation desc
-				limit $start, $limit", array(
-                        $gang_code
-                ))->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-
-    /**
-	 * returns the list of decklists of chosen datapack
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function lastpack ($pack_code, $start = 0, $limit = 30, Request $request)
-    {
-        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-				d.id,
-				d.name,
-				d.prettyname,
-				d.creation,
-				d.user_id,
-				u.username,
-				u.gang usercolor,
-				u.reputation,
-				u.donation,
-				c.code,
-				d.nbvotes,
-				d.nbfavorites,
-				d.nbcomments
-				from decklist d
-				join user u on d.user_id=u.id
-				join card c on d.outfit_id=c.id
-				join pack p on d.last_pack_id=p.id
-				where p.code=?
-				order by creation desc
-				limit $start, $limit", array(
-                        $pack_code
-                ))->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-
-    /**
-	 * returns the list of recent decklists
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function recent ($start = 0, $limit = 30, Request $request)
-    {
-        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-				d.id,
-				d.name,
-				d.prettyname,
-				d.creation,
-				d.user_id,
-				u.username,
-				u.gang usercolor,
-				u.reputation,
-		        u.donation,
-				c.code,
-		        c.title outfit,
-		        p.name lastpack,
-				d.nbvotes,
-				d.nbfavorites,
-				d.nbcomments
-				from decklist d
-				join user u on d.user_id=u.id
-				join card c on d.outfit_id=c.id
-		        join pack p on d.last_pack_id=p.id
-		        where d.creation > DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)
-				order by creation desc
-				limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-
-    /**
-	 * returns a list of decklists according to search criteria
-	 * @param integer $limit
-	 * @return \Doctrine\DBAL\Driver\PDOStatement
-	 */
-    public function find ($start = 0, $limit = 30, Request $request)
-    {
-
-        $cards_code = $request->query->get('cards');
-        $gang_code = filter_var($request->query->get('gang'), FILTER_SANITIZE_STRING);
-        $lastpack_code = filter_var($request->query->get('lastpack'), FILTER_SANITIZE_STRING);
-        $author_name = filter_var($request->query->get('author'), FILTER_SANITIZE_STRING);
-        $decklist_title = filter_var($request->query->get('title'), FILTER_SANITIZE_STRING);
-        $sort = $request->query->get('sort');
-        
-        $wheres = array();
-        $bindings = array();
-        if (! empty($gang_code)) {
-            $wheres[] = 'f.code=?';
-            $bindings[] = $gang_code;
-        }
-        if (! empty($lastpack_code)) {
-            $wheres[] = 'p.code=?';
-            $bindings[] = $lastpack_code;
-        }
-        if (! empty($author_name)) {
-            $wheres[] = 'u.username=?';
-            $bindings[] = $author_name;
-        }
-        if (! empty($decklist_title)) {
-            $wheres[] = 'd.name like ?';
-            $bindings[] = '%' . $decklist_title . '%';
-        }
-        if (! empty($cards_code) && is_array($cards_code)) {
-            foreach ($cards_code as $card_code) {
-                $wheres[] = 'exists(select * from decklistslot where decklistslot.decklist_id=d.id and decklistslot.card_id=(select id from card where code=?))';
-                $bindings[] = filter_var($card_code, FILTER_SANITIZE_STRING);
-            }
-        }
-        
-        if (empty($wheres)) {
-            $where = "d.creation > DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)";
-            $bindings = array();
-        } else {
-            $where = implode(" AND ", $wheres);
-        }
-        
-        switch ($sort) {
-            case 'date':
-                $order = 'creation';
-                break;
-            case 'likes':
-                $order = 'nbvotes';
-                break;
-            case 'reputation':
-                $order = 'reputation';
-                break;
-            default:
-                $order = 'creation';
-        }
-        
-        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
-        $dbh = $this->get('doctrine')->getConnection();
-        
-        $rows = $dbh->executeQuery(
-                "SELECT SQL_CALC_FOUND_ROWS
-	            d.id,
-	            d.name,
-	            d.prettyname,
-	            d.creation,
-	            d.user_id,
-	            u.username,
-	            u.gang usercolor,
-	            u.reputation,
-	            u.donation,
-	            c.code,
-	            d.nbvotes,
-	            d.nbfavorites,
-	            d.nbcomments
-	            from decklist d
-	            join user u on d.user_id=u.id
-	            join card c on d.outfit_id=c.id
-				join pack p on d.last_pack_id=p.id
-	            join gang f on d.gang_id=f.id
-	            where $where
-	            order by $order desc
-	            limit $start, $limit", $bindings)->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
-        
-        return array(
-                "count" => $count,
-                "decklists" => $rows
-        );
-    
-    }
-    
     private function searchForm(Request $request)
     {
         $cards_code = $request->query->get('cards');
@@ -604,7 +155,8 @@ class SocialController extends Controller
         $packs = $dbh->executeQuery(
                 "SELECT
 				p.name,
-				p.code
+				p.code,
+                '' as selected
 				from pack p
 				where p.released is not null
 				order by p.released desc")
@@ -624,8 +176,8 @@ class SocialController extends Controller
         if (! empty($cards_code) && is_array($cards_code)) {
             $cards = $dbh->executeQuery(
                     "SELECT
-    				c.title" . ($this->getRequest()
-            				        ->getLocale() == "en" ? '' : '_' . $this->getRequest()
+    				c.title" . ($request
+            				        ->getLocale() == "en" ? '' : '_' . $request
             				        ->getLocale()) . " title,
     				c.code,
                     f.code gang_code
@@ -661,58 +213,60 @@ class SocialController extends Controller
         
         $pagetitle = "Decklists";
         $header = '';
-        
+
         switch ($type) {
-            case 'recent':
-                $result = $this->recent($start, $limit, $request);
-                $pagetitle = "Recent Decklists";
-                break;
-            case 'halloffame':
-                $result = $this->halloffame($start, $limit, $request);
-                $pagetitle = "Hall of Fame";
-                break;
-            case 'hottopics':
-                $result = $this->hottopics($start, $limit, $request);
-                $pagetitle = "Hot Topics";
+            case 'find':
+                $result = $this->get('decklists')->find($start, $limit, $request);
+                $pagetitle = "Decklist search results";
+                $header = $this->searchForm($request);
                 break;
             case 'favorites':
                 $response->setPrivate();
-                $result = $this->favorites($start, $limit, $request);
+                $user = $this->getUser();
+                if (! $user) {
+                    $result = array('decklists' => array(), 'count' => 0);
+                } else {
+                    $result = $this->get('decklists')->favorites($user->getId(), $start, $limit);
+                }
                 $pagetitle = "Favorite Decklists";
                 break;
             case 'mine':
                 $response->setPrivate();
-                if (! $this->getUser())
-                {
+                $user = $this->getUser();
+                if (! $user) {
                     $result = array('decklists' => array(), 'count' => 0);
-                }
-                else
-                {
-                    $result = $this->by_author($this->getUser()->getId(), $start, $limit, $request);
+                } else {
+                    $result = $this->get('decklists')->by_author($user->getId(), $start, $limit);
                 }
                 $pagetitle = "My Decklists";
                 break;
-            case 'find':
-                $result = $this->find($start, $limit, $request);
-                $pagetitle = "Decklist search results";
-                $header = $this->searchForm($request);
+            case 'recent':
+                $result = $this->get('decklists')->recent($start, $limit);
+                $pagetitle = "Recent Decklists";
+                break;
+            case 'halloffame':
+                $result = $this->get('decklists')->halloffame($start, $limit);
+                $pagetitle = "Hall of Fame";
+                break;
+            case 'hottopics':
+                $result = $this->get('decklists')->hottopics($start, $limit);
+                $pagetitle = "Hot Topics";
                 break;
             case 'popular':
             default:
-                $result = $this->popular($start, $limit, $request);
+                $result = $this->get('decklists')->popular($start, $limit);
                 $pagetitle = "Popular Decklists";
                 break;
         }
         
         $decklists = $result['decklists'];
         $maxcount = $result['count'];
-        $count = count($decklists);
         
         $dbh = $this->get('doctrine')->getConnection();
         $gangs = $dbh->executeQuery(
                 "SELECT
-				f.name" . ($this->getRequest()
-                    ->getLocale() == "en" ? '' : '_' . $this->getRequest()
+				f.name" . ($request
+                    ->getLocale() == "en" ? '' : '_' . $request
                     ->getLocale()) . " name,
 				f.code
 				from gang f
@@ -721,8 +275,8 @@ class SocialController extends Controller
         
         $packs = $dbh->executeQuery(
                 "SELECT
-				p.name" . ($this->getRequest()
-                    ->getLocale() == "en" ? '' : '_' . $this->getRequest()
+				p.name" . ($request
+                    ->getLocale() == "en" ? '' : '_' . $request
                     ->getLocale()) . " name,
 				p.code
 				from pack p
@@ -739,9 +293,9 @@ class SocialController extends Controller
         $nbpages = min(10, ceil($maxcount / $limit));
         $nextpage = min($nbpages, $currpage + 1);
         
-        $route = $this->getRequest()->get('_route');
+        $route = $request->get('_route');
         
-        $params = $this->getRequest()->query->all();
+        $params = $request->query->all();
         $params['type'] = $type;
         $params['code'] = $code;
         
@@ -763,7 +317,7 @@ class SocialController extends Controller
                         'decklists' => $decklists,
                         'packs' => $packs,
                         'gangs' => $gangs,
-                        'url' => $this->getRequest()
+                        'url' => $request
                             ->getRequestUri(),
                         'header' => $header,
                         'route' => $route,
@@ -1301,44 +855,6 @@ class SocialController extends Controller
     }
     
     /*
-	 * displays the main page
-	 */
-    public function indexAction (Request $request)
-    {
-        $response = new Response();
-        $response->setPublic();
-        $response->setMaxAge($this->container->getParameter('short_cache'));
-        
-        $decklists_recent = $this->recent(0, 10, $request)['decklists'];
-        
-        $dbh = $this->get('doctrine')->getConnection();
-        $rows = $dbh->executeQuery("SELECT
-				decklist from highlight where id=?
-				", array(
-                1
-        ))->fetchAll();
-        
-        if (empty($rows)) {
-            
-            $decklist = json_decode($this->saveHighlight());
-        } else {
-            
-            $decklist = json_decode($rows[0]['decklist']);
-        }
-        
-        return $this->render('DtdbBuilderBundle:Default:index.html.twig',
-                array(
-                        'pagetitle' => "Doomtown Cards and Deckbuilder",
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
-                        'recent' => $decklists_recent,
-                        'decklist' => $decklist,
-                        'url' => $this->getRequest()
-                            ->getRequestUri()
-                ), $response);
-    
-    }
-    
-    /*
 	 * edits name and description of a decklist by its publisher
 	 */
     public function editAction ($decklist_id, Request $request)
@@ -1460,7 +976,7 @@ class SocialController extends Controller
             $page = 1;
         $start = ($page - 1) * $limit;
         
-        $result = $this->by_author($user_id, $start, $limit, $request);
+        $result = $this->get('decklists')->by_author($user_id, $start, $limit);
         
         $decklists = $result['decklists'];
         $maxcount = $result['count'];
@@ -1474,7 +990,7 @@ class SocialController extends Controller
         $nbpages = min(10, ceil($maxcount / $limit));
         $nextpage = min($nbpages, $currpage + 1);
         
-        $route = $this->getRequest()->get('_route');
+        $route = $request->get('_route');
         
         $pages = array();
         for ($page = 1; $page <= $nbpages; $page ++) {
@@ -1495,7 +1011,7 @@ class SocialController extends Controller
                         'user' => $user,
                         'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
                         'decklists' => $decklists,
-                        'url' => $this->getRequest()
+                        'url' => $request
                             ->getRequestUri(),
                         'route' => $route,
                         'pages' => $pages,
@@ -1561,7 +1077,7 @@ class SocialController extends Controller
         $nbpages = min(10, ceil($maxcount / $limit));
         $nextpage = min($nbpages, $currpage + 1);
         
-        $route = $this->getRequest()->get('_route');
+        $route = $request->get('_route');
         
         $pages = array();
         for ($page = 1; $page <= $nbpages; $page ++) {
@@ -1579,7 +1095,7 @@ class SocialController extends Controller
                         'user' => $user,
                         'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
                         'comments' => $comments,
-                        'url' => $this->getRequest()
+                        'url' => $request
                             ->getRequestUri(),
                         'route' => $route,
                         'pages' => $pages,
@@ -1635,7 +1151,7 @@ class SocialController extends Controller
         $nbpages = min(10, ceil($maxcount / $limit));
         $nextpage = min($nbpages, $currpage + 1);
         
-        $route = $this->getRequest()->get('_route');
+        $route = $request->get('_route');
         
         $pages = array();
         for ($page = 1; $page <= $nbpages; $page ++) {
@@ -1652,7 +1168,7 @@ class SocialController extends Controller
                 array(
                         'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
                         'comments' => $comments,
-                        'url' => $this->getRequest()
+                        'url' => $request
                             ->getRequestUri(),
                         'route' => $route,
                         'pages' => $pages,
@@ -1675,8 +1191,8 @@ class SocialController extends Controller
         $dbh = $this->get('doctrine')->getConnection();
         $gangs = $dbh->executeQuery(
                 "SELECT
-				f.name" . ($this->getRequest()
-                    ->getLocale() == "en" ? '' : '_' . $this->getRequest()
+				f.name" . ($request
+                    ->getLocale() == "en" ? '' : '_' . $request
                     ->getLocale()) . " name,
 				f.code
 				from gang f
@@ -1687,7 +1203,7 @@ class SocialController extends Controller
                 "SELECT
 				p.name,
                 p.code,
-                0 selected
+                '' as selected
 				from pack p
 				where p.released is not null
 				order by p.released desc")
@@ -1696,7 +1212,7 @@ class SocialController extends Controller
         return $this->render('DtdbBuilderBundle:Search:search.html.twig',
                 array(
                         'pagetitle' => 'Decklist Search',
-                        'url' => $this->getRequest()
+                        'url' => $request
                             ->getRequestUri(),
                         'gangs' => $gangs,
                         'form' => $this->renderView('DtdbBuilderBundle:Search:form.html.twig',
@@ -1707,68 +1223,6 @@ class SocialController extends Controller
                             )
                         ),
                 ), $response);
-    
-    }
-
-    public function saveHighlight ()
-    {
-
-        $dbh = $this->get('doctrine')->getConnection();
-        $rows = $dbh->executeQuery(
-                "SELECT
-				d.id,
-				d.ts,
-				d.name,
-				d.prettyname,
-				d.creation,
-				d.rawdescription,
-				d.description,
-				d.precedent_decklist_id precedent,
-				u.id user_id,
-				u.username,
-				u.gang usercolor,
-				u.reputation,
-	            u.donation,
-				c.code outfit_code,
-				f.code gang_code,
-				d.nbvotes,
-				d.nbfavorites,
-				d.nbcomments
-				from decklist d
-				join user u on d.user_id=u.id
-				join card c on d.outfit_id=c.id
-				join gang f on d.gang_id=f.id
-				where d.creation > date_sub( current_date, interval 7 day )
-                order by nbvotes desc , nbcomments desc
-                limit 0,1
-				", array())->fetchAll();
-        
-        if (empty($rows)) {
-			return null;
-        }
-        
-        $decklist = $rows[0];
-        
-        $cards = $dbh->executeQuery("SELECT
-				c.code card_code,
-				s.quantity qty,
-                s.start start
-				from decklistslot s
-				join card c on s.card_id=c.id
-				where s.decklist_id=?
-				order by c.code asc", array(
-                $decklist['id']
-        ))->fetchAll();
-        
-        $decklist['cards'] = $cards;
-        
-        $json = json_encode($decklist);
-        $dbh->executeQuery("INSERT INTO highlight (id, decklist) VALUES (?,?) ON DUPLICATE KEY UPDATE decklist=values(decklist)", array(
-                1,
-                $json
-        ));
-        
-        return $json;
     
     }
 

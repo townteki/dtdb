@@ -5,13 +5,12 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-		version: '1.10.0',
-		type: 'info', // success info warning danger
-		message: "The starting posse can now be indicated. Select a card and click on 'Starting'."
+			version: 2,
+			type: 'info',
+			message: "New section 'Reviews'."
 	};
-	if(!Notification.message) return;
-	var localStorageNotification = localStorage.getItem('notification');
-	if(localStorageNotification === Notification.version) return;
+    var localStorageNotification = parseInt(localStorage.getItem('notification'));
+    if(localStorageNotification >= Notification.version) return;
 	var alert = $('<div class="alert alert-'+Notification.type+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+Notification.message+'</div>');
 	alert.bind('closed.bs.alert', function () {
 		localStorage.setItem('notification', Notification.version);  

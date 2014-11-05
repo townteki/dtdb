@@ -39,16 +39,14 @@
 		locale: '{{ app.request.locale }}'
 	};
 {% if app.environment == 'prod' %}
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-44413511-1']);
-  _gaq.push(['_trackPageview']);
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-  {% endif %}
+ga('create', 'UA-44413511-2', 'auto');
+ga('send', 'pageview');
+{% endif %}
     </script>
     <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.js') }}"></script>
     <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.user.js') }}"></script>
@@ -75,6 +73,7 @@
             <li><a href="{{ path('decks_list') }}">My Decks</a></li>
             <li><a href="{{ path('decklists_list', {type:'popular'}) }}">Decklists</a></li>
             <li><a href="{{ path('cards_search') }}">Cards</a></li>
+            <li><a href="{{ path('card_reviews_list') }}">Reviews</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li id="login">
@@ -96,8 +95,11 @@
   </div>
     <div id="footer" class="hidden-print">
     <div class="container">
-        {% block footer %}
-    <div class="row">
+    
+{% block footer %}
+<div class="row">
+    <div class="col-xs-12">
+    
     <ul class="list-inline pull-right">
     {% if locales is defined %}
 	{{ locales|raw }}
@@ -106,46 +108,25 @@
     
     <ul class="list-inline">
     <li><a href="{{ path('cards_about') }}">About</a></li>
-    {#<li><a href="{{ path('cards_api') }}">API</a></li>
-    <li><a href="{{ path('tools_demo') }}">Integration</a></li>
-    <li><a href="{{ path('donators') }}">Donators</a> <span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span></li>#}
     <li><a href="javascript:localStorage.clear()">Clear data</a></li>
     </ul>
-    </div>
     
-    <div class="row">
     <p>
     Designed and built by <a href="//twitter.com/alsciende">@alsciende</a>
     </p>
-    </div>
     
-    <div class="row">
     <p>
-    Bug reports and Feature Requests on <a href="https://bitbucket.org/alsciende/dtdb/issues">BitBucket</a>
+    Bug reports and Feature Requests on <a href="https://bitbucket.org/alsciende/dtdb/issues?status=new&status=open">BitBucket</a>
     </p>
-    </div>
-    
-    <div class="row">
-    <p>
-    Contribute by giving money on <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4SB7QHB5XRN7Y">Paypal (€)</a> or <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HHBUW2QYG6ZUC">Paypal ($)</a> or directly to <i>alsciende</i> (at) <i>icloud.com</i>.
-    </p>
-    </div>
-    #}
-    <div class="row" style="color:#333">
-    <p>
+
+    <p style="color:#333">
     The information presented on this site about Doomtown, both literal and graphical, is copyrighted by AEG.
     </p>
-{#    <p>
-    This website is not produced, endorsed, supported, or affiliated with AEG.
-    </p>#}
+
     </div>
-    <svg width="0" height="0" viewBox="0 0 677 601" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dtdb_svg_hex">
- 		<defs>
-			<symbol id="hex"><polygon points="623,302.91412353515625 480,550.5973510742188 194,550.5973510742188 51,302.91412353515625 194,55.23085021972656 480,55.23085021972656 623,302.91412353515625 "/></symbol>
-			<symbol id="rect"><rect x="0" y="0" width="677" height="601" fill="white" /></symbol>
-		</defs>
-    </svg>
-    {% endblock %}
+</div>
+{% endblock %}
+
     </div>
     </div>
     </body>

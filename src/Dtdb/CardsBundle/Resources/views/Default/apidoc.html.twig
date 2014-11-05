@@ -1,8 +1,9 @@
-{% extends 'DtdbCardsBundle::main.html.twig' %}
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
 
 {% block title %}API Documentation{% endblock %}
 
-{% block content %}
+{% block body %}
+<div class="container">
 
 <h1>{{ block('title') }}</h1>
 
@@ -105,4 +106,5 @@ To test your application, 3 cards are useful:
 
 Add a parameter _locale=xx to get the results in xx locale.
 
+</div>
 {% endblock %}

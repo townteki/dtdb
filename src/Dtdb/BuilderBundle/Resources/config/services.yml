@@ -1,6 +1,10 @@
 parameters:
     judge.class: Dtdb\BuilderBundle\Services\Judge
     decks.class: Dtdb\BuilderBundle\Services\Decks
+    highlight.class: Dtdb\BuilderBundle\Services\Highlight
+    decklists.class: Dtdb\BuilderBundle\Services\Decklists
+    reviews.class: Dtdb\BuilderBundle\Services\Reviews
+    texts.class: Dtdb\BuilderBundle\Services\Texts
 
 services:
     judge:
@@ -9,4 +13,17 @@ services:
     decks:
         class: %decks.class%
         arguments: [@doctrine.orm.entity_manager, @judge]
+    highlight:
+        class: %highlight.class%
+        arguments: [@doctrine.orm.entity_manager]
+    decklists:
+        class: %decklists.class%
+        arguments: [@doctrine.orm.entity_manager]
+    reviews:
+        class: %reviews.class%
+        arguments: [@doctrine.orm.entity_manager]
+    texts:
+        class: %texts.class%
+        arguments: []
+
 

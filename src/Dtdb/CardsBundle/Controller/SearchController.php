@@ -14,7 +14,6 @@ class SearchController extends Controller
 {
 	public function zoomAction($card_code, Request $request)
 	{
-		$mode = $request->query->get('mode');
 		$card = $this->getDoctrine()->getRepository('DtdbCardsBundle:Card')->findOneBy(array("code" => $card_code));
 		if(!$card) throw $this->createNotFoundException('Sorry, this card is not in the database (yet?)');
 		$meta = $card->getTitle().", a ".($card->getGang() ? $card->getGang()->getName() : '')." ".$card->getType()->getName()." card for Doomtown from the set ".$card->getPack()->getName()." published by AEG.";
@@ -25,7 +24,6 @@ class SearchController extends Controller
 				'view' => 'card',
 				'sort' => 'set',
 				'title' => $card->getTitle(),
-				'mode' => $mode,
 				'meta' => $meta,
 				'locale' => $this->getRequest()->getLocale(),
 				'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
@@ -35,7 +33,6 @@ class SearchController extends Controller
 	
 	public function listAction($pack_code, $view, $sort, $page, Request $request)
 	{
-		$mode = $request->query->get('mode');
 		$pack = $this->getDoctrine()->getRepository('DtdbCardsBundle:Pack')->findOneBy(array("code" => $pack_code));
 		if(!$pack) throw $this->createNotFoundException('This pack does not exist');
 		$meta = $pack->getName($this->getRequest()->getLocale()).", a set of cards for Doomtown"
@@ -49,7 +46,6 @@ class SearchController extends Controller
 				'sort' => $sort,
 			    'page' => $page,
 				'title' => $pack->getName($this->getRequest()->getLocale()),
-				'mode' => $mode,
 				'meta' => $meta,
 				'locale' => $this->getRequest()->getLocale(),
 				'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
@@ -59,7 +55,6 @@ class SearchController extends Controller
 
 	public function cycleAction($cycle_code, $view, $sort, Request $request)
 	{
-		$mode = $request->query->get('mode');
 		$cycle = $this->getDoctrine()->getRepository('DtdbCardsBundle:Cycle')->findOneBy(array("code" => $cycle_code));
 		if(!$cycle) throw $this->createNotFoundException('This cycle does not exist');
 		$meta = $cycle->getName($this->getRequest()->getLocale()).", a cycle of datapack for Doomtown published by AEG.";
@@ -70,7 +65,6 @@ class SearchController extends Controller
 				'view' => $view,
 				'sort' => $sort,
 			    'title' => $cycle->getName($this->getRequest()->getLocale()),
-				'mode' => $mode,
 				'meta' => $meta,
 				'locale' => $this->getRequest()->getLocale(),
 				'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
@@ -129,7 +123,6 @@ class SearchController extends Controller
 		$view = $request->query->get('view') ?: 'list';
 		$sort = $request->query->get('sort') ?: 'name';
 		$locale = $request->query->get('_locale') ?: 'en';
-		$mode = $request->query->get('mode');
 		
 		$request->setLocale($locale);
 
@@ -147,7 +140,6 @@ class SearchController extends Controller
 				'view' => $view,
 				'sort' => $sort,
 				'page' => $page,
-				'mode' => $mode,
 				'locale' => $locale,
 				'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
 			)
@@ -169,11 +161,11 @@ class SearchController extends Controller
 		return $title;
 	}
 	
-	public function displayAction($q, $view="card", $sort, $page=1, $title="", $mode="full", $meta="", $locale=null, $locales=null)
+	public function displayAction($q, $view="card", $sort, $page=1, $title="", $meta="", $locale=null, $locales=null)
 	{
 		$response = new Response();
 		$response->setPublic();
-		$response->setMaxAge($this->container->getParameter('long_cache'));
+		$response->setMaxAge($this->container->getParameter('short_cache'));
 		
 	    static $availability = array();
 
@@ -191,6 +183,7 @@ class SearchController extends Controller
 			'card' => 21,
 			'scan' => 21,
 			'short' => 1000,
+		    'zoom' => 1,
 		);
 		
 		if(!array_key_exists($view, $pagesizes))
@@ -208,7 +201,7 @@ class SearchController extends Controller
 		{
 			if(count($rows) == 1)
 			{
-				$view = "card";
+				$view = 'zoom';
 			}
 			
 			if($title == "") $title = $this->findATitle($conditions);
@@ -233,11 +226,11 @@ class SearchController extends Controller
 					if($pack->getReleased() && $pack->getReleased() <= new \DateTime()) $availability[$pack->getCode()] = true;
 				}
 				$cardinfo['available'] = $availability[$pack->getCode()];
-				if($view == "spoiler" || $view == "card") {
-					$cardinfo['text'] = implode(array_map(function ($l) { return "<p>$l</p>"; }, explode("\r\n", $cardinfo['text'])));
-					if($view == "card") {
-						$cardinfo['alternatives'] = $this->get('cards_data')->getCardAlternatives($card);
-					}
+				if($view == "card" || $view == "zoom") {
+					$cardinfo['alternatives'] = $this->get('cards_data')->getCardAlternatives($card);
+				}
+				if($view == "zoom") {
+				    $cardinfo['reviews'] = $this->get('cards_data')->get_reviews($card);
 				}
 				$cards[] = $cardinfo;
 			}
@@ -286,19 +279,6 @@ class SearchController extends Controller
 			$title = $q;
 		}
 
-		$mode_templates = array(
-			"full" => 'DtdbCardsBundle::main.html.twig',
-			"fragment" => 'DtdbCardsBundle::fragment.html.twig',
-			"embed" => 'DtdbCardsBundle::embed.html.twig',
-		);
-		if(empty($mode_templates[$mode])) {
-			$mode = 'full';
-		}
-
-		$response->headers->set('RequestUri', preg_replace('/[\&\?]mode=fragment/', '', $this->getRequest()->getRequestUri()));
-		$response->headers->set('PageTitle', rawurlencode($title));
-		$response->headers->set('SearchString', rawurlencode($q));
-		
 		// attention si $s="short", $cards est un tableau à 2 niveaux au lieu de 1 seul
 		return $this->render('DtdbCardsBundle:Search:display-'.$view.'.html.twig', array(
 			"view" => $view,
@@ -309,9 +289,7 @@ class SearchController extends Controller
 			"searchbar" => $searchbar,
 			"pagination" => $pagination,
 			"pagetitle" => $title,
-			"mode" => $mode,
 			"metadescription" => $meta,
-			"display_mode_template" => $mode_templates[$mode],
 			"locales" => $locales,
 		), $response);
 	}

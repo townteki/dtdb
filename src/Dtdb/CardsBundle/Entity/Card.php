@@ -686,4 +686,43 @@ class Card
     {
         return $this->octgnid;
     }
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $reviews;
+    
+    
+    /**
+     * Add reviews
+     *
+     * @param \Dtdb\BuilderBundle\Entity\Review $reviews
+     * @return Card
+     */
+    public function addReview(\Dtdb\BuilderBundle\Entity\Review $reviews)
+    {
+        $this->reviews[] = $reviews;
+    
+        return $this;
+    }
+    
+    /**
+     * Remove reviews
+     *
+     * @param \Dtdb\BuilderBundle\Entity\Review $reviews
+     */
+    public function removeReview(\Dtdb\BuilderBundle\Entity\Review $reviews)
+    {
+        $this->reviews->removeElement($reviews);
+    }
+    
+    /**
+     * Get reviews
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
 }

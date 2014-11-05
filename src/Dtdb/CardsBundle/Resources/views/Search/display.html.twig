@@ -1,18 +1,19 @@
-{% extends display_mode_template %}
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
 
-{% block content %}
+{% block head %}
+<script src="{{ asset('/web/bundles/dtdbcards/js/reviews.js') }}"></script>
+{% endblock %}
 
-{% if mode == 'full' %}
+{% block body %}
+<div class="container">
+
 {{ searchbar|raw }}
-{% endif %}
 
 <div id="list">
 
-{% if mode == 'full' or mode == 'fragment' %}
 {{ pagination|raw }}
-{% endif %}
 
 <div class="row">
 
@@ -28,10 +29,9 @@
 	{% endif %}
 </div>
 
-{% if mode == 'full' or mode == 'fragment' %}
 {{ pagination|raw }}
-{% endif %}
 
 </div>
 
+</div>
 {% endblock %}

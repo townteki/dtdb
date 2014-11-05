@@ -479,7 +479,8 @@ class CardsData
 			//$cardinfo = array_filter($cardinfo, function ($var) { return isset($var); });
 			$cacheApi[$card->getId()][$locale] = $cardinfo;
 		} else {
-			$cache[$card->getId()][$locale] = $cardinfo;
+			$cardinfo['text'] = implode(array_map(function ($l) { return "<p>$l</p>"; }, explode("\r\n", $cardinfo['text'])));
+		    $cache[$card->getId()][$locale] = $cardinfo;
 		}
 		 
 		return $cardinfo;
@@ -588,6 +589,30 @@ class CardsData
 		));
 	}
 	
+
+	public function get_reviews($card)
+	{
+	    $reviews = $this->doctrine->getRepository('DtdbBuilderBundle:Review')->findBy(array('card' => $card), array('nbvotes' => 'DESC'));
 	
+	    $response = array();
+	    foreach($reviews as $review) {
+	        /* @var $review \Dtdb\BuilderBundle\Entity\Review */
+	        $user = $review->getUser();
+	        $datecreation = $review->getDatecreation();
+	        $response[] = array(
+	                'id' => $review->getId(),
+	                'text' => $review->getText(),
+	                'author_id' => $user->getId(),
+	                'author_name' => $user->getUsername(),
+	                'author_reputation' => $user->getReputation(),
+	                'author_color' => $user->getGang(),
+	                'datecreation' => $datecreation,
+	                'nbvotes' => $review->getNbvotes()
+	        );
+	    }
+	
+	    return $response;
+	}
+		
     
 }

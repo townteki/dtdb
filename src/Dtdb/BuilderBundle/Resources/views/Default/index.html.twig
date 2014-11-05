@@ -17,23 +17,20 @@ var Outfit = null,
 {% endblock %}
 {% block body %}
 
-    <div class="jumbotron visible-sm visible-xs">
-      <div class="container">
-        <h1>Welcome on DoomtownDB!</h1>
-        <p>You can explore the public <a href="{{ path('decklists_list', {type:'popular'}) }}">decklists</a> or start building your own <a href="{{ path('decks_list') }}">decks</a>.</p>
-      </div>
-    </div>
-
-
 <div class="container" id="index_page">
 <div class="row">
 
 
-<div class="col-md-9">
-<div class="page-header hidden-sm hidden-xs">
+<div class="col-lg-8">
+
+<div class="page-header">
 <h1 style="font-size:72px">DoomtownDB</h1>
 <p class="">You can explore the public <a href="{{ path('decklists_list', {type:'popular'}) }}">decklists</a> or start building your own <a href="{{ path('decks_list') }}">decks</a>.</p>
 </div>
+
+<div class="row">
+<div class="col-md-8 col-md-push-4">
+
 {% if decklist %}
 <div id="highlight" class="decklist">
 
@@ -42,34 +39,21 @@ var Outfit = null,
 	
 <!-- Outfit and Stats -->
 <div class="row">
-    <div class="col-sm-4">
+	<div class="col-sm-2">
+		<img id="img_outfit" src="" class="img-responsive  hidden-xs">
+	</div><!-- /.col-md-3 -->
+	<div class="col-sm-10">
         <h4 id="outfit"></h4>
-		<div id="cardcount" class="small"></div>
+
+        
+        <div id="cardcount" class="small"></div>
 		<div id="latestpack" class="small"></div>
-		
-    </div>
-	<div class="col-sm-8" id="deck-content">
 	</div>
-</div><!-- /.row -->
-<!-- Outfit and Stats -->
-
-<div class="row hidden-xs">
-    <div class="col-sm-12" >
-        <table id="deck_browser" class="deck_browser deck_browser_150">
-            <tr>
-                <td id="deck_browser_left">
-                </td>
-                <td id="deck_browser_center">
-                </td>
-                <td id="deck_browser_right">
-                </td>
-            </tr>
-        </table>
-    </div>
 </div>
-
-<div class="row">
-<div class="col-sm-12">
+<!-- Identity and Stats -->
+	
+<div id="deck-content" class="row"></div>
+    
 <h4 class="decklist-author author">
     Description by the author:
     <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
@@ -77,33 +61,17 @@ var Outfit = null,
     <small title="User Reputation">{{ decklist.reputation }}</small>
 </h4>
 {{ decklist.description|raw }}
-</div>
-</div>
 
 </div> <!-- #highlight -->
 {% endif %}
 
+
 </div>
+<div class="col-md-4 col-md-pull-8"  id="recent_decklists">
 
-<div class="col-md-3">
-	<div id="card_search">
-	<h3 class="section">Card search <a href="{{ path('cards_about') }}" class="small">?</a></h3>
-	<form method="GET" action="{{ path('cards_processSearchForm') }}" role="form">
-	<div class="form-group">
-	    <input type="text" class="form-control" id="card_search_form" name="q" placeholder="Enter card name or query" autocomplete="off" tabindex="1">
-	  </div>
-	</form>
-	<table class="table table-condensed table-striped">
-	<tbody id="card_search_results">
-	</tbody>
-	</table>
-	</div><!-- #card_search -->
-
-	<div class="row">
-	<div class="col-md-12" id="recent_decklists">
 	<h3 class="section">Last 10 decklists <a href="{{ path('decklists_list', {type:'recent'}) }}" class="small">more</a></h3>
 	<table class="table">
-	{% for decklist in recent %}
+	{% for decklist in decklists %}
 	<tr>
 	<td>
 		<img src="/web/bundles/dtdbcards/images/cards/en/{{ decklist.code }}.jpg" style="width:52px">
@@ -129,15 +97,67 @@ var Outfit = null,
 	</tr>
 	{% endfor %}
 	</table>
-	</div><!-- #recent_decklists -->
-	{#
-	<div class="col-md-6" id="recent_other">
-		<h3 class="section">Card reviews <a href="{{ path('decklists_list', {type:'recent'}) }}" class="small">more</a></h3>
 	
-	</div>#}
-	</div><!-- /.row -->
+</div><!-- #recent_decklists -->
 
 </div>
+
+</div>
+
+<div class="col-lg-4" id="right-column">
+
+<div style="padding:30px;width:360px;height:310px;background:lightgrey;position:relative">
+{#
+<div style="position:absolute;width:300px;height:250px;background:darkgrey;color:white;font: 24px/36px monospace;text-align:center;padding-top:50px">
+DoomtownDB is supported by ads. Please whitelist us.
+</div>
+#}
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Bande verticale à droite -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-2254488884647695"
+     data-ad-slot="7013524567"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+
+<div id="card_search">
+	<h3 class="section">Card search <a href="{{ path('cards_about') }}" class="small">?</a></h3>
+	<form method="GET" action="{{ path('cards_processSearchForm') }}" role="form">
+	<div class="form-group">
+	    <input type="text" class="form-control" id="card_search_form" name="q" placeholder="Enter card name or query" autocomplete="off" tabindex="1">
+	  </div>
+	</form>
+	<table class="table table-condensed table-striped">
+	<tbody id="card_search_results">
+	</tbody>
+	</table>
+</div><!-- #card_search -->
+
+<div id="recent_other">
+		<h3 class="section">Card reviews <a href="{{ path('card_reviews_list') }}" class="small">more</a></h3>
+		<div class="reviews">
+		{% for review in reviews %}
+		<article class="review">
+		<div>
+		  <span class="pull-right"><span class="glyphicon glyphicon-heart social-icon-like"></span> {{ review.nbvotes }}</span>
+		  <a href="{{ path('cards_zoom', {card_code:review.card_code}) }}#review-{{ review.id }}" class="card">{{ review.card_title }}</a>
+		</div>
+		<div class="author small">
+    		by <a href="{{ path('user_profile_view', {user_id:review.user_id,user_name:review.username|e('url')}) }}" class="{{ review.usercolor }}">{{ review.username }}</a>
+    		{% if review.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
+    		<small class="reputation">{{ review.reputation }}</small>
+    	</div>
+		<p><small>{{ texts.truncate(texts.markdown(review.rawtext)|striptags,100)|raw }}</small></p>
+		</article>
+		{% endfor %}
+		</div>
+</div><!-- #recent_other} -->
+
+</div><!-- #right-column -->
 
 </div> <!-- .row -->
 

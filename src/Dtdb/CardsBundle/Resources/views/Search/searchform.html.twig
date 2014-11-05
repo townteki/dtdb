@@ -1,8 +1,9 @@
-{% extends 'DtdbCardsBundle::main.html.twig' %}
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
 
 {% block title %}{% trans %}Card Search{% endtrans %}{% endblock %}
 
-{% block content %}
+{% block body %}
+<div class="container">
 
 <script type="text/javascript" src="{{ asset('/web/bundles/dtdbcards/js/save-settings.js') }}"></script>
 
@@ -216,4 +217,6 @@
 </div>
 
 </div>
-			{% endblock %}
+
+</div>
+{% endblock %}

@@ -689,4 +689,116 @@ class User extends BaseUser
     {
         $this->followers->removeElement($followers);
     }
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $reviewvotes;
+    
+    
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * Set role
+     *
+     * @param integer $role
+     * @return User
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    
+        return $this;
+    }
+    
+    /**
+     * Get role
+     *
+     * @return integer
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+    
+    /**
+     * Add reviewvotes
+     *
+     * @param \Dtdb\BuilderBundle\Entity\Review $reviewvotes
+     * @return User
+     */
+    public function addReviewvote(\Dtdb\BuilderBundle\Entity\Review $review)
+    {
+        $review->addVote($this);
+        $this->reviewvotes[] = $review;
+    
+        return $this;
+    }
+    
+    /**
+     * Remove reviewvotes
+     *
+     * @param \Dtdb\BuilderBundle\Entity\Review $reviewvotes
+     */
+    public function removeReviewvote(\Dtdb\BuilderBundle\Entity\Review $reviewvotes)
+    {
+        $this->reviewvotes->removeElement($reviewvotes);
+    }
+    
+    /**
+     * Get reviewvotes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReviewvotes()
+    {
+        return $this->reviewvotes;
+    }
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $reviews;
+    
+    
+    /**
+     * Add reviews
+     *
+     * @param \Dtdb\BuilderBundle\Entity\Review $reviews
+     * @return User
+     */
+    public function addReview(\Dtdb\BuilderBundle\Entity\Review $reviews)
+    {
+        $this->reviews[] = $reviews;
+    
+        return $this;
+    }
+    
+    /**
+     * Remove reviews
+     *
+     * @param \Dtdb\BuilderBundle\Entity\Review $reviews
+     */
+    public function removeReview(\Dtdb\BuilderBundle\Entity\Review $reviews)
+    {
+        $this->reviews->removeElement($reviews);
+    }
+    
+    /**
+     * Get reviews
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
 }

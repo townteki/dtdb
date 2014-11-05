@@ -1,0 +1,58 @@
+Dtdb\BuilderBundle\Entity\Review:
+    type: entity
+    table: review
+    uniqueConstraints:
+        usercard_index:
+            columns: [ card_id, user_id ]
+    manyToOne:
+        card:
+            targetEntity: Dtdb\CardsBundle\Entity\Card
+            inversedBy: reviews
+            joinColumn:
+                name: card_id
+                referencedColumnName: id
+        user:
+            targetEntity: Dtdb\UserBundle\Entity\User
+            inversedBy: reviews
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    manyToMany:
+        votes:
+            targetEntity: Dtdb\UserBundle\Entity\User
+            inversedBy: reviewvotes
+            joinTable:
+                name: reviewvote
+                joinColumns:
+                    review_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    user_id:
+                        referencedColumnName: id
+            cascade: ["persist"]
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        datecreation:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on:  create
+        dateupdate:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on:  update
+        rawtext:
+            type: text
+            nullable: false
+        text:
+            type: text
+            nullable: false
+        nbvotes:
+            type: smallint
+            nullable: false
+

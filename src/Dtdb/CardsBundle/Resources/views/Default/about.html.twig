@@ -1,8 +1,9 @@
-{% extends 'DtdbCardsBundle::main.html.twig' %}
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
 
 {% block title %}About{% endblock %}
 
-{% block content %}
+{% block body %}
+<div class="container">
 
 <h1>{{ block('title') }}</h1>
 
@@ -65,4 +66,5 @@
 </ul>
 
 
+</div>
 {% endblock %}

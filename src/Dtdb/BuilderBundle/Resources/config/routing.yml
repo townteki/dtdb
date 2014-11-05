@@ -2,7 +2,7 @@ deck_builder_index:
     pattern: /{_locale}
     methods: [GET]
     defaults:
-        _controller: DtdbBuilderBundle:Social:index
+        _controller: DtdbBuilderBundle:Index:index
         _locale: en
     requirements:
         _locale: en|fr|de|es|it|pl
@@ -413,3 +413,31 @@ user_info:
     pattern: /user/info
     defaults: { _controller: DtdbUserBundle:Default:info }
     
+card_review_post:
+    pattern: /review/post
+    methods: [POST]
+    defaults: 
+        _controller: DtdbBuilderBundle:Review:post
+
+card_review_like:
+    pattern: /review/like
+    methods: [POST]
+    defaults:
+        _controller: DtdbBuilderBundle:Review:like
+        
+card_review_remove:
+    pattern: /review/remove/{id}
+    defaults:
+        _controller: DtdbBuilderBundle:Review:remove
+        
+card_reviews_list:
+    pattern: /{_locale}/reviews/{page}
+    defaults:
+        _controller: DtdbBuilderBundle:Review:list
+        _locale: en
+        page: 1
+    requirements:
+        _locale: en|fr|de|es|it|pl
+        page: \d+
+        
+        

@@ -33,6 +33,10 @@ Dtdb\CardsBundle\Entity\Card:
         decklists:
             targetEntity: Dtdb\BuilderBundle\Entity\Decklist
             mappedBy: outfit
+        reviews:
+            targetEntity: Dtdb\BuilderBundle\Entity\Review
+            orderBy: {'datecreation':'DESC'}
+            mappedBy: card
     fields:
         id:
             type: integer
