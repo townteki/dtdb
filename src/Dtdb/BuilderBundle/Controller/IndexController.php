@@ -25,7 +25,7 @@ class IndexController extends Controller
         
         return $this->render('DtdbBuilderBundle:Default:index.html.twig',
                 array(
-                        'pagetitle' => "Android:Netrunner Cards and Deckbuilder",
+                        'pagetitle' => "Doomtown Cards and Deckbuilder",
                         'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
                         'decklists' => $decklists_recent,
                         'decklist' => $decklist,
