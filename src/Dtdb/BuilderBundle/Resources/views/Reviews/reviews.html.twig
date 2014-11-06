@@ -34,56 +34,15 @@
 
 <div class="reviews" style="">
 {% for i in 0..reviews|length-1 %}{% set review = reviews[i] %}{% set card = review.card %}
-<div class="row" style="margin-bottom:2em;border-bottom:1px solid #ddd">
-	<div class="col-sm-4 hidden-xs">
-		<div class="card-info">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-    			<h3 class="panel-title card-title">
-    			 <span class="pull-right">{{ suits.display_card_face(card.rank, card.suit|lower) }}</span>
-				<a href="{{ card.url }}" class="card-title">{{ card.title }}</a>
-				</h3>
-  			</div>
-			<div class="panel-body">
-				<div class="card-type">
-					{{ card.type }}
-                    {% if card.keywords %}&bull; {{ card.keywords }}{% endif %}
-					{% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
-					{% if not card.influence is null %}&bull; Influence {{ card.influence }}{% endif %}
-					{% if not card.control is null %}&bull; Control {{ card.control }}{% endif %}
-					{% if not card.cost is null %}&bull; Cost {{ card.cost }}{% endif %}
-					{% if not card.wealth is null %}&bull; Wealth {{ card.wealth }}{% endif %}
-					{% if not card.production is null %}&bull; Production {{ card.production }}{% endif %}
-					{% if not card.upkeep is null %}&bull; Upkeep {{ card.upkeep }}{% endif %}
-				</div>
-				<div class="card-text">
-					{{ card.text|raw }}
-				</div>
-				<div class="card-flavor">
-					<small>{{ card.flavor|raw|nl2br }}</small>
-				</div>
-				<div class="card-illustrator">
-					<small>
-					{{ card.gang }} &bull;
-					{% if card.illustrator %}{{ card.illustrator }} &bull; {% endif %}{{ card.pack }} #{{ card.number }}
-					</small>
-				</div>
-			</div>
-		</div>
-	</div>
-		 </div>
-    <div class="col-sm-3" style="padding:0">
-			<div class="card-image" style="margin-bottom:10px">
-				{% if card.imagesrc %}
-            	   <img src="{{ card.imagesrc }}" class="img-responsive" style="margin:auto">
-            	{% else %}
-            	   <div class="no-image" style="margin:auto"><div class="no-image-text">No image</div></div>
-            	{% endif %}
-			</div>
-	</div>
-	<div class="col-sm-5">
+<div class="row">
+	<div class="col-sm-6 col-sm-push-3" style="margin-bottom:2em;border-bottom:1px solid #ddd">
 	   <article class="review" data-index="{{ review.id }}">
     	   <a name="review-{{ review.id }}"></a>
+    	   {% if card.imagesrc %}
+    	       <img src="{{ card.imagesrc }}" style="float:right;width:165px;height:231px;margin:0 0 20px 20px">
+            {% else %}
+               <div class="no-image" style="float:right;width:165px;height:231px;margin:0 0 20px 20px"><div class="no-image-text">No image</div></div>
+            {% endif %}
 	       <header>
 	           <span class="pull-right">
 	               <a id="review-social-icon-like" href="#" class="social-icon-like" data-toggle="tooltip" data-placement="bottom" title="Like that review">
@@ -97,7 +56,7 @@
 	           {{ review.text|raw }}
 	       </div>
 	   </article>
-	   </div>
+	</div>
 </div>
 {% endfor %}
 </div>
