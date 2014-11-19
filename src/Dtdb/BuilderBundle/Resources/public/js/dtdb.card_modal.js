@@ -54,8 +54,11 @@ DTDB.card_modal = {};
 			
 			$('#start').remove();
 			if(card.type_code == 'dude') {
-				var start = $('<div class="btn-group" data-toggle="buttons" id="start" style="margin-left:5px"><label class="btn btn-default'+(card.start ? ' active' : '')+'"><input type="checkbox"'+(card.start ? ' checked' : '')+'>Starting</label></div>');
-				qtyelt.after(start);
+				var canstart = card.gang_code === 'neutral' || card.gang_code === Outfit.gang_code;
+				if(canstart) {
+					var start = $('<div class="btn-group" data-toggle="buttons" id="start" style="margin-left:5px"><label class="btn btn-default'+(card.start ? ' active' : '')+'"><input type="checkbox"'+(card.start ? ' checked' : '')+'>Starting</label></div>');
+					qtyelt.after(start);
+				}
 			}
 		} else {
 			if(qtyelt) qtyelt.closest('.row').remove();
