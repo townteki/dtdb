@@ -17,12 +17,12 @@ DTDB.draw_simulator = {};
 		container = $('#table-draw-simulator-content');
 		deck = [];
 		DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).each(function (record) {
-			for(var ex = 0; ex < record.indeck; ex++) {
+			for(var ex = 0; ex < record.indeck - record.start; ex++) {
 				deck.push(record);
 			}
 		});
 		initial_size = deck.length;
-	}
+	};
 
 	function update_odds() {
 		for(var i=1; i<=max; i++) {
