@@ -134,7 +134,7 @@ var Outfit = null,
     		{% if review.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="NetrunnerDB Gracious Donator"></span>{% endif %}
     		<small class="reputation">{{ review.reputation }}</small>
     	</div>
-		<p><small>{{ texts.truncate(texts.markdown(review.rawtext)|striptags,200)|raw }}</small></p>
+		<p><small>{{ review.rawtext|raw }}</small></p>
 		</article>
 		{% endfor %}
 		</div>

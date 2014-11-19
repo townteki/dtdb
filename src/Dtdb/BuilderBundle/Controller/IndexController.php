@@ -20,8 +20,11 @@ class IndexController extends Controller
         $decklists_recent = $this->get('decklists')->recent(0, 10)['decklists'];
         
         // recent reviews
-        $reviews_recent = $this->get('reviews')->recent(0, 6)['reviews'];
-        
+        $reviews_recent = $this->get('reviews')->recent(0, 5)['reviews'];
+        $texts = $this->get('texts');
+        foreach($reviews_recent as $i => $review) {
+            $reviews_recent[$i]['rawtext'] = $texts->truncate(strip_tags($texts->markdown($review['rawtext'])),200);
+        }
         
         return $this->render('DtdbBuilderBundle:Default:index.html.twig',
                 array(

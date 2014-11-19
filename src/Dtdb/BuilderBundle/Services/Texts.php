@@ -11,12 +11,14 @@ class Texts
 {
     /**
      * Returns a substring of $string that is $max_length length max and doesn't split
-     * a word
+     * a word or a html tag
      */
     public function truncate($string, $max_length)
     {
         $response = '';
         $token = '';
+        
+        $string = preg_replace('/\s+/', ' ', $string);
         
         while(strlen($token.$string) > 0 && strlen($response.$token) < $max_length)
         {
@@ -28,7 +30,7 @@ class Texts
                 $token = $matches[1];
                 $string = $matches[2];
             }
-            else if(preg_match('/^(.+?\s)(.*)/', $string, $matches))
+            else if(preg_match('/^([^\s]+\s*)(.*)/', $string, $matches))
             {
                 $token = $matches[1];
                 $string = $matches[2];
