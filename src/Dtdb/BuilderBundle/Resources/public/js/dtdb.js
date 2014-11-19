@@ -276,17 +276,28 @@ function update_deck(options) {
 
 
 function check_composition() {
-	var outfits = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'outfit'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-	var jokers = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'joker'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-	var others = DTDB.data.cards({indeck:{'gt':0},suit:{'!is':null}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+	var startingposse = DTDB.data.cards({'start':1});
+	var outfits = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'outfit'}});
+	var number_of_outfits = outfits.select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+	var number_of_jokers = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'joker'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+	var number_of_others = DTDB.data.cards({indeck:{'gt':0},suit:{'!is':null}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
 	
-	$('#cardcount').html(others+" cards with printed value (required 52)")[others !=  52 ? 'addClass' : 'removeClass']("text-danger");
-	if(outfits != 1) {
+	if($('#cardcount').size()) {
+		$('#cardcount').html(number_of_others+" cards with printed value (required 52)")[number_of_others !=  52 ? 'addClass' : 'removeClass']("text-danger");
+	}
+	if(number_of_outfits != 1) {
 		$('#deckcomposition').html("Must have exactly one outfit.").addClass('text-danger');
-	} else if(jokers > 2) {
+	} else if(number_of_jokers > 2) {
 		$('#deckcomposition').html("Must have no more than 2 jokers.").addClass('text-danger');
 	} else {
-		$('#deckcomposition').empty();
+		if($('#startingnumbers').size()) {
+			var outfit = outfits.first();
+			$('#deckcomposition').empty();
+			var cost_of_starting_posse = startingposse.select("cost").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+			var upkeep_of_starting_posse = startingposse.select("upkeep").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+			var influence_of_starting_posse = startingposse.select("influence").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
+			$('#startingnumbers').html('Starting with '+(outfit.wealth-cost_of_starting_posse)+' wealth, '+(outfit.production-upkeep_of_starting_posse)+' income and '+influence_of_starting_posse+' influence');
+		}
 	}
 	
 }
