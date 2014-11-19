@@ -47,7 +47,7 @@ function write_review_open(event) {
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				form.replaceWith('<div class="alert alert-danger" role="alert">An error occured while posting your review ('+jqXHR.statusText+'). Reload the page and try again.</div>');
+				form.replaceWith('<div class="alert alert-danger" role="alert">An error occured while posting your review ('+jqXHR.responseText+'). Reload the page and try again.</div>');
 			}
 		});
 	});
