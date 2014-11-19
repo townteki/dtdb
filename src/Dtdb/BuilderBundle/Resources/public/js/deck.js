@@ -429,16 +429,11 @@ function handle_quantity_change(event) {
 			|| $(this).closest('div.modal').data('index');
 	var in_collection = $(this).closest('#collection').size();
 	var quantity = parseInt($(this).val(), 10);
-	$(this).closest('.card-container')[quantity ? "addClass" : "removeClass"]
-			('in-deck');
-	var card = DTDB.data.cards({
-		code : index
-	}).first();
-	DTDB.data.cards({
-		code : index
-	}).update({
-		indeck : quantity
-	});
+	$(this).closest('.card-container')[quantity ? "addClass" : "removeClass"]('in-deck');
+	var card = DTDB.data.cards({ code: index }).first();
+	var newdata = { indeck: quantity };
+	if(quantity === 0) newdata.start = 0;
+	DTDB.data.cards({ code: index }).update(newdata);
 	if (card.type_code == "outfit") {
 		DTDB.data.cards({
 			indeck : {
