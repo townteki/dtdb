@@ -5,7 +5,7 @@ var Snapshots = []; // deck contents autosaved
 var Autosave_timer = null;
 var Deck_changed_since_last_autosave = false;
 var Autosave_running = false;
-var Autosave_period = 1;
+var Autosave_period = 60;
 
 DTDB.data_loaded.add(function() {
 	var localStorageDisplayColumns;
