@@ -7,12 +7,16 @@ use Doctrine\ORM\EntityManager;
 use Dtdb\BuilderBundle\Services\Judge;
 use Dtdb\BuilderBundle\Entity\Deck;
 use Dtdb\BuilderBundle\Entity\Deckslot;
+use Dtdb\BuilderBundle\Entity\Deckchange;
+use Symfony\Bridge\Monolog\Logger;
 
 class Decks
 {
-	public function __construct(EntityManager $doctrine, Judge $judge) {
+	public function __construct(EntityManager $doctrine, Judge $judge, Diff $diff, Logger $logger) {
 		$this->doctrine = $doctrine;
         $this->judge = $judge;
+        $this->diff = $diff;
+        $this->logger = $logger;
 	}
     
 
@@ -23,11 +27,12 @@ class Decks
                 "SELECT
 				d.id,
 				d.name,
-				d.creation,
-                d.lastupdate,
+				DATE_FORMAT(d.datecreation, '%Y-%m-%dT%TZ') datecreation,
+                DATE_FORMAT(d.dateupdate, '%Y-%m-%dT%TZ') dateupdate,
 				d.description,
                 d.tags,
-				d.problem,
+                (select count(*) from deckchange c where c.deck_id=d.id and c.saved=0) unsaved,
+                d.problem,
 				c.title outfit_title,
                 c.code outfit_code,
 				g.code gang_code,
@@ -38,7 +43,7 @@ class Decks
 				left join gang g on c.gang_id=g.id
                 left join pack p on d.last_pack_id=p.id
 				where d.user_id=?
-				order by lastupdate desc", array(
+				order by dateupdate desc", array(
                         $user->getId()
                 ))
             ->fetchAll();
@@ -71,9 +76,17 @@ class Decks
         
         foreach ($decks as $i => $deck) {
             $decks[$i]['cards'] = $cards[$deck['id']];
+            $decks[$i]['unsaved'] = intval($decks[$i]['unsaved']);
             $decks[$i]['tags'] = $deck['tags'] ? explode(' ', $deck['tags']) : array();
-            $problem = $deck['problem'];
-            $decks[$i]['message'] = isset($problem) ? $this->judge->problem($problem) : '';
+            $problem_message = '';
+            if(isset($deck['problem'])) {
+                $problem_message = $this->judge->problem($deck['problem']);
+            }
+            if($decks[$i]['unsaved'] > 0) {
+                $problem_message = "This deck has unsaved changes.";
+            }
+            
+            $decks[$i]['message'] =  $problem_message;
         }
         
         return $decks;
@@ -87,9 +100,11 @@ class Decks
                 "SELECT
 				d.id,
 				d.name,
-				d.creation,
+				DATE_FORMAT(d.datecreation, '%Y-%m-%dT%TZ') datecreation,
+                DATE_FORMAT(d.dateupdate, '%Y-%m-%dT%TZ') dateupdate,
 				d.description,
                 d.tags,
+                (select count(*) from deckchange c where c.deck_id=d.id and c.saved=0) unsaved,
 				d.problem,
 				c.title outfit_title,
                 c.code outfit_code,
@@ -134,7 +149,7 @@ class Decks
     }
     
 
-    public function save ($user, $deck, $decklist_id, $name, $description, $tags, $content)
+    public function saveDeck ($user, $deck, $decklist_id, $name, $description, $tags, $content, $source_deck)
     {
         $deck_content = array();
         
@@ -147,10 +162,6 @@ class Decks
         $deck->setName($name);
         $deck->setDescription($description);
         $deck->setUser($user);
-        if (! $deck->getCreation()) {
-            $deck->setCreation(new \DateTime());
-        }
-        $deck->setLastupdate(new \DateTime());
         $outfit = null;
         $cards = array();
         /* @var $latestPack \Dtdb\CardsBundle\Entity\Pack */
@@ -193,6 +204,44 @@ class Decks
             $tags = implode(' ', $tags);
         }
         $deck->setTags($tags);
+        $this->doctrine->persist($deck);
+
+        // on the deck content
+        
+        if($source_deck) {
+            $quantities = array_map(function ($value) {
+                return $value['quantity'];
+            }, $content);
+            $this->logger->debug('quantities', $quantities);
+            $this->logger->debug('source_content', $source_deck->getContent());
+            // compute diff between current content and saved content
+            list($listings) = $this->diff->diffContents(array($quantities, $source_deck->getContent()));
+            // remove all change (autosave) since last deck update (changes are sorted)
+            $changes = $source_deck->getChanges();
+            foreach($changes as $change) {
+                /* @var $change \Dtdb\BuilderBundler\Entity\Deckchange */
+                if(!$change->getSaved()) {
+                    $this->doctrine->remove($change);
+                } else {
+                    break;
+                }
+            }
+            $this->doctrine->flush();
+            // save new change unless empty
+            if(count($listings[0]) || count($listings[1])) {
+                $change = new Deckchange();
+                $change->setDeck($deck);
+                $change->setVariation(json_encode($listings));
+                $change->setSaved(TRUE);
+                $this->doctrine->persist($change);
+                $this->doctrine->flush();
+            }
+        }
+        foreach ($deck->getSlots() as $slot) {
+            $deck->removeSlot($slot);
+            $this->doctrine->remove($slot);
+        }
+         
         foreach ($content as $card_code => $info) {
             $card = $cards[$card_code];
             $card = $cards[$card_code];
@@ -216,10 +265,24 @@ class Decks
             $deck->setDeckSize($analyse['deckSize']);
         }
         
-        $this->doctrine->persist($deck);
+        $deck->setDateupdate(new \DateTime());
         $this->doctrine->flush();
         
         return $deck->getId();
+    }
+    
+    public function revertDeck($deck)
+    {
+        $changes = $deck->getChanges();
+        foreach($changes as $change) {
+            /* @var $change \Dtdb\BuilderBundler\Entity\Deckchange */
+            if(!$change->getSaved()) {
+                $this->doctrine->remove($change);
+            } else {
+                break;
+            }
+        }
+        $this->doctrine->flush();
     }
     
     

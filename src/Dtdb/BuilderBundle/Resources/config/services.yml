@@ -5,14 +5,15 @@ parameters:
     decklists.class: Dtdb\BuilderBundle\Services\Decklists
     reviews.class: Dtdb\BuilderBundle\Services\Reviews
     texts.class: Dtdb\BuilderBundle\Services\Texts
-
+    diff.class: Dtdb\BuilderBundle\Services\Diff
+    
 services:
     judge:
         class: %judge.class%
         arguments: [@doctrine.orm.entity_manager]
     decks:
         class: %decks.class%
-        arguments: [@doctrine.orm.entity_manager, @judge]
+        arguments: [@doctrine.orm.entity_manager, @judge, @diff, @logger]
     highlight:
         class: %highlight.class%
         arguments: [@doctrine.orm.entity_manager]
@@ -25,5 +26,9 @@ services:
     texts:
         class: %texts.class%
         arguments: []
+    diff:
+        class: %diff.class%
+        arguments: [@doctrine.orm.entity_manager]
+        
 
 

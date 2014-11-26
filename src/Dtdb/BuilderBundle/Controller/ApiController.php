@@ -232,7 +232,7 @@ class ApiController extends Controller
             $slots[$arr['card_code']] = intval($arr['qty']);
         }
         
-        $deck_id = $this->get('decks')->save($this->getUser(), $deck, $decklist_id, $name, $description, $tags, $slots);
+        $deck_id = $this->get('decks')->saveDeck($this->getUser(), $deck, $decklist_id, $name, $description, $tags, $slots, $deck_id ? $deck : null);
         
         if(isset($deck_id))
         {

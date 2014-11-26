@@ -35,54 +35,59 @@ DTDB.suggestions = {};
 	suggestions.compute = function() {
 		if(suggestions.matrix.length == 0) return;
 		
-		// init current suggestions
-		suggestions.codesFromindex.forEach(function (code, index) {
-			suggestions.current[index] = {
-				code: code,
-				proba: 0
-			};
-		});
-		// find used cards
-		var indexes = DTDB.data.cards({indeck:{'gt':0}}).select('code').map(function (code) {
-			return suggestions.indexFromCodes[code];
-		});
-		// add suggestions of all used cards
-		indexes.forEach(function (i) {
-			suggestions.matrix[i].forEach(function (value, j) {
-				suggestions.current[j].proba += (value || 0);
+		if(suggestions.number) 
+		{
+			// init current suggestions
+			suggestions.codesFromindex.forEach(function (code, index) {
+				suggestions.current[index] = {
+					code: code,
+					proba: 0
+				};
 			});
-		});
-		// remove suggestions of already used cards
-		indexes.forEach(function (i) {
-			suggestions.current[i].proba = 0;
-		});
-		// remove suggestions of outfit 
-		DTDB.data.cards({type_code:'outfit'}).select('code').map(function (code) {
-			return suggestions.indexFromCodes[code];
-		}).forEach(function (i) {
-			suggestions.current[i].proba = 0;
-		});
-		// remove suggestions of excluded cards
-		suggestions.exclusions.forEach(function (i) {
-			suggestions.current[i].proba = 0;
-		});
-		// sort suggestions
-		suggestions.current.sort(function (a, b) {
-			return (b.proba - a.proba);
-		});
+			// find used cards
+			var indexes = DTDB.data.cards({indeck:{'gt':0}}).select('code').map(function (code) {
+				return suggestions.indexFromCodes[code];
+			});
+			// add suggestions of all used cards
+			indexes.forEach(function (i) {
+				if(suggestions.matrix[i]) {
+					suggestions.matrix[i].forEach(function (value, j) {
+						suggestions.current[j].proba += (value || 0);
+					});
+				}
+			});
+			// remove suggestions of already used cards
+			indexes.forEach(function (i) {
+				if(suggestions.current[i]) suggestions.current[i].proba = 0;
+			});
+			// remove suggestions of outfit 
+			DTDB.data.cards({type_code:'outfit'}).select('code').map(function (code) {
+				return suggestions.indexFromCodes[code];
+			}).forEach(function (i) {
+				if(suggestions.current[i]) suggestions.current[i].proba = 0;
+			});
+			// remove suggestions of excluded cards
+			suggestions.exclusions.forEach(function (i) {
+				if(suggestions.current[i]) suggestions.current[i].proba = 0;
+			});
+			// sort suggestions
+			suggestions.current.sort(function (a, b) {
+				return (b.proba - a.proba);
+			});
+		}
 		suggestions.show();
 	};
 	
 	suggestions.show = function() {
-		var tbody = $('#table-suggestions tbody');
+		var table = $('#table-suggestions');
+		var tbody = table.children('tbody');
 		tbody.empty();
-		var toggle = $('#table-suggestions thead tr th a.small');
-		if(!suggestions.number && tbody.is(':visible')) {
-			tbody.toggle(400, function() { toggle.text(tbody.is(':visible') ? 'hide': 'show'); });
+		if(!suggestions.number && table.is(':visible')) {
+			table.hide();
 			return;
 		}
-		if(suggestions.number && !tbody.is(':visible')) {
-			tbody.toggle(400, function() { toggle.text(tbody.is(':visible') ? 'hide': 'show'); });
+		if(suggestions.number && !table.is(':visible')) {
+			table.show();
 		}
 		var nb = 0;
 		for(var i=0; i<suggestions.current.length; i++) {

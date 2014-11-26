@@ -22,12 +22,12 @@ class Deck
     /**
      * @var \DateTime
      */
-    private $creation;
+    private $datecreation;
 
     /**
      * @var \DateTime
      */
-    private $lastupdate;
+    private $dateupdate;
 
     /**
      * @var string
@@ -115,49 +115,49 @@ class Deck
     }
 
     /**
-     * Set creation
+     * Set datecreation
      *
-     * @param \DateTime $creation
+     * @param \DateTime $datecreation
      * @return Deck
      */
-    public function setCreation($creation)
+    public function setDatecreation($datecreation)
     {
-        $this->creation = $creation;
+        $this->datecreation = $datecreation;
     
         return $this;
     }
 
     /**
-     * Get creation
+     * Get datecreation
      *
      * @return \DateTime
      */
-    public function getCreation()
+    public function getDatecreation()
     {
-        return $this->creation;
+        return $this->datecreation;
     }
 
     /**
-     * Set lastupdate
+     * Set dateupdate
      *
-     * @param \DateTime $lastupdate
+     * @param \DateTime $dateupdate
      * @return Deck
      */
-    public function setLastupdate($lastupdate)
+    public function setDateupdate($dateupdate)
     {
-        $this->lastupdate = $lastupdate;
+        $this->dateupdate = $dateupdate;
     
         return $this;
     }
 
     /**
-     * Get lastupdate
+     * Get dateupdate
      *
      * @return \DateTime
      */
-    public function getLastupdate()
+    public function getDateupdate()
     {
-        return $this->lastupdate;
+        return $this->dateupdate;
     }
 
     /**
@@ -478,5 +478,46 @@ class Deck
     public function removeChild(\Dtdb\BuilderBundle\Entity\Decklist $children)
     {
         $this->children->removeElement($children);
+    }
+    /**
+     * @var \Dtdb\BuilderBundle\Entity\Deckchange
+     */
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $changes;
+
+
+    /**
+     * Add changes
+     *
+     * @param \Dtdb\BuilderBundle\Entity\Deckchange $changes
+     * @return Deck
+     */
+    public function addChange(\Dtdb\BuilderBundle\Entity\Deckchange $changes)
+    {
+        $this->changes[] = $changes;
+
+        return $this;
+    }
+
+    /**
+     * Remove changes
+     *
+     * @param \Dtdb\BuilderBundle\Entity\Deckchange $changes
+     */
+    public function removeChange(\Dtdb\BuilderBundle\Entity\Deckchange $changes)
+    {
+        $this->changes->removeElement($changes);
+    }
+
+    /**
+     * Get changes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChanges()
+    {
+        return $this->changes;
     }
 }

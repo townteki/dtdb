@@ -9,6 +9,9 @@ use Dtdb\BuilderBundle\Entity\Deckslot;
 use Dtdb\CardsBundle\Entity\Card;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
+use Dtdb\BuilderBundle\Entity\Deckchange;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
 
 class BuilderController extends Controller
 {
@@ -344,40 +347,46 @@ class BuilderController extends Controller
     public function saveAction (Request $request)
     {
 
+        /* @var $em \Doctrine\ORM\EntityManager */
+        $em = $this->get('doctrine')->getManager();
+        
         $user = $this->getUser();
         if (count($user->getDecks()) > $user->getMaxNbDecks())
             return new Response('You have reached the maximum number of decks allowed. Delete some decks or increase your reputation.');
         
-        $is_copy = (boolean) filter_var($request->get('copy'), FILTER_SANITIZE_NUMBER_INT);
-        $name = filter_var($request->get('name'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
         $id = filter_var($request->get('id'), FILTER_SANITIZE_NUMBER_INT);
+        $deck = null;
+        $source_deck = null;
+        if($id) {
+            $deck = $em->getRepository('DtdbBuilderBundle:Deck')->find($id);
+            if (!$deck || $user->getId() != $deck->getUser()->getId()) {
+                throw new UnauthorizedHttpException("You don't have access to this deck.");
+            }
+            $source_deck = $deck;
+        }
+        
+        $cancel_edits = (boolean) filter_var($request->get('cancel_edits'), FILTER_SANITIZE_NUMBER_INT);
+        if($cancel_edits) {
+            $this->get('decks')->revertDeck($deck);
+            return $this->redirect($this->generateUrl('decks_list'));
+        }
+        
+        $is_copy = (boolean) filter_var($request->get('copy'), FILTER_SANITIZE_NUMBER_INT);
+        if($is_copy || !$id) {
+            $deck = new Deck();
+        }
+
+        $content = json_decode($request->get('content'), TRUE);
+        if (! count($content)) {
+            return new Response('Cannot import empty deck');
+        }
+        
+        $name = filter_var($request->get('name'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
         $decklist_id = filter_var($request->get('decklist_id'), FILTER_SANITIZE_NUMBER_INT);
         $description = filter_var($request->get('description'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
         $tags = filter_var($request->get('tags'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-        $content = (array) json_decode($request->get('content'), TRUE);
-        if (! count($content))
-            return new Response('Cannot import empty deck');
         
-        if ($is_copy && $id) {
-            $id = null;
-        }
-        
-        /* @var $em \Doctrine\ORM\EntityManager */
-        $em = $this->get('doctrine')->getManager();
-        
-        if ($id) {
-            $deck = $em->getRepository('DtdbBuilderBundle:Deck')->find($id);
-            if ($user->getId() != $deck->getUser()->getId())
-                throw new UnauthorizedHttpException("You don't have access to this deck.");
-            foreach ($deck->getSlots() as $slot) {
-                $deck->removeSlot($slot);
-                $em->remove($slot);
-            }
-        } else {
-            $deck = new Deck();
-        }
-        
-        $this->get('decks')->save($this->getUser(), $deck, $decklist_id, $name, $description, $tags, $content);
+        $this->get('decks')->saveDeck($this->getUser(), $deck, $decklist_id, $name, $description, $tags, $content, $source_deck ? $source_deck : null);
 
         return $this->redirect($this->generateUrl('decks_list'));
     
@@ -445,6 +454,9 @@ class BuilderController extends Controller
 				d.id,
 				d.name,
 				d.description,
+                DATE_FORMAT(d.datecreation, '%Y-%m-%dT%TZ') datecreation,
+                DATE_FORMAT(d.dateupdate, '%Y-%m-%dT%TZ') dateupdate,
+                (select count(*) from deckchange c where c.deck_id=d.id and c.saved=0) unsaved,
                 d.tags
 				from deck d
 				where d.id=?
@@ -471,7 +483,75 @@ class BuilderController extends Controller
                     "start" => intval($row['start'])
             );
         }
-        $deck['slots'] = $cards;
+        
+        $snapshots = array();
+        $changes = $dbh->executeQuery("SELECT
+				DATE_FORMAT(c.datecreation, '%Y-%m-%dT%TZ') datecreation,
+				c.variation,
+                c.saved
+				from deckchange c
+				where c.deck_id=? and c.saved=1
+                order by datecreation desc", array($deck_id))->fetchAll();
+        // recreating the versions with the variation info, starting from $preversion
+        $preversion = $cards;
+        foreach ($changes as $change) {
+            $change['variation'] = $variation = json_decode($change['variation'], TRUE);
+            $change['saved'] = (boolean) $change['saved'];
+            // add preversion with variation that lead to it
+            $change['content'] = $preversion;
+            array_unshift($snapshots, $change);
+            // applying variation to create 'next' (older) preversion
+            foreach($variation[0] as $code => $qty) {
+                $preversion[$code]["quantity"] = $preversion[$code]["quantity"] - $qty;
+                if($preversion[$code]["quantity"] == 0) unset($preversion[$code]);
+            }
+            foreach($variation[1] as $code => $qty) {
+                if(!isset($preversion[$code])) $preversion[$code] = array("quantity" => 0, "start" => 0);
+                $preversion[$code]["quantity"] = $preversion[$code]["quantity"] + $qty;
+            }
+            ksort($preversion);
+        }
+        // add last know version with empty diff
+        $change['content'] = $preversion;
+        $change['datecreation'] = $deck['datecreation'];
+        $change['saved'] = TRUE;
+        $change['variation'] = null;
+        array_unshift($snapshots, $change);
+        $changes = $dbh->executeQuery("SELECT
+				DATE_FORMAT(c.datecreation, '%Y-%m-%dT%TZ') datecreation,
+				c.variation,
+                c.saved
+				from deckchange c
+				where c.deck_id=? and c.saved=0
+                order by datecreation asc", array($deck_id))->fetchAll();
+        // recreating the snapshots with the variation info, starting from $postversion
+        $postversion = $cards;
+        foreach ($changes as $change) {
+            $change['variation'] = $variation = json_decode($change['variation'], TRUE);
+            $change['saved'] = (boolean) $change['saved'];
+            // applying variation to postversion
+            foreach($variation[0] as $code => $qty) {
+                if(!isset($postversion[$code])) $postversion[$code] = array("quantity" => 0, "start" => 0);
+                $postversion[$code]["quantity"] = $postversion[$code]["quantity"] + $qty;
+            }
+            foreach($variation[1] as $code => $qty) {
+                $postversion[$code]["quantity"] = $postversion[$code]["quantity"] - $qty;
+                if($postversion[$code]["quantity"] == 0) unset($postversion[$code]);
+            }
+            ksort($postversion);
+            // add postversion with variation that lead to it
+            $change['content'] = $postversion;
+            array_push($snapshots, $change);
+        }
+        // current deck is newest snapshot
+        $deck['slots'] = $postversion;
+        // hsitory is deck contents without 'start' key
+        $deck['history'] = array_map(function ($snapshot) {
+            $snapshot['content'] = array_map(function ($value) {
+                return $value['quantity'];
+            }, $snapshot['content']);
+            return $snapshot;
+        }, $snapshots);
         
         $published_decklists = $dbh->executeQuery(
                 "SELECT
@@ -699,7 +779,7 @@ class BuilderController extends Controller
                  $parse = $this->parseTextImport($zip->getFromIndex($i));
                  
                  $deck = new Deck();
-                 $this->get('decks')->save($this->getUser(), $deck, null, $name, '', '', $parse['content']);
+                 $this->get('decks')->saveDeck($this->getUser(), $deck, null, $name, '', '', $parse['content']);
             }
         }
         $zip->close();
@@ -709,6 +789,32 @@ class BuilderController extends Controller
             ->set('notice', "Decks imported.");
         
         return $this->redirect($this->generateUrl('decks_list'));
+    }
+    public function autosaveAction($deck_id, Request $request)
+    {
+        $user = $this->getUser();
+        /* @var $em \Doctrine\ORM\EntityManager */
+        $em = $this->get('doctrine')->getManager();
+        $deck = $em->getRepository('DtdbBuilderBundle:Deck')->find($deck_id);
+        if(!$deck) {
+            throw new BadRequestHttpException("Cannot find deck ".$deck_id);
+        }
+        if ($user->getId() != $deck->getUser()->getId()) {
+            throw new UnauthorizedHttpException("You don't have access to this deck.");
+        }
+        $diff = json_decode($request->get('diff'), TRUE);
+        if (count($diff) != 2) {
+            throw new BadRequestHttpException("Wrong content ".$diff);
+        }
+        if(count($diff[0]) || count($diff[1])) {
+            $change = new Deckchange();
+            $change->setDeck($deck);
+            $change->setVariation(json_encode($diff));
+            $change->setSaved(FALSE);
+            $em->persist($change);
+            $em->flush();
+        }
+        return new Response($change->getDatecreation()->format('c'));
     }
 }
 

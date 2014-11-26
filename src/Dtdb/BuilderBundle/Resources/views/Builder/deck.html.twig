@@ -6,6 +6,7 @@
 <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.card_modal.js') }}"></script>
 <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.smart_filter.js') }}"></script>
 <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.suggestions.js') }}"></script>
+<script src="{{ asset('/web/bundles/Dtdbbuilder/js/dtdb.diff.js') }}"></script>
 <script src="{{ asset('/web/bundles/dtdbbuilder/js/deck.js') }}"></script>
 <script type="text/javascript">
 
@@ -17,6 +18,8 @@ var Filters = {},
 	Outfit = null,
 	DeckSize = 0,
 	Deck = {{ deck.slots|json_encode|raw }},
+	Deck_id = {{ deck.id }},
+	History = {{ deck.history|json_encode|raw }},
 	Url_GangImage = '{{  asset('/web/bundles/dtdbbuilder/images/xxx-20.png') }}',
 	Url_TypeImage = '{{ asset('/web/bundles/dtdbbuilder/images/types/xxx.png') }}',
 	DisplaySort = 'value',
@@ -29,6 +32,9 @@ var Filters = {},
 
 {% block body %}
 <div class="container deck" style="display:none">
+{% if deck.unsaved %}
+<div class="alert alert-danger" role="alert" id="deck-unsaved-alert"><span class="glyphicon glyphicon-warning-sign"></span> This deck has unsaved changes. Please save the deck or cancel the changes before making further edits.</div>
+{% endif %}
 <div class="row">
 
 <!-- Left-side Column -->
@@ -51,7 +57,7 @@ var Filters = {},
 <!-- Outfit and Stats -->
 
 <!-- Deck Content -->
-<div class="row" id="deck-content" style="margin-bottom:10px;min-height:300px">
+<div class="row" id="deck-content" style="margin-bottom:1em;min-height:300px">
 </div><!-- /#deck-content -->
 <!-- Deck Content -->
 
@@ -65,74 +71,39 @@ var Filters = {},
 </table>
 <!-- Suggestions -->
 
-<!-- Name and Notes Form -->
-<div class="row" style="margin-bottom:10px">
-	<div class="col-sm-12">
-				<form method="POST" action="{{ path('deck_save') }}" id="save_form" role="form">
-					<input type="hidden" id="deck-save-id" name="id" value="{{ deck.id }}">
-					<input type="hidden" id="deck-save-as-copy" name="copy" value="0">
-					<input type="hidden" name="content">
-					<div class="form-group">
-						<label for="name">Name</label>
-						<input type="text" class="form-control" name="name" value="{{ deck.name }}"></input>
-					</div>
-					<div class="form-group">
-						<label for="tags">Tags</label>
-						<input type="text" class="form-control" name="tags" value="{{ deck.tags }}"></input>
-					</div>
-					<div class="form-group">
-						<label for="name">Notes</label>
-						<textarea class="form-control" rows="3" name="description" id="description" placeholder="Type # to enter a card name.">{{ deck.description }}</textarea>
-					</div>
-					<div class="well text-muted" id="description-preview"><small>Preview. Look <a href="http://daringfireball.net/projects/markdown/dingus">here</a> for a Markdown syntax reference.</small></div>
-					<button type="submit" class="btn btn-warning">Save</button>
-					<button type="submit" id="btn-save-as-copy" class="btn btn-primary">Save as Copy</button>
-				</form>
-	</div><!-- /.col-sm-12 -->
-</div><!-- /.row -->
-<!-- Name and Notes Form -->
-
-<!-- Draw Simulator -->
-<table class="table table-condensed" id="table-draw-simulator">
-<thead>
-<tr><th colspan="1"><span class="glyphicon glyphicon-repeat"></span> Card draw simulator</th></tr>
-</thead>
-<tbody>
-<tr><td class="text-center" title="Click to draw; Shift-click to reset and draw">
-    <div class="btn-group"><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-1">1</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-2">2</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-3">3</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-4">4</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-5">5</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-6">6</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-9">9</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-all">all</a><a href="#" role="button" class="btn btn-default btn-sm"  disabled="disabled" id="draw-simulator-clear">Reset</a></div>
-    <div title="Odds to have at least 1 copy of a desired card, after having drawn that many cards from the deck, depending of the number of copies in the deck (1 - 2 - 3 - 4)"><span class="small">Odds: <span id="draw-simulator-odds-1">0</span>% &ndash; <span id="draw-simulator-odds-2">0</span>% &ndash; <span id="draw-simulator-odds-3">0</span>% &ndash; <span id="draw-simulator-odds-4">0</span>% <a href="#oddsModal" id="draw-simulator-more" data-toggle="modal" style="margin:0 10px">more</a></span>
-</td></tr>
-<tr><td id="table-draw-simulator-content"></td></tr>
-</tbody>
-</table>
-
-<!-- Published decklists Table -->
-<table class="table table-condensed" id="table-predecessor">
-	<thead>
-		<tr><th colspan="4"><span class="glyphicon glyphicon-share"></span> Published versions</th></tr>
-	</thead>
-	<tbody>
-	{% if published_decklists|length %}
-	{% for decklist in published_decklists %}
-		<tr>
-			<td><a href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a></td>
-			<td><span class="glyphicon glyphicon-heart social-icon-like"></span> {{ decklist.nbvotes }}</td>
-			<td><span class="glyphicon glyphicon-star social-icon-favorite"></span> {{ decklist.nbfavorites }}</td>
-			<td><span class="glyphicon glyphicon-comment social-icon-comment"></span> {{ decklist.nbcomments }}</td>
-		</tr>
-	{% endfor %}
-	{% else %}
-		<tr><td>None.</td></tr>
-	{% endif %}
-	</tbody>
-</table>
-<!-- Published decklists Table -->
+<form method="POST" action="{{ path('deck_save') }}" id="save_form" role="form">
+	<input type="hidden" id="deck-save-id" name="id" value="{{ deck.id }}">
+	<input type="hidden" id="deck-save-as-copy" name="copy" value="0">
+	<input type="hidden" id="deck-cancel-edits" name="cancel_edits" value="0">
+	<input type="hidden" name="content">
+	<input type="hidden" name="name">
+	<input type="hidden" name="description">
+	<input type="hidden" name="tags">
+	<button type="submit" class="btn btn-warning">Save</button>
+	<button type="submit" id="btn-save-as-copy" class="btn btn-default">Save as Copy</button>
+	<button type="submit" id="btn-cancel-edits" class="btn btn-link">Cancel edits</button>
+</form>
 
 </div><!-- /#deck -->
 <!-- Left-side Column -->
 
 <!-- Right-side Column -->
 <div class="col-md-7">
+
+<div role="tabpanel">
+
+<!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#tab-pane-build" aria-controls="tab-pane-build" role="tab" data-toggle="tab">Build</a></li>
+    <li role="presentation"><a href="#tab-pane-infos" aria-controls="tab-pane-infos" role="tab" data-toggle="tab">Infos</a></li>
+    <li role="presentation"><a href="#tab-pane-check" aria-controls="tab-pane-check" role="tab" data-toggle="tab">Check</a></li>
+    <li role="presentation"><a href="#tab-pane-history" aria-controls="tab-pane-history" role="tab" data-toggle="tab" id="tab-header-history">History</a></li>
+   </ul>
+  
+   <!-- Tab panes -->
+  <div class="tab-content">
+  
+   <div role="tabpanel" class="tab-pane active" id="tab-pane-build">
 
 <!-- Search Bar -->
 <div class="row" id="search">
@@ -172,7 +143,7 @@ var Filters = {},
 		<span class="input-group-btn"><button class="btn btn-default btn-sm" type="button" id="filter-text-button">?</button></span>
 	</div>
 	<div class="col-sm-8">
-		<div class="pull-right">
+		<div class="pull-right" title="Shift+Click to add to selection ; Alt+Click to select all other options">
 			<div class="btn-group filter" data-toggle="buttons" id="gang_code">
 			</div>
 			<div class="btn-group filter" data-toggle="buttons" id="suit" style="font-family:cursive">
@@ -200,6 +171,95 @@ var Filters = {},
 	<div id="collection-grid" class="col-sm-12"></div>
 </div><!-- /.row -->
 <!-- Collection Table -->
+	
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tab-pane-infos">
+
+<!-- Name and Notes Form -->
+<div class="row" style="margin-bottom:10px">
+	<div class="col-sm-12">
+		<div class="form-group">
+			<label for="name_">Name</label>
+			<input type="text" class="form-control" name="name_" value="{{ deck.name }}"></input>
+		</div>
+		<div class="form-group">
+			<label for="tags_">Tags</label>
+			<input type="text" class="form-control" name="tags_" value="{{ deck.tags }}"></input>
+		</div>
+		<div class="form-group">
+			<label for="description_">Notes</label>
+			<textarea class="form-control" rows="3" name="description_" id="description" placeholder="Type # to enter a card name.">{{ deck.description }}</textarea>
+		</div>
+	</div><!-- /.col-sm-12 -->
+</div><!-- /.row -->
+<!-- Name and Notes Form -->
+
+    </div>
+	<div role="tabpanel" class="tab-pane" id="tab-pane-check">
+    
+<!-- Draw Simulator -->
+<table class="table table-condensed" id="table-draw-simulator">
+<thead>
+<tr><th colspan="1"><span class="glyphicon glyphicon-repeat"></span> Card draw simulator</th></tr>
+</thead>
+<tbody>
+<tr><td class="text-center" title="Click to draw; Shift-click to reset and draw">
+    <div class="btn-group"><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-1">1</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-2">2</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-3">3</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-4">4</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-5">5</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-6">6</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-9">9</a><a href="#" role="button" class="btn btn-default btn-sm" id="draw-simulator-all">all</a><a href="#" role="button" class="btn btn-default btn-sm"  disabled="disabled" id="draw-simulator-clear">Reset</a></div>
+    <div title="Odds to have at least 1 copy of a desired card, after having drawn that many cards from the deck, depending of the number of copies in the deck (1 - 2 - 3 - 4)"><span class="small">Odds: <span id="draw-simulator-odds-1">0</span>% &ndash; <span id="draw-simulator-odds-2">0</span>% &ndash; <span id="draw-simulator-odds-3">0</span>% &ndash; <span id="draw-simulator-odds-4">0</span>% <a href="#oddsModal" id="draw-simulator-more" data-toggle="modal" style="margin:0 10px">more</a></span>
+</td></tr>
+<tr><td id="table-draw-simulator-content"></td></tr>
+</tbody>
+</table>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tab-pane-history">
+    
+<!-- History -->
+<div class="row">
+	<div class="col-sm-12">
+	   <div class="progress">
+	       <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="60" style="width:0%" id="history-timer-bar"><span class="sr-only">Time remaining</span></div>
+	   </div>
+		<table class="table">
+		  <thead>
+		      <tr>
+		          <th>Time</th>
+		          <th>Change</th>
+		          <th>Action</th>
+		      </tr>
+		  </thead>
+		  <tbody id="tbody-history">
+		  </tbody>
+		</table>
+	</div><!-- /.col-sm-12 -->
+</div><!-- /.row -->
+<!-- History -->
+    
+<!-- Published decklists Table -->
+<table class="table table-condensed" id="table-predecessor">
+	<thead>
+		<tr><th colspan="4"><span class="glyphicon glyphicon-share"></span> Published versions</th></tr>
+	</thead>
+	<tbody>
+	{% if published_decklists|length %}
+	{% for decklist in published_decklists %}
+		<tr>
+			<td><a href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a></td>
+			<td><span class="glyphicon glyphicon-heart social-icon-like"></span> {{ decklist.nbvotes }}</td>
+			<td><span class="glyphicon glyphicon-star social-icon-favorite"></span> {{ decklist.nbfavorites }}</td>
+			<td><span class="glyphicon glyphicon-comment social-icon-comment"></span> {{ decklist.nbcomments }}</td>
+		</tr>
+	{% endfor %}
+	{% else %}
+		<tr><td>None.</td></tr>
+	{% endif %}
+	</tbody>
+</table>
+<!-- Published decklists Table -->
+
+</div>
+</div>
+</div>
 	
 </div><!-- .col-md-8 -->
 <!-- Right-side Column -->

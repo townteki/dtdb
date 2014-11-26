@@ -5,7 +5,7 @@
 {% block main %}
 
 {% for row in 0..(cards|length-1)//4 %}
-<div class="row">
+<div class="row" style="margin-bottom:3em">
 {% for col in 0..3 %}
 {% if row*4+col < cards|length %}
 

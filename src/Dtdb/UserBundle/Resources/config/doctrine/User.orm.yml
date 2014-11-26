@@ -5,7 +5,7 @@ Dtdb\UserBundle\Entity\User:
     oneToMany:
         decks:
             targetEntity: Dtdb\BuilderBundle\Entity\Deck
-            orderBy: {'lastupdate':'DESC'}
+            orderBy: {'dateupdate':'DESC'}
             mappedBy: user
             cascade: ["remove"]
         decklists:

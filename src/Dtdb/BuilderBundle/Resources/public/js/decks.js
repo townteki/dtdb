@@ -67,45 +67,23 @@ function decks_upload_all() {
 
 function do_diff(ids) {
 	if(ids.length < 2) return;
-	var decks = [];
 	
-	var ensembles = [];
+	var contents = [];
+	var names = [];
 	for(var decknum=0; decknum<ids.length; decknum++) {
 		var deck = DeckDB({id:String(ids[decknum])}).first();
-		decks.push(deck);
-		var cards = [];
+		var hash = {};
 		for(var slotnum=0; slotnum<deck.cards.length; slotnum++) {
 			var slot = deck.cards[slotnum];
-			for(var copynum=0; copynum<slot.qty; copynum++) {
-				cards.push(slot.card_code);
-			}
+			hash[slot.card_code] = slot.qty;
 		}
-		ensembles.push(cards);
+		contents.push(hash);
+		names.push(deck.name);
 	}
 	
-	var conjonction = [];
-	for(var i=0; i<ensembles[0].length; i++) {
-		var code = ensembles[0][i];
-		var indexes = [ i ];
-		for(var j=1; j<ensembles.length; j++) {
-			var index = ensembles[j].indexOf(code);
-			if(index > -1) indexes.push(index);
-			else break;
-		}
-		if(indexes.length === ensembles.length) {
-			conjonction.push(code);
-			for(var j=0; j<indexes.length; j++) {
-				ensembles[j].splice(indexes[j], 1);
-			}
-			i--;
-		}
-	}
-	
-	var listings = [];
-	for(var i=0; i<ensembles.length; i++) {
-		listings[i] = array_count(ensembles[i]);
-	}
-	var intersect = array_count(conjonction);
+	var diff = DTDB.diff.compute_simple(contents);
+	var listings = diff[0];
+	var intersect = diff[1];
 	
 	var container = $('#diff_content');
 	container.empty();
@@ -117,7 +95,7 @@ function do_diff(ids) {
 	});
 	
 	for(var i=0; i<listings.length; i++) {
-		container.append("<h4>Cards only in <b>"+decks[i].name+"</b></h4>");
+		container.append("<h4>Cards only in <b>"+names[i]+"</b></h4>");
 		var list = $('<ul></ul>').appendTo(container);
 		$.each(listings[i], function (card_code, qty) {
 			var card = DTDB.data.cards({code:card_code}).first();
@@ -271,8 +249,8 @@ function do_action_sort(event) {
 	var action_id = $(this).attr('id');
 	if(!action_id) return;
 	switch(action_id) {
-		case 'btn-sort-update': sort_list('lastupdate'); break;
-		case 'btn-sort-creation': sort_list('creation'); break;
+		case 'btn-sort-update': sort_list('dateupdate'); break;
+		case 'btn-sort-creation': sort_list('datecreation'); break;
 		case 'btn-sort-outfit': sort_list('outfit_title,name'); break;
 		case 'btn-sort-gang': sort_list('gang_code,name'); break;
 		case 'btn-sort-lastpack': sort_list('cycle_id,pack_number'); break;
@@ -510,5 +488,8 @@ function show_deck() {
 	$('#deck-name').text(SelectedDeck.name);
 	
 	update_deck();
-	$('#btn-publish').prop('disabled', !!$(this).closest('tr').data('problem'));
+	// convert date from UTC to local
+	$('#datecreation').html('<small>Creation: '+moment(SelectedDeck.datecreation).format('LLLL')+'</small>');
+	$('#dateupdate').html('<small>Last update: '+moment(SelectedDeck.dateupdate).format('LLLL')+'</small>');
+	$('#btn-publish').prop('disabled', SelectedDeck.problem || SelectedDeck.unsaved);
 }

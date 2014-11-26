@@ -2,6 +2,7 @@
 {% block head %}
 <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.draw_simulator.js') }}"></script>
 <script src="{{ asset('/web/bundles/dtdbbuilder/js/dtdb.card_modal.js') }}"></script>
+<script src="{{ asset('/web/bundles/Dtdbbuilder/js/dtdb.diff.js') }}"></script>
 <script src="{{ asset('/web/bundles/dtdbbuilder/js/decks.js') }}"></script>
 <script type="text/javascript">
 var Outfit = null,
@@ -93,6 +94,23 @@ var Outfit = null,
 </div>
 </div>
 
+<div style="padding:30px;width:360px;height:310px;background:transparent;position:relative">
+
+<div style="position:absolute;width:300px;height:250px;background:lightgrey;color:white;font: 24px/36px monospace;text-align:center;padding-top:50px">
+DoomtownDB is supported by ads. Please whitelist us.
+</div>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Bande verticale à droite -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-2254488884647695"
+     data-ad-slot="7013524567"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
 </div>
 <!-- / Right-side column -->
 
@@ -101,7 +119,7 @@ var Outfit = null,
 
 <div class="row">
 <div class="col-md-12">
-<div class="list-group" id="decks" data-sort-type="lastupdate" data-sort-order="1">
+<div class="list-group" id="decks" data-sort-type="dateupdate" data-sort-order="1">
 {% for deck in decks %}
 <a href="#" class="list-group-item deck-list-group-item" id="deck_{{ deck.id }}" data-id="{{ deck.id }}" data-problem="{{ deck.problem }}" data-gang="{{ deck.gang_code }}">
     <div class="deck-list-outfit-image" title="{{ deck.outfit_title }}" style="background-image:url({{ asset('/web/bundles/dtdbcards/images/cards/en/'~deck.outfit_code~'.jpg') }})"></div>
@@ -155,7 +173,9 @@ var Outfit = null,
 		<button type="button" class="btn btn-default btn-xs" id="btn-export-plaintext">plain text</button>
 	</div>
 	</div>
-		
+	
+	<div id="datecreation"></div>
+	<div id="dateupdate"></div>
 </div><!-- /#deck -->
 
 {% else %}

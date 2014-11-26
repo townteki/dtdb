@@ -1,6 +1,11 @@
 var InputByTitle = false;
 var DisplayColumns = 1;
 var BaseSets = 1;
+var Snapshots = []; // deck contents autosaved
+var Autosave_timer = null;
+var Deck_changed_since_last_autosave = false;
+var Autosave_running = false;
+var Autosave_period = 1;
 
 DTDB.data_loaded.add(function() {
 	var localStorageDisplayColumns;
@@ -84,15 +89,13 @@ DTDB.data_loaded.add(function() {
 	$('#suit').empty();
 	$.each(DTDB.data.cards().distinct("suit").sort(), function(index, record) {
 		$('#suit').append(
-				'<label title="' + record
-						+ '" class="btn btn-default" data-code="'
+				'<label class="btn btn-default" data-code="'
 						+ record + '"><input type="checkbox" name="' + record
 						+ '">&' + (record ? record.toLowerCase() : '#8962') + ';</label>')
 	});
 	$('#suit').button();
-	$('#suit').children('label').each(function(index, elt) {
-		if ($(elt).data('code') !== "outfit")
-			$(elt).button('toggle');
+	$('#suit').children('label:first-child').each(function(index, elt) {
+		$(elt).button('toggle');
 	});
 
 	$('#pack_code').empty();
@@ -162,7 +165,7 @@ $(function() {
 					var dropdown = $(this).closest('ul').hasClass(
 							'dropdown-menu');
 					if (dropdown) {
-						if (event.shiftKey) {
+						if (!event.shiftKey) {
 							if (!event.altKey) {
 								$(this).closest(".filter").find(
 										"input[type=checkbox]").prop("checked",
@@ -179,7 +182,7 @@ $(function() {
 						}
 						event.stopPropagation();
 					} else {
-						if (event.shiftKey) {
+						if (!event.shiftKey) {
 							if (!event.altKey) {
 								$(this).closest(".filter").find("label.active")
 										.button('toggle');
@@ -203,6 +206,17 @@ $(function() {
 	$('#btn-save-as-copy').on('click', function(event) {
 		$('#deck-save-as-copy').val(1);
 	});
+	$('#btn-cancel-edits').on('click', function(event) {
+		var edits = $.grep(Snapshots, function (snapshot) {
+			return snapshot.saved === false;
+		});
+		if(edits.length) {
+			var confirmation = confirm("This operation will revert the changes made to the deck since "+edits[edits.length-1].datecreation.calendar()+". The last "+(edits.length > 1 ? edits.length+" edits" : "edit")+" will be lost. Do you confirm?");
+			if(!confirmation) return false;
+		}
+		$('#deck-cancel-edits').val(1);
+	});
+
 	$('#collection').on({
 		change : function(event) {
 			InputByTitle = false;
@@ -358,7 +372,98 @@ $(function() {
 						index : 1
 					}
 			]);
+	
+	$('#tbody-history').on('click', 'a[role=button]', load_snapshot);
+	$.each(History, function (index, snapshot) {
+		add_snapshot(snapshot);
+	});
+	setInterval(autosave_interval, 1000);
 });
+function autosave_interval() {
+	if(Autosave_running) return;
+	if(Autosave_timer < 0) Autosave_timer = Autosave_period;
+	//('#tab-header-history').html('History '+Autosave_timer);
+	$('#history-timer-bar').css('width', (Autosave_timer*100/Autosave_period)+'%').attr('aria-valuenow', Autosave_timer).find('span').text(Autosave_timer+' seconds remaining.');
+	if(Autosave_timer === 0) {
+		deck_autosave();
+	}
+	Autosave_timer--;
+}
+// if diff is undefined, consider it is the content at load
+function add_snapshot(snapshot) {
+	snapshot.datecreation = snapshot.datecreation ? moment(snapshot.datecreation) : moment();
+	Snapshots.push(snapshot);
+	
+	var list = [];
+	if(snapshot.variation) {
+		$.each(snapshot.variation[0], function (code, qty) {
+			var card = DTDB.data.cards({code:code}).first();
+			if(!card) return; 
+			list.push('+'+qty+' '+'<a href="'+Routing.generate('cards_zoom',{card_code:code})+'" class="card" data-index="'+code+'">'+card.title+'</a>');
+		});
+		$.each(snapshot.variation[1], function (code, qty) {
+			var card = DTDB.data.cards({code:code}).first();
+			if(!card) return; 
+			list.push('&minus;'+qty+' '+'<a href="'+Routing.generate('cards_zoom',{card_code:code})+'" class="card" data-index="'+code+'">'+card.title+'</a>');
+		});
+	} else {
+		list.push("First version");
+	}
+	
+	$('#tbody-history').prepend('<tr'+(snapshot.saved ? '' : ' class="warning"')+'><td>'+snapshot.datecreation.calendar()+(snapshot.saved ? '' : ' (unsaved)')+'</td><td>'+list.join('<br>')+'</td><td><a role="button" href="#" data-index="'+(Snapshots.length-1)+'"">Revert</a></td></tr>');
+	
+	Autosave_timer = -1; // start timer
+}
+function load_snapshot(event) {
+	var index = $(this).data('index');
+	var snapshot = Snapshots[index];
+	if(!snapshot) return;
+	
+	DTDB.data.cards().each(function(record) {
+		var indeck = 0;
+		if (snapshot.content[record.code]) {
+			indeck = parseInt(snapshot.content[record.code], 10);
+		}
+		DTDB.data.cards(record.___id).update({
+			indeck : indeck
+		});
+	});
+	update_deck();
+	refresh_collection();
+	DTDB.suggestions.compute();
+	Deck_changed_since_last_autosave = true;
+	return false;
+}
+function deck_autosave() {
+	// check if deck has been modified since last autosave
+	if(!Deck_changed_since_last_autosave) return;
+	// compute diff between last snapshot and current deck
+	var last_snapshot = Snapshots[Snapshots.length-1].content;
+	console.log('last_snapshot', last_snapshot);
+	var current_deck = get_deck_content();
+	Deck_changed_since_last_autosave = false;
+	var r = DTDB.diff.compute_simple([current_deck, last_snapshot]);
+	if(!r) return;
+	var diff = JSON.stringify(r[0]);
+	if(diff == '[{},{}]') return;
+	// send diff to autosave
+	$('#tab-header-history').html("Autosave...");
+	Autosave_running = true;
+	$.ajax(Routing.generate('deck_autosave', {deck_id:Deck_id}), {
+		data: {diff:diff},
+		type: 'POST',
+		success: function(data, textStatus, jqXHR) {
+			add_snapshot({datecreation: data, variation: r[0], content: current_deck, saved: false});
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			Deck_changed_since_last_autosave = true;
+		},
+		complete: function () {
+			$('#tab-header-history').html("History");
+			Autosave_running = false;
+		}
+	});
+}
 function handle_header_click(event) {
 	var new_sort = $(this).data('sort');
 	if (Sort == new_sort) {
@@ -395,21 +500,36 @@ function handle_input_change(event) {
 	});
 	refresh_collection();
 }
-
-function handle_submit(event) {
+function get_deck_content() {
 	var deck_content = {};
 	DTDB.data.cards({
 		indeck : {
 			'gt' : 0
 		}
 	}).each(function(record) {
-		deck_content[record.code] = {
-				quantity: record.indeck,
-				start: record.start
-		};
+		deck_content[record.code] = record.indeck;
 	});
-	var deck_json = JSON.stringify(deck_content);
+	return deck_content;
+}
+function get_deck_full_content() {
+	var deck_content = {};
+	DTDB.data.cards({
+		indeck : {
+			'gt' : 0
+		}
+	}).each(function(record) {
+		deck_content[record.code] = { quantity: record.indeck, start: record.start };
+	});
+	return deck_content;
+}
+function handle_submit(event) {
+	console.log(get_deck_full_content());
+	var deck_json = JSON.stringify(get_deck_full_content());
+	console.log(deck_json);
 	$('input[name=content]').val(deck_json);
+	$('input[name=name]').val($('input[name=name_]').val());
+	$('input[name=description]').val($('input[name=description_]').val());
+	$('input[name=tags]').val($('input[name=tags_]').val());
 }
 
 function handle_start_change(event) {
@@ -483,6 +603,8 @@ function handle_quantity_change(event) {
 	DTDB.suggestions.compute();
 	if (InputByTitle)
 		$('input[name=title]').typeahead('setQuery', '').focus().blur();
+	
+	Deck_changed_since_last_autosave = true;
 }
 
 function update_base_sets() {

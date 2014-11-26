@@ -80,6 +80,12 @@ deck_publish:
         _controller: DtdbBuilderBundle:Social:publish
         deck_id: \d+
 
+deck_autosave:
+    pattern: /deck/autosave/{deck_id}
+    methods: [POST]
+    defaults:
+        _controller: DtdbBuilderBundle:Builder:autosave
+
 deck_delete:
     pattern: /{_locale}/deck/delete
     methods: [POST]

@@ -3,8 +3,8 @@ Dtdb\BuilderBundle\Entity\Deck:
     table: deck
     repositoryClass: Dtdb\BuilderBundle\Entity\DeckRepository
     indexes:
-        lastupdate_index:
-            columns: [ lastupdate ]
+        dateupdate_index:
+            columns: [ dateupdate ]
     manyToOne:
         user:
             targetEntity: Dtdb\UserBundle\Entity\User
@@ -41,6 +41,11 @@ Dtdb\BuilderBundle\Entity\Deck:
             orderBy: { 'creation': 'DESC' }
             targetEntity: Decklist
             mappedBy: parent
+        changes:
+            targetEntity: Deckchange
+            orderBy: {'datecreation':'DESC'}
+            mappedBy: deck
+            cascade: ["persist","remove"]
     fields:
         id:
             type: integer
@@ -50,10 +55,16 @@ Dtdb\BuilderBundle\Entity\Deck:
         name:
             type: string
             length: 255
-        creation:
+        datecreation:
             type: datetime
-        lastupdate:
+            gedmo:
+                timestampable:
+                    on:  create
+        dateupdate:
             type: datetime
+            gedmo:
+                timestampable:
+                    on:  create
         description:
             type: text
             nullable: true
