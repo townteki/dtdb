@@ -20,7 +20,7 @@ class CardType extends AbstractType
             ->add('quantity')
             ->add('title')
             ->add('keywords')
-            ->add('text', 'textarea')
+            ->add('text', 'textarea', array('required' => false))
             ->add('flavor', 'textarea', array('required' => false))
             ->add('illustrator')
             ->add('cost')
