@@ -1,4 +1,4 @@
-<div class="col-sm-4">
+<div class="col-sm-4" style="margin-bottom:.5em">
 <select name="sort" class="form-control">
 	<option value="name"    {% if sort|default('name') == "name"    %}selected{% endif %}>{% trans %}Sort by Name{% endtrans %}</option>
 	<option value="set"     {% if sort|default('name') == "set"     %}selected{% endif %}>{% trans %}Sort by Set{% endtrans %}</option>
@@ -8,7 +8,7 @@
 	<option value="strength"{% if sort|default('name') == "strength"%}selected{% endif %}>{% trans %}Sort by Strength{% endtrans %}</option>
 </select>
 </div>
-<div class="col-sm-4">
+<div class="col-sm-4" style="margin-bottom:.5em">
 <select name="view" class="form-control">
 	<option value="list"    {% if view|default('list') == "list"    %}selected{% endif %}>{% trans %}View as a Checklist{% endtrans %}</option>
 	<option value="spoiler" {% if view|default('list') == "spoiler" %}selected{% endif %}>{% trans %}View as a Spoiler{% endtrans %}</option>

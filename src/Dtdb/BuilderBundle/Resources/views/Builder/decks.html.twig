@@ -123,7 +123,7 @@ DoomtownDB is supported by ads. Please whitelist us.
 {% for deck in decks %}
 <a href="#" class="list-group-item deck-list-group-item" id="deck_{{ deck.id }}" data-id="{{ deck.id }}" data-problem="{{ deck.problem }}" data-gang="{{ deck.gang_code }}">
     <div class="deck-list-outfit-image" title="{{ deck.outfit_title }}" style="background-image:url({{ asset('/web/bundles/dtdbcards/images/cards/en/'~deck.outfit_code~'.jpg') }})"></div>
-    <h4>{{ deck.name }}{% if deck.message %} <span class="glyphicon glyphicon-exclamation-sign text-danger" title="{{ deck.message }}"></span>{% endif %}</h4>
+    <h4 class="decklist-name">{{ deck.name }}{% if deck.message %} <span class="glyphicon glyphicon-exclamation-sign text-danger" title="{{ deck.message }}"></span>{% endif %}</h4>
     <div>
         {% if deck.outfit_title %}{{ deck.outfit_title }}{% else %}No Outfit{% endif %}
     </div><div class="deck-list-tags">

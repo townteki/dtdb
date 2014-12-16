@@ -38,7 +38,7 @@ var Filters = {},
 <div class="row">
 
 <!-- Left-side Column -->
-<div class="col-md-5" id="deck">
+<div class="col-md-6" id="deck">
 
 <!-- Outfit and Stats -->
 <div class="row">
@@ -76,9 +76,12 @@ var Filters = {},
 	<input type="hidden" id="deck-save-as-copy" name="copy" value="0">
 	<input type="hidden" id="deck-cancel-edits" name="cancel_edits" value="0">
 	<input type="hidden" name="content">
-	<input type="hidden" name="name">
 	<input type="hidden" name="description">
 	<input type="hidden" name="tags">
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" class="form-control decklist-name" name="name" value="{{ deck.name }}"></input>
+		</div>
 	<button type="submit" class="btn btn-warning">Save</button>
 	<button type="submit" id="btn-save-as-copy" class="btn btn-default">Save as Copy</button>
 	<button type="submit" id="btn-cancel-edits" class="btn btn-link">Cancel edits</button>
@@ -88,7 +91,7 @@ var Filters = {},
 <!-- Left-side Column -->
 
 <!-- Right-side Column -->
-<div class="col-md-7">
+<div class="col-md-6">
 
 <div role="tabpanel">
 
@@ -107,11 +110,10 @@ var Filters = {},
 
 <!-- Search Bar -->
 <div class="row" id="search">
-	<div class="col-sm-6 input-group">
-		<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+	<div class="col-sm-6" style="margin-bottom:10px">
 		<input type="text" class="form-control" name="title" placeholder="Find a card" tabindex="1">
 	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-6" style="margin-bottom:10px">
 		<div class="pull-right">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Sets <span class="caret"></span></button>
@@ -137,18 +139,14 @@ var Filters = {},
 </div><!-- /.row -->
 <!-- Search Bar -->
 
-<div class="row" id="search2" style="margin-top:10px">
-	<div class="col-sm-4 input-group">
-		<input type="text" class="form-control input-sm" id="filter-text" placeholder="Filter list">
-		<span class="input-group-btn"><button class="btn btn-default btn-sm" type="button" id="filter-text-button">?</button></span>
-	</div>
-	<div class="col-sm-8">
-		<div class="pull-right" title="Shift+Click to add to selection ; Alt+Click to select all other options">
-			<div class="btn-group filter" data-toggle="buttons" id="gang_code">
-			</div>
-			<div class="btn-group filter" data-toggle="buttons" id="suit" style="font-family:cursive">
-			</div>
-		</div>
+<div class="row" id="search2" style="margin-bottom:10px">
+	<div class="col-sm-12 form-inline">
+	   <div class="input-group">
+    		<input type="text" class="form-control input-sm" id="filter-text" placeholder="Filter list">
+    		<span class="input-group-btn"><button class="btn btn-default btn-sm" type="button" id="filter-text-button">?</button></span>
+    	</div>
+    	<div class="btn-group filter" data-toggle="buttons" id="gang_code"></div>
+    	<div class="btn-group filter" data-toggle="buttons" id="suit" style="font-family:cursive"></div>
 	</div>
 </div>
 
@@ -178,10 +176,6 @@ var Filters = {},
 <!-- Name and Notes Form -->
 <div class="row" style="margin-bottom:10px">
 	<div class="col-sm-12">
-		<div class="form-group">
-			<label for="name_">Name</label>
-			<input type="text" class="form-control" name="name_" value="{{ deck.name }}"></input>
-		</div>
 		<div class="form-group">
 			<label for="tags_">Tags</label>
 			<input type="text" class="form-control" name="tags_" value="{{ deck.tags }}"></input>

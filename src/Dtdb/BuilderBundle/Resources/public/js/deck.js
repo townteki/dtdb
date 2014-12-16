@@ -74,12 +74,14 @@ DTDB.data_loaded.add(function() {
 				return b === "neutral" ? -1 : a === "neutral" ? 1 : a < b ? -1
 						: a > b ? 1 : 0;
 			}), function(index, record) {
-		$('#gang_code').append(
-				'<label class="btn btn-default" data-code="' + record
-						+ '"><input type="checkbox" name="' + record
+		var example = DTDB.data.cards({"gang_code": record}).first();
+		var label = $('<label class="btn btn-default btn-sm" data-code="' + record
+						+ '" title="'+example.gang+'"><input type="checkbox" name="' + record
 						+ '"><img src="'
 						+ Url_GangImage.replace('xxx', record)
-						+ '"></label>')
+						+ '" style="width:14px"></label>');
+		if(!Modernizr.touch) label.tooltip({container: 'body'});
+		$('#gang_code').append(label)
 	});
 	$('#gang_code').button();
 	$('#gang_code').children('label').each(function(index, elt) {
@@ -88,10 +90,11 @@ DTDB.data_loaded.add(function() {
 
 	$('#suit').empty();
 	$.each(DTDB.data.cards().distinct("suit").sort(), function(index, record) {
-		$('#suit').append(
-				'<label class="btn btn-default" data-code="'
-						+ record + '"><input type="checkbox" name="' + record
-						+ '">&' + (record ? record.toLowerCase() : '#8962') + ';</label>')
+		var label = $('<label class="btn btn-default btn-sm" data-code="'
+						+ record + '" title="'+record+'"><input type="checkbox" name="' + record
+						+ '">&' + (record ? record.toLowerCase() : '#8962') + ';</label>');
+		if(!Modernizr.touch) label.tooltip({container: 'body'});
+		$('#suit').append(label);
 	});
 	$('#suit').button();
 	$('#suit').children('label:first-child').each(function(index, elt) {
@@ -523,11 +526,8 @@ function get_deck_full_content() {
 	return deck_content;
 }
 function handle_submit(event) {
-	console.log(get_deck_full_content());
 	var deck_json = JSON.stringify(get_deck_full_content());
-	console.log(deck_json);
 	$('input[name=content]').val(deck_json);
-	$('input[name=name]').val($('input[name=name_]').val());
 	$('input[name=description]').val($('input[name=description_]').val());
 	$('input[name=tags]').val($('input[name=tags_]').val());
 }

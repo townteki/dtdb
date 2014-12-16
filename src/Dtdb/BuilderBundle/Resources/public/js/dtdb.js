@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 2,
+			version: 3,
 			type: 'info',
-			message: "New section 'Reviews'."
+			message: "Card reviews can now be modified by the author on the card page."
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;

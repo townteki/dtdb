@@ -8,53 +8,58 @@
 {% set card = cards[i] %}
 
 <div class="row" style="margin-top:2em">
-	<div class="card-image col-sm-6">
-	{% if card.imagesrc %}
-	   <img src="{{ card.imagesrc }}" class="img-responsive" style="margin-left:auto">
-	{% else %}
-	   <div class="no-image" style="margin-left:auto"><div class="no-image-text">No image</div></div>
-	{% endif %}
-	</div>
-	<div class="card-info col-md-4 col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-    			<h3 class="panel-title card-title">
-    			 <span class="pull-right">{{ suits.display_card_face(card.rank, card.suit|lower) }}</span>
-				<a href="{{ card.url }}" class="card-title{% if card.available == false %} card-preview{% endif %}">{{ card.title }}</a>
-				</h3>
-  			</div>
-			<div class="panel-body">
-				<div class="card-type">
-					{{ card.type }}
-                    {% if card.keywords %}&bull; {{ card.keywords }}{% endif %}
-					{% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
-					{% if not card.influence is null %}&bull; Influence {{ card.influence }}{% endif %}
-					{% if not card.control is null %}&bull; Control {{ card.control }}{% endif %}
-					{% if not card.cost is null %}&bull; Cost {{ card.cost }}{% endif %}
-					{% if not card.wealth is null %}&bull; Wealth {{ card.wealth }}{% endif %}
-					{% if not card.production is null %}&bull; Production {{ card.production }}{% endif %}
-					{% if not card.upkeep is null %}&bull; Upkeep {{ card.upkeep }}{% endif %}
-				</div>
-				<div class="card-text">
-					{{ card.text|raw }}
-				</div>
-				<div class="card-flavor">
-					<small>{{ card.flavor|raw|nl2br }}</small>
-				</div>
-				<div class="card-illustrator">
-					<small>
-					{{ card.gang }} &bull;
-					{% if card.illustrator %}{{ card.illustrator }} &bull; {% endif %}{{ card.pack }} #{{ card.number }}
-					{% for alternative in card.alternatives %}
-						| <a href="{{ alternative.url }}" title="Alternative">{{ alternative.pack }} #{{ alternative.number }}</a>
-					{% endfor %}
-					</small>
-				</div>
-			</div>
-		</div>
+	<div class="col-sm-5 col-sm-offset-2">
+		<div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title card-title">
+					   <span class="pull-right">{{ suits.display_card_face(card.rank, card.suit|lower) }}</span>
+					   <a href="{{ card.url }}" class="card-title{% if card.available == false %} card-preview{% endif %}">{{ card.title }}</a>
+					</h3>
+	  			</div>
+				<div class="panel-body">
+					<div class="card-info">
+        				<div class="card-type">
+        					{{ card.type }}
+                            {% if card.keywords %}&bull; {{ card.keywords }}{% endif %}
+        					{% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
+        					{% if not card.influence is null %}&bull; Influence {{ card.influence }}{% endif %}
+        					{% if not card.control is null %}&bull; Control {{ card.control }}{% endif %}
+        					{% if not card.cost is null %}&bull; Cost {{ card.cost }}{% endif %}
+        					{% if not card.wealth is null %}&bull; Wealth {{ card.wealth }}{% endif %}
+        					{% if not card.production is null %}&bull; Production {{ card.production }}{% endif %}
+        					{% if not card.upkeep is null %}&bull; Upkeep {{ card.upkeep }}{% endif %}
+        				</div>
+        				<div class="card-text">
+        					{{ card.text|raw }}
+        				</div>
+        				<div class="card-flavor">
+        					<small>{{ card.flavor|raw|nl2br }}</small>
+        				</div>
+        				<div class="card-illustrator">
+        					<small>
+        					{{ card.gang }} &bull;
+        					{% if card.illustrator %}{{ card.illustrator }} &bull; {% endif %}{{ card.pack }} #{{ card.number }}
+        					{% for alternative in card.alternatives %}
+        						| <a href="{{ alternative.url }}" title="Alternative">{{ alternative.pack }} #{{ alternative.number }}</a>
+        					{% endfor %}
+        					</small>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+	<div class="col-sm-3" style="padding:0">
+        <div class="card-image">
+        {% if card.imagesrc %}
+           <img src="{{ card.imagesrc }}" class="img-responsive" style="margin-left:auto">
+        {% else %}
+           <div class="no-image" style="margin-left:auto"><div class="no-image-text">No image</div></div>
+        {% endif %}
+        </div>
 	</div>
 </div>
-
 {% endfor %}
 
 {% endblock %}

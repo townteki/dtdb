@@ -24,7 +24,7 @@ DTDB.user.params.decklist_id = Decklist.id;
 
 <div class="row">
 <div class="col-xs-12">
-<h1 id="decklist_title">
+<h1 id="decklist_title" class="decklist-name">
     <span class="icon icon-{{ decklist.gang_code }} {{ decklist.gang_code }}"></span> {{ decklist.name }}</h1>
 <div class="decklist-social">
 <div class="pull-right" id="decklist-social-icons">
@@ -168,7 +168,7 @@ DTDB.user.params.decklist_id = Decklist.id;
 <!-- Right-side Column -->
 <div class="col-md-6">
 
-<h3 class="decklist-author">
+<h3 class="username">
     <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
     {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
     <small title="User Reputation">{{ decklist.reputation }}</small>

@@ -425,6 +425,12 @@ card_review_post:
     defaults: 
         _controller: DtdbBuilderBundle:Review:post
 
+card_review_edit:
+    pattern: /review/edit
+    methods: [POST]
+    defaults: 
+        _controller: DtdbBuilderBundle:Review:edit
+
 card_review_like:
     pattern: /review/like
     methods: [POST]

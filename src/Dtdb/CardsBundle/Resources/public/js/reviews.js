@@ -1,8 +1,26 @@
 
 $(function () {
-	$(window.document).on('click', '.write-review', write_review_open);
+	$(window.document).on('click', '#review-button', write_review_open);
 	$(window.document).on('click', '.social-icon-like', like_review);
 });
+
+$.when(DTDB.user.deferred).then(function() {
+	if(DTDB.user.data.review_id) {
+		setup_edit();
+	} else {
+		setup_write();
+	}
+});
+
+function setup_write() {
+	$('#reviews-header').prepend('<button class="pull-right btn btn-default" id="review-button"><span class="glyphicon glyphicon-pencil"></span> Write a review</button>');
+}
+
+function setup_edit() {
+	var review_id = DTDB.user.data.review_id;
+	$('#review-'+review_id+' header').append('<button class="btn btn-default" id="review-button"><span class="glyphicon glyphicon-pencil"></span> Edit review</a>');
+	$('input[name=review_id').val(review_id);
+}
 
 function like_review(event) {
 	event.preventDefault();
@@ -20,7 +38,7 @@ function write_review_open(event) {
 		alert('You must be logged in to write a card review.');
 		return;
 	}
-	var form = $(this).parent('div').parent('div').find('form');
+	var form = $("#review-edit-form");
 	$(this).remove();
 	
 	form.append('<div><div class="form-group">'
@@ -34,8 +52,12 @@ function write_review_open(event) {
 			alert('Your review must at least 200 characters long.');
 			return;
 		}
+		var url = Routing.generate('card_review_post');
+		if(DTDB.user.data.review_id) {
+			url = Routing.generate('card_review_edit');
+		}
 		var data = $(this).serialize();
-		$.ajax(Routing.generate('card_review_post'), {
+		$.ajax(url, {
 			data: data,
 			type: 'POST',
 			dataType: 'json',
@@ -47,7 +69,7 @@ function write_review_open(event) {
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				form.replaceWith('<div class="alert alert-danger" role="alert">An error occured while posting your review ('+jqXHR.responseText+'). Reload the page and try again.</div>');
+				form.replaceWith('<div class="alert alert-danger" role="alert">An error occured while posting your review ('+jqXHR.statusText+'). Reload the page and try again.</div>');
 			}
 		});
 	});
@@ -81,5 +103,9 @@ function write_review_open(event) {
 						},
 						index : 1
 					} ]);
+
+	if(DTDB.user.data.review_id) {
+		$('#review-form-text').val(DTDB.user.data.review_text).trigger('keyup');
+	}
 
 }

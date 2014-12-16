@@ -9,9 +9,32 @@
 	font-style: normal;
 }
 
-h1,h2,h3,h4,h5,h6,a.navbar-brand{font-family: 'IM Fell DW Pica SC', serif;}
 .card-face, .card-rank{font-family: 'Ultra', serif;}
-div.card-text{font-size:14px;border-left:1px solid #888;font-family: serif;}
+
+/* fonts */
+h2,h3,h4,h5,h6,.navbar{font-family:inherit;}
+/* copy text */
+body {font-size:16px;font-family: 'Noto Sans', sans-serif;}
+/* main headers */
+h1, #index_page .section{font-family:'IM Fell DW Pica SC', serif;}
+/* brand name */
+.page-header h1, .navbar-brand  {font-family:'IM Fell DW Pica SC', serif}
+/* decklist names and user names */
+.decklist-name{font-family:'Anaheim',sans-serif}
+.reputation{font-family:'Anaheim',sans-serif}
+.username{font-family:'Anaheim',sans-serif}
+.social{color:darkgray;font-family: 'Anaheim';}
+.social>div>a, .social>div>span{margin:0 10px;font-family:'Anaheim'}
+
+/* classes .card-* used in card pages, card modal, card tip */
+.card-title{font-size:125%;position:relative;z-index: 10;margin-right: 15px}
+.card-text{border-left:1px solid #888}
+.card-text sup{line-height:0;font-size:x-small}
+.card-text p{margin:6px}
+.card-flavor{font-style:italic}
+.pack-future, .card-preview{color:red}
+/* */
+
 
 [class^="suit-"], [class*=" suit-"] {
 	font-family: 'icomoon';
@@ -76,7 +99,6 @@ div.card-text sup{line-height:0;font-size:x-small}
 div.card-text p{margin:6px}
 .card-flavor{font-style:italic}
 .card-preview{color:red}
-.card-title {position: relative;z-index: 1000;}
 html,body{height:100%;background:lightgray}
 #wrapper{background:white;padding-bottom:50px;/*box-shadow:0px 1px 10px black;*/border-bottom:1px solid silver;}
 #footer{padding:50px 0;color:darkgray}
@@ -379,10 +401,6 @@ article.review:first-child {
 article.review  header {
 	font-size: 120%;
 	margin-bottom: 1em;
-	font-family: 'IM Fell DW Pica SC';	
-}
-article.review  a[rel="author"] {
-	font-family: 'IM Fell DW Pica SC';	
 }
 article.review div.review-content {
 	

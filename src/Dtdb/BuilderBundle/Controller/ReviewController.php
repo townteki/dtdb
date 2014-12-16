@@ -67,6 +67,47 @@ class ReviewController extends Controller
         
         return new Response(json_encode(TRUE));
     }
+
+    public function editAction(Request $request)
+    {
+    
+        /* @var $em \Doctrine\ORM\EntityManager */
+        $em = $this->get('doctrine')->getManager();
+    
+        /* @var $user \Dtdb\UserBundle\Entity\User */
+        $user = $this->getUser();
+        if(!$user) {
+            throw new UnauthorizedHttpException();
+        }
+    
+        $review_id = filter_var($request->get('review_id'), FILTER_SANITIZE_NUMBER_INT);
+        /* @var $review Review */
+        $review = $em->getRepository('DtdbBuilderBundle:Review')->find($review_id);
+        if(!$review) {
+            throw new BadRequestHttpException();
+        }
+        if($review->getUser()->getId() !== $user->getId()) {
+            throw new UnauthorizedHttpException();
+        }
+    
+        $review_raw = trim(filter_var($request->get('review'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+    
+        $review_raw = preg_replace(
+                '%(?<!\()\b(?:(?:https?|ftp)://)(?:((?:(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)(?:\.(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)*(?:\.[a-z\x{00a1}-\x{ffff}]{2,6}))(?::\d+)?)(?:[^\s]*)?%iu',
+                '[$1]($0)', $review_raw);
+    
+        $review_html = $this->get('texts')->markdown($review_raw);
+        if(!$review_html) {
+            return new Response('Your review is empty.');
+        }
+    
+        $review->setRawtext($review_raw);
+        $review->setText($review_html);
+    
+        $em->flush();
+    
+        return new Response(json_encode(TRUE));
+    }
     
     public function likeAction(Request $request)
     {

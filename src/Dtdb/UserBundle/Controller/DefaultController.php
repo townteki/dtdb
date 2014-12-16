@@ -57,6 +57,7 @@ class DefaultController extends Controller
         $locale = $request->getLocale();
         
         $decklist_id = $request->query->get('decklist_id');
+        $card_id = $request->query->get('card_id');
         
         $content = null;
         
@@ -108,6 +109,24 @@ class DefaultController extends Controller
     
     			    $content['can_delete'] = ($decklist->getNbcomments() == 0) && ($decklist->getNbfavorites() == 0) && ($decklist->getNbvotes() == 0);
 				}
+            }
+
+            if(isset($card_id)) {
+                /* @var $em \Doctrine\ORM\EntityManager */
+                $em = $this->get('doctrine')->getManager();
+                /* @var $card \Dtdb\CardsBundle\Entity\Card */
+                $card = $em->getRepository('DtdbCardsBundle:Card')->find($card_id);
+            
+                if($card) {
+                    $reviews = $card->getReviews();
+                    /* @var $review \Dtdb\BuilderBundle\Entity\Review */
+                    foreach($reviews as $review) {
+                        if($review->getUser()->getId() === $user->getId()) {
+                            $content['review_id'] = $review->getId();
+                            $content['review_text'] = $review->getRawtext();
+                        }
+                    }
+                }
             }
         }
         $content = json_encode($content);
