@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 3,
+			version: 4,
 			type: 'info',
-			message: "Card reviews can now be modified by the author on the card page."
+			message: "New option to choose the behavior of the faction & type filter buttons in the deckbuilder."
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
