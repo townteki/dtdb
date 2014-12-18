@@ -129,16 +129,14 @@ DTDB.data_loaded.add(function() {
 	});
 
 	$('#pack_code').empty();
-	DTDB.data.sets().each(
-			function(record) {
-				var checked = record.available === ""
-						&& sets_in_deck[record.code] == null ? ''
-						: ' checked="checked"';
-				$('#pack_code').append(
-						'<li><a href="#"><label><input type="checkbox" name="'
-								+ record.code + '"' + checked + '>'
-								+ record.name + '</label></a></li>');
-			});
+	DTDB.data.sets().each(function(record) {
+		var checked = record.available === "" && sets_in_deck[record.code] === null ? '' : ' checked="checked"';
+		$('#pack_code').append(
+			'<li><a href="#"><label><input type="checkbox" name="'
+					+ record.code + '"' + checked + '>'
+					+ record.name + '</label></a></li>'
+		);
+	});
 
 	$('input[name=Outfit]').prop("checked", false);
 
@@ -216,6 +214,24 @@ DTDB.data_loaded.add(function() {
 	$('.container').show();
 });
 
+function uncheck_all_others() {
+	$(this).closest(".filter").find("input[type=checkbox]").prop("checked",false);
+	$(this).children('input[type=checkbox]').prop("checked", true).trigger('change');
+}
+
+function check_all_others() {
+	$(this).closest(".filter").find("input[type=checkbox]").prop("checked",true);
+	$(this).children('input[type=checkbox]').prop("checked", false);
+}
+
+function uncheck_all_active() {
+	$(this).closest(".filter").find("label.active").button('toggle');
+}
+
+function check_all_inactive() {
+	$(this).closest(".filter").find("label:not(.active)").button('toggle');
+}
+
 $(function() {
 	$('html,body').css('height', '100%');
 
@@ -230,42 +246,30 @@ $(function() {
 		}
 	});
 	
-	$('#pack_code,.search-buttons').on(
-			{
-				change : handle_input_change,
-				click : function(event) {
-					var dropdown = $(this).closest('ul').hasClass(
-							'dropdown-menu');
-					if (dropdown) {
-						if (!event.shiftKey) {
-							if (!event.altKey) {
-								$(this).closest(".filter").find(
-										"input[type=checkbox]").prop("checked",
-										false);
-								$(this).children('input[type=checkbox]').prop(
-										"checked", true).trigger('change');
-							} else {
-								$(this).closest(".filter").find(
-										"input[type=checkbox]").prop("checked",
-										true);
-								$(this).children('input[type=checkbox]').prop(
-										"checked", false);
-							}
-						}
-						event.stopPropagation();
+	$('#pack_code,.search-buttons').on({
+		change : handle_input_change,
+		click : function(event) {
+			var dropdown = $(this).closest('ul').hasClass('dropdown-menu');
+			if (dropdown) {
+				if (event.shiftKey) {
+					if (!event.altKey) {
+						uncheck_all_others.call(this);
 					} else {
-						if (!event.shiftKey && Buttons_Behavior === 'exclusive' || event.shiftKey && Buttons_Behavior === 'cumulative') {
-							if (!event.altKey) {
-								$(this).closest(".filter").find("label.active")
-										.button('toggle');
-							} else {
-								$(this).closest(".filter").find(
-										"label:not(.active)").button('toggle');
-							}
-						}
+						check_all_others.call(this);
 					}
 				}
-			}, 'label');
+				event.stopPropagation();
+			} else {
+				if (!event.shiftKey && Buttons_Behavior === 'exclusive' || event.shiftKey && Buttons_Behavior === 'cumulative') {
+					if (!event.altKey) {
+						uncheck_all_active.call(this);
+					} else {
+						check_all_inactive.call(this);
+					}
+				}
+			}
+		}
+	}, 'label');
 
 	$('#filter-text').on({
 		input : function (event) {
