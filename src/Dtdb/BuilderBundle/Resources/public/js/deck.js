@@ -629,7 +629,7 @@ function get_deck_full_content() {
 function handle_submit(event) {
 	var deck_json = JSON.stringify(get_deck_full_content());
 	$('input[name=content]').val(deck_json);
-	$('input[name=description]').val($('input[name=description_]').val());
+	$('input[name=description]').val($('textarea[name=description_]').val());
 	$('input[name=tags]').val($('input[name=tags_]').val());
 }
 
