@@ -1,6 +1,6 @@
 var InputByTitle = false;
 var DisplayColumns = 1;
-var BaseSets = 1;
+var BaseSets = 2;
 var Buttons_Behavior = 'cumulative';
 var Snapshots = []; // deck contents autosaved
 var Autosave_timer = null;
