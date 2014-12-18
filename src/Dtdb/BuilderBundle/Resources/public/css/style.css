@@ -109,8 +109,6 @@ html,body{height:100%;background:lightgray}
 textarea{resize:vertical}
 tbody#decks{cursor:pointer}
 #deck-content img{height:15px;vertical-align:text-bottom}
-.twitter-typeahead{width:100%}
-.twitter-typeahead .tt-hint{color:#aaa;margin-left:11px;margin-top:4px}
 .type,.gang{text-align:center}
 .nav-tabs{margin-bottom:15px}
 tbody .btn-group{white-space:nowrap}
@@ -142,6 +140,10 @@ tbody .btn-group{white-space:nowrap}
 #collection-grid .col-sm-4 .media-object {height:70px}
 #collection-grid .col-sm-4 .media-heading {line-height:30px;overflow:hidden;white-space:nowrap;font-family:Arial}
 #table-draw-simulator-content img.card {width:99px;float:left;margin:5px;box-shadow: black 0px 0px 5px;border-radius: 5px;}
+
+
+.twitter-typeahead{width:100%}
+.twitter-typeahead .tt-hint{color:#aaa;margin-left:11px;margin-top:4px}
 
 .twitter-typeahead .tt-hint {
 	display: none;
@@ -175,7 +177,7 @@ tbody .btn-group{white-space:nowrap}
   padding: 3px 20px;
 }
 
-.tt-suggestion.tt-is-under-cursor {
+.tt-suggestion.tt-cursor {
   color: #fff;
   background-color: #0081c2;
   background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
@@ -187,7 +189,7 @@ tbody .btn-group{white-space:nowrap}
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0)
 }
 
-.tt-suggestion.tt-is-under-cursor a {
+.tt-suggestion.tt-cursor a {
   color: #fff;
 }
 
