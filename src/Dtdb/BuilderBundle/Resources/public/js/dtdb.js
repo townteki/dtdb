@@ -18,8 +18,6 @@ function display_notification()
 	$('#wrapper>div.container').prepend(alert);
 }
 
-
-
 function debounce(fn, delay) {
 	var timer = null;
 	return function() {

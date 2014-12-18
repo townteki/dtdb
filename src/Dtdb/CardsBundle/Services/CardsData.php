@@ -438,7 +438,7 @@ class CardsData
 				"keywords" => $card->getKeywords(),
 				"text" => $card->getText(),
 				"cost" => $card->getCost(),
-				"gang" => $card->getGang() ? $card->getGang()->getName() : 'neutral',
+				"gang" => $card->getGang() ? $card->getGang()->getName() : 'Neutral',
 				"gang_code" => $card->getGang() ? $card->getGang()->getCode() : 'neutral',
 				"gang_letter" => $card->getGang() ? substr($card->getGang()->getCode(), 0, 1) : '-',
 				"flavor" => $card->getFlavor($locale),

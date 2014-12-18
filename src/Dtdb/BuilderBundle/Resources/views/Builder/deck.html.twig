@@ -108,46 +108,48 @@ var Filters = {},
   
    <div role="tabpanel" class="tab-pane active" id="tab-pane-build">
 
-<!-- Search Bar -->
-<div class="row" id="search">
-	<div class="col-sm-6" style="margin-bottom:10px">
-		<input type="text" class="form-control" name="title" placeholder="Find a card" tabindex="1">
-	</div>
-	<div class="col-sm-6" style="margin-bottom:10px">
-		<div class="pull-right">
-			<div class="btn-group">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Sets <span class="caret"></span></button>
-				<ul class="dropdown-menu filter pull-right" id="pack_code" title="Shift+Click to select only one option ; Alt+Shift+Click to select all other options"></ul>
-			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Options <span class="caret"></span></button>
-				<ul class="dropdown-menu pull-right">
-					<li><a href="#"><label><input type="checkbox" name="show-disabled"> Show unusable cards</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="only-deck"> Show only used cards</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="display-column-1"> Display on 1 column</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="display-column-2"> Display on 2 columns</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="display-column-3"> Display on 3 columns</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="base-set-1"> Use 1 Base Set</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="base-set-2"> Use 2 Base Sets</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="show-suggestions-0"> Show no suggestion</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="show-suggestions-3"> Show 3 suggestions</label></a></li>
-					<li><a href="#"><label><input type="checkbox" name="show-suggestions-10"> Show 10 suggestions</label></a></li>
-					</ul>
-			</div><!-- /.btn-group -->
-		</div><!-- /.pull-right -->
-	</div><!-- /.col-sm-7 -->
+<div class="row">
+	<div class="col-md-12 text-right" style="margin-bottom:10px">
+        <button class="btn btn-default btn-xs" type="button" id="filter-text-button">Filter help</button>
+        <div class="btn-group">
+			<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Sets <span class="caret"></span></button>
+			<ul class="dropdown-menu filter pull-right" id="set_code" title="Shift+Click to select only one option ; Alt+Shift+Click to select all other options"></ul>
+		</div>
+		<div class="btn-group">
+			<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Options <span class="caret"></span></button>
+			<ul class="dropdown-menu pull-right">
+				<li><a href="#"><label><input type="checkbox" name="show-disabled"> Show unusable cards</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="only-deck"> Show only used cards</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="display-column-1"> Display on 1 column</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="display-column-2"> Display on 2 columns</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="display-column-3"> Display on 3 columns</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="base-set-1"> Use 1 Base Set</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="base-set-2"> Use 2 Base Sets</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="show-suggestions-0"> Show no suggestion</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="show-suggestions-3"> Show 3 suggestions</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="show-suggestions-10"> Show 10 suggestions</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="buttons-behavior-cumulative"> Faction/type cumulative</label></a></li>
+				<li><a href="#"><label><input type="checkbox" name="buttons-behavior-exclusive"> Faction/type exclusive</label></a></li>
+			</ul>
+		</div><!-- /.btn-group -->
+	</div><!-- /.col-sm-6 -->
 </div><!-- /.row -->
+			
+<!-- Search Bar -->
+<div class="row">
+	<div class="col-sm-12" style="margin-bottom:10px">
+		<input type="text" class="form-control" id="filter-text" placeholder="Find a card or filter the list" tabindex="1">
+	</div>
+</div>
 <!-- Search Bar -->
 
-<div class="row" id="search2" style="margin-bottom:10px">
-	<div class="col-sm-12 form-inline">
-	   <div class="input-group">
-    		<input type="text" class="form-control input-sm" id="filter-text" placeholder="Filter list">
-    		<span class="input-group-btn"><button class="btn btn-default btn-sm" type="button" id="filter-text-button">?</button></span>
-    	</div>
-    	<div class="btn-group filter" data-toggle="buttons" id="gang_code"></div>
-    	<div class="btn-group filter" data-toggle="buttons" id="suit" style="font-family:cursive"></div>
-	</div>
+<div class="row search-buttons" style="margin-bottom:10px">
+    <div class="col-xs-6">
+        <div id="gang_code" class="filter" data-toggle="buttons"></div>
+    </div>
+    <div class="col-xs-6 text-right">
+        <div id="suit" class="filter" data-toggle="buttons" style="font-family:cursive"></div>
+    </div>
 </div>
 
 <!-- Collection Table -->

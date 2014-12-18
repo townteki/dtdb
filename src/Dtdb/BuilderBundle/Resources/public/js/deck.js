@@ -1,6 +1,7 @@
 var InputByTitle = false;
 var DisplayColumns = 1;
 var BaseSets = 1;
+var Buttons_Behavior = 'cumulative';
 var Snapshots = []; // deck contents autosaved
 var Autosave_timer = null;
 var Deck_changed_since_last_autosave = false;
@@ -36,6 +37,14 @@ DTDB.data_loaded.add(function() {
 	}
 	$('input[name=show-suggestions-' + DTDB.suggestions.number + ']').prop('checked', true);
 
+	var localStorageButtonsBehavior;
+	if (localStorage
+			&& (localStorageButtonsBehavior = localStorage.getItem('buttons_behavior')) !== null
+			&& [ 'cumulative', 'exclusive' ].indexOf(localStorageButtonsBehavior) > -1) {
+		Buttons_Behavior = localStorageButtonsBehavior;
+	}
+	$('input[name=buttons-behavior-' + Buttons_Behavior + ']').prop('checked', true);
+
 	DTDB.data.sets({
 		code : "alt"
 	}).remove();
@@ -68,6 +77,11 @@ DTDB.data_loaded.add(function() {
 		});
 	});
 
+	if(Modernizr.touch) {
+		$('#gang_code, #suit').css('width', '100%').addClass('btn-group-vertical');
+	} else {
+		$('#gang_code, #suit').addClass('btn-group');
+	}
 	$('#gang_code').empty();
 	$.each(DTDB.data.cards().distinct("gang_code").sort(
 			function(a, b) {
@@ -75,13 +89,19 @@ DTDB.data_loaded.add(function() {
 						: a > b ? 1 : 0;
 			}), function(index, record) {
 		var example = DTDB.data.cards({"gang_code": record}).first();
+		var gang = example.gang;
 		var label = $('<label class="btn btn-default btn-sm" data-code="' + record
-						+ '" title="'+example.gang+'"><input type="checkbox" name="' + record
+						+ '" title="'+gang+'"><input type="checkbox" name="' + record
 						+ '"><img src="'
 						+ Url_GangImage.replace('xxx', record)
 						+ '" style="width:14px"></label>');
-		if(!Modernizr.touch) label.tooltip({container: 'body'});
-		$('#gang_code').append(label)
+		if(Modernizr.touch) {
+			label.append(' '+gang);
+			label.addClass('btn-block');
+		} else {
+			label.tooltip({container: 'body'});
+		}
+		$('#gang_code').append(label);
 	});
 	$('#gang_code').button();
 	$('#gang_code').children('label').each(function(index, elt) {
@@ -90,10 +110,17 @@ DTDB.data_loaded.add(function() {
 
 	$('#suit').empty();
 	$.each(DTDB.data.cards().distinct("suit").sort(), function(index, record) {
+		var suit = record;
+		if(suit === null) suit = "None";
 		var label = $('<label class="btn btn-default btn-sm" data-code="'
-						+ record + '" title="'+record+'"><input type="checkbox" name="' + record
-						+ '">&' + (record ? record.toLowerCase() : '#8962') + ';</label>');
-		if(!Modernizr.touch) label.tooltip({container: 'body'});
+						+ record + '" title="'+suit+'"><input type="checkbox" name="' + record
+						+ '">&' + (record === null ? '#8962' : record.toLowerCase()) + ';</label>');
+		if(Modernizr.touch) {
+			label.append(' '+record);
+			label.addClass('btn-block');
+		} else {
+			label.tooltip({container: 'body'});
+		}
 		$('#suit').append(label);
 	});
 	$('#suit').button();
@@ -147,10 +174,44 @@ DTDB.data_loaded.add(function() {
 
 	refresh_collection();
 
-	$('input[name=title]').typeahead({
+	var titleMatcher = function(strs) {
+		  return function findMatches(q, cb) {
+		    var matches, substrRegex;
+		    
+		    if(q.match(/^\w:/)) return;
+		 
+		    // an array that will be populated with substring matches
+		    matches = [];
+		 
+		    // regex used to determine if a string contains the substring `q`
+		    substrRegex = new RegExp(q, 'i');
+		 
+		    // iterate through the pool of strings and for any string that
+		    // contains the substring `q`, add it to the `matches` array
+		    $.each(strs, function(i, str) {
+		      if (substrRegex.test(str)) {
+		        // the typeahead jQuery plugin expects suggestions to a
+		        // JavaScript object, refer to typeahead docs for more info
+		        matches.push({ value: str });
+		      }
+		    });
+		 
+		    cb(matches);
+		  };
+		};
+	
+	var titles = DTDB.data.cards().select('title');
+
+	$('#filter-text').typeahead({
+		  hint: true,
+		  highlight: true,
+		  minLength: 2
+		},{
 		name : 'cardnames',
-		local : DTDB.data.cards().select('title')
+		displayKey: 'value',
+		source: titleMatcher(titles)
 	});
+	
 	$('html,body').css('height', 'auto');
 	$('.container').show();
 });
@@ -158,10 +219,18 @@ DTDB.data_loaded.add(function() {
 $(function() {
 	$('html,body').css('height', '100%');
 
-	$('input[name=title]').on('typeahead:selected typeahead:autocompleted',
+	$('#filter-text').on('typeahead:selected typeahead:autocompleted',
 			DTDB.card_modal.typeahead);
 	
-	$('#pack_code,#search2').on(
+	$(document).on('hidden.bs.modal', function (event) {
+		if(InputByTitle) {
+			setTimeout(function () {
+				$('#filter-text').typeahead('val', '').focus();
+			}, 100);
+		}
+	});
+	
+	$('#pack_code,.search-buttons').on(
 			{
 				change : handle_input_change,
 				click : function(event) {
@@ -185,7 +254,7 @@ $(function() {
 						}
 						event.stopPropagation();
 					} else {
-						if (!event.shiftKey) {
+						if (!event.shiftKey && Buttons_Behavior === 'exclusive' || event.shiftKey && Buttons_Behavior === 'cumulative') {
 							if (!event.altKey) {
 								$(this).closest(".filter").find("label.active")
 										.button('toggle');
@@ -200,7 +269,9 @@ $(function() {
 
 	$('#filter-text').on({
 		input : function (event) {
-			DTDB.smart_filter.handler($(this).val(), refresh_collection);
+			var q = $(this).val();
+			if(q.match(/^\w:/)) DTDB.smart_filter.handler(q, refresh_collection);
+			else DTDB.smart_filter.handler('', refresh_collection);
 		}
 	});
 
@@ -226,6 +297,11 @@ $(function() {
 			handle_quantity_change.call(this, event);
 		}
 	}, 'input[type=radio]');
+	$('#collection').on({
+		click : function(event) {
+			InputByTitle = false;
+		}
+	}, 'a.card');
 	$('.modal').on({
 		change : handle_quantity_change
 	}, 'input[type=radio]');
@@ -324,6 +400,24 @@ $(function() {
 			if (localStorage)
 				localStorage.setItem('show_suggestions', DTDB.suggestions.number);
 			DTDB.suggestions.show();
+		}
+	});
+	$('input[name=buttons-behavior-cumulative]').on({
+		change : function(event) {
+			$('input[name=buttons-behavior-exclusive]').prop('checked', false);
+			$('input[name=buttons-behavior-exclusive]').prop('checked', false);
+			Buttons_Behavior = 'cumulative';
+			if (localStorage)
+				localStorage.setItem('buttons_behavior', Buttons_Behavior);
+		}
+	});
+	$('input[name=buttons-behavior-exclusive]').on({
+		change : function(event) {
+			$('input[name=buttons-behavior-cumulative]').prop('checked', false);
+			$('input[name=buttons-behavior-cumulative]').prop('checked', false);
+			Buttons_Behavior = 'exclusive';
+			if (localStorage)
+				localStorage.setItem('buttons_behavior', Buttons_Behavior);
 		}
 	});
 	$('thead').on({
@@ -485,22 +579,25 @@ function handle_input_change(event) {
 	var div = $(this).closest('.filter');
 	var columnName = div.attr('id');
 	var arr = [];
-	div.find("input[type=checkbox]").each(
-			function(index, elt) {
-				if ($(elt).prop('checked'))
-					arr.push($(elt).attr('name'));
-				if (columnName == "pack_code" && localStorage)
-					localStorage.setItem('pack_code_' + $(elt).attr('name'), $(
-							elt).prop('checked') ? "on" : "off");
-			});
+	div.find("input[type=checkbox]").each(function(index, elt) {
+		var value = $(elt).attr('name');
+		if(value === "null") value = null;
+		if ($(elt).prop('checked')) {
+			arr.push(value);
+		}
+		if (columnName == "pack_code" && localStorage) {
+			localStorage.setItem('pack_code_' + value, $(elt).prop('checked') ? "on" : "off");
+		}
+	});
 	Filters[columnName] = arr;
 
 	FilterQuery = {};
-	$.each(Filters, function(k) {
-		if (Filters[k] != '') {
-			FilterQuery[k] = Filters[k];
+	$.each(Filters, function(k, v) {
+		if (v && v.length) {
+			FilterQuery[k] = v;
 		}
 	});
+
 	refresh_collection();
 }
 function get_deck_content() {
@@ -602,7 +699,7 @@ function handle_quantity_change(event) {
 	$('div.modal').modal('hide');
 	DTDB.suggestions.compute();
 	if (InputByTitle)
-		$('input[name=title]').typeahead('setQuery', '').focus().blur();
+		$('#filter-text').typeahead('setQuery', '').focus().blur();
 	
 	Deck_changed_since_last_autosave = true;
 }

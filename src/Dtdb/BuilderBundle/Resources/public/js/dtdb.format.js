@@ -31,7 +31,7 @@ DTDB.format = {};
 	};
 	
 	format.face = function(card) {
-		if(!card.suit) return '';
+		if(card.suit === null) return '';
 		
 		var drank = card.rank;
 		if(card.rank == 1) drank = 'A';
@@ -57,7 +57,7 @@ DTDB.format = {};
 	};
 
 	format.suit = function(card) {
-		if(!card.suit) return '';
+		if(card.suit === null) return '';
 		var dsuit = card.suit.toLowerCase(); 
 		return '<span class="card-suit suit-'+dsuit+'"></span>';
 	};
