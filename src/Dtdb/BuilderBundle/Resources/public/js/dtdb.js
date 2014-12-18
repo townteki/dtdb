@@ -7,7 +7,7 @@ function display_notification()
 	var Notification = {
 			version: 4,
 			type: 'info',
-			message: "New option to choose the behavior of the faction & type filter buttons in the deckbuilder."
+			message: "New option to choose the behavior of the gang & suit filter buttons in the deckbuilder."
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
