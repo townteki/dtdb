@@ -7,9 +7,22 @@ DTDB.data_loaded.add(function() {
 		pack_code : "alt"
 	}).remove();
 	
+	function findMatches(q, cb) {
+		if(q.match(/^\w:/)) return;
+		var matches = DTDB.data.cards({title: {likenocase: q}}).map(function (record) {
+	    	return { value: record.title };
+	    });
+		cb(matches);
+	}
+	
 	$('#card').typeahead({
+		  hint: true,
+		  highlight: true,
+		  minLength: 3
+		},{
 		name : 'cardnames',
-		local : DTDB.data.cards().select('title')
+		displayKey: 'value',
+		source: findMatches
 	});
 });
 
