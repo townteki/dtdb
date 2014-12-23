@@ -81,7 +81,9 @@ class BuilderController extends Controller
                                 "name" => "New Deck",
                                 "description" => "",
                                 "tags" => $card->getGang()->getCode(),
-                                "id" => ""
+                                "id" => "",
+                                "history" => array(),
+                                "unsaved" => 0,
                         ),
                         "published_decklists" => array()
                 ), $response);
