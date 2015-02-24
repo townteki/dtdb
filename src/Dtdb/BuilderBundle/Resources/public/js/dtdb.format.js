@@ -18,15 +18,16 @@ DTDB.format = {};
 
 	format.text = function(card) {
 		var text = card.text;
-		
-		text = text.replace(/\[Subroutine\]/g, '<span class="icon icon-subroutine"></span>');
-		text = text.replace(/\[Credits\]/g, '<span class="icon icon-credit"></span>');
-		text = text.replace(/\[Trash\]/g, '<span class="icon icon-trash"></span>');
-		text = text.replace(/\[Click\]/g, '<span class="icon icon-click"></span>');
-		text = text.replace(/\[Recurring Credits\]/g, '<span class="icon icon-recurring-credit"></span>');
-		text = text.replace(/\[Memory Unit\]/g, '<span class="icon icon-mu"></span>');
-		text = text.replace(/\[Link\]/g, '<span class="icon icon-link"></span>');
-		text = text.split("\n").join('</p><p>');
+		if(text) {
+			text = text.replace(/\[Subroutine\]/g, '<span class="icon icon-subroutine"></span>');
+			text = text.replace(/\[Credits\]/g, '<span class="icon icon-credit"></span>');
+			text = text.replace(/\[Trash\]/g, '<span class="icon icon-trash"></span>');
+			text = text.replace(/\[Click\]/g, '<span class="icon icon-click"></span>');
+			text = text.replace(/\[Recurring Credits\]/g, '<span class="icon icon-recurring-credit"></span>');
+			text = text.replace(/\[Memory Unit\]/g, '<span class="icon icon-mu"></span>');
+			text = text.replace(/\[Link\]/g, '<span class="icon icon-link"></span>');
+			text = text.split("\n").join('</p><p>');
+		}
 		return '<p>'+text+'</p>';
 	};
 	
