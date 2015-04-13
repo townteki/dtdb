@@ -1,8 +1,8 @@
 # Quick notes for installation
 
 - Go into the directory where your server will reside
-- Fork the repo and clone it: `git clone https://github.com/yourname/netrunnerdb`
-- This creates a directory named netrunnerdb. This has to be your apache DOCROOT. 
+- Fork the repo and clone it: `git clone https://yourname@bitbucket.org/yourname/dtdb.git`
+- This creates a directory named dtdb. This has to be your apache DOCROOT. 
 - Go into it.
 - Install Composer: `curl -s http://getcomposer.org/installer | php`
 - Install the vendor libs: `php composer.phar install`
@@ -10,7 +10,7 @@
 - Create the tables: `php app/console doctrine:schema:update --force`
 - If the above command fails, edit app/config/parameters.yml and try again
 - execute php app/console assets:install --symlink
-- Import the data: mysql -u root -p netrunnerdb < netrunnerdb-cards.sql
+- Import the data: mysql -u root -p dtdb< dtdb-cards.sql
 - Configure your web server with the correct DocRoot
 - Point your browser to `/web/app_dev.php`
 
@@ -42,7 +42,7 @@ To update the deck of the week on the front page:
 
 ## Add cards with Excel on existing pack
 
-- note the code of the pack (wla for What Lies Ahead, etc.). let's say it's xxx
+- note the code of the pack (ntnr for New Town New Rules, etc.). let's say it's xxx
 - login with admin-level account
 - go to /api/set/xxx.xls
 - open the downloaded file and add your cards
