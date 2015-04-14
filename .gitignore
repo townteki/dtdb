@@ -7,7 +7,7 @@ build/
 vendor/
 bin/
 composer.phar
-src/Netrunnerdb/CardsBundle/Resources/public/images/cards
+src/Dtdb/CardsBundle/Resources/public/images/cards
 .settings/
 .buildpath
 .project
