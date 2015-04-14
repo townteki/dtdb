@@ -12,7 +12,7 @@ class Highlight
     public function save ()
     {
     
-        $dbh = $this->get('doctrine')->getConnection();
+        $dbh = $this->doctrine->getConnection();
         $rows = $dbh->executeQuery(
                 "SELECT
     				d.id,
