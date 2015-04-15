@@ -274,7 +274,7 @@ function update_deck(options) {
 
 
 function check_composition() {
-	var startingposse = DTDB.data.cards({'start':1});
+	var startingposse = DTDB.data.cards({indeck:{'gt':0},start:{'gt':0}});
 	var outfits = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'outfit'}});
 	var number_of_outfits = outfits.select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
 	var number_of_jokers = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'joker'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
