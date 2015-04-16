@@ -255,7 +255,7 @@ class SearchController extends Controller
 					'gang' => 'gang',
 					'type' => 'type',
 					'cost' => 'cost',
-					'strength' => 'strength',
+					'rank' => 'rank',
 				);
 				
 				$brokenlist = array();

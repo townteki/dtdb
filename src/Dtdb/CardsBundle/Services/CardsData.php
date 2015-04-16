@@ -363,7 +363,7 @@ class CardsData
 			case 'gang': $qb->addOrderBy('c.gang')->addOrderBy('c.type'); break;
 			case 'type': $qb->addOrderBy('c.type')->addOrderBy('c.gang'); break;
 			case 'cost': $qb->orderBy('c.type')->addOrderBy('c.cost'); break;
-			case 'strength': $qb->orderBy('c.type')->addOrderBy('c.bullets')->addOrderBy('c.control'); break;
+			case 'rank': $qb->orderBy('c.rank')->addOrderBy('c.type')->addOrderBy('c.gang'); break;
 		}
 		$qb->addOrderBy('c.title');
 		$qb->addOrderBy('c.code');
