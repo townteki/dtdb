@@ -286,9 +286,12 @@ $(function() {
 			InputByTitle = false;
 		}
 	}, 'a.card');
-	$('.modal').on({
+	$('.modal-qty').on({
 		change : handle_quantity_change
 	}, 'input[type=radio]');
+	$('.modal').on({
+		change : handle_qty_start_change
+	}, 'input[name=start]');
 	$('.modal').on({
 		change : handle_start_change
 	}, 'input[type=checkbox]');
@@ -625,6 +628,20 @@ function handle_start_change(event) {
 	update_deck();
 }
 
+function handle_qty_start_change(event) {
+	var index = $(this).closest('.card-container').data('index') || $(this).closest('div.modal').data('index');
+	var start = parseInt($(this).val(), 10);
+	var card = DTDB.data.cards({ code: index }).first();
+	if(card.indeck < start) start = card.indeck;
+	DTDB.data.cards({
+		code : index
+	}).update({
+		start : start
+	});
+	$('div.modal').modal('hide');
+	update_deck();
+}
+
 function handle_quantity_change(event) {
 	var index = $(this).closest('.card-container').data('index')
 			|| $(this).closest('div.modal').data('index');
@@ -633,7 +650,7 @@ function handle_quantity_change(event) {
 	$(this).closest('.card-container')[quantity ? "addClass" : "removeClass"]('in-deck');
 	var card = DTDB.data.cards({ code: index }).first();
 	var newdata = { indeck: quantity };
-	if(quantity === 0) newdata.start = 0;
+	if(quantity < card.start) newdata.start = quantity;
 	DTDB.data.cards({ code: index }).update(newdata);
 	if (card.type_code == "outfit") {
 		DTDB.data.cards({

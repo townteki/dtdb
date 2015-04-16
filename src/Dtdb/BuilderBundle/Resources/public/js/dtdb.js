@@ -255,7 +255,7 @@ function update_deck(options) {
 		}
 
 		var face = DTDB.format.face(record);
-		var item = $('<div>'+record.indeck+'x '+face+' <a href="'+Routing.generate('cards_zoom', {card_code:record.code})+'" class="card'+(record.start ? ' card-start' : '')+'" data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="'+record.code+'">'+record.title+'</a> '+additional_info+'</div>');
+		var item = $('<div>'+record.indeck+'x '+face+' <a href="'+Routing.generate('cards_zoom', {card_code:record.code})+'" class="card'+(record.start ? ' card-start'+record.start : '')+'" data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="'+record.code+'">'+record.title+'</a> '+additional_info+'</div>');
 		item.appendTo($('#deck-content .deck-'+criteria));
 		
 		cabinet[criteria] |= 0;
@@ -291,10 +291,19 @@ function check_composition() {
 		if($('#startingnumbers').size()) {
 			var outfit = outfits.first();
 			$('#deckcomposition').empty();
-			var cost_of_starting_posse = startingposse.select("cost").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-			var upkeep_of_starting_posse = startingposse.select("upkeep").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-			var influence_of_starting_posse = startingposse.select("influence").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-			$('#startingnumbers').html('Starting with '+(outfit.wealth-cost_of_starting_posse)+' wealth, '+(outfit.production-upkeep_of_starting_posse)+' income and '+influence_of_starting_posse+' influence');
+			
+			var cost_of_starting_posse = 0;
+			var upkeep_of_starting_posse = 0;
+			var production_of_starting_posse = 0;
+			var influence_of_starting_posse = 0;
+			startingposse.each(function(record){
+				cost_of_starting_posse += record.start * record.cost;
+				upkeep_of_starting_posse += record.start * record.upkeep;
+				production_of_starting_posse += record.start * record.production;
+				influence_of_starting_posse += record.start * record.influence;
+			});
+			
+			$('#startingnumbers').html('Starting with '+(outfit.wealth-cost_of_starting_posse)+' wealth, '+(outfit.production+production_of_starting_posse-upkeep_of_starting_posse)+' income and '+influence_of_starting_posse+' influence');
 		}
 	}
 	

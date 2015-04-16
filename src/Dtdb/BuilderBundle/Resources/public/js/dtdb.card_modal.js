@@ -52,13 +52,39 @@ DTDB.card_modal = {};
 				qtyelt.find('label').addClass("disabled").find('input[type=radio]').attr("disabled", true);
 			}
 			
-			$('#start').remove();
+			$('#starting').remove();
 			if(card.type_code == 'dude') {
-				var canstart = card.gang_code === 'neutral' || card.gang_code === Outfit.gang_code;
+				var canstart = card.gang_code === 'neutral' || card.gang_code === Outfit.gang_code;				
 				if(canstart) {
-					var start = $('<div class="btn-group" data-toggle="buttons" id="start" style="margin-left:5px"><label class="btn btn-default'+(card.start ? ' active' : '')+'"><input type="checkbox"'+(card.start ? ' checked' : '')+'>Starting</label></div>');
+					if (card.keywords.search('Non-Unique') != -1){
+					var start = '<div class="btn-group modal-start" data-toggle="buttons" id="starting" style="margin-left:5px"></div>';
+					qtyelt.after(start);
+					
+					var startelt = modal.find('.modal-start');
+					if(startelt) {
+						start = '<label class="btn btn-default disabled">Starting</label>';
+					  	for(var i=0; i<=card.maxqty; i++) {
+					  		start += '<label class="btn btn-default"><input type="radio" name="start" value="'+i+'">'+i+'</label>';
+					  	}
+					  	startelt.html(start);
+					   	
+					  	startelt.find('label').each(function (index, element) {
+							if(index == card.start + 1) $(element).addClass('active');
+							else $(element).removeClass('active');
+						});					  	
+					}
+					} else {
+						var start = $('<div class="btn-group" data-toggle="buttons" id="starting" style="margin-left:5px"><label class="btn btn-default'+(card.start ? ' active' : '')+'"><input type="checkbox"'+(card.start ? ' checked' : '')+'>Starting</label></div>');
+						qtyelt.after(start);
+					}
+				}
+			} else if (card.type_code == 'deed'){
+				var canstart = card.keywords.search('Core') != -1;
+				if(canstart) {
+					var start = $('<div class="btn-group" data-toggle="buttons" id="starting" style="margin-left:5px"><label class="btn btn-default'+(card.start ? ' active' : '')+'"><input type="checkbox"'+(card.start ? ' checked' : '')+'>Starting</label></div>');
 					qtyelt.after(start);
 				}
+				
 			}
 		} else {
 			if(qtyelt) qtyelt.closest('.row').remove();

@@ -386,6 +386,23 @@ div.deck-composition td.level-4 { background: #40352A; }
     content: "*";
 }
 
+.card-start1 { font-weight: bold }
+.card-start1::after { 
+    content: "*";
+}
+.card-start2 { font-weight: bold }
+.card-start2::after { 
+    content: "**";
+}
+.card-start3 { font-weight: bold }
+.card-start3::after { 
+    content: "***";
+}
+.card-start4 { font-weight: bold }
+.card-start4::after { 
+    content: "****";
+}
+
 
 #list article.review {
 	margin-top: 2em;

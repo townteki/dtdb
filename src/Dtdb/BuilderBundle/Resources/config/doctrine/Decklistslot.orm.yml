@@ -25,5 +25,5 @@ Dtdb\BuilderBundle\Entity\Decklistslot:
         quantity:
             type: smallint
         start:
-            type: boolean
+            type: smallint
     lifecycleCallbacks: {  }

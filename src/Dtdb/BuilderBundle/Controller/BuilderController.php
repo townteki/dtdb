@@ -298,13 +298,14 @@ class BuilderController extends Controller
             } else if($slot->getStart()) {
                 $start[] = array(
                         "id" => $slot->getCard()->getOctgnid(),
-                        "name" => $slot->getCard()->getTitle()
+                        "name" => $slot->getCard()->getTitle(),
+                        "qty" => $slot->getStart()
                 );
-                if($slot->getQuantity() > 1) {
+                if($slot->getQuantity() > $slot->getStart()) {
                     $rd[] = array(
                             "id" => $slot->getCard()->getOctgnid(),
                             "name" => $slot->getCard()->getTitle(),
-                            "qty" => $slot->getQuantity()-1
+                            "qty" => $slot->getQuantity() - $slot->getStart()
                     );
                 }
             } else {

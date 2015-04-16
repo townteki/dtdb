@@ -109,7 +109,7 @@ class Decklistslot
     }
     
     /**
-     * @var boolean
+     * @var integer
      */
     private $start;
 
@@ -117,7 +117,7 @@ class Decklistslot
     /**
      * Set start
      *
-     * @param boolean $start
+     * @param integer $start
      * @return Decklistslot
      */
     public function setStart($start)
@@ -130,7 +130,7 @@ class Decklistslot
     /**
      * Get start
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getStart()
     {

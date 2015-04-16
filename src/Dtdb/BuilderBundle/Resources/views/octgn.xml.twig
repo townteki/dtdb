@@ -5,7 +5,7 @@
   </section>
   <section name="Starting Cards" shared="False">
 {% for card in start %}
-    <card qty="1" id="{{ card.id }}">{{ card.name }}</card>
+    <card qty="{{ card.qty }}" id="{{ card.id }}">{{ card.name }}</card>
 {% endfor %}
   </section>
   <section name="Deck" shared="False">
