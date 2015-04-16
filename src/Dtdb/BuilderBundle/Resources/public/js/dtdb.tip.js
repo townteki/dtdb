@@ -10,6 +10,9 @@ DTDB.tip = {};
 				|| ($(this).attr('href') && $(this).attr('href').replace(
 						/.*\/card\/(\d\d\d\d\d).*$/,
 						"$1"));
+		code = String(code);
+		if (!code)
+			return;
 		var card = DTDB.data.cards({
 			code : code
 		}).first();

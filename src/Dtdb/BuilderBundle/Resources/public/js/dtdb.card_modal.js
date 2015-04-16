@@ -25,6 +25,7 @@ DTDB.card_modal = {};
 	};
 
 	function fill_modal (code) {
+		code = String(code);
 		var card = DTDB.data.cards({code:code}).first();
 		modal.data('index', code);
 		modal.find('h3.modal-title').html((card.uniqueness ? "&diams; " : "")+card.title);
