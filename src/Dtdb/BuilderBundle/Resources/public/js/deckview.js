@@ -38,9 +38,11 @@ function do_action_deck(event) {
 		case 'btn-download-text': location.href=Routing.generate('deck_export_text', {deck_id:SelectedDeck.id}); break;
 		case 'btn-download-octgn': location.href=Routing.generate('deck_export_octgn', {deck_id:SelectedDeck.id}); break;
 		case 'btn-print': window.print(); break;
+		case 'btn-sort-suit': DisplaySort = 'suit'; switch_to_web_view(); break;
 		case 'btn-sort-type': DisplaySort = 'type'; switch_to_web_view(); break;
 		case 'btn-sort-number': DisplaySort = 'number'; switch_to_web_view(); break;
 		case 'btn-sort-gang': DisplaySort = 'gang'; switch_to_web_view(); break;
+		case 'btn-sort-rank': DisplaySort = 'rank'; switch_to_web_view(); break;
 		case 'btn-sort-title': DisplaySort = 'title'; switch_to_web_view(); break;
 		case 'btn-display-plain': $('#deck').html(build_plaintext().join('<br>')); break;
 		case 'btn-display-bbcode': $('#deck').html(build_bbcode().join('<br>')); break;

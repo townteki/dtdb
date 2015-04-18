@@ -12,11 +12,12 @@ var Outfit = null,
 	Deck = {{ deck|json_encode|raw }},
 	DeckDB = TAFFY([Deck]),
 	SelectedDeck = DeckDB().first(),
-	DisplaySort = 'value',
+	DisplaySort = 'suit',
 	Order = 1,
 	Outfit = null,
 	DeckSize = 0,
 	HideDisabled = true,
+	Url_GangImage = '{{  asset('/web/bundles/dtdbbuilder/images/xxx-20.png') }}',
 	ShowOnlyDeck = false;
 	
 </script>
@@ -98,9 +99,11 @@ var Outfit = null,
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu" id="menu-sort">
-			<li><a href="#" id="btn-sort-type"><label><input type="radio" name="sort-order" checked="checked">by Type</label></a></li>
+			<li><a href="#" id="btn-sort-suit"><label><input type="radio" name="sort-order" checked="checked">by Suit</label></a></li>
+			<li><a href="#" id="btn-sort-type"><label><input type="radio" name="sort-order">by Type</label></a></li>
 			<li><a href="#" id="btn-sort-number"><label><input type="radio" name="sort-order">by Set</label></a></li>
 			<li><a href="#" id="btn-sort-gang"><label><input type="radio" name="sort-order">by Gang</label></a></li>
+			<li><a href="#" id="btn-sort-rank"><label><input type="radio" name="sort-order">by Rank</label></a></li>
 			<li><a href="#" id="btn-sort-title"><label><input type="radio" name="sort-order">by Name</label></a></li>
     </ul>
   </div>

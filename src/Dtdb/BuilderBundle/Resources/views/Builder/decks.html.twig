@@ -9,8 +9,8 @@ var Outfit = null,
 	SelectedDeck = null,
 	Decks = {{ decks|json_encode|raw }},
 	DeckDB = TAFFY(Decks),
-	Url_GangImage = '{{  asset('/web/bundles/dtdbbuilder/images/gangs/16px/xxx.png') }}',
-	DisplaySort = 'value';
+	Url_GangImage = '{{  asset('/web/bundles/dtdbbuilder/images/xxx-20.png') }}',
+	DisplaySort = 'suit';
 	
 </script>
 {% endblock %}
@@ -75,7 +75,7 @@ var Outfit = null,
 			<li><a href="#" id="btn-sort-creation">By date of creation</a></li>
 			<li><a href="#" id="btn-sort-gang">By gang</a></li>
 			<li><a href="#" id="btn-sort-outfit">By outfit</a></li>
-			<li><a href="#" id="btn-sort-lastpack">By last datapack</a></li>
+			<li><a href="#" id="btn-sort-lastpack">By last set</a></li>
 			<li><a href="#" id="btn-sort-name">By deck name</a></li>
 		</ul>
 	</div>

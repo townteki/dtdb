@@ -64,7 +64,19 @@ h1, #index_page .section{font-family:'IM Fell DW Pica SC', serif;}
 }
 
 #push{clear:both}
-.type-icon,.gang-icon{vertical-align:text-bottom}
+.type-icon,.gang-icon{
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	}
 
 .card-face-diams, .card-face-hearts, .suit-diams, .suit-hearts { color: red }
 

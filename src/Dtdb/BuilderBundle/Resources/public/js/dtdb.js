@@ -63,7 +63,7 @@ function getDisplayDescriptions(sort) {
                   }
                 ]
             ],
-            'value': [
+            'suit': [
                      [ // first column
 
                          {
@@ -97,7 +97,75 @@ function getDisplayDescriptions(sort) {
                     id: 'cards',
                     label: 'Cards'
                 }]
-            ]
+            ],
+            'gang': [
+                [{
+                    id: 'fourthring',
+                    label: 'The Fourth Ring',
+                    icon: ''
+                },{
+                    id: 'lawdogs',
+                    label: 'Law Dogs',
+                    icon: ''
+                },{
+                    id: 'morganco',
+                    label: 'Morgan Cattle Co.',
+                    icon: ''
+                },{
+                    id: 'sloanegang',
+                    label: 'The Sloane Gang',
+                    icon: ''
+                }],[{
+                    id: 'neutral',
+                    label: 'Neutral',
+                    icon: ''
+                }]
+            ],
+            'rank': [
+                [{
+                    id: '1',
+                    label: 'A'
+                },{
+                    id: '2',
+                    label: '2'
+                },{
+                    id: '3',
+                    label: '3'
+                },{
+                    id: '4',
+                    label: '4'
+                },{
+                    id: '5',
+                    label: '5'
+                },{
+                    id: '6',
+                    label: '6'
+                },{
+                    id: '7',
+                    label: '7'
+                }],[{
+                    id: '8',
+                    label: '8'
+                },{
+                    id: '9',
+                    label: '9'
+                },{
+                    id: '10',
+                    label: '10'
+                },{
+                    id: '11',
+                    label: 'J'
+                },{
+                    id: '12',
+                    label: 'Q'
+                },{
+                    id: '13',
+                    label: 'K'
+                },{
+                    id: 'Joker',
+                    label: 'Jokers'
+                }]
+           ]
         };
         return dd[sort];
 }
@@ -175,14 +243,6 @@ function update_deck(options) {
 	var displayDescription = getDisplayDescriptions(DisplaySort);
 	if(displayDescription == null) return;
 	
-	if(DisplaySort === 'gang') {
-		for(var i=0; i<displayDescription[1].length; i++) {
-			if(displayDescription[1][i].id === Outfit.gang_code) {
-				displayDescription[0] = displayDescription[1].splice(i, 1);
-				break;
-			}
-		}
-	}
 	if(DisplaySort === 'number' && displayDescription.length === 0) {
 		var rows = [];
 		DTDB.data.sets().each(function (record) {
@@ -205,7 +265,10 @@ function update_deck(options) {
 			if(row.icon) {
 				$('<span>').addClass(DisplaySort+'-icon').html('&'+row.icon+';').prependTo(item);
 			} else if(DisplaySort == "gang") {
-				$('<span class="icon icon-'+row.id+' '+row.id+'"></span>').prependTo(item);
+				var imgsrc = row.id == "neutral" ? "" : '<img src="'
+					+ Url_GangImage.replace('xxx', row.id)
+					+ '.png">';
+				$('<span>').addClass(DisplaySort+'-icon').html(imgsrc).prependTo(item);
 			}
 			var content = $('<div class="deck-'+row.id+'"></div>');
 			div.append(item).append(content);
@@ -217,7 +280,20 @@ function update_deck(options) {
 	$('#img_outfit').prop('src', Outfit.imagesrc);
 
 	var latestpack = DTDB.data.sets({name:Outfit.pack}).first();
-	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order(DisplaySort === 'number' ? 'code' : 'value').each(function(record) {
+	if(DisplaySort === 'type') {
+		var preSort = 'value';
+	} else if(DisplaySort === 'gang') {
+		var preSort = 'type';
+	} else if(DisplaySort === 'suit') {
+		var preSort = 'value';
+	} else if(DisplaySort === 'number') {
+		var preSort = 'code';
+	} else if(DisplaySort === 'title') {
+		var preSort = 'title';
+	} else if(DisplaySort === 'rank') {
+		var preSort = 'type';
+	} 
+	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order(preSort).each(function(record) {
 		var pack = DTDB.data.sets({name:record.pack}).first();
 		if(latestpack.cyclenumber < pack.cyclenumber || (latestpack.cyclenumber == pack.cyclenumber && latestpack.number < pack.number)) latestpack = pack;
 		
@@ -225,24 +301,10 @@ function update_deck(options) {
 		var additional_info = '';
 		
 		if(DisplaySort === 'type') {
-			criteria = record.type_code, keywordss = record.keywords_code ? record.keywords_code.split(" - ") : [];
-			if(criteria == "ice") {
-				var ice_type = [];
-				if(keywordss.indexOf("barrier") >= 0) ice_type.push("barrier");
-				if(keywordss.indexOf("code gate") >= 0) ice_type.push("code-gate");
-				if(keywordss.indexOf("sentry") >= 0) ice_type.push("sentry");
-				switch(ice_type.length) {
-				case 0: criteria = "none"; break;
-				case 1: criteria = ice_type.pop(); break;
-				default: criteria = "multi"; break;
-				}
-			}
-			if(criteria == "program") {
-				 if(keywordss.indexOf("icebreaker") >= 0) criteria = "icebreaker";
-			}
+			criteria = record.type_code;
 		} else if(DisplaySort === 'gang') {
 			criteria = record.gang_code;
-		} else if(DisplaySort === 'value') {
+		} else if(DisplaySort === 'suit') {
 			criteria = record.suit;
 			if(record.type_code == 'joker') criteria = 'Joker';
 		} else if(DisplaySort === 'number') {
@@ -252,6 +314,8 @@ function update_deck(options) {
 			additional_info = '(#' + record.number + ') ' + alert_number_of_sets;
 		} else if(DisplaySort === 'title') {
 			criteria = 'cards';
+		} else if(DisplaySort === 'rank') {
+			criteria = record.rank;
 		}
 
 		var face = DTDB.format.face(record);
