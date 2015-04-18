@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 4,
+			version: 5,
 			type: 'info',
-			message: "New option to choose the behavior of the gang & suit filter buttons in the deckbuilder."
+			message: 'DoomtownDB Reloads! Help us improve it by reporting bugs on <a href="https://bitbucket.org/platypusDT/dtdb/issues?status=new&status=open">BitBucket</a>'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
