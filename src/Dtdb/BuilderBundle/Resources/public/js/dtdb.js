@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 5,
+			version: 5.1,
 			type: 'info',
-			message: 'DoomtownDB Reloads! Help us improve it by reporting bugs on <a href="https://bitbucket.org/platypusDT/dtdb/issues?status=new&status=open">BitBucket</a>'
+			message: 'DoomtownDB Reloads! Help us improve it by reporting bugs on <a href="https://bitbucket.org/platypusDT/dtdb/issues?status=new&status=open">BitBucket</a><br />If you experience any trouble with the card images, clearing your cache should correct the issue.'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
