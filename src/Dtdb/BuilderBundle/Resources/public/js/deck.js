@@ -465,7 +465,7 @@ $(function() {
 });
 function autosave_interval() {
 	if(Autosave_running) return;
-	if(Autosave_timer < 0) Autosave_timer = Autosave_period;
+	if(Autosave_timer < 0 && Deck_id) Autosave_timer = Autosave_period;
 	//('#tab-header-history').html('History '+Autosave_timer);
 	$('#history-timer-bar').css('width', (Autosave_timer*100/Autosave_period)+'%').attr('aria-valuenow', Autosave_timer).find('span').text(Autosave_timer+' seconds remaining.');
 	if(Autosave_timer === 0) {
@@ -520,7 +520,7 @@ function load_snapshot(event) {
 }
 function deck_autosave() {
 	// check if deck has been modified since last autosave
-	if(!Deck_changed_since_last_autosave) return;
+	if(!Deck_changed_since_last_autosave || !Deck_id) return;
 	// compute diff between last snapshot and current deck
 	var last_snapshot = Snapshots[Snapshots.length-1].content;
 	console.log('last_snapshot', last_snapshot);
