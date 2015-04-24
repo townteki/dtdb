@@ -14,5 +14,5 @@ parameters:
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
     cardimages_dir:    /a/dir/path
-    long_cache: 864000
+    long_cache: 86400
     short_cache: 600
