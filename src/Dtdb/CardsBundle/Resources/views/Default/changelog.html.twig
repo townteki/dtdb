@@ -1,17 +1,18 @@
 {% extends 'DtdbBuilderBundle::layout.html.twig' %}
 
-{% block title %}About{% endblock %}
+{% block title %}Change Log{% endblock %}
 
 {% block body %}
 <div class="container">
 
 <h1>{{ block('title') }}</h1>
 
+<p>Help us improve DoomtownDB by reporting bugs or proposing additional features on <a href="https://bitbucket.org/platypusDT/dtdb/issues?status=new&status=open" target="_blank">BitBucket</a>!</p>
 
 <h2>Version 2.0</h2>
 
 <ul>
-<li>Correction on starting values (GR, influence and production).</li>
+<li>Correction on starting values displayed (GR, influence and production).</li>
 <li>Allowing to start multiple non-unique dudes.</li>
 <li>Allowing to start Core deeds.</li>
 <li>Additionnal verifications when building decks (negative starting GR, multiple unique dudes, more than 4 cards with same name, max starting posse size, ...).</li>

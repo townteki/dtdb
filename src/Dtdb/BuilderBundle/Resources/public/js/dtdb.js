@@ -7,7 +7,7 @@ function display_notification()
 	var Notification = {
 			version: 6,
 			type: 'info',
-			message: 'DoomtownDB Reloads: have a look at the change log! Help us improve it by reporting bugs on <a href="https://bitbucket.org/platypusDT/dtdb/issues?status=new&status=open" target="_blank">BitBucket</a><br />If you experience any trouble with the card images, clearing your cache should correct the issue (ctrl+f5).'
+			message: 'DoomtownDB Reloads: have a look at the change log!<br />If you experience any trouble with the card images, clearing your cache should correct the issue (ctrl+f5).'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
