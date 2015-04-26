@@ -89,6 +89,17 @@ class DefaultController extends Controller
 		        "pagetitle" => "About",
 		), $response);
 	}
+	
+	function changelogAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:changelog.html.twig', array(
+		        "pagetitle" => "Change Log",
+		), $response);
+	}
 
 	function apidocAction()
 	{

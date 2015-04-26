@@ -1,0 +1,28 @@
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+<div class="container">
+
+<h1>{{ block('title') }}</h1>
+
+
+<h2>Version 2.0</h2>
+
+<ul>
+<li>Correction on starting values (GR, influence and production).</li>
+<li>Allowing to start multiple non-unique dudes.</li>
+<li>Allowing to start Core deeds.</li>
+<li>Additionnal verifications when building decks (negative starting GR, multiple unique dudes, more than 4 cards with same name, max starting posse size, ...).</li>
+<li>Adding the option to sort by value the cards in the card listing.</li>
+<li>Adding the option to sort by value and by gang the cards in the deck viewer.</li>
+<li>Adding the experience level to dudes names.</li>
+<li>Adding illustrators and flavor text to card entries.</li>
+<li>Change of developper.</li>
+<li>Change of webmaster.</li>
+</ul>
+
+
+</div>
+{% endblock %}
