@@ -55,21 +55,46 @@ class Judge
 		$outfit = null;
 		$deck = array();
 		$deckSize = 0;
+		$startSize = 0;
+		$startGR = 0;
+		$startDudes = array();
+		$dudes = array();
 		$deckComposition = array('Spades' => array(), 'Diams' => array(), 'Hearts' => array(), 'Clubs' => array());
-		
+
 		$nb_jokers = 0;
 		foreach($cards as $elt) {
 			$card = $elt['card'];
 			$qty = $elt['qty'];
+			$start = $elt['start'];
 			$suit_name = $card->getType()->getSuit() ? $card->getType()->getSuit()->getName() : null;
 			$rank = $card->getRank();
 			if($card->getType()->getName() == "Outfit") {
 				$outfit = $card;
+				$startGR += $card->getWealth();
 			} else if($card->getType()->getName() == "Joker") {
 				$nb_jokers += $qty;
 			} else {
 				$deck[] = $card;
 				$deckSize += $qty;
+				if($start != 0){
+					$startSize += $start;
+					$startGR -= $card->getCost();
+				}
+				if($card->getType()->getName() == "Dude"){
+					$legalName = preg_replace("/ \(Exp.\d\)/", "", $card->getTitle());
+					if(isset($dudes[$legalName])){
+						$dudes[$legalName] += $qty;
+					} else {
+						$dudes[$legalName] = $qty;
+					}
+					if($start != 0){
+						if(isset($startDudes[$legalName])){
+							$startDudes[$legalName] = false;
+						} else {
+							$startDudes[$legalName] = true;
+						}
+					}
+				}
 			}
 			if($rank) {
 			    if(isset($deckComposition[$suit_name][$rank])) {
@@ -95,6 +120,11 @@ class Judge
 			    return 'copies';
 			}
 		}
+		foreach($dudes as $legalName => $qty){
+			if($qty > 4){
+			    return 'copies';				
+			}
+		}
 		
 		$nb = 0;
 		foreach($deckComposition as $suit => $suitComposition) {
@@ -107,6 +137,14 @@ class Judge
 		}
 		if($nb != 52) {
 		    return 'deckSize';
+		}
+		if($startSize > 5 || $startGR < 0) {
+		    return 'startingposse';
+		}
+		foreach($startDudes as $legalName => $value){
+			if($value == false){
+			    return 'startingposse';				
+			}
 		}
 		
 		return array(
@@ -122,6 +160,7 @@ class Judge
 			case 'copies' : return "The deck has more than 4 copies of a card."; break;
 			case 'values': return "The deck has more than 4 cards with a given value."; break;
 			case 'jokers': return "The deck has more than 2 Jokers."; break;
+			case 'startingposse': return "Illegal starting posse."; break;
 		}
 	}
 	

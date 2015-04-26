@@ -619,11 +619,14 @@ function handle_submit(event) {
 function handle_start_change(event) {
 	var index = $(this).closest('.card-container').data('index') || $(this).closest('div.modal').data('index');
 	var start = $(this).prop('checked');
-	DTDB.data.cards({
-		code : index
-	}).update({
-		start : start ? 1 : 0
-	});
+	var card = DTDB.data.cards({ code: index }).first();
+	if ( !start || card.indeck != 0){
+		DTDB.data.cards({
+			code : index
+		}).update({
+			start : start ? 1 : 0
+		});
+	}
 	$('div.modal').modal('hide');
 	update_deck();
 }

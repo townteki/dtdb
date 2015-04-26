@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 5.1,
+			version: 6,
 			type: 'info',
-			message: 'DoomtownDB Reloads! Help us improve it by reporting bugs on <a href="https://bitbucket.org/platypusDT/dtdb/issues?status=new&status=open">BitBucket</a><br />If you experience any trouble with the card images, clearing your cache should correct the issue.'
+			message: 'DoomtownDB Reloads: have a look at the change log! Help us improve it by reporting bugs on <a href="https://bitbucket.org/platypusDT/dtdb/issues?status=new&status=open" target="_blank">BitBucket</a><br />If you experience any trouble with the card images, clearing your cache should correct the issue (ctrl+f5).'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
@@ -276,6 +276,8 @@ function update_deck(options) {
 	}
 	
 	var cabinet = {};
+	DudeIndeck = [];
+	DudeStarter = [];
 	$('#outfit').html('<a href="'+Routing.generate('cards_zoom', {card_code:Outfit.code})+'" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="'+Outfit.code+'">'+Outfit.title+'</a>');
 	$('#img_outfit').prop('src', Outfit.imagesrc);
 
@@ -329,6 +331,25 @@ function update_deck(options) {
 		if(record.suit) {
 			DeckDistribution[SuitNumbers[record.suit]][record.rank] += record.indeck;
 		}
+		
+		if(record.type === "Dude"){
+			var DudeLegalName = record.title;
+			if(DudeLegalName.includes("Exp.")){
+				DudeLegalName = DudeLegalName.replace(/ \(Exp.\d\)/,"");
+			}
+			if(DudeIndeck[DudeLegalName] == null){
+				DudeIndeck[DudeLegalName] = record.indeck;
+			} else {
+				DudeIndeck[DudeLegalName] += record.indeck;		
+			}
+			if(record.start){
+				if(DudeStarter[DudeLegalName] == null){
+					DudeStarter[DudeLegalName] = true;
+				} else {
+					DudeStarter[DudeLegalName] = false;		
+				}
+			}
+		}
 	});
 	$('#latestpack').html('Cards up to <i>'+latestpack.name+'</i>');
 	check_composition();
@@ -347,28 +368,59 @@ function check_composition() {
 	if($('#cardcount').size()) {
 		$('#cardcount').html(number_of_others+" cards with printed value (required 52)")[number_of_others !=  52 ? 'addClass' : 'removeClass']("text-danger");
 	}
+
+	var legal = true;
+	for(DudeLegalName in DudeIndeck){
+		if (DudeIndeck[DudeLegalName] > 4){
+			legal = false;
+			break;
+		}
+	}
 	if(number_of_outfits != 1) {
 		$('#deckcomposition').html("Must have exactly one outfit.").addClass('text-danger');
 	} else if(number_of_jokers > 2) {
 		$('#deckcomposition').html("Must have no more than 2 jokers.").addClass('text-danger');
+	} else if(!legal) {
+		$('#deckcomposition').html("Too many dudes with same name: "+DudeLegalName).addClass('text-danger');
 	} else {
-		if($('#startingnumbers').size()) {
-			var outfit = outfits.first();
-			$('#deckcomposition').empty();
-			
-			var cost_of_starting_posse = 0;
-			var upkeep_of_starting_posse = 0;
-			var production_of_starting_posse = 0;
-			var influence_of_starting_posse = 0;
-			startingposse.each(function(record){
-				cost_of_starting_posse += record.start * record.cost;
-				upkeep_of_starting_posse += record.start * record.upkeep;
-				production_of_starting_posse += record.start * record.production;
-				influence_of_starting_posse += record.start * record.influence;
-			});
-			
-			$('#startingnumbers').html('Starting with '+(outfit.wealth-cost_of_starting_posse)+' wealth, '+(outfit.production+production_of_starting_posse-upkeep_of_starting_posse)+' income and '+influence_of_starting_posse+' influence');
+		$('#deckcomposition').empty();
+	}
+	
+	if($('#startingnumbers').size()) {
+		var outfit = outfits.first();
+		
+		var cost_of_starting_posse = 0;
+		var upkeep_of_starting_posse = 0;
+		var production_of_starting_posse = 0;
+		var influence_of_starting_posse = 0;
+		var size_of_starting_posse = 0;
+		startingposse.each(function(record){
+			cost_of_starting_posse += record.start * record.cost;
+			upkeep_of_starting_posse += record.start * record.upkeep;
+			production_of_starting_posse += record.start * record.production;
+			influence_of_starting_posse += record.start * record.influence;
+			size_of_starting_posse += record.start;
+		});
+
+
+		legal = true;
+		for(DudeLegalName in DudeStarter){
+			if (DudeStarter[DudeLegalName] == false){
+				legal = false;
+				break;
+			}
 		}
+		if(size_of_starting_posse>5){
+			$('#startingcomposition').html("Too many starting dudes.").addClass('text-danger');
+		} else if(outfit.wealth <  cost_of_starting_posse){
+			$('#startingcomposition').html("Negative starting Ghost Rock.").addClass('text-danger');		
+		} else if(!legal){
+			$('#startingcomposition').html("More than one " + DudeLegalName + " starting.").addClass('text-danger');		
+		} else {
+			$('#startingcomposition').empty();
+		}
+
+		$('#startingnumbers').html('Starting with '+(outfit.wealth-cost_of_starting_posse)+' wealth, '+(outfit.production+production_of_starting_posse-upkeep_of_starting_posse)+' income and '+influence_of_starting_posse+' influence');
 	}
 	
 }
@@ -390,6 +442,8 @@ function check_distribution() {
 	}
 }
 var DeckDistribution = [];
+var DudeIndeck = [];
+var DudeStarter = [];
 var SuitNumbers = { Spades: 0, Diams: 1, Hearts: 2, Clubs: 3 };
 var SuitNames = [ 'Spades', 'Diams', 'Hearts', 'Clubs' ];
 var RankNames = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
