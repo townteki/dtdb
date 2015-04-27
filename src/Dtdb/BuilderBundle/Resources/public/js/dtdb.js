@@ -334,9 +334,7 @@ function update_deck(options) {
 		
 		if(record.type === "Dude"){
 			var DudeLegalName = record.title;
-			if(DudeLegalName.includes("Exp.")){
-				DudeLegalName = DudeLegalName.replace(/ \(Exp.\d\)/,"");
-			}
+			DudeLegalName = DudeLegalName.replace(/ \(Exp.\d\)/,"");
 			if(DudeIndeck[DudeLegalName] == null){
 				DudeIndeck[DudeLegalName] = record.indeck;
 			} else {
