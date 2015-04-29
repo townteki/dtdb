@@ -80,7 +80,7 @@ DTDB.card_modal = {};
 					}
 				}
 			} else if (card.type_code == 'deed'){
-				var canstart = card.keywords != null && card.keywords.search('Government') != -1;
+				var canstart = card.keywords != null && card.keywords.search('Core') != -1;
 				if(canstart) {
 					var start = $('<div class="btn-group" data-toggle="buttons" id="starting" style="margin-left:5px"><label class="btn btn-default'+(card.start ? ' active' : '')+'"><input type="checkbox"'+(card.start ? ' checked' : '')+'>Starting</label></div>');
 					qtyelt.after(start);
