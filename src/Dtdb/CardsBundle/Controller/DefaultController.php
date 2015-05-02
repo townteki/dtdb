@@ -100,6 +100,17 @@ class DefaultController extends Controller
 		        "pagetitle" => "Change Log",
 		), $response);
 	}
+	
+	function rulesAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:rules.html.twig', array(
+		        "pagetitle" => "Rules",
+		), $response);
+	}
 
 	function apidocAction()
 	{

@@ -95,6 +95,14 @@ cards_changelog:
     requirements:
         _locale: en|fr|de|es|it|pl
 
+cards_rules:
+    pattern:  /{_locale}/rules
+    defaults:
+        _controller: DtdbCardsBundle:Default:rules
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
 cards_api:
     pattern:  /{_locale}/apidoc
     defaults:
