@@ -1,0 +1,1061 @@
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
+
+{% block title %}Comprehensive Doomtown Reloaded Rules{% endblock %}
+
+{% block body %}
+<div class="container">
+
+<h1>{{ block('title') }}</h1>
+
+<nav id="prime">
+<ul>
+<li><a href="#rop">Rules o' Play</a></li>
+<li><a href="#tig">Talking in Gomorra</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#tr">Tournament Rules</a></li>
+</ul>
+</nav>
+
+<article class="rules rop">
+<h1 id="rop">Rules o' Play</h1>
+<nav class="inner rop">
+	<ul>
+	<li><a href="#rop1">Welcome to Doomtown!</a></li>
+	<li><a href="#rop2">What Y'all Are Tryin' to Git Done</a></li>
+	<li><a href="#rop3">Stuff in the Box</a></li>
+	<ul>
+		<li><a href="#rop4">Outfit Card</a></li>
+		<li><a href="#rop5">Deed Card</a></li>
+		<li><a href="#rop6">Dude Card</a></li>
+		<li><a href="#rop7">Goods Card</a></li>
+		<li><a href="#rop8">Spell Card</a></li>
+		<li><a href="#rop9">Action Card</a></li>
+		<li><a href="#rop10">Joker Card</a></li>
+		<li><a href="#rop11">Counters</a></li>
+	</ul>
+	<li><a href="#rop12">Larnin' the Ropes</a></li>
+	<ul>
+		<li><a href="#rop13">The Cards Are Always Right... Unless They's Wrong</a></li>
+		<li><a href="#rop14">Decks, Discards, and Boot Hill</a></li>
+		<li><a href="#rop15">Card Values, Hands, and Cheatin'</a></li>
+		<li><a href="#rop16">Bootin' Cards</a></li>
+		<li><a href="#rop17">Locations and Adjacency</a></li>
+		<li><a href="#rop18">Owner and Controller</a></li>
+		<li><a href="#rop19">Uniqueness</a></li>
+		<li><a href="#rop20">Makin' Plays and Reactin'</a></li>
+	</ul>
+	<li><a href="#rop21">Setup</a></li>
+	<li><a href="#rop22">Sequence o' Play</a></li>
+	<ul>
+		<li><a href="#rop23">Gamblin' Phase</a></li>
+		<li><a href="#rop24">Upkeep Phase</a></li>
+		<li><a href="#rop25">High Noon Phase</a></li>
+		<li><a href="#rop26">Sundown Phase</a></li>
+	</ul>
+	<li><a href="#rop27">Plays You Can Make at High Noon</a></li>
+	<ul>
+		<li><a href="#rop28">Actin'</a></li>
+		<li><a href="#rop29">Callin' Out</a></li>
+		<li><a href="#rop30">Movin'</a></li>
+		<li><a href="#rop31">Shoppin'</a></li>
+		<li><a href="#rop32">Tradin'</a></li>
+	</ul>
+	<li><a href="#rop33">Shootouts</a></li>
+	<ul>
+		<li><a href="#rop34">Formin' Posses</a></li>
+		<li><a href="#rop35">Breakin' and Enterin'</a></li>
+		<li><a href="#rop36">Slingin' Lead</a></li>
+	</ul>
+	<li><a href="#rop37">Them Other Rules</a></li>
+	<ul>
+		<li><a href="#rop38">Card Text</a></li>
+		<li><a href="#rop39">Aces</a></li>
+		<li><a href="#rop40">Harrowed Dudes</a></li>
+		<li><a href="#rop41">Help Text</a></li>
+		<li><a href="#rop42">How Long? How Big?</a></li>
+		<li><a href="#rop43">Jobs</a></li>
+		<li><a href="#rop44">Pulls</a></li>
+		<li><a href="#rop45">Skill Ratin's</a></li>
+		<li><a href="#rop46">Wanted Dudes</a></li>
+	</ul>
+	<li><a href="#rop47">Winnin' the Durn Game</a></li>
+	<li><a href="#rop48">Appendices</a></li>
+	<ul>
+		<li><a href="#rop49">Stackin' a Deck</a></li>
+		<li><a href="#rop50">Rustlin' Up Some Help</a></li>
+	</ul>
+	<li><a href="#rop51">Credits</a></li>
+	<ul>
+		<li><a href="#rop52">Copyright & Contact</a></li>
+	</ul>
+	<li><a href="#rop53">Reference</a></li>
+	<ul>
+		<li><a href="#rop54">Hand Ranks</a></li>
+	</ul>
+	</ul>
+</nav>
+
+<h2 id="rop1">Welcome to Doomtown!</h2>
+<p class="italic">The year is 1878, but the history is not our own.</p>
+<p class="italic">After almost two decades of bitter fighting, the American Civil War has ground to a standstill. The Confederate States have retained their sovereignty. Much of California has fallen into the Pacific Ocean. A superfuel called ghost rock advances technology by unpredictable leaps and sometimes dangerous bounds. The Sioux have retaken the Dakotas and the Coyote Confederation dances the Ghost Dance on the High Plains. Monsters stalk the deserts and prowl the dark streets of the boomtowns. Some even say the dead walk among us.</p>
+<p class="italic">But where there are monsters, so there are heroes - hex-slingin' hucksters, Bible-thumpin' preachers, deadly gunfighters, fearless braves, wizened shamans, and mad scientists armed with weird steampunk gadgets. Heroic, foolhardy, visionary, or simply too headstrong to let some abomination tell them what to be afraid of, the frontier is carved out by heroes who take a stand against the forces of terror.</p>
+<p class="italic">Gomorra, called "Doomtown," needs such heroes. A huge vein of ghost rock was struck in the Maze there, turning it into a boomtown. It seemed like the veins were mostly tapped out, but the miners still find large deposits. As long as the miners keep digging, others will be waiting. Bartenders and soiled doves, outlaws and law dogs, even the politicians and accountants are hard-bitten folk, all wanting a piece of the pie for themselves.</p>
+<p class="italic">Gomorra's seen more than its share of misery. The heroes of the town had defeated a rogue demon, Knicknevin, at great cost. Even so, it was a mysterious monster-filled storm that ended up ravaging the valley and killing most of the townsfolk.</p>
+<p class="italic">Dave Montreal's the sheriff now, upholding the law as best he can as the town rebuilds while refugees from the region make their way to Gomorra. The Morgan Cattle Company moved in, making Gomorra a cattle town on top of everything else. A gang of rogues and outlaws sporting red bandanas have encamped amongst the ruins of a neighboring town and they ain't fixin' to leave anytime soon. A circus rolled into town and set up, no one remembers quite when, and why they are staying is a mystery.</p>
+<p class="italic">Gomorra's a hard place that has seen more than its share of action, and a good day is any day that doesn't end in a pine box.</p>
+<p class="italic">That's why they call it Doomtown.</p>
+ 
+<h2 id="rop2">What Y'all Are Tryin' to Git Done</h2>
+<p class="italic">Y'all are trying to take control of the town of Gomorra. Why you're doin' it is up to you; you may be tryin' to ensure the good folk can live a safe and happy life, or you may want to sacrifice the souls of the innocent on the altar to the demon lord of everflowin' whiskey. It makes no difference to those who're trying to stop you.</p>
+<p>Doomtown is a game for two or more players, each vying for control of the town. You take control of the town and win the game if, at the end of any Sundown phase, you have more Control than each other player has Influence.</p>
+<p>Generally, you get control by virtue of deeds you have under your thumb (the bank, the church and the town hall) and important tasks that you've accomplished (like robbing the bank, gunning down the robbers, or summoning a demon).</p>
+<p>You gain influence by having dudes in play. The more important the dude is around town, the more influence that dude has to show the commoners that while someone else might control the bank, they don't control you.</p>
+
+<h2 id="rop3">Stuff in the Box</h2>
+<p class="italic">This here game is played primarily with cards, although y'also got a few counters and such to help out.</p>
+<p>If you look through the box, you'll see several cellowrapped packs of cards. Two of these packs are prebuilt decks that are stacked for use with the Learn to Play walkthrough in the Getting' to Know Gomorra booklet. You can identify these as they have their outfit cards visible, as shown here. They are stacked for use to run the Learn to Play guide. We recommend running through the Learn to Play guide with these decks before you change their order. You can open the other packs to look at the cards while reviewing the rules.</p>
+
+<h3 id="rop4">Outfit Card</h3>
+<p class="italic">Before someone takes over the town, you gotta know who it is, on account of everyone is on their own side, anyways. That's what the outfit card is for. This card shows you which gang you're leadin' in the struggle for control of the fine- er, well, the prosperous town of Gomorra.</p>
+<p>The outfit card serves as the home for your gang; it's the place your dudes come into play when you recruit them, and it's the place where they can (usually) be safe from the other players' dudes.</p>
+<div><ol>
+<li>This is the name of your outfit. It's who you are. There are four main outfits trying to take control of Gomorra; these are:</li>
+<div class="insert"><ul>
+<li><img src="{{ asset('/web/bundles/dtdbbuilder/images/lawdogs-20.png') }}" title="Law Dogs"><b>The Law Dogs</b>, who maintain law and order.</li>
+<li><img src="{{ asset('/web/bundles/dtdbbuilder/images/sloanegang-20.png') }}" title="The Sloane Gang"><b>The Sloane Gang</b>, an outlaw gang camped nearby.</li>
+<li><img src="{{ asset('/web/bundles/dtdbbuilder/images/morganco-20.png') }}" title="Morgan Cattle Co."><b>The Morgan Cattle Company</b>, the big business in these parts.</li>
+<li><img src="{{ asset('/web/bundles/dtdbbuilder/images/fourthring-20.png') }}" title="The Fourth Ring"><b>The Fourth Ring</b>, a recently arrived circus and freak show.</li>
+</ul></div>
+<li>This is the symbol for your outfit. All dudes in your outfit will have the same symbol on them. If a dude has a different symbol, then that dude is from a different outfit; if the dude has no symbol at all, then they're a drifter with no real allegiance to any of the outfits.</li>
+<li>Each outfit card also has a special background texture (for these here Law Dogs, that's a blue denim sort of look). Dudes from the same outfit all have the same background. It helps you tell them apart.</li>
+<li>This area of the card describes what the special ability or trait of that outfit is; it's a power that you, the player, have by virtue of choosing to play that outfit.</li>
+<li>Each outfit has a starting treasury, shown here with a stack of money. Each outfit starts with a few dudes already in play; the nucleus of your gang. This shows how much ghost rock (that's the term Doomtown uses for money) the outfit can spend on starting dudes.</li>
+<li>This shows the outfit card's production. It has a + sign next to it to help you remember that it's income for you. The card gives you that much ghost rock during each Upkeep phase. We'll tell you all about that later.</li>
+</ol></div>
+
+<h3 id="rop5">Deed Card</h3>
+<p class="italic">If you're going to control a town, you gotta have a town to control. That's where deed cards come in. Each deed card represents a specific building in Gomorra, with a specific purpose. When you play a deed, you get its benefits and income, which is good, because it'll take a big bucket o' ghost rock to bring this whole town to heel.</p>
+<p>Deeds are buildings and properties that provide special abilities or game effects, and, once brought into play, cannot be moved. When you bring a deed into play, it goes on the street on your side of town.</p>
+<div><ol>
+<li>Each deed card has a specific suit (diamonds) and value assigned to it. This value is used when resolving shootouts and skill checks, which will all be explained later.</li>
+<li>Many deeds have control points, shown in a blue chip. The more control points a deed has, the more important it is to the fine citizens of Gomorra. The most important thing about control points is that they are how you win the game. Remember, you need more control than the other players have influence.</li>
+<li>This area of the card describes what the deed does in game terms. At the top, in bold, are the deed's keywords (e.g. Saloon, Private, etc.). These may be referenced by other cards in the game, or by the rules. Below that, in primarily regular type, are the card's abilities and traits. You'll find out all about how to use these abilities later in the rules.</li>
+<li>Each deed has a cost, shown on an icon of a coin. This is how much ghost rock you must pay to bring the deed into play.</li>
+<li>Deeds also have production, just like your outfit card. This shows you how much extra ghost rock the deed brings in to your coffers each turn.</li>
+</ol></div>
+
+<h3 id="rop6">Dude Card</h3>
+<p class="italic">A town's gotta have people, too. And you, if you want to control the town, you gotta have some folks willin' to throw their weight around on your behalf, or at least take your wages and do your dirty work.</p>
+<p>Townsfolk are represented by dude cards. Dudes are people that owe you their loyalty, and work to further your goals by their influence, their innate abilities, or their skills with a revolver.</p>
+<div><ol>
+<li>Each dude card has a specific suit (spades) and value assigned to it. A dude's value is often referenced by other card effects; the higher the dude's value, the harder it is for bad things to affect them (e.g., getting hit by a shotgun, getting a spell cast on them).</li>
+<li>Bullets are a measure of a dude's capability to win a shootout. The higher the number, the better they are at gunning down the other side. In addition, the color of the cartridge determines whether the dude is a stud or a draw; a silver cartridge means the dude is a stud (and better), while a brass cartridge indicates that the dude is a draw (less stellar, but still useful).</li>
+<li>Influence is a representation of how renowned the dude is around town. Well-known, charismatic dudes have high influence. So do dangerous, infamous killers. The primary use of influence is to prevent the other players from winning; remember that a player wins by having more control than any other player's influence. Influence is also used to take control other players' deeds, to help you win.</li>
+<li>Outfit shows which gang the dude primarily works for.</li>
+<li>This area of the card describes any special skills that the dude can use in the game. At the top, in bold, are any keywords that the dude may have (e.g., Deputy, Huckster, etc.). These may be referenced by other cards in the game. Below that, in primarily regular type, are the card's abilities and traits. You'll find out all about how to use these abilities later in the rules.</li>
+<li>Each dude has a cost, shown on an icon of a coin. This is how much ghost rock you must pay to bring the dude into play.</li>
+<li>Upkeep shows how much the dude costs each turn to keep them on your side (some dudes have a zero upkeep). Influential dudes that belong to other outfits cost more in upkeep each turn.</li>
+</ol></div>
+<div class="insert"><h4>Grit</h4>
+<p>Dudes also have grit: an overall measure of how tough that dude is. This is not shown on a dude's card, but is calculated whenever needed. A dude's grit is equal to that dude's value plus bullets plus influence. Harry Somerset, shown here, has a grit of 6.</p>
+</div>
+
+<h3 id="rop7">Goods Card</h3>
+<p class="italic">They say you can git more with a smile and a sawed-off shotgun than you can with just a "purty please." Guess that's why everybody 'round these parts is goin' heeled... that means carryin' a gun for you back East types what don't talk right.</p>
+<p>Goods cards represent items that your dudes can own, from new hats to horses and everything in between. Goods cards can't be used by themselves, but must be attached to another card you already have in play (usually a dude).</p>
+<div><ol>
+<li>Each goods card has a specific suit (hearts) and value assigned to it. This value is used when resolving shootouts and skill checks, which will all be explained later.</li>
+<li>Bullet bonus (if any) shows how much the goods card improves the gunfighting skills of the dude carrying it. The color of the bullet on goods cards is usually brass; this does not change the dude carrying it from a stud to a draw. The only time a goods bullet is silver is if the card changes the dude carrying it from a draw to a stud, and even then, it only serves as a reminder.</li>
+<li>This area of the card describes any special skills that the goods provides to the dude carrying it. At the top, in bold, are any keywords that the goods may have (e.g., Gadget, Horse, etc.). These may be referenced by other cards in the game. Below that, in primarily regular type, are the card's abilities and traits. You'll find out all about how to use these abilities later in the rules.</li>
+<li>Each goods card has a cost, shown on an icon of a coin. This is how much ghost rock you must pay to bring the goods into play.</li>
+</ol></div>
+
+<h3 id="rop8">Spell Card</h3>
+<p class="italic">I saw a couple card tricks once when I was a half-pint, but that warn't nuthin' compared to what some fellers can do these days. Some o' their card tricks are even more powerful than the wink of a saloon gal.</p>
+<p>Spell cards represent special talents that dudes with magical affinity can perform. Spell cards must be attached to a dude card you already have in play. A Hex can only be attached to a dude with the Huckster keyword; Miracles can only attach to a Blessed dude, and Spirits only attach to a Shaman.</p>
+<div><ol>
+<li>Each spell card has a specific suit (hearts) and value assigned to it. This value is used when resolving shootouts and skill checks, which will all be explained later.</li>
+<li>This area shows the card's game effects. At the top, in bold, are the keywords that the spell has, which always include its type (e.g., Hex, Miracle, etc.). These may be referenced by other cards in the game. Below that, in primarily regular type, the text describes what special ability that the spell lends to the dude who has attached it. You'll find out all about how to use these abilities later in the rules.</li>
+<li>Each spell card has a cost, shown on an icon of a coin. This is how much ghost rock you must pay to bring the spell into play.</li>
+</ol></div>
+
+<h3 id="rop9">Action Card</h3>
+<p class="italic">This here town, smack in the middle of what we call The Weird West, has a lot of surprises. And if you want to make a go of it out here, you gotta have a few surprises of your own.</p>
+<p>Action cards represent special events, plans, and tactics that your dudes or your gang use to get the best of the situation. Unlike every other card in the game, action cards get played directly from your hand and then discarded; you don't have to bring them into play like dudes or deeds, and once their effect is finished, action cards are discarded immediately.</p>
+<div><ol>
+<li>Each action card has a specific suit (clubs) and value assigned to it. This value is used when resolving shootouts and skill checks, which will all be explained later.</li>
+<li>This area of the card describes the effects the action has when played.</li>
+<li>Each action card has a cost, shown on an icon of a coin. Often this is zero. This is how much ghost rock you must pay to play the action.</li>
+</ol></div>
+
+<h3 id="rop10">Joker Card</h3>
+<p class="italic">If there's truly a joker, it's the yahoo who done thought up settlin' in this God-forsaken wasteland and usin' ghost rock to make all sorts o' infernal Gadgets. But aside from that - or maybe on account of it - we've taken to using joker cards when playin' poker.</p>
+<p>Jokers are only useful for pulls and draw hands (including lowball); you can't play one from your play hand. When you have a joker in one of these cases, you must choose its suit and value. A joker does not itself make a hand illegal; for example, if you have a legal four-of-a-kind hand with a joker, it becomes a legal five-of-a-kind hand.</p>
+<p>As noted on the card, once you use a joker for any of the above hands, ace it (that is, remove it from the game, see <a href="#rop14">Decks, Discards, and Boot Hill</a>).</p>
+
+<h3 id="rop11">Counters</h3>
+<p>Included in the box are ghost rock chits to track how much ghost rock a player has in his stash. In addition, you can use these to track a wanted dude's bounty.</p>
+<p>The cardstock counters can be used to track game effects. The counters come in several colors:</p>
+<div><ul>
+<li>Blue counters are used for control. Place them on any cards that get a permanent control point (which can be done by a variety of card effects).</li>
+<li>Red counters are influence. If a card gets a permanent bonus to influence, mark that with this card. Many players also like to track how much total influence their gang has by keeping an appropriate stack of influence counters in their stash as a bookkeeping trick.</li>
+<li>Green and Black counters are to be used for whatever you need them for. You could use them to track who owns which card, cover up whichever abilities have been used, mark temporary changes in a dude's bullets, etc. They are there for your convenience.</li>
+</ul></div>
+ 
+<h2 id="rop12">Larnin' the Ropes</h2>
+<p class="italic">Afore we get to the actual rules of the game, we need to lay down some basics so's you don't end up lookin' like a greenhorn.</p>
+
+<h3 id="rop13">The Cards Are Always Right... Unless They's Wrong</h3>
+<p>Many of the cards seem to contradict the rules; in such cases, the cards are always right. However, when one card says you can do something, and another card says you can't, the one that says you can't takes priority. For example, Clementine Lepp says that she can't be called out while at a saloon you own. That means that while she is there, no one can call her out, not even a wanted Sanford Taylor.</p>
+
+<h3 id="rop14">Decks, Discards, and Boot Hill</h3>
+<p>All players have their own deck, to draw cards from during the game. You must shuffle your deck before the game begins, as well as after using any ability that allows you to search through your deck. Be sure to give the other players a chance to cut your deck after you shuffle. You do not have to shuffle your deck if you are only looking at "the top [number of] cards" of the deck (not even if your deck has only has that number of cards left).</p>
+<p>You also have a discard pile. This holds cards you've used, but that you might see again later in the game. After you use an action card, or make a draw or pull, or discard a lowball or draw hand, put those cards face up in your discard pile. Players are allowed to look through any discard pile at any time, however they are not allowed to change the order of cards in the discard pile.</p>
+<p>You also have a Boot Hill, a discard pile that you never shuffle back into your deck. Some cards get aced (killed or destroyed) during play; whenever a card of yours gets aced, put it in your Boot Hill, permanently out of play. All players have their own separate Boot Hill. Anyone can look through anyone's Boot Hill at any time, but cannot change the order of the cards in it.</p>
+<p>If you need to take a card from your deck for whatever reason, but your deck is empty, shuffle your discard pile to make a new deck.</p>
+<p>If some ability lets you steal or take control of a card from your opponent's deck and that card leaves play, make sure you put it in their discard pile or Boot Hill, as appropriate.</p>
+<p>Aside from the above, you also have your stash, which is where you keep your ghost rock counters (ghost rock is what Doomtown uses for money).</p>
+
+<h3 id="rop15">Card Values, Hands, and Cheatin'</h3>
+<p class="italic">You play this here game with a deck of cards, but it's not always exactly what your citified folk might think of as a rightly legal poker deck. But don't you worry about that none.</p>
+<p>Each card in your deck has a suit (clubs, diamonds, hearts, and spades) and a numeric value. These are primarily used when creating draw hands to resolve shootouts, but can be referenced at other times. All cards of the same type have the same suit.</p>
+<p>A card's value ranges from one to thirteen. Aces count as ones, while jacks, queens, and kings count as elevens, twelves, and thirteens, respectively. There are also jokers; when you draw a joker, you choose its suit and value.</p>
+<p>During the game you'll have a play hand of cards that you can use. In addition, at various times you'll have a draw hand, which is used during a shootout as well as the Gamblin' phase. A draw hand is only used for its poker hand rank; you cannot play cards from it. Be very careful never to mix or switch your play hand with your draw hand.</p>
+<p>Once you become familiar with the game, you'll want to build your own custom decks so that you can get the values you want in your draw hands. Since your deck may have multiple cards of the same suit and value - three cards that all say 4 of diamonds, for instance - you may end up with more than one of them in your draw hand or lowball hand. This is called a Cheatin' hand or an illegal draw hand, and it opens the door for other players to punish you for it. More on that later. A hand that does not have cards that duplicate the same suit and value is called a legal hand.</p>
+<p>If you need to create a draw hand, and you have less than five cards left in your deck and discard, draw all of them, and your hand is considered the lowest possible that you can make with the cards you have.</p>
+
+<h3 id="rop16">Bootin' Cards</h3>
+<p>Many times when you use a card's ability, the card tells you to boot it. You boot a card by turning it sideways. A booted card can't be booted again until it's unbooted, which means turned straight up. Cards come into play unbooted.
+<div>Booted cards are treated pretty much the same as unbooted cards - they can join shootouts and all that - with three exceptions:
+<div><ul>
+<li>First, they cannot use an ability that has booting as a cost. In other words, if a card's ability says something like, "Noon, Boot: Do this awesome thing" or "Boot a card to do this awesome thing," you can't do that awesome thing if the card is already booted.</li>
+<li>Second, they can't attach goods and spells.</li>
+<li>Third, booted cards are too tired to move by themselves. They can't move without a card effect, except to move home booted at the end of a round of a shootout.</li>
+</ul></div>
+</div>
+<p>Only cards in play can be booted. If a booted card leaves play (to your hand, discard pile, or Boot Hill) it is no longer booted.</p>
+
+
+<h3 id="rop17">Locations and Adjacency</h3>
+<p class="italic">It's like that Chinese guy once said, "No matter where you go, someone will prob'ly shoot at you."</p>
+<p>When you play Doomtown, your table becomes a sort of map of the town as the players build it up. Your street is your row of cards - your home and deeds - that make up the part of the town that you own.</p>
+<p>There are three types of in-town locations. Each deed is its own location. Each outfit's home is a location (with a few special rules). And the area in the middle of the table is a location called the town square.</p>
+<p>During the game, you'll bring deeds into play, placing them next to one end of your street or the other. Thus, at the start of the game, when you play a deed, it goes to the left or right of your home (your choice). The next deed you play goes next to either your home or the first deed you played; it can't go between them.</p>
+
+<div class="insert">
+<h4>Adjacency</h4>
+<p>Adjacency is a key aspect of Doomtown; it determines which dudes can join shootouts, do jobs, and more. Be very careful when forming posses for jobs or shootouts, because you might be facing everyone who is adjacent to your foe.</p>
+</div>
+
+<p>When two in-town locations are next to each other, they are adjacent. Thus any in-town deed is adjacent to the deeds to its right and left (same goes for your home). Also, each in-town deed is adjacent to the town square, and the town square is adjacent to all in-town deeds. Locations on your street are not adjacent to locations on any other player's street.</p>
+<p>Finally, some deeds are out of town (they say so in their keywords), and each of them is a location unto itself. Out-of-town deeds are not adjacent to anything, not even other out-of-town deeds.</p>
+<p>Sometimes, a deed leaves the game (being discarded or aced). When this happens, any dudes on that deed go home booted. Move the locations that were adjacent to that deed together so that they are adjacent, closing the gap created by the deed leaving play.</p>
+
+<h3 id="rop18">Owner and Controller</h3>
+<p class="italic">Water rights, mineral rights, women's rights... much more talk about rights, and I'm gonna bust someone right upside the head.</p>
+<p>The owner of a card is the person whose deck the card came from. An owner of a card never changes.</p>
+<p>The controller of a card is the person who gets to make all the decisions about what the card does. Whenever a card refers to "you," it is referring to the controller of the card. Most of the time, the controller is also the owner. However, there are two ways it might be someone else.</p>
+<p>The first happens when someone plays an ability that uses the words "take control." That means the other person takes over running your card.</p>
+<p>The other, much more common method concerns deeds: Whoever has the most influence at a given deed controls that deed. A deed's controller can change any number of times a day. This does not move, boot, or otherwise affect the deed. If there's a tie for the most influence (even a 0-0 tie because no one is there), the owner has control, even if the owner's not part of the tie.</p>
+<p>If you control a dude or a deed, you also control all cards attached to that dude or deed (whether or not you own any of those cards).</p>
+<p>No one ever owns or controls the town square. Players always own and control their own home (the influence rule does not apply, because an outfit card is not a deed).</p>
+
+<div class="insert">
+<h4>Control</h4>
+<p>Controlling deeds is a fundamental strategy in Doomtown. Just because a player owns a deed doesn't mean that player controls it; if you have the most influence there, you control it.</p>
+<p>When you control another player's deed, you don't get the income from it, but you do get the ability. Also, you deny the owner the income. Finally, and most important, sending your dudes out to other players' deeds gets you the deeds' control points, and forces them either to try to wrest control of your deeds or confront your dudes to reclaim control of their deed.</p>
+</div>
+
+<h3 id="rop19">Uniqueness</h3>
+<p class="italic">We'll never see his like agin... unless'n he rises from the grave.</p>
+<p>All dudes and deeds in Doomtown are unique; any exceptions will have the keyword "non-unique" on them. You can put more than one copy in your deck, but you can't bring a unique card into play if you own another card with the same name that is either already in play or in your Boot Hill.</p>
+<p>If you have a unique card in play, that doesn't stop someone else from having that same unique card in play. Gomorra is just kind of a strange place that way.</p>
+<p>Nothing else is considered unique unless it says "unique" in bold on the card. There ain't no limit to the number of each non-unique goods or spells you can put into play, though you can only put up to four copies in your deck (see <a href="#rop49">Stackin' a Deck</a>). Actions are also non-unique, but since they don't stay in play, it doesn't really matter.</p>
+
+<h3 id="rop20">Makin' Plays and Reactin'</h3>
+<p>The phases in Doomtown uses a turn system that proceeds around the table, much like bidding, calling, and raising in poker.</p>
+<p>During a game phase, starting with the Winner, each player in turn has an opportunity to take some sort of activity ("make a play") or pass. When that player has either made a play or passed, the next player on the left has an opportunity to make a play or pass.</p>
+<p>Play processes around the table in that fashion until all player pass consecutively.</p>
+<p>This method of taking turns is used in almost every aspect of the game, and the plays you can make when it is your turn to act vary based on the phase and the play taking place.</p>
+<p>One special case is React abilities. When a player wants to use a React ability, the normal flow of play is paused while all reacts are sorted out. The Winner has the first chance to React, followed by the other players around the table (until everyone passes). In the cases of jobs and shootouts, the rules dictate who has the first chance to react.</p>
+
+<h2 id="rop21">Setup</h2>
+<p>Place your outfit card face up on your side of the table. It is your home and the first location on your street. Take ghost rock from the bank equal to your outfit's starting stash.</p>
+<p>Once players have revealed their outfits, they search their decks for up to five dudes - either from their outfit or drifters - with a combined cost less than or equal to their starting stash. You cannot have a dude from another outfit in play at the start of the game. A player is allowed to choose only one dude with the Grifter keyword for their starting gang. All players simultaneously place those dudes in play, paying all costs.</p>
+<p>Shuffle your deck and draw a play hand of five cards.</p>
+<p>Resolve any Grifter ability (if you have one in your starting gang), if desired.</p>
+
+<h2 id="rop22">Sequence o' Play</h2>
+<p class="italic">Didja see what I just did? I done used the word 'sequence,' on account of I'm smart. Anyway, let's get on with how things run 'round these parts. As excitin' as things get, each day runs through the same sort of routine: You milk the cows, fleece the drifters, mosey about town, and get into gunfights with the other outfits, and then at the end of the day you crawl under a blanket, get some rest, and pray to the Good Lord that the demons don't tear out your soul in a nightmare.</p>
+<p>Doomtown is played over a series of days. Each day in Doomtown moves through four phases: Gamblin', Upkeep, High Noon, and Sundown.</p>
+<p>The Gamblin' phase determines who goes first, using a friendly game of lowball poker.</p>
+<p>The Upkeep phase is when you collect ghost rock from your deeds, and pay your dudes' upkeep to keep them in play.</p>
+<p>The High Noon phase is when most of the action takes place as players bring new dudes and goods into play, maneuver around town, use Noon abilities, and get into shootouts.</p>
+<p>Finally, the Sundown phase is when victory is determined. If no one has won, then everyone gets to draw some new cards, unboot their dudes, and get ready for the next day.</p>
+
+<h3 id="rop23">Gamblin' Phase</h3>
+<p>At the start of each day, each player antes up 1 ghost rock from their stash (it goes to a pot in the town square). If you don't have any, borrow one from the bank, but you must repay it during the Upkeep phase, after you collect your production, but before you pay any upkeep.</p>
+<p>All players set aside their play hands and draw a five-card lowball draw hand from the top of their decks. You can't play cards from these lowball hands; all you care about with them is their poker values. All players reveal their lowball hands simultaneously.</p>
+<p>Since everyone's deck is likely stacked, it's possible that someone might have a cheatin' hand, that is, one that has two or more cards with the exact same suit and value. If anyone does, then, starting with the previous day's Winner (if needed, pull for low value to determine this person on the first turn of the game) and going clockwise, every player has the chance to use Cheatin' Resolution abilities, either from an action card in their play hand or printed on a card they have in play. Each player can only have one cheatin' ability used on them per draw hand. You cannot play a cheatin' card on yourself.</p>
+<p>This hand is played lowball: unlike other Doomtown draw hands, the lowest hand rank wins. Players with exactly tied hands - like A, 2, 3, 5, K and A, 2, 3, 5, K - draw new five-card lowball hands to break the tie.</p>
+<p>The player with the lowest hand is called the Winner, and remains the Winner until a new Winner is determined in the next Gamblin' phase. The Winner takes all the ghost rock from the pot and places it in their stash. The Winner goes first during each phase of the day, and wins ties whenever players want to do something at the same time.</p>
+<p>Once everything is completed, everyone discards their lowball hands and retrieves their play hands.</p>
+
+<h3 id="rop24">Upkeep Phase</h3>
+<p class="italic">This is where you do all that fancy figurin' and 'rithmatic and such like them bookish types do all the danged time. You take ghost rock income from deeds (them ones with that cute li'l plus sign), and you spend it on whiskey- er, I mean buyin' the continued services of the folk you've done hired already.</p>
+<p>All players collect all the ghost rock from their deeds as well as their outfit card, taking that much ghost rock from the bank and adding it to their stash. There's one exception: if you own a deed but don't control it (see <a href="#rop18">Control</a>), neither you nor the controller gains its production.</p>
+<p>Then it's time to pay wages. Pay the bank back if you borrowed a ghost rock during the Gamblin' phase. Next, to keep each of your dudes in play, you must pay ghost rock to the bank equal that dude's upkeep cost.</p>
+<p>You don't have to pay a dude's upkeep if you don't want to, but if you can't or don't pay someone's upkeep, discard that dude along with any attached cards.</p>
+<p>If you have a dude in your gang that belongs to another outfit (that is, the dude's card has an outfit symbol that doesn't match the one on your home), you must pay extra upkeep equal to the dude's influence.</p>
+<p>Players can typically all perform the Upkeep phase at the same time. If not, start with the Winner and go clockwise.</p>
+
+<h3 id="rop25">High Noon Phase</h3>
+<p class="italic">The most ruckus happens in the middle of the day, what with a bunch of ornery dudes with itchy trigger fingers and a chip on their shoulder movin' about town and roughin' up the locals. This is most definitely when you can expect to see shootouts used to resolve all sorts of disagreements between disagreeable types. Some say it's chaos out here, but the fact is that these hombres are cool as ice, and their every move is part of a calculated plan.</p>
+<p>Starting with the Winner and going clockwise, each player in turn makes one play at a time. When it's your turn to make a play, you can make one o' the five basic plays from the rulebook (<a href="#rop28">Actin'</a>, <a href="#rop29">Callin' Out</a>, <a href="#rop30">Movin'</a>, <a href="#rop31">Shoppin'</a>, or <a href="#rop32">Tradin'</a>), or you can pass. You can make these plays in any order and any number of times.</p>
+<p>Play keeps passing to the left around the table until every player passes consecutively. Once this happens, the High Noon phase ends.</p>
+
+<h3 id="rop26">Sundown Phase</h3>
+<p>Once the High Noon phase is over, check to see if anybody's won (see <a href="#rop47">Winnin' the Durn Game</a>). If not, you can discard one card from your play hand, if desired. Then either draw or discard cards until your hand is at its maximum size, which, barring card effects, is five cards.</p>
+<p>Finally, unboot all your booted cards, and go back to the Gamblin' phase for the next day.</p>
+
+<h2 id="rop27">Plays You Can Make at High Noon</h2>
+<p class="italic">It's a free country, or so they say, but rules is still rules. So here's what y'all can do and the right proper way to git it done.</p>
+<p>When it's your turn to act during the High Noon phase, you can choose one of the following plays to make. If you don't want to (or can't) make any of the plays, you can pass. If you pass, you can still make a play later on in the phase. As soon as everybody passes consecutively, the High Noon phase immediately ends and you move on to the Sundown phase.</p>
+
+<h3 id="rop28">Actin'</h3>
+<p>One play you can make is to use a Noon ability on an action card in your play hand or printed on one of your cards in play (like a deed, dude, goods, or spell). To do so, just declare the ability, pay any costs, and resolve its effect.</p>
+<p>You can use an ability on a booted card, unless that ability requires the card to boot (you know it's a cost if the word "Boot" is in front of the colon, or if the card says something like, "Boot this card to do this stuff."). Just using a card's ability does not necessarily boot that card.</p>
+<p>You can only use each ability on a given card in play once per day. You can only use one ability on a spell card per day, no matter how many abilities that spell card has. However, cards that have the word "Repeat" at the start of an ability can be used multiple times per day, without limit.</p>
+<p>Most abilities on deeds can only be used by that deed's controller, whether or not the controller is also the owner. This is noted by the word "Controller" in front of the deed's ability.</p>
+<p>Unless otherwise noted, the effects of noon abilities last through the Sundown phase.</p>
+
+<h3 id="rop29">Callin' Out</h3>
+<p class="italic">When you've got dudes from another gang hangin' around your saloon and they're refusin' to leave, it's 'bout time you cleared 'em out the hard way.</p>
+<p>As a Noon play, one of your unbooted dudes can choose a dude controlled by another player at the same location, and call out that dude (challenge that dude to a shootout). This doesn't boot your dude, and so as long as your dude stays unbooted, they can call out an opposing dude each and every time it's your turn to make a play.</p>
+<p>If unbooted, the dude you called out can refuse the call out by moving home booted. A booted dude has to accept the call-out.</p>
+<p>You cannot use this Noon play to call out a dude at their home.</p>
+<p>However, there are card abilities that allow you to call out a dude as part of the ability's effects. When you're using one of those abilities, the ability allows your dude to call someone out while booted, and more importantly, your dude can use it to call out dudes in their home. Unless prohibited by a card effect, dudes at their home can still refuse such a call-out by moving home booted, even though they are already at home (they are assumed to run upstairs). Such a refusal still boots the dude, of course.</p>
+<p>If the target accepts the call out, the dudes start a shootout (see <a href="#rop33">Shootouts</a>) at the target's location, and both sides can form posses.</p>
+
+<h3 id="rop30">Movin'</h3>
+<p class="italic">Those dudes you've hired ain't gonna do you much good just sittin' at home. Sooner or later you're gonna want to get them out the door to sashay, amble, mosey, or even gallop on somewhere else.</p>
+<p>As a Noon play you can move one of your unbooted dudes to any other location in play (a deed, a home, or the town square). This always boots a dude, unless you're making one of the two following special moves:</p>
+<div><ol>
+<li>A dude can move from their home to an adjacent location (town square or an adjacent deed) without booting.</li>
+<li>A dude can move from the town square to an in-town deed or to another player's home (but not to the controlling player's own home) without booting.</li>
+</ol></div>
+<p>Although neither of these moves boots the dude, the dude still has to be unbooted in order to move at all.</p>
+<p>Some card effects let you move a dude. These are usually Noon abilities, but there are also a few Shootout abilities and React abilities. When you use one of those abilities, you can use it to move a booted dude, and the move doesn't boot your dude.</p>
+
+<h3 id="rop31">Shoppin'</h3>
+<p class="italic">You mine ghost rock to buy stuff, you use the stuff to mine more ghost rock. Don't make much sense less'n you realize the alternative is to mine ghost rock to buy tequila, then wake up in a puddle of your own drool without your pants.</p>
+<p>You make this play to bring a dude, deed, spell, or goods card into play from your play hand. Pay its ghost rock cost to the bank, then put the card on the table unbooted. You can start using its abilities as soon as your next turn to make a play. The way you bring a card into play depends on the type of card it is:</p>
+<p>If you use a card effect to bring another card into play, play the new card in the same way as above unless the card effect says otherwise.</p>
+<p><b>Dude:</b> A dude starts at your home. It's where folks sign on.</p>
+<p><b>Deed:</b> Unless they say otherwise, all deeds are in town. Place an in-town deed at one end of your street or the other, adjacent to the in-town location on that end of your street. You can't place a deed in between two other deeds you already have in play, or between your home and another deed. Put out-of-town deeds off to one side of your street.</p>
+<p><b>Goods:</b> Attach the card to one of your unbooted dudes at a location you control (the dude must be able to attach that card). The card sticks with them. A dude can usually carry any number of goods, although a dude can only ever have one Horse and one Weapon at a time. If you want to attach a new Weapon (or Horse) to a dude that already has a Weapon (or Horse), discard the old one.</p>
+<p>Gadgets can only be brought into play by a Mad Scientist, who must invent the Gadget. See <a href="#rop45">Skill Ratin's</a> for details. Once the Mad Scientist invents the Gadget, you can use the Tradin' play to have them give it to someone else.</p>
+<p><b>Spell:</b> All spells have restrictions on who can attach them. Only Hucksters can attach Hexes. Only a Blessed dude can attach Miracles, and only Shamans can attach Spirits. Attach the card to one of your unbooted dudes at a location you control (the dude must be able to attach that card). The card sticks with them. A dude can usually carry any number of spell cards.</p>
+
+<h3 id="rop32">Tradin'</h3>
+<p class="italic">Frontier folks are only too happy to lend or borrow for them as has need. Course, some of the borrowin' that goes on around here is more rightly described as stealin'.</p>
+<p>If you have two or more of dudes you control together in a location you control (whether or not you own it), you can swap one or more goods cards between them. All dudes receiving goods must be unbooted, and can't receive anything that they aren't allowed to carry. Booted dudes can give goods away, but can't get any cards. Once a dude gets a goods card from a trade, that dude can't trade it away on that same day.</p>
+<p>Dudes with Weapons and Horses are allowed to trade them, although once you are done tradin', if a dude has more than one of each, you must discard those cards.</p>
+<p>Dudes cannot trade spells.</p>
+<p>There are card effects that let you transfer a goods card from one dude to another. As with other card effects, this allows a dude to attach a goods card while booted, and in a location you don't control. Dudes still can't take anything that they aren't allowed to carry.</p>
+<p>If a dude takes another player's goods card and then either the dude or the goods card leaves play, the goods goes to its owner's Boot Hill or discard pile, as appropriate.</p>
+
+<h2 id="rop33">Shootouts</h2>
+<p class="italic">Fights break out in the Weird West all the time, and folks don't usually need a reason. So here's how you settle yer differences, Doomtown style.</p>
+<p>A shootout usually starts when a dude accepts a call-out. Both the player and dude doing the callin' out are known as the leader, while the player and dude being called out are known as the mark.</p>
+
+<h3 id="rop34">Formin' Posses</h3>
+<p class="italic">When a shootout starts, most likely folks ain't gonna let their friends face the danger alone. They'll pitch in, help out, provide cover, and maybe even take a bullet.</p>
+<p>Both players in the shootout form a group of participating dudes called a posse. The leader declares their entire posse first. All dudes added to a posse, including the original leader and the mark (both of whom must be in their respective posse), are said to be joining the posse.</p>
+<p>Only dudes in the location of the shootout or in an adjacent location can join a posse. A dude in the same location can join even while booted, but only unbooted dudes can join the posse from an adjacent location.</p>
+<p>Once both players have declared their posses, all dudes joining a posse that are not already in the location of the shootout must move to that location. This move automatically boots them. All dudes moving to join a posse move simultaneously.</p>
+<p>Players can never ever have dudes they control in both posses. The player cannot therefore ever make a choice that would result in that situation, no matter what the cards say.</p>
+
+<div class="insert">
+<h4>Adjacency: Reloaded</h4>
+<p>Let's remind you about adjacency. Locations next to each other in a player's street are adjacent. The deeds and home on one gang's street are not adjacent to those on another's. The town square, which is not a deed, is adjacent to everything in town. Out-oftown deeds aren't adjacent to anything, not even to each other.</p>
+</div>
+
+<h3 id="rop35">Breakin' and Enterin'</h3>
+<p class="italic">If lead flies in a public place like the town square or a saloon, folks figger that the other varmint must o' needed killin'. But if you ever find yourself in a shootout on someone else's private property, the law is gonna want to have words with ya. A man's home is his castle, even if it's a clapboard shack and he's a no-good, flea-bit, back-shootin' four-flusher.</p>
+<p>If the shootout is taking place at a private location, then all dudes in that shootout that are controlled by a player that does not own the location have their bounty increased by 1 (even from 0 to 1). This happens regardless of which side started the shootout. It also happens if a dude joins a posse later in the shootout.</p>
+<p>Note that a deed's keywords tell you if it's public or private. A player's home is always private, and the town square is always public.</p>
+
+<h3 id="rop36">Slingin' Lead</h3>
+<p>Each shootout is resolved in a series of rounds (pun intended), done one at a time until all dudes in one posse are shot dead or flee. Following is how you handle a shootout round.</p>
+<h4>Step 1. Make Plays</h4>
+<p class="italic">Them as has a plan beyond bang bang bang are generally the ones that win.</p>
+<p>Starting with the Winner (or the first player with a dude in a posse going clockwise from the Winner if the Winner has no dudes in the shootout) and proceeding clockwise, each player with a dude in the shootout makes a Shootout play. Shootout plays include using Shootout abilities, passing, or using any other text that refers to a Shootout play.</p>
+<p>Shootout abilities you use must come from either an action card in your play hand (which is played and discarded), or printed on one of your cards in the posse. You can also use a Shootout ability on a card that's not in a posse, but only if that ability would bring a dude into a posse. Shootout abilities can also only affect dudes in a posse, unless that ability would bring a dude into the posse.</p>
+<p>Players continue making Shootout plays until all players pass consecutively.</p>
+<p>Unless it says otherwise, a Shootout ability's effect lasts until the shootout ends. If an ability ever sends a dude home booted, the dude leaves the shootout, even if they're already home.</p>
+<p>If, due to the use of Shootout abilities, there's only one posse left in the shootout, the shootout ends immediately; skip to step 7.</p>
+<h4>Step 2. Pick Yer Shooter</h4>
+<p>The leader and mark, in that order, choose and announce their shooter from the dudes in their posses. This choice only lasts for this round of the shootout. Booted dudes in a posse can be chosen as a shooter.</p>
+<h4>Step 3. Draw!</h4>
+<p class="italic">It ain't how many shots you fire. It's how much lead t'other guy has to eat.</p>
+<p>This is where you see how well your posse performs in this round of the shootout. You do this by dealing yourself a draw hand from your deck and making the best poker hand you can from it.</p>
+<p>Set aside your play hand, then draw cards from the top of your deck equal to five plus your posse's stud bonus. You gain a stud bonus from everyone in your posse that has a stud bullet rating, which is a number in a silver cartridge. Your bonus equals the full stud rating of your shooter (if they have one), plus one extra for each other stud in your posse (even dudes that have a 0-stud bullet rating).</p>
+<p>Once you've drawn those cards, you can take advantage of your draw bonus. You gain a draw bonus from everyone in your posse that has a draw bullet rating, which is a number in a brass cartridge. Your draw bonus equals the full draw bonus of your shooter (if they have one), plus one extra for each other draw in your posse (no matter how good or bad they are). So once you've determined your draw bonus, take a look at the cards in your draw hand, and decide which, if any of them, you'd like to discard (up to a number equal to your draw bonus), discard them, and replace them with cards drawn from the top of your deck. You must take your draw bonus all at once, not one card at a time.</p>
+<p>After all that, discard cards until you have five left. That's your final draw hand. It's perfectly fine if you have two cards with the same suit and value - two kings of clubs, for example - although a hand of that sort is called a cheatin' hand, and does open you up to the potential damage of a cheatin' Resolution ability.</p>
+<h4>Step 4. Reveal and Resolve</h4>
+<p>At this point, both players reveal their draw hands, and resolve any effects on cards in play that refer to draw hands being revealed (example: Sheriff Dave Montreal's text says, "If your opponent in Dave's shootout reveals a cheatin' hand and you do not, your dudes cannot be casualties this round."). These are all immediate effects. Once an "on reveal" effects has been applied, it cannot be applied again that round of the shootout, even if that effect causes the victim to draw and reveal a new hand.</p>
+<p>Next, each player with a dude in the shootout can make Resolution plays (at the moment, these are only Resolution abilities and passing). Players can play Resolution abilities on action cards from their play hand (not their draw hand). They can also use abilities printed on dudes, goods, or spells that are involved in the shootout. Starting with the Winner (or the first player with a dude in a posse going clockwise from the Winner if the Winner has no dudes in the shootout) and proceeding clockwise, each player with a dude in the shootout either passes or plays a Resolution ability until all players pass consecutively.</p>
+<p>One special kind of resolution ability is a Cheatin' Resolution ability. Each player can only have one Cheatin' Resolution ability used against them during this step, whether it is on a card in play or on an action card. This can be done when the player has a draw hand that has two or more cards with exactly the same suit and value (note that a joker never causes a legal hand to become a cheatin' hand, regardless of the suit and value is chosen for it). You cannot use a cheatin' ability on yourself.</p>
+<p>Any player can play a Cheatin' Resolution action card, even if that player is not in the shootout, although some cheatin' cards have effects that only work if you have a posse (e.g., Magical Distraction).</p>
+<p>Resolution abilities used during a Shootout can only affect dudes in a posse, unless that ability would bring a dude into the posse.</p>
+<p>If, due to the use of Resolution abilities, one player loses all the dudes in their posse (aced or discarded), the shootout immediately ends; skip to step 7. Remember, though a player can only have one cheatin' card played on them per draw hand.</p>
+<h4>Step 5. Take Yer Lumps</h4>
+<p>After making and Resolution plays, if each posse still has dudes in it, compare the ranks of the players' draw hands (i.e., the relative power of the poker hands they were able to create). The winner is the player with the higher hand rank. See the back cover for a complete list of hand ranks. When an ability or effect changes your hand rank upwards, it is always considered to change it to the worst possible hand within that rank. When a card changes a hand rank downwards, it is always considered to change it to the best possible hand within that rank.</p>
+<p>No hand can change to a rank above 11 (they just stop at 11), and all rank 11 hands are considered equal (there is no higher and lower hand at rank 11). Likewise, no hand rank can go below 1; if a hand rank tries to go below 1, it becomes the worst possible hand of that rank. If both sides have hand ranks of 11, then there is no winner or loser.</p>
+<p>The difference between the two ranks is the number of casualties the loser takes: that player must discard or ace dudes in their posse based on the number of casualties taken. Discarding a dude covers one casualty (they were either wounded or run out of town, but live to fight another day), and acing a dude covers two casualties (the dude was shot dead). Note that an aced dude goes to your Boot Hill, which means you will be unable to play another copy of that dude for the rest of the game, but their attached cards (goods and spells) are just discarded.</p>
+<p>In addition, players can discard goods cards that have the Sidekick keyword; doing so covers one casualty (you cannot ace a sidekick to cover two casualties). See also <a href="#rop40">Harrowed Dudes</a> for more options.</p>
+<p>If the players' draw hand ranks are tied, both posses take one casualty, although if one player has a better hand (say, three jacks compared to three aces), then that player still wins this round of the shootout. Winning a round in this fashion still counts for cards that check for winning (e.g., Flame-Thrower).</p>
+<p>The two main players (leader and mark) decide which dudes in their posse get discarded or aced. The loser of the round chooses first. In the event of an exact hand rank tie, the leader chooses first. Casualties are chosen and resolved one at a time, although if this causes the loser to remove their last dude in the shootout, the winner must still take all casualties.</p>
+<h4>Step 6. Run or Gun</h4>
+<p>Starting with the loser of the shootout round (the leader if both sides had a hand rank of 11), all players decide which of their dudes flee the shootout. Those that flee leave the posse and move home booted. Even dudes that are already booted or already home can flee the shootout. Each player decides for all of their dudes before the next player decides.</p>
+<h4>Step 7. Chamber Another Round</h4>
+<p>The leader and mark discard their draw hands.</p>
+<p>If only one posse is left, that posse wins the shootout. If both posses have been emptied of dudes, neither player wins the shootout. Otherwise, go back to step 1 to start the next shootout round.</p>
+
+<div class="insert">
+<h4>The Gettin' to Know Gomorra Booklet - a shootout in detail.</h4>
+<p>For a complete example shootout, see Gettin' to Know Gomorra.</p>
+</div>
+
+<h2 id="rop37">Them Other Rules</h2>
+<p class="italic">Rules are just like herding cattle; there are always a few that wander off. Here's them few what don't fit neatly somewheres else.</p>
+
+<h3 id="rop38">Card Text</h3>
+<p>There are three types of text on Doomtown cards: keywords, traits, and abilities.</p>
+<p><b>Keywords</b> appear in bold at the top of the card, and are descriptions of that card that can be referenced by other card text (e.g., Horse, Gadget). You can spot a keyword in card text because it is capitalized.</p>
+<p><b>Traits</b> appear below the keywords, and appear in plain text. Traits are game effects that are always on while the card is in play (e.g., "Lane gets +2 bullets while he has a Horse."). The card's controller cannot choose to ignore or "switch off" a trait.</p>
+<p><b>Abilities</b> are card text that starts with a boldface phase and cost, followed by a colon. The card's controller chooses if and when to use those abilities. Each ability can only be used once per turn, unless it is a repeat ability.</p>
+<p>If a card's text uses the word "this" (for example "this location" or "this shootout"), the text refers to the location or situation described. For example, Sanford Taylor's ability says, "Call out a dude at this deed." That means that Sanford can only call out a dude while Sanford is at a deed and the dude called out must be at the same deed as Sanford Taylor.</p>
+<p>A <b>leader</b> is the dude who starts a job or initiates a shootout by callin' someone out. The <b>mark</b> is the dude being called out, or the card or place being chosen for a job's effect.</p>
+<p>If a job requires booting as a part of the cost (example: Kidnappin', which says, "Noon Job, Boot:"), the leader must boot to pay the cost.</p>
+
+<h3 id="rop39">Aces</h3>
+<p class="italic">Aces high? What kind o' stupid place are you from, gringo?</p>
+<p>Aces always count as 1s, so they're lowest value in both hands and pulls.</p>
+
+<h3 id="rop40">Harrowed Dudes</h3>
+<p class="italic">Some poor folk get an evil manitou spirit up inside in their head, and it keeps them walkin' around when they should be pushin' up daisies. They're a mite harder to put down, on account o' already being dead.</p>
+<p>When a dude with the Harrowed keyword is involved in a shootout, that dude can absorb more casualties than a normal dude. You can send a Harrowed dude home booted to cover one of the casualties you take in a shootout. Discarding a Harrowed dude covers two casualties, and acing a Harrowed dude covers three.</p>
+<p>If a Harrowed dude in play gets aced by a card effect (that is, not in as a part of taking casualties in a shootout), discard that dude instead of acing them.</p>
+
+<h3 id="rop41">Help Text</h3>
+<p>Italic card text in parentheses is called "help text." It does not change the way the card works, but serves as a reminder of rules that apply to the card, and is intended to help new players learn the game.</p>
+<p>For example, Mustang says, "Noon, Boot: Move this dude (without booting)." The words without booting remind players that when a card effect moves a dude, the dude does not boot for that move, regardless of where that move starts or ends. However, when learning the game, we do not expect new players to remember all the nuances of the rules, so we have added help text wherever we could to make card effects as clear as possible.</p>
+
+<h3 id="rop42">How Long? How Big?</h3>
+<p>Many card abilities resolve immediately and then are done. Any effect that adds or removes counters is considered an effect that resolves immediately and is done. After the effect places the counter, it's the counter that has the ongoing effect. In effect, counters are permanent changes.</p>
+<p>Effects caused by a Noon ability last until the end of the day (that is, it lasts through the Sundown phase, but ends before the next Gamblin' phase). Effects caused by Shootout abilities last until the end of that particular shootout. Card effects that are not abilities (for example, "Sloane's bounty cannot be reduced below 1.") are always in effect and only go away when that card leaves play.</p>
+<p>There are limits to how much certain game numbers can be changed. A card's bullets, influence, cost, and upkeep is always equal to the printed stat plus all modifiers from all card effects and attached cards. These numbers can drop under 0, but whenever you check that number or use it for a game calculation, that negative number counts as 0.</p>
+<p>A card's value (ace through king) is always equal to its printed value plus all modifiers from all card effects and attached cards. Whenever you check that value or use it for a game calculation, a value of zero or lower is treated as a 1 (ace), and a value of 14 or higher is treated as a 13 (king). This also applies to value when calculated as a part of a dude's grit.</p>
+
+<h3 id="rop43">Jobs</h3>
+<p class="italic">There are some unpleasant tasks that require a little more manpower than just one or two of your dudes, and are more likely to get folks upset than a simple barnraisin' or vampire killin'.</p>
+<p>Big events in Doomtown are called jobs. Jobs are initiated by ability text like, "Noon Job:". Like shootouts, jobs are resolved in a specific manner.</p>
+<p>As with shootouts, both the player and dude starting the job are known as the leader, while the player and/or the dude (or the deed or something else) being affected by the job is known as the mark.</p>
+<h4>Step 1. Start the Job</h4>
+<p>First, choose one of your unbooted dudes to be the leader of the job. If the ability that started the job came from text on a dude or goods card, that dude must be selected as the job's leader. If a job requires booting as a part of the cost (example: Kidnappin', which says, "Noon Job, Boot:"), the leader is the dude who must boot to pay it.</p>
+<h4>Step 2. Choose the Mark</h4>
+<p>All jobs intend to do something to someplace or someone. The intended target is called the mark. The first sentence of the job text tells you what the mark is.</p>
+<p>The leader doesn't have to be in the same location as the mark to start the job; in fact, the leader can even be out of town.</p>
+<h4>Step 3. Form Posses</h4>
+<p>Once the leader's chosen, it's time to form posses. Just like in shootouts, the leader forms a posse first. Any of that player's unbooted dudes who are at the same location as or adjacent either to the leader or to the mark can join the leader's posse.</p>
+<p>All dudes other than the leader have to boot to join the posse unless they're already at the mark's location. Dudes at the same location as the mark can join without booting, and can join even if booted.</p>
+<p>Once the leader has declared who's joining their posse, the mark's controller can also form a posse. The mark can only use dudes at or adjacent to the mark's location. Those dudes must boot to join the posse unless they are already at the mark's location. Dudes at the same location as the mark can join even if booted. Note that, unlike a call-out, the mark does not necessarily have to join the posse (although it's usually a good idea). Players cannot form a posse with zero dudes in it. See <a href="#rop18">Owner and Controller</a>.</p>
+<p>If the mark's controller chooses not to (or cannot) form a posse, the mark's owner, if different from the controller, can form a posse. If the mark's controller does form a posse, the mark's owner cannot form a posse.</p>
+<p>If neither the controller nor the owner choose to form a posse (this is always the case with jobs that mark the town square or the leader's own cards), then any player, starting with the player to the left of the leader, can form a posse to oppose the job.</p>
+<p>If no one forms a posse to oppose the job, the job automatically succeeds.</p>
+<h4>Step 4. Saddle Up</h4>
+<p>Once posses are formed, all dudes in both posses move to the mark's location simultaneously. This special job movement doesn't require bootin', but most dudes will have already booted to join the posse. If the leader and mark's defender both end up with posses at the mark, a shootout starts (see <a href="#rop33">Shootouts</a>). If this happens at a private deed, the trespassin' dudes become wanted just like in a normal shootout.</p>
+<h4>Step 5. Is the Job Done?</h4>
+<p>If the leader's posse wins the shootout and is still at the mark's location at the end of the shootout, or no player forms a defending posse, the job succeeds. Otherwise, the job fails.</p>
+<p>After the shootout's over, regardless of the outcome, survivors in the leader's posse go home booted. Surviving dudes in the defending posse stay where they are.</p>
+<p>Finally, resolve the effects of a successful job as given on the card, if the mark is still in play. If the mark is not still in play, the job succeeds anyway, but the mark is not affected. If the job fails, nothing happens.</p>
+
+<h3 id="rop44">Pulls</h3>
+<p class="italic">Most cowboys can walk and chew tobacco at the same time, but buildin' an infernal contraption in an hour from ghost rock, brass tubing, and scrap wood is a wee bit harder.</p>
+<p>Some things your dudes might want to do aren't assured of success. Whether or not a dude succeeds at a challenging task is determined by a pull (that is, drawing a card from your deck).</p>
+<p>When you pull, draw the top card of your deck, reveal it, and check its value (ace through king). Usually, you compare the value to a number indicated in the pull instructions. Aces are 1s, jacks are 11s, queens are 12s, and kings are 13s. If you have no cards left to pull, shuffle up your discard pile to make a new deck. If your deck is completely out of cards (because they're all in Boot Hill or in your play hand), your pull is considered a 1 (ace) of clubs.</p>
+<p>Once you've enacted all results of the pull, discard the pulled card.</p>
+
+<h3 id="rop45">Skill Ratin's</h3>
+<p class="italic">Some dudes have special skills that us normal folks don't. That's why they're all a bit touched in the head.</p>
+<p>The keywords in a dude's card text tells you the kind of skills the dude has. A number follows the dude's skill (such as "Mad Scientist 2" or "Huckster 4"), which is called the dude's skill rating. Mad Scientists use their skill rating when creating a Gadget. A Shaman, Blessed, or Huckster uses their skill rating when using a spell card's ability (note that there are only Hucksters in the base set).</p>
+<p>Whenever one of your dudes wants to use a skill, that dude must perform a skill test. To make a skill test, pull (see <a href="#rop44">Pulls</a>) and add the value of the pull to the dude's skill rating. The total is called the skill check.</p>
+<p>Spells: For spells, each ability printed on the card has a difficulty level. Whenever your dude wants to cast a spell, perform a skill test. If the skill check equals or exceeds the spell's difficulty, the spell succeeds and you use that ability. Otherwise, the spell fails and nothing happens (the spell ability has been used to no effect, and it's the next player's turn to make a play).</p>
+<p>Gadgets: For Gadgets, the Mad Scientist uses the skill to invent the goods card. You can have your Mad Scientist try to invent a Gadget you hold in your play hand as a Noon play; it's just like shoppin', but it's not a sure deal.</p>
+<p>Boot the Mad Scientist while they're in a location you control (this is a cost of inventing), pay the Gadget's ghost rock cost, then perform a skill test using the dude's Mad Scientist skill rating. If the skill check equals or exceeds the Gadget difficulty, the Gadget works: attach it to the Mad Scientist. If the skill test fails, the Gadget doesn't work and the Mad Scientist scraps it. Place the Gadget into your discard pile. You don't get a refund on what you paid for it.</p>
+
+<h3 id="rop46">Wanted Dudes</h3>
+<p class="italic">While most folks around these parts got a secret or two, wanted dudes are hunted by the law. The law wants them so bad, they'll pay you for plugging them full of lead.</p>
+<p>When a dude becomes wanted, they gain a bounty that starts at 1 ghost rock. Put a ghost rock counter from the bank on the dude. Whenever a dude's bounty goes up or down, add or remove a ghost rock counter to that dude, as appropriate.</p>
+<p>Becoming wanted and getting a bounty go hand in hand. If a wanted dude gets a higher bounty, it doesn't make them wanted again (or wanted more), because they're already wanted, but it does give everyone else more incentive to gun them down. However, if a dude that is not wanted gains a bounty, that dude also becomes wanted.</p>
+<p>If a wanted dude opposing your posse in a shootout gets discarded or aced, you earn all the ghost rock on that dude as your reward; move it from that dude into your stash. Likewise, if you manage to discard or ace a wanted dude with a card ability, you gain that dude's bounty.</p>
+<p>If a dude's bounty goes to zero, that dude is no longer wanted. Likewise, if a dude becomes un-wanted, place all the bounty ghost rock from that dude back into the bank.</p>
+
+<h2 id="rop47">Winnin' the Durn Game</h2>
+<p>If it's the start of the Sundown phase and you have more control points than the highest influence total among the other players, you win.</p>
+<p>If two or more players meet the above victory condition, the one with the most control points wins. If that's also tied, the player with the most influence wins. If that's also tied, play another day and check again for victory; this may result in a player who was not tied winning the game.</p>
+
+<h2 id="rop48">Appendices</h2>
+<h3 id="rop49">Stackin' a Deck</h3>
+<p class="italic">Buildin' yer own personal deck is a big part o' Doomtown. You can make your deck howsomeever you like, so long as it fits the followin' local statutes:</p>
+<p>The deck must have exactly one outfit card.</p>
+<p>The deck must have exactly fifty-two cards with printed values.</p>
+<p>The deck can have up to two jokers.</p>
+<p>The deck cannot have more than four cards that share the same suit and value.</p>
+<p>The deck cannot have more than four cards that share the same title (this will become important as expansions are released).</p>
+
+<h3 id="rop50">Rustlin' Up Some Help</h3>
+<p class="italic">Sometimes folks want to play Doomtown with more'n just the two of ya. If 'n you gots three or more players, the only rules that change are as follows.</p>
+<p>When forming posses, players can also invite other players to send their dudes to join. Those players can join under the same restrictions as the player whose side they are joining. The dude's controller can use Shootout abilities when it is that player's turn to use an ability. A third-party dude's bullet rating contributes to the bullet rating of the posse's shooter, and the dude can even be selected as the shooter if the leader or mark (whichever is controlling that posse) desires.</p>
+<p>Even if a third-party dude is selected as a shooter, that player doesn't get to draw their own draw hand. The leader or mark uses their deck for the draw hand, draws the hand itself, and decides the posse's casualties, no matter who is in the posse or acting as the shooter. Yes, this means that a posse's controller can ace a bunch of third-party dudes to cover casualties, although that player cannot cover more casualties than required (e.g., that player cannot ace a third-party dude to cover one casualty).</p>
+<p>At the end of a round, third-party players are the first to decide whether their dudes (only) will flee the shootout; the loser's allies decide first, then the winner's allies. After those decisions have been made, the loser is next to choose whether or not to flee.</p>
+<p>If a posse at a private deed has the deed owner's dudes in it, that side does not get a bounty for breakin' and enterin'. In a 3-player game, it is possible for all dudes in a shootout to have a bounty levied at them if they are at a private deed owned by a third, non-involved player.</p>
+<p>Turn order starts from the Winner and goes clockwise around the table. In the case of a Shootout that doesn't involve the winner, it starts with the mark and goes clockwise.</p>
+<p>If you want to play a shorter multiplayer variant, a player wins if, at Sundown, that player has more control points than any other player's influence (rather than each other player's influence).</p>
+
+<h2 id="rop51">Credits</h2>
+<p>Original Game Design: David Williams</p>
+<p>Lead Design & Development: Mark Wootton</p>
+<p>Design & Development Team: Eric Jome, Konstantinos Thoukydidis, Steven Martino</p>
+<p>Playtest Lead: Will Abbott</p>
+<p>Art Direction: Todd Rowland</p>
+<p>Graphic Design: Kalissa Fitzgerald</p>
+<p>Original Graphic Design: Blake Beasley</p>
+<p>Rules Writing & Templating: Edward Bolme</p>
+<p>Background, Story and Flavor: Tim J. Meyer, Paul Durant, Brett Satkowiak, David Orange</p>
+<p>Layout: Kalissa Fitzgerald</p>
+<p>Typesetting: Edward Bolme, Kalissa Fitzgerald</p>
+<p>Proofreading: David Orange, Konstantinos Thoukydidis, Will Abbott, Nicolas Bongiu</p>
+<p>Production: Dave Lepore</p>
+<p>Brand Management: Mark Wootton</p>
+<p>Cover Art: Mario Wibisono</p>
+<p>Playtesting: Nicolas Bongiu, Mike Dickinson, Greg Durant, Paul Durant, Mike Godsil, Eric Jome, Adam Jones, Anthony Lawrence, Tim J. Meyer, Ian Oneail, David Orange, Geoff Prugh, Jason Smith, Kirk Stewart, Konstantinos Thoukydidis, Mike Valliere</p>
+
+<h3 id="rop52">Copyright & Contact</h3>
+<p>&copy;2014 Alderac Entertainment Group.</p>
+<p>Doomtown and Alderac Entertainment Group and all related marks are &trade; and &copy; Alderac Entertainment Group, Inc. All rights reserved.</p>
+<p>Printed in China.</p>
+<p>Warning: Choking hazard! Keep away from small children!</p>
+<p>For more information, visit our website: <a href="http://www.alderac.com/doomtown">www.alderac.com/doomtown</a> and <a href="http://www.alderac.com/forum">www.alderac.com/forum</a></p>
+<p>Questions? Email CustomerService@alderac.com</p>
+<p>Deadlands, the Weird West, and all related marks and logos are &trade; and &copy; Pinnacle Entertainment Group 2014. All rights reserved.</p>
+<p><a href="http://www.peginc.com">www.peginc.com</a></p>
+<p>Find Deadlands products and other Savage Worlds settings at <a href="http://www.peginc.com">www.peginc.com</a></p>
+
+<h2 id="rop53">Reference</h2>
+<h3 id="rop54">Hand Ranks</h3>
+<div><ol reversed>
+<li><b>Dead Man's Hand:</b> Exactly 8<span class="card-suit suit-spades"></span>, 8<span class="card-suit suit-clubs"></span>, A<span class="card-suit suit-spades"></span>, A<span class="card-suit suit-clubs"></span>, J<span class="card-suit suit-diams"></span></li>
+<li><b>Five of a Kind:</b> Example A<span class="card-suit suit-spades"></span>, A<span class="card-suit suit-hearts"></span>, A<span class="card-suit suit-diams"></span>, A<span class="card-suit suit-clubs"></span>, A<span class="card-suit suit-hearts"></span></li>
+<li><b>Straight Flush:</b> Example 8<span class="card-suit suit-clubs"></span>, 7<span class="card-suit suit-clubs"></span>, 6<span class="card-suit suit-clubs"></span>, 5<span class="card-suit suit-clubs"></span>, 4<span class="card-suit suit-clubs"></span></li>
+<li><b>Four of a Kind:</b> Example K<span class="card-suit suit-spades"></span>, K<span class="card-suit suit-clubs"></span>, K<span class="card-suit suit-diams"></span>, K<span class="card-suit suit-hearts"></span>, 2<span class="card-suit suit-diams"></span></li>
+<li><b>Full House:</b> Example J<span class="card-suit suit-spades"></span>, J<span class="card-suit suit-clubs"></span>, J<span class="card-suit suit-diams"></span>, 3<span class="card-suit suit-hearts"></span>, 3<span class="card-suit suit-clubs"></span></li>
+<li><b>Flush:</b> Example 10<span class="card-suit suit-spades"></span>, 8<span class="card-suit suit-spades"></span>, 7<span class="card-suit suit-spades"></span>, 6<span class="card-suit suit-spades"></span>, 4<span class="card-suit suit-spades"></span></li>
+<li><b>Straight:</b> Example Q<span class="card-suit suit-spades"></span>, J<span class="card-suit suit-diams"></span>, 10<span class="card-suit suit-clubs"></span>, 9<span class="card-suit suit-clubs"></span>, 8<span class="card-suit suit-clubs"></span></li>
+<li><b>Three of a Kind:</b> Example 5<span class="card-suit suit-clubs"></span>, 5<span class="card-suit suit-diams"></span>, 5<span class="card-suit suit-spades"></span>, 2<span class="card-suit suit-clubs"></span>, 3<span class="card-suit suit-hearts"></span></li>
+<li><b>Two Pairs:</b> Example Q<span class="card-suit suit-diams"></span>, Q<span class="card-suit suit-clubs"></span>, A<span class="card-suit suit-clubs"></span>, A<span class="card-suit suit-hearts"></span>, K<span class="card-suit suit-spades"></span></li>
+<li><b>One Pair:</b> Example 7<span class="card-suit suit-clubs"></span>, 7<span class="card-suit suit-diams"></span>, K<span class="card-suit suit-clubs"></span>, 10<span class="card-suit suit-spades"></span>, 3<span class="card-suit suit-diams"></span></li>
+<li><b>High Card:</b> Example K<span class="card-suit suit-clubs"></span>, 10<span class="card-suit suit-spades"></span>, 7<span class="card-suit suit-clubs"></span>, 3<span class="card-suit suit-hearts"></span>, A<span class="card-suit suit-diams"></span></li>
+</ol></div>
+<p>If you would like more tips and helpful pointers for getting the best out of Doomtown, including articles about deck-structure, choosing your shootouts, or moving around town successfully, then go to:</p>
+<p><a href="http://www.alderac.com/doomtown">www.alderac.com/doomtown</a></p>
+</article>
+
+<article class="rules rop">
+<h1 id="faq">Doomtown Rulings and FAQ</h1>
+<nav class="inner rop">
+	<ul>
+	<li><a href="#faq1">The rules and mechanics</a></li>
+	<ul>
+		<li><a href="#faq2">Rules Errata/Clarifications</a></li>
+		<ul>
+			<li><a href="#faq3">Shoppin’</a></li>
+			<li><a href="#faq4">Owner and Controller</a></li>
+			<li><a href="#faq5">Formin’ Posses</a></li>
+			<li><a href="#faq6">How Long? How Big</a></li>
+			<li><a href="#faq7">Token Dudes</a></li>
+			<li><a href="#faq8">Experienced Dudes</a></li>
+			<li><a href="#faq9">Cooperatin’</a></li>
+			<li><a href="#faq10">Paying costs</a></li>
+		</ul>
+		<li><a href="#faq11">Turn Sequence clarifications</a></li>
+		<ul>
+			<li><a href="#faq12">Sundown</a></li>
+			<li><a href="#faq13">Shootouts</a></li>
+		</ul>
+		<li><a href="#faq14">General Rulings</a></li>
+		<ul>
+			<li><a href="#faq15">Discarding cards</a></li>
+			<li><a href="#faq16">Cheatin’</a></li>
+			<li><a href="#faq17">Jobs</a></li>
+			<li><a href="#faq18">Sidekicks</a></li>
+			<li><a href="#faq19">Actions and Abilities</a></li>
+			<li><a href="#faq20">Weapons</a></li>
+			<li><a href="#faq21">Uniqueness</a></li>
+			<li><a href="#faq22">Bounties</a></li>
+			<li><a href="#faq23">Movement</a></li>
+		</ul>
+	</ul>
+	<li><a href="#faq24">Specific card rulings</a></li>
+	<ul>
+		<li><a href="#faq25">Outfits</a></li>
+		<ul>
+			<li><a href="#faq26">Law Dogs</a></li>
+			<li><a href="#faq27">The Sloane Gang</a></li>
+		</ul>
+		<li><a href="#faq28">Dudes</a></li>
+		<ul>
+			<li><a href="#faq29">Arnold McCadish</a></li>
+			<li><a href="#faq30">Barton Everest</a></li>
+			<li><a href="#faq31">Clementine Lepp</a></li>
+			<li><a href="#faq32">Dr Dawn Edwards / Eve Henry</a></li>
+			<li><a href="#faq33">The Fixer</a></li>
+			<li><a href="#faq34">Fred Aims</a></li>
+			<li><a href="#faq35">The Ghostly Gun</a></li>
+			<li><a href="#faq36">Harold Aimslee</a></li>
+			<li><a href="#faq37">Irving Patterson</a></li>
+			<li><a href="#faq38">Ivor Hawley</a></li>
+			<li><a href="#faq39">James Ghetty</a></li>
+			<li><a href="#faq40">Jarrett Blake</a></li>
+			<li><a href="#faq41">Jon Longstride</a></li>
+			<li><a href="#faq42">Kevin Wainwright</a></li>
+			<li><a href="#faq43">Lawrence Blackwood</a></li>
+			<li><a href="#faq44">Lilian Morgan</a></li>
+			<li><a href="#faq45">Maria Kingsford</a></li>
+			<li><a href="#faq46">Mortimer Parsons</a></li>
+			<li><a href="#faq47">Philip Swinford Exp</a></li>
+			<li><a href="#faq48">Nicodemus Whateley</a></li>
+			<li><a href="#faq49">Prescott Utter</a></li>
+			<li><a href="#faq50">QUATERMAN</a></li>
+			<li><a href="#faq51">Ramiro Mendoza</a></li>
+			<li><a href="#faq52">Remy LaPointe</a></li>
+			<li><a href="#faq53">Silas Aims</a></li>
+			<li><a href="#faq54">Sloane</a></li>
+			<li><a href="#faq55">Smiling Tom</a></li>
+			<li><a href="#faq56">Tommy Harden</a></li>
+			<li><a href="#faq57">William Specks</a></li>
+		</ul>
+		<li><a href="#faq58">Deeds</a></li>
+		<ul>
+			<li><a href="#faq59">1st Baptist Church</a></li>
+			<li><a href="#faq60">Bunkhouse</a></li>
+			<li><a href="#faq61">Carter’s Bounties</a></li>
+			<li><a href="#faq62">General Store</a></li>
+			<li><a href="#faq63">Gomorra Parish</a></li>
+			<li><a href="#faq64">Pearly’s Palace</a></li>
+			<li><a href="#faq65">Pony Express</a></li>
+			<li><a href="#faq66">Undertaker</a></li>
+		</ul>
+		<li><a href="#faq67">Actions</a></li>
+		<ul>
+			<li><a href="#faq68">Ambush</a></li>
+			<li><a href="#faq69">Bad Company</a></li>
+			<li><a href="#faq70">Bottom Dealin’</a></li>
+			<li><a href="#faq71">Bounty Hunter</a></li>
+			<li><a href="#faq72">Coachwhip</a></li>
+			<li><a href="#faq73">Cheatin Varmint</a></li>
+			<li><a href="#faq74">Concealed Weapons</a></li>
+			<li><a href="#faq75">Election Day Slaughter</a></li>
+			<li><a href="#faq76">Fresh Horses</a></li>
+			<li><a href="#faq77">Good Stiff Drink</a></li>
+			<li><a href="#faq78">Hex Slingin'</a></li>
+			<li><a href="#faq79">Hired Guns</a></li>
+			<li><a href="#faq80">Hot Lead Flying</a></li>
+			<li><a href="#faq81">It’s Who You Know</a></li>
+			<li><a href="#faq82">Kidnappin’</a></li>
+			<li><a href="#faq83">Magical Distraction</a></li>
+			<li><a href="#faq84">Make the Smart Choice</a></li>
+			<li><a href="#faq85">Pinned Down</a></li>
+			<li><a href="#faq86">Prayer</a></li>
+			<li><a href="#faq87">Run Em Down</a></li>
+			<li><a href="#faq88">The Stakes Just Rose</a></li>
+			<li><a href="#faq89">Takin’ Ya With Me</a></li>
+			<li><a href="#faq90">Unprepared</a></li>
+		</ul>
+		<li><a href="#faq91">Goods</a></li>
+		<ul>
+			<li><a href="#faq92">Auto-Revolver</a></li>
+			<li><a href="#faq93">Auto Cattle-Feeder</a></li>
+			<li><a href="#faq94">Flame-Thrower</a></li>
+			<li><a href="#faq95">Force Field</a></li>
+			<li><a href="#faq96">Holy Wheel Gun</a></li>
+			<li><a href="#faq97">Outlaw Mask</a></li>
+			<li><a href="#faq98">Pair of Six Shooters</a></li>
+			<li><a href="#faq99">Telepathy Helmet</a></li>
+			<li><a href="#faq100">Whiskey Flask</a></li>
+		</ul>
+		<li><a href="#faq101">Spells</a></li>
+		<ul>
+			<li><a href="#faq102">Ace in the Hole</a></li>
+			<li><a href="#faq103">Fetch</a></li>
+			<li><a href="#faq104">Holy Roller</a></li>
+			<li><a href="#faq105">Lay on Hands</a></li>
+			<li><a href="#faq106">Mirror, Mirror</a></li>
+			<li><a href="#faq107">Puppet</a></li>
+			<li><a href="#faq108">Raising Hell</a></li>
+		</ul>
+	</ul>
+	</ul>
+</nav>
+
+<h2 id="faq1">The rules and mechanics</h2>
+<h3 id="faq2">Rules Errata/Clarifications</h3>
+<h4 id="faq3">Shoppin’</h4>
+<p>When attaching a goods or spell using a card effect, the dude receiving the goods or spell does not have to be in a location you control, and can attach the card even when booted (unless the card says otherwise). All other requirements for attaching the card must still be met.</p>
+<p>When attaching a gadget using a card effect, the mad scientist must still boot in a location you control in order to invent the gadget, and he must still successfully pass the skill check.</p>
+<h4 id="fa4">Owner and Controller</h4>
+<p>You cannot use a card effect to take a card owned by another player into your play hand.</p>
+<h4 id="faq5">Formin’ Posses</h4>
+<p>A dude cannot join a posse if there are restrictions that prevent him from moving to the marks location.</p>
+<h4 id="faq6">How Long? How Big</h4>
+<p>Treat casualties in the same way as other numbers i.e. if they drop below zero, keep track of their value but treat them as zero.</p>
+<h4 id="faq7">Token Dudes</h4>
+<p>When a Token Dude is aced or discarded it is removed from play instead of going to the discard pile or boot hill. It will still trigger events like collecting a bounty or the Undertaker giving its controller 2 ghost rock.</p>
+<p>Token dudes are always considered non­unique</p>
+<h4 id="faq8">Experienced Dudes</h4>
+<p>Overlaying does not trigger "enters play" effects (or leaves play/discard effects)</p>
+<h4 id="faq9">Cooperatin’</h4>
+<p><b>Errata​:</b> You cannot include both a Confederate and a Union card in your starting posse.</p>
+<h4 id="faq10">Paying costs</h4>
+<p>You may not use an ability to prevent or cancel the payment of a cost being paid. If you have to pay a cost, neither you or your opponent can opt to use an ability to prevent/cancel/reverse that cost being paid. If a trait, keyword or some other mandatory effect will interfere with the cost being paid, that trait/keyword/mandatory effect still happens but the cost is still considered paid (for example if you ace a Harrowed Dude from play to pay a cost his Harrowed Keyword will trigger causing him to be Discarded instead of aced but the cost was paid).</p>
+<h3 id="faq11">Turn Sequence clarifications</h3>
+<h4 id="faq12">Sundown</h4>
+<div><ul>
+<li>Traits or effects that apply continuously during Sundown start</li>
+<li>Check for victory conditions (game possibly ends)</li>
+<li>Effects that require a check or game state change during Sundown (eg Sloane Gang outfit) are resolved</li>
+<li>All players may choose to discard one card from their play hand—Winner goes first.</li>
+<li>All players refill their hand to their maximum hand size (normally 5 cards)</li>
+<li>Unboot all cards</li>
+<li>Effects that apply “during Sundown” end</li>
+<li>Effects that apply until the end of turn end</li>
+<li>Turn ends, start a new turn.</li>
+</ul></div>
+<h4 id="faq13">Shootouts</h4>
+<p><b>Step 1. Make Plays</b></p>
+<p>Winner (of Lowball), or first player clockwise from winner if winner has no dudes in fight gets the first opportunity to perform a Shootout ​ability.</p>
+<p>Shootout ​abilities must come from a dude in the fight, from cards attached to a dude in the fight, from an Action card, or move someone into the fight. A player may use a React printed on any card if the relevant trigger is met.</p>
+<p>A card ability may be used to move a dude into or out of a posse from/to the same location as the shootout, as entering or leaving a posse fulfils the movement requirement of any such ability.</p>
+<p>Each player with dudes in the fight may perform an ability when it is their turn until all players pass, even if they have previously passed during this round of the fight. However, once all players have passed the step ends immediately</p>
+<p>The shootout ends if at any point there is only one posse with dudes left in the shootout, that posse wins, card abilities may not be used to move dudes back in to an empty posse, the fight has already finished.</p>
+<p><b>Step 2. Pick Yer Shooter</b></p>
+<p>Any dude in each posse may be chosen, even if not controlled by the Leader or Mark. Card effects may determine this choice.</p>
+<p><b>Step 3. Draw!</b></p>
+<p>If the lead shooter has zero bullets, they contribute nothing, all other dudes, including those with zero bullets, contribute 1 only, choosing a zero bullet dude as lead shooter if there is any other option reduces your shooting ability.</p>
+<p>Players should determine how much of their Draw bonus they will use then discard simultaneously. Each player may, if they wish, examine their opponents discarded cards, but only after revealing their own discards.</p>
+<p><b>Step 4a. Reveal</b></p>
+<p>Reveal effects apply first, before any Resolution plays can be made.</p>
+<p>Reveal effects are only applied to, or as a result of, the initially revealed hands this round, they do not get a chance to trigger during Resolution if a hand is changed by a Resolution effect</p>
+<p>Reveal effects happen simultaneously, if either player believes it matters, the Winner can choose the order to process them.</p>
+<p>Reveal effects normally apply for that round, and continue to do so if the hand is changed</p>
+<p>The value of a joker is declared as part of Reveal and before Resolution ​plays. You may view your opponents hand before declaring the suit and value of your joker, but once declared, it cannot be changed.</p>
+<p><b>Step 4b. Resolution plays</b></p>
+<p>Winner (of Lowball), or first player clockwise from winner if winner has no dudes in fight gets the first opportunity to perform a Resolution ​ability.</p>
+<p>Resolution ​abilities must come from a dude in the fight, from cards attached to a dude in the fight, from an Action card, or move someone into the fight. A player may use a React printed on any card if the relevant trigger is met.</p>
+<p>Note: Cheatin' ​cards are not React ​cards and are played during the Resolution step alongside other Resolution plays</p>
+<p>A Cheatin' ability may only be used when another player has a Cheatin' hand.If you are the only player Cheatin’ you may not use a Cheatin’ ability.</p>
+<p>Cheatin' resolution abilities require that a different player is currently Cheatin' and they haven’t already had a Cheatin' ability used against them to their hand this draw. A currently legal hand cannot have a Cheatin' ability used against it, even if that hand was previously illegal.</p>
+<p>If a draw hand that was legal on reveal is changed as a result of a resolution ability, it may now be treated as a Cheatin' hand, the requirement is that the hand be Cheatin' at the time the resolution ability is played.</p>
+<p>A player may only have one Cheatin' ability triggered by their draw hand per resolution step, regardless of how many times their hand changes to or from legal to Cheatin' during that resolution step.</p>
+<p><b>Step 5. Take Yer Lumps</b></p>
+<p>Modifiers to hand rank are cumulative and last for the round</p>
+<p>Modifiers that take a hand rank below 1 or above 11 are still there but not counted for casualties, modifiers back the other way have to bring it back below the minimum or maximum (ie if a hand has rank 8, has modifiers giving it +6 and ­2 it is still above 11 and counts as being rank 11)</p>
+<p>If hands are exactly tied, there is no winner or loser for that round, the leader chooses casualties first.</p>
+<p>There is no suit comparison, two (eg) straight flushes with the same numeric values are an exact tie regardless of suit.</p>
+<p>Each player must try to 'fairly cover' casualties as exactly as possible, you must discard one dude if you have one casualty (you cannot ace a dude for one casualty), and must ace all your dudes if your casualty number is twice or more the number of dudes you have in the posse.</p>
+<p>The loser of the round first chooses all their dudes that will become casualties and what will happen to them. After nominating all their casualties, each casualty is resolved one at a time. Reactions to the loser taking casualties (Takin Ya With me, Hot Lead Flying) are played after the loser finishes.</p>
+<p>When the loser has resolved their casualties, the winner of the round then chooses theirs and then resolves them in the same way.</p>
+<p>Card abilities that happen when a dude is being discarded or aced as a casualty (especially “healing” reacts) can change or prevent the discard or acing from taking place, this still counts for the purpose of fulfilling casualty numbers.</p>
+<p>Sidekicks attached to a dude selected as a casualty can still be selected in the same round as the dude has not yet left play.</p>
+<p><b>Step 6. Run or Gun</b></p>
+<p>Dudes that flee count as moving, even if the shootout is in their own home</p>
+<p>You may choose to have some dudes run and some stay, this can include the original mark if this is a shootout resulting from a callout.</p>
+<p><b>Step 7. Chamber another Round</b></p>
+<p>If both posses still have dudes remaining, another round of the shoutout happens automatically.</p>
+<p>If not, all shootout effects end and the game returns to where it was, or the job is resolved</p>
+<h3 id="faq14">General Rulings</h3>
+<h4 id="faq15">Discarding cards</h4>
+<p>Whenever someone makes a Noon or Shootout play using an action card, that card does not go to the discard pile until the play is over. For example, if an action card such as Bounty Hunter is played to call out a wanted dude, that will start a shootout. The Bounty Hunter card itself is placed to one side, and is only discarded after the shootout when the play ends and it is time for the next player to make a Noon play.</p>
+<h4 id="faq16">Cheatin’</h4>
+<p>If a card is modified from its original value, determine whether you have a cheatin' hand with the modified value—the printed value doesn't matter once it's been altered.</p>
+<h4 id="faq17">Jobs</h4>
+<p>The mark’s location is defined during step 4, “Saddle Up”, when the leader’s posse moves. Even if the mark subsequently moves (eg by Pistol Whip or fleeing under step 6), the job can still succeed if the attacking posse is there at the end of the job shootout.</p>
+<p>The attacking posse only needs one dude to remain to claim victory, even if the original leader dies or is sent home</p>
+<p>If the job was created by an ability on a dude and that dude dies or is discarded, keep them to one side until the job is resolved in case the job text needs referencing (they still count as having been aced or discarded for the purpose of other card effects).</p>
+<p>The Leader starting the job only boots if the card requires it as a cost (eg: A Coach Comes To Town does not require the leader to boot, Ambush does)</p>
+<p>Under Step 1: Start the Job, there is an additional requirement that if a job was started by a spell, the dude who cast that spell must be selected as the job's leader.</p>
+<p>Sometimes a Job will place additional requirements on a posse. If those requirements aren't met after the posse is formed, then it is considered to be an illegal posse. If the leader has an illegal posse, the job immediately fails. If the mark has an illegal posse, the job automatically succeeds. In either case, proceed to Step 5.</p>
+<h4 id="faq18">Sidekicks</h4>
+<p>A dude may attach any number of sidekicks.</p>
+<p>The sidekick must be attached to a dude in the posse in order to be used</p>
+<p>Sidekicks cover a casualty in the same way as dudes do, they don’t reduce the number taken, they count as one.</p>
+<p>If another card effect checks the bullet rating of a casualty, a sidekick has 0 bullets</p>
+<p>Cannot be used to replace a casualty required by, for example, Pinned Down</p>
+<p>Can be selected as a casualty if the dude attached to has already been selected for that round, all casualties are selected then each is resolved.</p>
+<h4 id="faq19">Actions and Abilities</h4>
+<p>The first sentence after the colon is a requirement that defines whether an ability can be used. NB, a requirement is not a cost, negating costs does not remove the requirement. All other clauses after the first sentence must be done if possible.</p>
+<p>Actions are a type of card that have Abilities printed on them. Other cards also have Abilities, using them is not performing an action, it is making a play.</p>
+<h4 id="faq20">Weapons</h4>
+<p>Add their bullet bonus (if any) to the dude they’re attached to even when booted, unless a card effect says otherwise</p>
+<h4 id="faq21">Uniqueness</h4>
+<p>You check for Unique status at the point of entering play, if while a card is in play another copy goes to Boot Hill (eg through Ace in the Hole) this has no effect on the card while it is still in play, it does make it harder to return the card to play (eg with Raising Hell).</p>
+<h4 id="faq22">Bounties</h4>
+<p>You only get the bounty from other players wanted Dudes, not yours.</p>
+<p>A dude with no bounty is not wanted, all dudes with at least one bounty are wanted.</p>
+<p>If a Dude leaves a posse (eg Pistol Whip) and then reenters (eg The Stakes Just Rose), they count as entering the posse and receive a second bounty if for a job that makes you wanted or in a shootout on private ground</p>
+<p>Card effects that add to a bounty may target dudes with no bounty unless they say otherwise</p>
+<h4 id="faq23">Movement</h4>
+<p>As long as a Dude remains unbooted they may continue performing move actions</p>
+<h2 id="faq24">Specific card rulings</h2>
+<h3 id="faq25">Outfits</h3>
+<h4 id="faq26">Law Dogs</h4>
+<p>You only need to boot enough dudes to exceed the target influence, not all your dudes.</p>
+<h4 id="faq27">The Sloane Gang</h4>
+<p>The control point is gained during Sundown, after victory conditions are checked at the start of Sundown so cannot count for that turn.</p>
+<p>If someone puppets your dude after you use this ability, you still get to choose whether to add a control point or take ghost rock, and if you choose the latter you gain the ghost rock, not the player who puppeted your dude.</p>
+<h3 id="faq28">Dudes</h3>
+<h4 id="faq29">Arnold McCadish</h4>
+<p>The dude still counts as a casualty for other effects (eg Takin’ Ya With Me)</p>
+<p>Attached cards stay with the dude, they’re not at any point actually discarded</p>
+<p>Can be used to save a dude who was originally aced, but is now being discarded due to another card effect e.g. Dr Emanuel Ashbel</p>
+<h4 id="faq30">Barton Everest</h4>
+<p>Trait triggers on reveal (step 4a above) and lasts for that round, is cumulative with other hand rank modifiers and continues to apply if Barton is aced or leaves the shootout.</p>
+<p>Jokers do not make a hand Cheatin’, an illegal hand must have two cards of the same suit and value excluding jokers.</p>
+<h4 id="faq31">Clementine Lepp</h4>
+<p>A Bounty Hunter can be played against Clementine, but will have no effect and is immediately removed from play.</p>
+<h4 id="faq32">Dr Dawn Edwards / Eve Henry</h4>
+<p>If brought into play by the discard of the other, they enter play unbooted in the normal manner, effects do not carry over.</p>
+<p>They do not enter the Shootout</p>
+<p>You can only search your deck, not your discard pile or hand.</p>
+<p>They must actually be discarded, effects that prevent discard (eg Arnold McCadish) prevent the trigger for the trait.</p>
+<p>You may search your deck even if you know the card is not present as that knowledge is not public (it may be in your hand, etc)</p>
+<h4 id="faq33">The Fixer</h4>
+<p>Discard the cards from the top of your deck</p>
+<h4 id="faq34">Fred Aims</h4>
+<p>His trait defines his base influence (as if it were printed in the chip), other modifiers still apply.</p>
+<h4 id="faq35">The Ghostly Gun</h4>
+<p>If his ability is used when he is the last member of his posse the shootout ends and you skip to step 7 as per <a href="#rop36">shootout rules</a>.</p>
+<p>It is a Resolution ability, Cheatin’ abilities may still be played on the hand he is now in if, at the time the Cheatin' ability is played the hand is illegal and his owner hasn’t already been targeted by a Cheatin' ability that draw.</p>
+<p>His value must be declared when you use the ability</p>
+<p>His value counts as the value declared only for the purpose of determining if the hand is illegal</p>
+<h4 id="faq36">Harold Aimslee</h4>
+<p>You must have a non­Weapon Gadget in your discard pile in order to use the ability and discard a card</p>
+<h4 id="faq37">Irving Patterson</h4>
+<p>You gain the ghost rock if he is the Leader or Target as per <a href="#rop34">shootout rules</a>, as well as when he joins a posse formed by someone else.</p>
+<h4 id="faq38">Ivor Hawley</h4>
+<p>His trait checks to see if he has one (or more) hexes attached and if so gives him the bonus, it’s not a one­per­hex bonus.</p>
+<h4 id="faq39">James Ghetty</h4>
+<p>The Ghost Rock may be used to pay for an Auto Revolver (or other Goods if Concealed Weapons has been played).</p>
+<p>May not be used to pay secondary costs, such as paying for an Abomination brought into play using Raising Hell</p>
+<h4 id="faq40">Jarrett Blake</h4>
+<p>The move does not boot him or his target.</p>
+<h4 id="faq41">Jon Longstride</h4>
+<p>Allows an ability to be reused later in the turn, does not require or allow immediate use</p>
+<h4 id="faq42">Kevin Wainwright</h4>
+<p>A Peacemaker does not prevent Kevin from reverting to a draw at the end of Sundown, his ability grants a temporary boost.</p>
+<p>Moving is a requirement of the ability, so he must actually change location (ie start in a different location to the Huckster)</p>
+<p>The Huckster does not need to be under your control.</p>
+<h4 id="faq43">Lawrence Blackwood</h4>
+<p>His CPs are not set to 1 by his trait, other modifiers (eg from the Sloane Gang outfit) still apply.</p>
+<h4 id="faq44">Lilian Morgan</h4>
+<p>The Ghost Rock may be used to pay for an Auto Revolver (or other Goods if Concealed Weapons has been played).</p>
+<p>May not be used to pay secondary costs, such as paying for an Abomination brought into play using Raising Hell</p>
+<h4 id="faq45">Maria Kingsford</h4>
+<p>She does not add her bounty to her Huckster check when using a hex to enter the shootout</p>
+<h4 id="faq46">Mortimer Parsons</h4>
+<p>After being sent home, his influence can still be modified using other card effects.</p>
+<h4 id="faq47">Philip Swinford Exp</h4>
+<p>In a multi­player game, you do not need to be in the shootout to use his ability i.e. you do not need a draw hand.</p>
+<h4 id="faq48">Nicodemus Whateley</h4>
+<p>Can boot to give himself a control point.</p>
+<p>At sundown, or when moving home, he loses all control points, not just those gained from his ability.</p>
+<h4 id="faq49">Prescott Utter</h4>
+<p>His trait defines his base bullets and influence (as if printed on the card), other modifiers still apply</p>
+<h4 id="faq50">QUATERMAN</h4>
+<p>Only cards attached to QUATERMAN can affect its bullets.</p>
+<p>Cannot use abilities that require him to boot.</p>
+<p>Can go on Jobs at other locations, because it is the job rules that boot it, not the job card itself.</p>
+<p>Can be brought into play elsewhere using the Stagecoach Office</p>
+<p>Can be brought into play using Recruitment Drive, but the Mad Scientist must still boot in a controlled location and pass a skill check.</p>
+<h4 id="faq51">Ramiro Mendoza</h4>
+<p>You must pay the ghost rock if Mendoza is the Leader or the Target, as per <a href="#rop34">shootout rules</a>, as well as when he joins a posse formed by someone else.</p>
+<p>You must have the ghost rock when declaring he’s joining, you cannot use ghost rock gained through, for example, Irving Patterson’s trait.</p>
+<p>If Mendoza is wanted and his controller doesn’t pay him, he is discarded (and leaves town), thus no bounty is rewarded, he was neither discarded during a shootout nor by a card ability.</p>
+<p>If using an ability to move Mendoza into an existing shootout, he is still joining a posse and still demands payment</p>
+<h4 id="faq52">Remy LaPointe</h4>
+<p>His ability cannot raise his bullet rating above 5, even if he has bonuses from other sources such as weapons.</p>
+<h4 id="faq53">Silas Aims</h4>
+<p>His trait defines his base bullets(as if it were printed on the card), other modifiers still apply.</p>
+<h4 id="faq54">Sloane</h4>
+<p>Does not enter play wanted, but once she has a bounty it cannot be reduced below the stated minimum</p>
+<p>Does not grant booted dudes the ability to join a posse</p>
+<p>Your dudes in her location may join a posse without booting even if she does not.</p>
+<p>Must still boot to start the job if the job ability requires the leader to boot</p>
+<h4 id="faq55">Smiling Tom</h4>
+<p>Cannot form or join a posse for a job unless there is already a Fourth Ring dude at the location of the mark.</p>
+<h4 id="faq56">Tommy Harden</h4>
+<p>Trait triggers on reveal of a Cheatin’ hand (step 4a above) and lasts for that round, is cumulative with other hand rank modifiers and continues to apply both if Tommy is aced or leaves the shootout and if the hand subsequently becomes legal through other card effects.</p>
+<h4 id="faq57">William Specks</h4>
+<p>As inventing a gadget requires a Mad Scientist to boot, William cannot also boot to reduce the cost of a gadget he is inventing.</p>
+<h3 id="faq58">Deeds</h3>
+<h4 id="faq59">1st Baptist Church</h4>
+<p>The extra card is gained when hands are refilled during Sundown, after Victory Conditions are checked but before effects such as Yan Li’s Tailoring wear off.</p>
+<p>It only affects the Play Hand, not Draw Hands</p>
+<h4 id="faq60">Bunkhouse</h4>
+<p><b>Technical Errata​:</b> It should be read as “Dudes with 0 or 1 influence (excluding any modifiers from this deed) have +1 influence while at this deed."</p>
+<h4 id="faq61">Carter’s Bounties</h4>
+<p>Can be used to move a dude into the posse from the same location, including a dude that had previously left the posse.</p>
+<h4 id="faq62">General Store</h4>
+<p>As with all card effects that attach goods and spells, the goods can be attached to a booted dude, and to a dude in a location you don’t control.</p>
+<h4 id="faq63">Gomorra Parish</h4>
+<p>Cards aced are still in Boot Hill and count for Uniqueness</p>
+<h4 id="faq64">Pearly’s Palace</h4>
+<p>Using this ability, you get to make a shootout play before the normal round of shootout plays begins. Once done, shootout plays are made as per the rulebook, starting with the Winner. If you are the Winner and control Pearly’s Palace, this means you get to make two consecutive shootout plays if you wish.</p>
+<h4 id="faq65">Pony Express</h4>
+<p>You must have a card in your hand to use the ability</p>
+<h4 id="faq66">Undertaker</h4>
+<p>If a shootout takes place at the Undertaker, control is determined *after* each casualty arrives in Boot Hill, and so that casualty does not count their influence towards control of the deed.</p>
+<p>Casualties are chosen and resolved one at a time, so after each dude is aced in a shootout, control of the Undertaker is rechecked before paying out the ghost rock.</p>
+<p>If you ace a dude card from your hand, using cards such as Raising Hell, you can claim the 2 ghost rock.</p>
+<h3 id="faq67">Actions</h3>
+<h4 id="faq68">Ambush</h4>
+<p>Check the status of the Mark each time a dude enters the leader’s posse, and if the mark is not wanted at that point, raise the bounty on the dude by 1.</p>
+<p>If the mark has been aced or discarded (or otherwise left play) at the point a dude enters the leader’s posse, the mark cannot be wanted and therefore the bounty on the dude is increased by one.</p>
+<h4 id="faq69">Bad Company</h4>
+<p>Responsibility is defined in the same way as bounty payments, it must be the direct result of a card ability or as a shootout casualty.</p>
+<h4 id="faq70">Bottom Dealin’</h4>
+<p>After receiving your new hand from your opponent’s deck, you can interact with that hand.</p>
+<p>The Ghostly Gun, Pair of Six Shooters and Doyle’s Hoyle can all be used to switch cards in your new hand.</p>
+<p>As per the errata regarding other players cards, Fetch cannot be used to take your opponent’s cards into your play hand</p>
+<p>The player who plays Bottom Dealin’ chooses the suit and value of any Jokers that are revealed.</p>
+<h4 id="faq71">Bounty Hunter</h4>
+<p>The Gunslinger becomes wanted if at an opponents private location as per <a href="#rop35">shootout rules</a>.</p>
+<p>The Gunslinger is under the control of the player that played the card</p>
+<h4 id="faq72">Coachwhip</h4>
+<p>If used during Shootout Resolution, the dude must be in a posse as per <a href="#rop36">shootout rules</a>.</p>
+<h4 id="faq73">Cheatin Varmint</h4>
+<p>Playing this card to affect an opponents hand in Lowball makes them more likely to be the Winner</p>
+<p>You may use its effect to reduce your draw hand</p>
+<p>Lasts for that round, is cumulative with other hand rank modifiers</p>
+<p>Any player with a draw hand may have its rank reduced, even if used as a Cheatin' resolution, it does not have to be the Cheatin' hand</p>
+<p>When you play the card, choose which ability to use if either is valid, you may not use both from one copy of the card in one play.</p>
+<h4 id="faq74">Concealed Weapons</h4>
+<p><b>Technical Errata​:</b> It should be read as "<b>Noon​:</b> Your dudes may attach goods and spells (as Shoppin') at locations you do not control, and as Shootout plays"</p>
+<p>Does not allow you to attach goods or spells to a booted dude.</p>
+<h4 id="faq75">Election Day Slaughter</h4>
+<p>Players get to unboot an in town dude before declaring whether they will oppose the job.</p>
+<h4 id="faq76">Fresh Horses</h4>
+<p>Horses affected may use printed abilities again this turn, they are not required to do so immediately</p>
+<h4 id="faq77">Good Stiff Drink</h4>
+<p>Allows an ability to be reused later in the turn, does not require or allow immediate use</p>
+<h4 id="faq78">Hex Slingin'</h4>
+<p>Lasts for that round, is cumulative with other hand rank modifiers</p>
+<h4 id="faq79">Hired Guns</h4>
+<p>Can be legally played if there are no dudes in your discard pile, but you must have cards in your discard pile.</p>
+<h4 id="faq80">Hot Lead Flying</h4>
+<p>"After you take casualties" is a timing window description, not a reference to a number of casualties, and losing the round is something that can happen even taking zero casualties (for example if Sheriff Dave Montreal’s trait has applied that round).</p>
+<h4 id="faq81">It’s Who You Know</h4>
+<p>The dudes’ influence is only used to determine the number of cards drawn when building your draw hand. Effects that play off bullets e.g. Shotgun still use the dude’s bullet rating.</p>
+<h4 id="faq82">Kidnappin’</h4>
+<p>Each time a dude enters the leader’s posse, raise the bounty on the dude by 1 (in addition to any bounty received for shootin’ in a private location).</p>
+<h4 id="faq83">Magical Distraction</h4>
+<p>Does not replace your actual hand, does not prevent you also being hit by a Cheatin' card</p>
+<p>Sets your base hand rank for the round, modifiers still apply, changes to the content of your actual hand have no further effect (eg Ace in the Hole, Bottom Dealin)</p>
+<p>The dude that discards the hex is not making the pull, so cannot be combined with Doyle’s Hoyle.</p>
+<p>You must have a dude with a hex attached in your posse in order to play the card</p>
+<h4 id="faq84">Make the Smart Choice</h4>
+<p>You may target your own dudes with this ability</p>
+<p>The bullet penalty lasts until end of shootout, so if the dude is moved back into that shootout the penalty still applies, but the next shootout they’re back to normal.</p>
+<h4 id="faq85">Pinned Down</h4>
+<p>By first casualty, this effect means the next casualty to be taken by the opposing player after this ability is played.</p>
+<p><b>Amendment​:</b> If multiple effects have been played that claim the first casualty, the player selecting that casualty can select which applies. Once that first casualty has been chosen, any other effects currently in play that require a dude to be selected as the first casualty are ignored.</p>
+<p>The required number of casualties are chosen and then each is resolved, so a Sidekick attached to a Pinned Down dude may still be used. If the dude is the only casualty, the sidekick goes when they go.</p>
+<p>If there are enough other dudes or sidekicks to cover all casualties, the dude can be discarded.</p>
+<h4 id="faq86">Prayer</h4>
+<p>Can be used to attach the Miracle as a shootout action, and in an uncontrolled location as both a Noon and Shootout play.</p>
+<h4 id="faq87">Run Em Down</h4>
+<p>Each of your moving dudes must have a horse</p>
+<p>The opposing dude may already be booted</p>
+<p>You must have at least one dude in play with a horse in order to play the card</p>
+<p>Any of your dudes at the opposing dude’s location may call them out, it does not have to be someone that moved in</p>
+<h4 id="faq88">The Stakes Just Rose</h4>
+<p>The dude joining the posse does not boot.</p>
+<p>Can be played on a booted dude</p>
+<p>Can be played on a dude at the same location as the shootout but not currently in either posse, including a dude that has previously left a posse</p>
+<h4 id="faq89">Takin’ Ya With Me</h4>
+<p>Take the value at the point the card is resolved (ie, the dudes are in Boot Hill with no modifiers). There is no card memory.</p>
+<p>If a casualty has not left play (eg thanks to Arnold McCadish) then their current Bullet value counts, including all modifiers (eg Weapons, Pistol Whip)</p>
+<p>Must be played after loser of the round takes their casualties, but before the winner does, cannot be played after the winner takes casualties.</p>
+<p>Cards without a bullet stat (such as sidekicks) count as having zero bullets for this card</p>
+<p>Token dudes that have been aced are out of play when this effect applies, and so are considered to have zero bullets.</p>
+<p>Can be played even if the loser took no casualties (eg Dave Montreal was present), the trigger is a timing step—no casualties counts as zero bullets in this case</p>
+<p>Adds on to the number of casualties the winner must chose, does not create another casualty step</p>
+<h4 id="faq90">Unprepared</h4>
+<p><b>Technical Errata​:</b> It should be read as "<b>Shootout​:</b> Choose a dude. Boot that dude and their attached cards. That dude gets –1 bullets and cannot use abilities. Their attached cards lose all traits, abilities, and bullet bonuses."</p>
+<p>Effects last until end of shootout</p>
+<h3 id="faq91">Goods</h3>
+<h4 id="faq92">Auto-Revolver</h4>
+<p>Costs (including booting the mad scientist) must still be paid, so the scientist must boot in a controlled location and pass a skill check.</p>
+<p>The dude carrying the Auto­Revolver does not need to be in the shootout in order to draw the additional card</p>
+<p>If you have multiple Auto­Revolvers in play, each can be used to draw an additional card.</p>
+<h4 id="faq93">Auto Cattle-Feeder</h4>
+<p>The scientist does not have to be at the ranch.</p>
+<p>More than one can be attached to the same deed.</p>
+<h4 id="faq94">Flame-Thrower</h4>
+<p>If the ability has been used, the controller must take an extra casualty if they lose the round.</p>
+<p>In the event of tied hand ranks, the lowest poker hand still counts as the loser for this effect.</p>
+<p>In the event of an exact tie for hand value, there is no winner or loser (eg identical hands)</p>
+<h4 id="faq95">Force Field</h4>
+<p>This can raise your hand rank to be equal to your opponent and force both players to take a casualty</p>
+<p>It’s a +X bonus set when the ability is used the maximum +X takes into account other bonuses. Abilities played subsequently may further increase or decrease hand ranks.</p>
+<p>May be used multiple times in the same round whenever hand ranks are different</p>
+<h4 id="faq96">Holy Wheel Gun</h4>
+<p>By first casualty, this effect means the next casualty to be taken by the opposing player after this ability is played.</p>
+<p>If multiple effects have been played that claim the first casualty, the player selecting that casualty can select which applies. Once that first casualty has been chosen, any other effects currently in play that require a dude to be selected as the first casualty are ignored.</p>
+<h4 id="faq97">Outlaw Mask</h4>
+<p>A dude may equip more than one Outlaw Mask.</p>
+<h4 id="faq98">Pair of Six Shooters</h4>
+<p>If this makes your hand illegal and you have not been hit by a Cheatin’ card this resolution phase, you may now be.</p>
+<p>Can be used during Lowball</p>
+<h4 id="faq99">Telepathy Helmet</h4>
+<p>If a dude wearing this is hit by Unprepared, the dude is not affected but the Helmet is now blanked. Subsequent shootout actions can therefore affect this dude, including a second Unprepared.</p>
+<h4 id="faq100">Whiskey Flask</h4>
+<p>You must have a card in your hand to use the ability</p>
+<h3 id="faq101">Spells</h3>
+<h4 id="faq102">Ace in the Hole</h4>
+<p>Can be used as a reaction during a shootout by a Huckster not in the shootout, the rule of presence only applies to Resolution and Shootout actions.</p>
+<h4 id="faq103">Fetch</h4>
+<p>If used to bring a Joker into your hand, the Joker is not aced.</p>
+<p>Cannot be used to put another player’s card into your play hand</p>
+<p>Can be used to put Ghostly Gun, Doyle’s Hoyle, and similar cards that have been added to your draw hand via Resolution plays, back into your play hand.</p>
+<h4 id="faq104">Holy Roller</h4>
+<p>The +1 bullets applies for the duration of the shootout.</p>
+<p>Protection from being chosen as a casualty applies to the current round only.</p>
+<h4 id="faq105">Lay on Hands</h4>
+<p>The dude must always be at or adjacent to the Blessed's location</p>
+<h4 id="faq106">Mirror, Mirror</h4>
+<p>Can be cast on a dude with the same bullet type as the Huckster.</p>
+<h4 id="faq107">Puppet</h4>
+<p>Can be used to take control of an opposing dude that you already have a copy of in play.</p>
+<p>If you have puppeted an opposing dude, you can still play your own copy of that dude as you don’t have a copy in play that you own.</p>
+<p>If you puppet an opposing dude, and then overlay it with an experienced version, you retain control of that dude after Sundown because control reverts to the owner, which is now you.</p>
+<h4 id="faq108">Raising Hell</h4>
+<p>If your Boot Hill contains multiple copies of the same unique Abomination (eg through Ace in the Hole) then that Abomination cannot enter play.</p>
+<p>The Abomination that enters play may be the card aced from your draw hand.</p>
+<p>The Abomination joins the hucksters posse therefore enters play at the location of the shootout.</p>
+</article>
+
+</div>
+{% endblock %}
