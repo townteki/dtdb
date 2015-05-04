@@ -67,7 +67,7 @@ DTDB.smart_filter = {};
 				add_string_sf('flavor', operator, values);
 				break;
 			case "a":
-				add_string_sf('artist', operator, values);
+				add_string_sf('illustrator', operator, values);
 				break;
 			case "":
 				add_string_sf('title', operator, values);

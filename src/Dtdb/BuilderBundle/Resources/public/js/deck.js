@@ -124,7 +124,7 @@ DTDB.data_loaded.add(function() {
 		$('#suit').append(label);
 	});
 	$('#suit').button();
-	$('#suit').children('label:first-child').each(function(index, elt) {
+	$('#suit').children('label').each(function(index, elt) {
 		$(elt).button('toggle');
 	});
 
@@ -423,7 +423,30 @@ $(function() {
 						container : 'body',
 						placement : 'bottom',
 						trigger : 'click',
-						title : "<h5>Smart filter syntax</h5><ul style=\"text-align:left\"><li>by default, filters on title</li><li>x &ndash; filters on text</li></ul>"
+						title : "<h5>Smart filter syntax</h5><ul style=\"text-align:left\">" +
+								"<li>by default, filters on title</li></ul>" +
+								"<h5>Criteria</h5>" +
+								"<ul style=\"text-align:left\"><li>x: card text</li>" +
+								"<li>e: expansion name</li>" +
+								"<li>t: card type</li>" +
+								"<li>k: keyword</li>" +
+								"<li>g: gang (l, s, f ,m, -)</li>" +
+								"<li>s: bullet type (stud, draw, bonus)</li>" +
+								"<li>r: cost</li>" +
+								"<li>v: value</li>" +
+								"<li>u: upkeep</li>" +
+								"<li>p: production</li>" +
+								"<li>b: bullet value</li>" +
+								"<li>i: influence</li>" +
+								"<li>c: control</li>" +
+								"<li>w: wealth, starting stash</li>" +
+								"<li>f: flavor text</li>" +
+								"<li>a: artist name</li></ul>" +
+								"<h5>Operator</h5>" +
+								"<ul style=\"text-align:left\"><li>: &ndash; equals/includes</li>" +
+								"<li>! &ndash; different from</li>" +
+								"<li>< &ndash; less than</li>" +
+								"<li>> &ndash; more than</li></ul>"
 					});
 	
 	var converter = new Markdown.Converter();
