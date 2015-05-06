@@ -22,22 +22,28 @@ DTDB.tip = {};
 		if (card.strength != null)
 			type += '<p>Strength <b>' + card.strength + '</b></p>';
 		var image_svg = ''; 
-		if($('#dtdb_svg_hex').length && typeof InstallTrigger === 'undefined') {
+		//if($('#dtdb_svg_hex').length && typeof InstallTrigger === 'undefined') {
 			// no hexagon for Firefox, bad boy!
-			image_svg = '<div class="card-image"'+(card.imagesrc ? ' style="background-image:url('+card.imagesrc+')"': '')
-			+ '><svg width="103px" height="90px" viewBox="0 0 677 601" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><mask id="mask"><use xlink:href="#rect" style="fill:white" /><use xlink:href="#hex" style="fill:black"/></mask><use xlink:href="#rect" mask="url(#mask)"/><use xlink:href="#hex" style="stroke:black;fill:none;stroke-width:15" /></svg></div>';
+			//image_svg = '<div class="card-image"'+(card.imagesrc ? ' style="background-image:url('+card.imagesrc+')"': '')
+			//+ '><svg width="103px" height="90px" viewBox="0 0 677 601" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><mask id="mask"><use xlink:href="#rect" style="fill:white" /><use xlink:href="#hex" style="fill:black"/></mask><use xlink:href="#rect" mask="url(#mask)"/><use xlink:href="#hex" style="stroke:black;fill:none;stroke-width:15" /></svg></div>';
+		//}
+		if (card.imagesrc){
+			image_svg = '<div class="col-sm-4 pull-left"><img src="'+card.imagesrc+'" class="img-responsive"></div><div class="col-sm-8">'			
+		} else {
+			image_svg = '<div class="col-sm-12">'
 		}
 		$(this).qtip(
 				{
 					content : {
-						text : image_svg
+						text : '<div class="row">'
+							    + image_svg
 								+ '<h4>'
 								+ (card.uniqueness ? "&diams; " : "")
 								+ card.title + '</h4>' + type
-								+ '<div class="card-text">' + DTDB.format.text(card) + '</div>'
+								+ '<div class="card-text ">' + DTDB.format.text(card) + '</div>'
 								+ '<p class="card-gang" style="clear:right"><span class="pull-right">' + card.gang + ' &ndash; ' + card.pack + '</span>'
 								+ DTDB.format.face(card)
-								+ '</p>'
+								+ '</p></div></div>'
 					},
 					style : {
 						classes : 'qtip-bootstrap qtip-dtdb'
