@@ -214,7 +214,6 @@ class ReviewController extends Controller
                 r.card_id
                 from review r
                 join user u on r.user_id=u.id
-                where r.datecreation > DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)
                 order by r.datecreation desc
                 limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
 

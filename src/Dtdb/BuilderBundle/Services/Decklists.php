@@ -348,7 +348,6 @@ class Decklists
 				join user u on d.user_id=u.id
 				join card c on d.outfit_id=c.id
 		        join pack p on d.last_pack_id=p.id
-		        where d.creation > DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)
 				order by creation desc
 				limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
         
@@ -404,7 +403,7 @@ class Decklists
         }
         
         if (empty($wheres)) {
-            $where = "d.creation > DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)";
+            $where = "1";
             $bindings = array();
         } else {
             $where = implode(" AND ", $wheres);
