@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 6,
+			version: 7,
 			type: 'info',
-			message: 'DoomtownDB Reloads: have a look at the change log!<br />If you experience any trouble with the card images, clearing your cache should correct the issue (ctrl+f5).'
+			message: 'Rules page added, along with several improvments. Have a look at the change log page!'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
