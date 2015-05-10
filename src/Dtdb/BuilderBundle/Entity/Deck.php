@@ -364,7 +364,7 @@ class Deck
     	$arr = array();
     	foreach($this->slots as $slot) {
     		$card = $slot->getCard();
-    		$arr[$card->getCode()] = array('qty' => $slot->getQuantity(), 'card' => $card);
+    		$arr[$card->getCode()] = array('qty' => $slot->getQuantity(), 'card' => $card, 'start' => $slot->getStart() );
     	}
     	return $arr;
     }

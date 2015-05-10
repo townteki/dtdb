@@ -89,7 +89,8 @@ class HighlightCommand extends ContainerAwareCommand
         ->executeQuery(
                 "SELECT
 				c.code card_code,
-				s.quantity qty
+				s.quantity qty,
+        		s.start start
 				from decklistslot s
 				join card c on s.card_id=c.id
 				where s.decklist_id=?
