@@ -444,7 +444,7 @@ article.rules div.insert{border:1px solid DarkOrange; display: inline-block; pad
 article.rules p.italic{font-style:italic}
 article.rules{border-top:1px dashed black;clear:both}
 article.rules nav.inner{float:right;border-left:1px solid DarkOrange;border-bottom:1px solid DarkOrange;margin-left:20px}
-article.rules table, th, td {
+article.rules table.bordered, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
