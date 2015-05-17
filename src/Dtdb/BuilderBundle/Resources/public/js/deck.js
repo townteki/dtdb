@@ -85,8 +85,19 @@ DTDB.data_loaded.add(function() {
 	$('#gang_code').empty();
 	$.each(DTDB.data.cards().distinct("gang_code").sort(
 			function(a, b) {
-				return b === "neutral" ? -1 : a === "neutral" ? 1 : a < b ? -1
-						: a > b ? 1 : 0;
+				if(b === "neutral"){
+					return -1
+				}
+				if(a === "neutral"){
+					return 1
+				}
+				if(b === "drifter"){
+					return -1					
+				}
+				if(a === "drifter"){
+					return 1					
+				}
+				return (a < b ? -1 : (a > b ? 1 : 0));
 			}), function(index, record) {
 		var example = DTDB.data.cards({"gang_code": record}).first();
 		var gang = example.gang;
