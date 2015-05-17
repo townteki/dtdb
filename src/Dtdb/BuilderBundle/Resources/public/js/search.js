@@ -24,6 +24,30 @@ DTDB.data_loaded.add(function() {
 		displayKey: 'value',
 		source: findMatches
 	});
+
+	$.each(DTDB.data.cards({type_code:'outfit'}).distinct("gang_code").sort(
+			function(a, b) {
+				if(b === "neutral"){
+					return -1
+				}
+				if(a === "neutral"){
+					return 1
+				}
+				if(b === "drifter"){
+					return -1					
+				}
+				if(a === "drifter"){
+					return 1					
+				}
+				return (a < b ? -1 : (a > b ? 1 : 0));
+			}), function(index, record) {
+		var example = DTDB.data.cards({"gang_code": record}).first();
+		var gang = example.gang;
+		var code = example.gang_code;
+
+		var option = $('<option value="'+code+'">'+gang+'</option>');
+		$('#gang').append(option);
+	});
 });
 
 $(function() {
