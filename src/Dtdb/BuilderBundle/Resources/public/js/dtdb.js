@@ -115,6 +115,10 @@ function getDisplayDescriptions(sort) {
                     id: 'sloanegang',
                     label: 'The Sloane Gang',
                     icon: ''
+                },{
+                    id: 'drifters',
+                    label: 'Drifters',
+                    icon: ''
                 }],[{
                     id: 'neutral',
                     label: 'Neutral',
@@ -265,7 +269,7 @@ function update_deck(options) {
 			if(row.icon) {
 				$('<span>').addClass(DisplaySort+'-icon').html('&'+row.icon+';').prependTo(item);
 			} else if(DisplaySort == "gang") {
-				var imgsrc = row.id == "neutral" ? "" : '<img src="'
+				var imgsrc = (row.id === "neutral" || row.id === "drifters") ? "" : '<img src="'
 					+ Url_GangImage.replace('xxx', row.id)
 					+ '.png">';
 				$('<span>').addClass(DisplaySort+'-icon').html(imgsrc).prependTo(item);
@@ -306,6 +310,7 @@ function update_deck(options) {
 			criteria = record.type_code;
 		} else if(DisplaySort === 'gang') {
 			criteria = record.gang_code;
+			if(record.gang_code === 'neutral' && record.type === "Dude") criteria = 'drifters'
 		} else if(DisplaySort === 'suit') {
 			criteria = record.suit;
 			if(record.type_code == 'joker') criteria = 'Joker';
