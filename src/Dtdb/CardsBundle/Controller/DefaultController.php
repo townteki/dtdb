@@ -42,6 +42,21 @@ class DefaultController extends Controller
 			return strtolower($type->getName());
 		}, $list_types);
 
+		$list_gangs = $this->getDoctrine()->getRepository('DtdbCardsBundle:gang')->findBy(array(), array("id" => "ASC"));
+		$gangs = array();
+		foreach($list_gangs as $gang) {
+			$gangs[] = array(
+					"name" => $gang->getName($this->getRequest()->getLocale()),
+					"code" => $gang->getCode(),
+					"code1" => $gang->getCode()[0],
+			);
+		}
+		$gangs[] = array(
+				"name" => "Neutral",
+				"code" => "neutral",
+				"code1" => '-',
+		);
+		
 		$list_shooters = $this->getDoctrine()->getRepository('DtdbCardsBundle:shooter')->findBy(array(), array("name" => "ASC"));
 		$shooters = array_map(function ($shooter) {
 		    return strtolower($shooter->getName());
@@ -69,6 +84,7 @@ class DefaultController extends Controller
 				"packs" => $packs,
 				"cycles" => $cycles,
 				"types" => $types,
+				"gangs" => $gangs,
 		        "shooters" => $shooters,
 				"keywords" => $keywords,
 				"illustrators" => $illustrators,

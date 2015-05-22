@@ -21,6 +21,29 @@
 <form method="GET" action="{{ path('cards_processSearchForm') }}" role="form">
 
 <div class="row">
+	<div class="col-sm-8">
+		<div class="form-group">
+			<label for="g">{% trans %}Gang{% endtrans %}</label>
+			<div class="btn-group btn-group-justified" data-toggle="buttons">
+				{% for gang in gangs %}<label class="btn btn-default active" style="width:20px"><input type="checkbox" name="g[]" checked value="{{ gang.code1 }}"><img src="{{ asset('/web/bundles/dtdbbuilder/images/' ~ gang.code ~ '-20.png') }}" title="{{ gang.name }}"></label>{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">		
+		<div class="form-group">
+			<label for="v">{% trans %}Rank{% endtrans %}</label>
+			<div class="row">
+			     <div class="col-sm-4">
+				<select name="vo" id="vo" class="form-control"><option value=":">=</option><option value="<">&lt;</option><option value=">">&gt;</option></select>
+			     </div>
+			     <div class="col-sm-8">
+				<input id="v" name="v" value="" class="form-control">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
 
 <div class="col-sm-4">
 
@@ -45,15 +68,11 @@
 				<input class="form-control" size="30" id="f" name="f" value="">
 			</div>
 		</div>
-    
+					
 		<div class="form-group">
-			<label for="g">{% trans %}Gang{% endtrans %}</label>
-			<div class="btn-group btn-group-justified" data-toggle="buttons">
-				<label class="btn btn-default active"><input type="checkbox" name="g[]" checked value="f"><img src="{{ asset('/web/bundles/dtdbbuilder/images/fourthring-20.png') }}" title="The Fourth Ring"></label>
-				<label class="btn btn-default active"><input type="checkbox" name="g[]" checked value="l"><img src="{{ asset('/web/bundles/dtdbbuilder/images/lawdogs-20.png') }}" title="Law Dogs"></label>
-				<label class="btn btn-default active"><input type="checkbox" name="g[]" checked value="m"><img src="{{ asset('/web/bundles/dtdbbuilder/images/morganco-20.png') }}" title="Morgan Cattle Co."></label>
-				<label class="btn btn-default active"><input type="checkbox" name="g[]" checked value="s"><img src="{{ asset('/web/bundles/dtdbbuilder/images/sloanegang-20.png') }}" title="The Sloane Gang"></label>
-				<label class="btn btn-default active"><input type="checkbox" name="g[]" checked value="-"><img src="{{ asset('/web/bundles/dtdbbuilder/images/neutral-20.png') }}" title="Neutral"></label>
+			<label for="a">{% trans %}Artist{% endtrans %}</label>
+			<div>
+				<select class="form-control" name="a" id="a"><option value="">{% trans %}any{% endtrans %}</option>{% for illustrator in illustrators %}<option value="{{ illustrator }}">{{ illustrator }}</option>{% endfor %}</select>
 			</div>
 		</div>
     
@@ -63,13 +82,6 @@
 				<label class="btn btn-default active"><input type="radio" name="d" checked value="">{% trans %}Yes{% endtrans %}</label>
 				<label class="btn btn-default"><input type="radio" name="d" value="<now">{% trans %}No{% endtrans %}</label>
 				<label class="btn btn-default"><input type="radio" name="d" value=">now">{% trans %}Only{% endtrans %}</label>
-			</div>
-		</div>
-					
-		<div class="form-group">
-			<label for="a">{% trans %}Artist{% endtrans %}</label>
-			<div>
-				<select class="form-control" name="a" id="a"><option value="">{% trans %}any{% endtrans %}</option>{% for illustrator in illustrators %}<option value="{{ illustrator }}">{{ illustrator }}</option>{% endfor %}</select>
 			</div>
 		</div>
 			
@@ -103,18 +115,6 @@
 			<label for="s">{% trans %}Shooter{% endtrans %}</label>
 			<div>
 				<select class="form-control" name="s" id="s"><option value="">{% trans %}any{% endtrans %}</option>{% for shooter in shooters %}<option value="{{ shooter }}">{{ shooter }}</option>{% endfor %}</select>
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<label for="v">{% trans %}Rank{% endtrans %}</label>
-			<div class="row">
-			     <div class="col-sm-4">
-				<select name="vo" id="vo" class="form-control"><option value=":">=</option><option value="<">&lt;</option><option value=">">&gt;</option></select>
-			     </div>
-			     <div class="col-sm-8">
-				<input id="v" name="v" value="" class="form-control">
-				</div>
 			</div>
 		</div>
 		
