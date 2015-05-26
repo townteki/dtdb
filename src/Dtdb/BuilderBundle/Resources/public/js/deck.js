@@ -495,6 +495,16 @@ $(function() {
 	$.each(History, function (index, snapshot) {
 		add_snapshot(snapshot);
 	});
+	
+	$('#menu-sort').on({
+		change : function(event) {
+			if ($(this).attr('id').match(/btn-sort-(\w+)/)) {
+				DisplaySort = RegExp.$1;
+				update_deck();
+			}
+		}
+	}, 'a');
+	
 	setInterval(autosave_interval, 1000);
 });
 function autosave_interval() {
