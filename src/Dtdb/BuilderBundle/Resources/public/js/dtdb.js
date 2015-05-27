@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 7,
+			version: 8,
 			type: 'info',
-			message: 'Rules page added, along with several improvments. Have a look at the change log page!'
+			message: 'v2.2 is here! Have a look at the <a href="'+Routing.generate('cards_changelog')+'">change log</a>!<br/>If your experience any trouble, clear your browser\'s cache (ctrl+f5).'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
