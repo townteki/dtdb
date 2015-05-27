@@ -138,6 +138,9 @@ DTDB.data_loaded.add(function() {
 	$('#suit').children('label').each(function(index, elt) {
 		$(elt).button('toggle');
 	});
+	$('#suit').children('label:last-child').each(function(index, elt) {
+		$(elt).button('toggle');
+	});
 
 	$('#pack_code').empty();
 	DTDB.data.sets().each(function(record) {
