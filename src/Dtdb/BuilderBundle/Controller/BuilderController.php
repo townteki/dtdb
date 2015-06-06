@@ -218,8 +218,8 @@ class BuilderController extends Controller
         
         /* @var $deck \Dtdb\BuilderBundle\Entity\Deck */
         $deck = $em->getRepository('DtdbBuilderBundle:Deck')->find($deck_id);
-        if (! $this->getUser() || $this->getUser()->getId() != $deck->getUser()->getId())
-            throw new UnauthorizedHttpException("You don't have access to this deck.");
+        //if (! $this->getUser() || $this->getUser()->getId() != $deck->getUser()->getId())
+        //    throw new UnauthorizedHttpException("You don't have access to this deck.");
             
             /* @var $judge \Dtdb\SocialBundle\Services\Judge */
         $judge = $this->get('judge');
@@ -273,8 +273,8 @@ class BuilderController extends Controller
         
         /* @var $deck \Dtdb\BuilderBundle\Entity\Deck */
         $deck = $em->getRepository('DtdbBuilderBundle:Deck')->find($deck_id);
-        if (! $this->getUser() || $this->getUser()->getId() != $deck->getUser()->getId())
-            throw new UnauthorizedHttpException("You don't have access to this deck.");
+        //if (! $this->getUser() || $this->getUser()->getId() != $deck->getUser()->getId())
+        //    throw new UnauthorizedHttpException("You don't have access to this deck.");
         
         $rd = array();
         $start = array();
