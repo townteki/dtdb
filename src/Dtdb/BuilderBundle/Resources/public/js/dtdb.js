@@ -393,9 +393,7 @@ function check_composition() {
 				break;
 			}
 		}
-		if(size_of_starting_posse>5){
-			$('#startingcomposition').html("Too many starting dudes.").addClass('text-danger');
-		} else if(outfit.wealth <  cost_of_starting_posse){
+		if(outfit.wealth <  cost_of_starting_posse){
 			$('#startingcomposition').html("Negative starting Ghost Rock.").addClass('text-danger');		
 		} else if(!legal){
 			$('#startingcomposition').html("More than one " + DudeLegalName + " starting.").addClass('text-danger');		

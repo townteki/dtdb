@@ -139,7 +139,7 @@ class Judge
 		if($nb != 52) {
 		    return 'deckSize';
 		}
-		if($startSize > 5 || $startGR < 0) {
+		if($startGR < 0) {
 		    return 'startingposse';
 		}
 		foreach($startDudes as $legalName => $value){
