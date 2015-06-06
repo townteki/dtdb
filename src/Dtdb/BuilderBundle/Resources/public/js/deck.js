@@ -771,11 +771,13 @@ function update_base_sets() {
 
 function build_div(record) {
 	var radios = '';
-	for (var i = 0; i <= record.maxqty; i++) {
-		radios += '<label class="btn btn-xs btn-default'
-				+ (i == record.indeck ? ' active' : '')
-				+ '"><input type="radio" name="qty-' + record.code
-				+ '" value="' + i + '">' + i + '</label>';
+	if(record.keywords == null || record.keywords.search('Token') == -1){
+		for (var i = 0; i <= record.maxqty; i++) {
+			radios += '<label class="btn btn-xs btn-default'
+					+ (i == record.indeck ? ' active' : '')
+					+ '"><input type="radio" name="qty-' + record.code
+					+ '" value="' + i + '">' + i + '</label>';
+		}
 	}
 
 	var div;

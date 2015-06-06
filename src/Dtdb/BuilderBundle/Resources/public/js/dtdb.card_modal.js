@@ -51,6 +51,10 @@ DTDB.card_modal = {};
 			});
 			if(card.code == Outfit.code) {
 				qtyelt.find('label').addClass("disabled").find('input[type=radio]').attr("disabled", true);
+			} else {
+				if(card.keywords != null && card.keywords.search('Token') != -1) {
+					qtyelt.find('label').addClass("disabled").find('input[type=radio]').attr("disabled", true);
+				}
 			}
 			
 			$('#starting').remove();
