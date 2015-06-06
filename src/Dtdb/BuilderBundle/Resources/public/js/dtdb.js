@@ -185,28 +185,7 @@ function process_deck_by_type() {
 
 	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order("type,title").each(function(record) {
 		var type = record.type_code, keywordss = record.keywords_code ? record.keywords_code.split(" - ") : [];
-		if(type == "ice") {
-			var ice_type = [];
-			 if(keywordss.indexOf("barrier") >= 0) {
-				 ice_type.push("barrier");
-			 }
-			 if(keywordss.indexOf("code gate") >= 0) {
-				 ice_type.push("code-gate");
-			 }
-			 if(keywordss.indexOf("sentry") >= 0) {
-				 ice_type.push("sentry");
-			 }
-			 switch(ice_type.length) {
-			 case 0: type = "none"; break;
-			 case 1: type = ice_type.pop(); break;
-			 default: type = "multi"; break;
-			 }
-		}
-		if(type == "program") {
-			 if(keywordss.indexOf("icebreaker") >= 0) {
-				 type = "icebreaker";
-			 }
-		}
+
 		var gang_code = '';
 		if(record.gang != Outfit.gang) {
 			gang_code = record.gang_code;
@@ -216,7 +195,8 @@ function process_deck_by_type() {
 		bytype[type].push({
 			card: record,
 			qty: record.indeck,
-			gang: gang_code
+			gang: gang_code,
+			start: record.start
 		});
 	});
 	bytype.outfit = [{
@@ -498,13 +478,14 @@ var GangColors = {
 	"weyland-consortium": "#006400"
 };
 
+var types = ["outfit", "dude", "deed", "goods", "spell", "action"];
+var typesstr = ["Outfit", "Dude", "Deed", "Goods", "Spell", "Action"];
+
 function build_bbcode() {
 	var deck = process_deck_by_type(SelectedDeck);
 	var lines = [];
 	lines.push("[b]"+SelectedDeck.name+"[/b]");
 	lines.push("");
-	var types = ["outfit", "event", "hardware", "resource", "icebreaker", "program", "agenda", "asset", "upgrade", "operation", "barrier", "code-gate", "sentry", "none", "multi"];
-	var typesstr = ["Outfit", "Event", "Hardware", "Resource", "Icebreaker", "Program", "Agenda", "Asset", "Upgrade", "Operation", "Barrier", "Code Gate", "Sentry", "Other", "Multi"];
 	$.each(types, function (n, type) {
 		if(deck[type] != null) {
 			if(type == "outfit") {
@@ -521,11 +502,15 @@ function build_bbcode() {
 				var count = deck[type].reduce(function (prev, curr) { return prev + curr.qty; }, 0);
 				lines.push("[b]"+typesstr[n]+"[/b] ("+count+")");
 				$.each(deck[type], function (n, slot) {
+	            	var start ="";
+	            	for(var loop=slot.start; loop>0; loop--) start+="*";
 					lines.push(slot.qty + 'x [url=http://dtdb.co/'+DTDB.locale+'/card/'
 					 + slot.card.code
 					 + ']'
 					 + slot.card.title
-					 + '[/url] [i]('
+					 + '[/url]'
+					 + start
+					 + ' [i]('
 					 + slot.card.pack
 					 + ")[/i]"
 					);
@@ -555,8 +540,6 @@ function build_markdown() {
 	var lines = [];
 	lines.push("# "+SelectedDeck.name);
 	lines.push("");
-	var types = ["outfit", "event", "hardware", "resource", "icebreaker", "program", "agenda", "asset", "upgrade", "operation", "barrier", "code-gate", "sentry", "none", "multi"];
-	var typesstr = ["Outfit", "Event", "Hardware", "Resource", "Icebreaker", "Program", "Agenda", "Asset", "Upgrade", "Operation", "Barrier", "Code Gate", "Sentry", "Other", "Multi"];
 	$.each(types, function (n, type) {
 		if(deck[type] != null) {
 			if(type == "outfit") {
@@ -575,11 +558,15 @@ function build_markdown() {
 				lines.push("## "+typesstr[n]+" ("+count+")");
 				lines.push("");
 				$.each(deck[type], function (n, slot) {
+	            	var start ="";
+	            	for(var loop=slot.start; loop>0; loop--) start+="*";
 					lines.push('* '+ slot.qty + 'x ['
 					 + slot.card.title 
 					 + '](http://dtdb.co/'+DTDB.locale+'/card/'
 					 + slot.card.code
-					 + ') _('
+					 + ')'
+					 + start
+					 + '_('
 					 + slot.card.pack
 					 + ")_"
 					);
@@ -610,8 +597,6 @@ function build_plaintext() {
 	var lines = [];
 	lines.push(SelectedDeck.name);
 	lines.push("");
-	var types = ["outfit", "event", "hardware", "resource", "icebreaker", "program", "agenda", "asset", "upgrade", "operation", "barrier", "code-gate", "sentry", "none", "multi"];
-	var typesstr = ["Outfit", "Event", "Hardware", "Resource", "Icebreaker", "Program", "Agenda", "Asset", "Upgrade", "Operation", "Barrier", "Code Gate", "Sentry", "Other", "Multi"];
 	$.each(types, function (n, type) {
 		if(deck[type] != null) {
 			if(type == "outfit") {
@@ -625,8 +610,11 @@ function build_plaintext() {
 				lines.push("");
 				lines.push(typesstr[n]+" ("+count+")");
 				$.each(deck[type], function (n, slot) {
+	            	var start ="";
+	            	for(var loop=slot.start; loop>0; loop--) start+="*";
 					lines.push(slot.qty + 'x '
 					 + slot.card.title
+					 + start
 					 + ' ('
 					 + slot.card.pack
 					 + ")"

@@ -28,11 +28,12 @@ class Judge
 			/* @var $card \Dtdb\CardsBundle\Entity\Card */
 			$card = $elt['card'];
 			$qty = $elt['qty'];
+			$start = $elt['start'];
 			$type = $card->getType()->getName();
 			if($type == "Outfit") continue;
-			$elt['gang'] = str_replace(' ', '-', mb_strtolower($card->getGang()->getName()));
+			$elt['gang'] = str_replace(' ', '-', mb_strtolower(($card->getGang()?$card->getGang()->getName():'')));
 			
-			if(!isset($classeur[$type])) $classeur[$type] = array("qty" => 0, "slots" => array());
+			if(!isset($classeur[$type])) $classeur[$type] = array("qty" => 0, "slots" => array(), "start" => 0);
 			$classeur[$type]["slots"][] = $elt;
 			$classeur[$type]["qty"] += $qty;
 		}

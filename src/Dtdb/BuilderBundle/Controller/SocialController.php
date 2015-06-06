@@ -716,11 +716,7 @@ class SocialController extends Controller
 	 * returns a text file with the content of a decklist
 	 */
     public function textexportAction ($decklist_id, Request $request)
-    {
-        $response = new Response();
-        $response->setPublic();
-        $response->setMaxAge($this->container->getParameter('long_cache'));
-        
+    {        
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine')->getManager();
         
@@ -735,21 +731,13 @@ class SocialController extends Controller
         
         $lines = array();
         $types = array(
-                "Event",
-                "Hardware",
-                "Resource",
-                "Icebreaker",
-                "Program",
-                "Agenda",
-                "Asset",
-                "Upgrade",
-                "Operation",
-                "Barrier",
-                "Code Gate",
-                "Sentry",
-                "ICE"
+                "Dude",
+                "Deed",
+                "Goods",
+                "Spell",
+                "Action"
         );
-        
+        $lines[] = "Social export";
         $lines[] = $decklist->getOutfit()->getTitle() . " (" . $decklist->getOutfit()
             ->getPack()
             ->getName() . ")";
@@ -758,15 +746,22 @@ class SocialController extends Controller
                 $lines[] = "";
                 $lines[] = $type . " (" . $classement[$type]['qty'] . ")";
                 foreach ($classement[$type]['slots'] as $slot) {
-                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . " (" . $slot['card']->getPack()->getName() . ")";
+                	$start ="";
+                	for($loop=$slot['start']; $loop>0; $loop--) $start.="*";
+                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . $start . " (" . $slot['card']->getPack()->getName() . ")";
                 }
             }
         }
+        $lines[] = "";
+        $lines[] = $decklist->getDeckSize() . " cards (must be 52)";
+        $lines[] = "Cards up to " . $decklist->getLastPack()->getName();
         $content = implode("\r\n", $lines);
         
         $name = mb_strtolower($decklist->getName());
         $name = preg_replace('/[^a-zA-Z0-9_\-]/', '-', $name);
         $name = preg_replace('/--+/', '-', $name);
+
+        $response = new Response();
         
         $response->headers->set('Content-Type', 'text/plain');
         $response->headers->set('Content-Disposition', 'attachment;filename=' . $name . ".txt");

@@ -227,21 +227,13 @@ class BuilderController extends Controller
         
         $lines = array();
         $types = array(
-                "Event",
-                "Hardware",
-                "Resource",
-                "Icebreaker",
-                "Program",
-                "Agenda",
-                "Asset",
-                "Upgrade",
-                "Operation",
-                "Barrier",
-                "Code Gate",
-                "Sentry",
-                "ICE"
+                "Dude",
+                "Deed",
+                "Goods",
+                "Spell",
+                "Action"
         );
-        
+
         $lines[] = $deck->getOutfit()->getTitle() . " (" . $deck->getOutfit()
             ->getPack()
             ->getName() . ")";
@@ -250,12 +242,13 @@ class BuilderController extends Controller
                 $lines[] = "";
                 $lines[] = $type . " (" . $classement[$type]['qty'] . ")";
                 foreach ($classement[$type]['slots'] as $slot) {
-                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . " (" . $slot['card']->getPack()->getName() . ")";
+                	$start ="";
+                	for($loop=$slot['start']; $loop>0; $loop--) $start.="*";
+                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . $start . " (" . $slot['card']->getPack()->getName() . ")";
                 }
             }
         }
         $lines[] = "";
-        $lines[] = $deck->getDeckSize() . " cards (must be 54)";
         $lines[] = "Cards up to " . $deck->getLastPack()->getName();
         $content = implode("\r\n", $lines);
         
