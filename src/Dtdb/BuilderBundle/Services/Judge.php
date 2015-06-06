@@ -59,6 +59,7 @@ class Judge
 		$startSize = 0;
 		$startGR = 0;
 		$startDudes = array();
+		$gangStarting = array();
 		$dudes = array();
 		$deckComposition = array('Spades' => array(), 'Diams' => array(), 'Hearts' => array(), 'Clubs' => array());
 
@@ -78,8 +79,9 @@ class Judge
 				$deck[] = $card;
 				$deckSize += $qty;
 				if($start != 0){
-					$startSize += $start;
 					$startGR -= $card->getCost();
+					if($card->getGang() != null) 
+						$gangStarting[$card->getGang()->getName()] = $card->getGang();
 				}
 				if($card->getType()->getName() == "Dude"){
 					$legalName = preg_replace("/ \(Exp.\d\)/", "", $card->getTitle());
@@ -124,6 +126,11 @@ class Judge
 		foreach($dudes as $legalName => $qty){
 			if($qty > 4){
 			    return 'copies';				
+			}
+		}
+		foreach($gangStarting as $gang){
+			if($gang != $outfit->getGang()){
+			    return 'startingposse';				
 			}
 		}
 		

@@ -372,17 +372,22 @@ function check_composition() {
 	if($('#startingnumbers').size()) {
 		var outfit = outfits.first();
 		
+		var illegalStartingDude = false;
+		
 		var cost_of_starting_posse = 0;
 		var upkeep_of_starting_posse = 0;
 		var production_of_starting_posse = 0;
 		var influence_of_starting_posse = 0;
 		var size_of_starting_posse = 0;
 		startingposse.each(function(record){
+			
 			cost_of_starting_posse += record.start * record.cost;
 			upkeep_of_starting_posse += record.start * record.upkeep;
 			production_of_starting_posse += record.start * record.production;
 			influence_of_starting_posse += record.start * record.influence;
 			size_of_starting_posse += record.start;
+			
+			if(record.gang_code !="neutral" && record.gang_code != outfit.gang_code) illegalStartingDude=true;
 		});
 
 
@@ -397,6 +402,8 @@ function check_composition() {
 			$('#startingcomposition').html("Negative starting Ghost Rock.").addClass('text-danger');		
 		} else if(!legal){
 			$('#startingcomposition').html("More than one " + DudeLegalName + " starting.").addClass('text-danger');		
+		} else if(illegalStartingDude){
+			$('#startingcomposition').html("Starting a dude from another outfit.").addClass('text-danger');		
 		} else {
 			$('#startingcomposition').empty();
 		}
