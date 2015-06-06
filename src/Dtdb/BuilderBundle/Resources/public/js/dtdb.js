@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 8,
+			version: 9,
 			type: 'info',
-			message: 'v2.2 is here! Have a look at the <a href="'+Routing.generate('cards_changelog')+'">change log</a>!<br/>If your experience any trouble, clear your browser\'s cache (ctrl+f5).'
+			message: 'Promo cards from OP kits added!<br/>If your experience any trouble, <a href="javascript:localStorage.clear()">clear your browser\'s cache (ctrl+f5)</a>.'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
