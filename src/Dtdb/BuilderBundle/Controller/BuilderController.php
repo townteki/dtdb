@@ -363,8 +363,12 @@ class BuilderController extends Controller
         
         $cancel_edits = (boolean) filter_var($request->get('cancel_edits'), FILTER_SANITIZE_NUMBER_INT);
         if($cancel_edits) {
-            $this->get('decks')->revertDeck($deck);
-            return $this->redirect($this->generateUrl('decks_list'));
+        	if($deck){
+            	$this->get('decks')->revertDeck($deck);
+            	return $this->redirect($this->generateUrl('decks_list'));
+        	} else {
+            	return $this->redirect($this->generateUrl('decks_list'));        		
+        	}
         }
         
         $is_copy = (boolean) filter_var($request->get('copy'), FILTER_SANITIZE_NUMBER_INT);
