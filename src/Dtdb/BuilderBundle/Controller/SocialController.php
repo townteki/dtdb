@@ -176,9 +176,7 @@ class SocialController extends Controller
         if (! empty($cards_code) && is_array($cards_code)) {
             $cards = $dbh->executeQuery(
                     "SELECT
-    				c.title" . ($request
-            				        ->getLocale() == "en" ? '' : '_' . $request
-            				        ->getLocale()) . " title,
+    				c.title" . /*($request->getLocale() == "en" ? '' : '_' . $request->getLocale()) .*/ " title,
     				c.code,
                     f.code gang_code
     				from card c
@@ -265,9 +263,7 @@ class SocialController extends Controller
         $dbh = $this->get('doctrine')->getConnection();
         $gangs = $dbh->executeQuery(
                 "SELECT
-				f.name" . ($request
-                    ->getLocale() == "en" ? '' : '_' . $request
-                    ->getLocale()) . " name,
+				f.name" . /*($request->getLocale() == "en" ? '' : '_' . $request->getLocale()) .*/ " name,
 				f.code
 				from gang f
 				order by f.name asc")
@@ -275,9 +271,7 @@ class SocialController extends Controller
         
         $packs = $dbh->executeQuery(
                 "SELECT
-				p.name" . ($request
-                    ->getLocale() == "en" ? '' : '_' . $request
-                    ->getLocale()) . " name,
+				p.name" . /*($request->getLocale() == "en" ? '' : '_' . $request->getLocale()) .*/ " name,
 				p.code
 				from pack p
 				where p.released is not null
@@ -1187,9 +1181,7 @@ class SocialController extends Controller
         $dbh = $this->get('doctrine')->getConnection();
         $gangs = $dbh->executeQuery(
                 "SELECT
-				f.name" . ($request
-                    ->getLocale() == "en" ? '' : '_' . $request
-                    ->getLocale()) . " name,
+				f.name" . /*($request->getLocale() == "en" ? '' : '_' . $request->getLocale()) .*/ " name,
 				f.code
 				from gang f
 				order by f.name asc")
