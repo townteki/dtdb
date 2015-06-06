@@ -69,16 +69,13 @@ var Outfit = null,
 <div class="col-md-4 col-md-pull-8"  id="recent_decklists">
 
 	<h3 class="section">Last 10 decklists <a href="{{ path('decklists_list', {type:'recent'}) }}" class="small">more</a></h3>
-	<table class="table">
+	<table class="table table-decklists">
 	{% for decklist in decklists %}
 	<tr>
 	<td>
 		<img src="/web/bundles/dtdbcards/images/cards/en/{{ decklist.code }}.jpg" style="width:52px">
 	</td>
-	<td class="decklists" style="
-    max-width: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;">
+	<td class="decklists">
 	<div>
 			<a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a>
 	</div>
