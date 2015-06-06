@@ -806,11 +806,11 @@ function build_div(record) {
 				+ record.code
 				+ '">'
 				+ '<div class="media">'
-				+ '<a class="pull-left card" href="'
+				+ '<div class="media-left"><a class="pull-left card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
 				+ '    <img class="media-object" src="'+record.imagesrc+'">'
-				+ '</a>'
+				+ '</a></div>'
 				+ '<div class="media-body">'
 				+ '    <h4 class="media-heading"><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
@@ -826,11 +826,11 @@ function build_div(record) {
 				+ record.code
 				+ '">'
 				+ '<div class="media">'
-				+ '<a class="pull-left card" href="'
+				+ '<div class="media-left"><a class="pull-left card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
 				+ '    <img class="media-object" src="'+record.imagesrc+'">'
-				+ '</a>'
+				+ '</a></div>'
 				+ '<div class="media-body">'
 				+ '    <h5 class="media-heading"><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})

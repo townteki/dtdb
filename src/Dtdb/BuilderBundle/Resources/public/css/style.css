@@ -148,10 +148,10 @@ tbody .btn-group{white-space:nowrap}
 .decklist-outfit-image img{height:64px}
 .decklists{height:64px;max-width: 500px;overflow: hidden;text-overflow: ellipsis}
 .table-striped>tbody>tr:nth-child(odd)>td,.table-striped>tbody>tr:nth-child(odd)>th{background-color:rgba(0,0,0,0.05)}
-#collection-grid .col-sm-6 .media {margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed lightgray}
+#collection-grid .col-sm-6 .media {margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed lightgray;overflow:hidden;}
 #collection-grid .col-sm-6 .media-object {height:100px}
-#collection-grid .col-sm-6 .media-heading {line-height:50px;overflow:hidden;white-space:nowrap;font-family:Arial}
-#collection-grid .col-sm-4 .media {margin-bottom:10px;padding-bottom:10px;border-bottom:1px dotted lightgray}
+#collection-grid .col-sm-6 .media-heading {line-height:50px;white-space:nowrap;font-family:Arial}
+#collection-grid .col-sm-4 .media {margin-bottom:10px;padding-bottom:10px;border-bottom:1px dotted lightgray;overflow:hidden;}
 #collection-grid .col-sm-4 .media-object {height:70px}
 #collection-grid .col-sm-4 .media-heading {line-height:30px;overflow:hidden;white-space:nowrap;font-family:Arial}
 #table-draw-simulator-content img.card {width:99px;float:left;margin:5px;box-shadow: black 0px 0px 5px;border-radius: 5px;}
