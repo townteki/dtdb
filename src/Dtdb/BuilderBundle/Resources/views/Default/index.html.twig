@@ -75,7 +75,10 @@ var Outfit = null,
 	<td>
 		<img src="/web/bundles/dtdbcards/images/cards/en/{{ decklist.code }}.jpg" style="width:52px">
 	</td>
-	<td class="decklists">
+	<td class="decklists" style="
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;">
 	<div>
 			<a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a>
 	</div>

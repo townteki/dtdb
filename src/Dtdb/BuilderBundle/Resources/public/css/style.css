@@ -145,7 +145,8 @@ tbody .btn-group{white-space:nowrap}
 .social-icon-like:hover{color:red}
 .social-icon-favorite:hover{color:orange}
 .social-icon-comment:hover{color:green}
-.decklists .decklist-outfit-image img{height:64px}
+.decklist-outfit-image img{height:64px}
+.decklists{height:64px;max-width: 500px;overflow: hidden;text-overflow: ellipsis}
 .table-striped>tbody>tr:nth-child(odd)>td,.table-striped>tbody>tr:nth-child(odd)>th{background-color:rgba(0,0,0,0.05)}
 #collection-grid .col-sm-6 .media {margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed lightgray}
 #collection-grid .col-sm-6 .media-object {height:100px}
