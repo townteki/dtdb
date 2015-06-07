@@ -119,6 +119,10 @@ function getDisplayDescriptions(sort) {
                     id: 'drifters',
                     label: 'Drifters',
                     icon: ''
+                }, {
+                    id: 'Joker',
+                    label: 'Jokers',
+                    icon: ''
                 }],[{
                     id: 'neutral',
                     label: 'Neutral',
@@ -249,7 +253,7 @@ function update_deck(options) {
 			if(row.icon) {
 				$('<span>').addClass(DisplaySort+'-icon').html('&'+row.icon+';').prependTo(item);
 			} else if(DisplaySort == "gang") {
-				var imgsrc = (row.id === "neutral" || row.id === "drifters") ? "" : '<img src="'
+				var imgsrc = (row.id === "neutral" || row.id === "drifters" || row.id === "Joker") ? "" : '<img src="'
 					+ Url_GangImage.replace('xxx', row.id)
 					+ '.png">';
 				$('<span>').addClass(DisplaySort+'-icon').html(imgsrc).prependTo(item);
@@ -267,17 +271,17 @@ function update_deck(options) {
 
 	var latestpack = DTDB.data.sets({name:Outfit.pack}).first();
 	if(DisplaySort === 'type') {
-		var preSort = 'value';
+		var preSort = 'rank,title';
 	} else if(DisplaySort === 'gang') {
-		var preSort = 'type';
+		var preSort = 'suit,rank';
 	} else if(DisplaySort === 'suit') {
-		var preSort = 'value';
+		var preSort = 'rank,title';
 	} else if(DisplaySort === 'number') {
 		var preSort = 'code';
 	} else if(DisplaySort === 'title') {
 		var preSort = 'title';
 	} else if(DisplaySort === 'rank') {
-		var preSort = 'type';
+		var preSort = 'suit,title';
 	} 
 	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order(preSort).each(function(record) {
 		var pack = DTDB.data.sets({name:record.pack}).first();
@@ -291,6 +295,7 @@ function update_deck(options) {
 		} else if(DisplaySort === 'gang') {
 			criteria = record.gang_code;
 			if(record.gang_code === 'neutral' && record.type === "Dude") criteria = 'drifters'
+			if(record.type_code == 'joker') criteria = 'Joker';
 		} else if(DisplaySort === 'suit') {
 			criteria = record.suit;
 			if(record.type_code == 'joker') criteria = 'Joker';
@@ -303,6 +308,7 @@ function update_deck(options) {
 			criteria = 'cards';
 		} else if(DisplaySort === 'rank') {
 			criteria = record.rank;
+			if(record.type_code == 'joker') criteria = 'Joker';
 		}
 
 		var face = DTDB.format.face(record);
