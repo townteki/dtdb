@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 8,
+			version: 9,
 			type: 'info',
-			message: 'v2.2 is here! Have a look at the <a href="'+Routing.generate('cards_changelog')+'">change log</a>!<br/>If your experience any trouble, clear your browser\'s cache (ctrl+f5).'
+			message: 'Promo cards from OP kits added!<br/>If your experience any trouble, <a href="javascript:localStorage.clear()">clear your browser\'s cache (ctrl+f5)</a>.'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
@@ -119,6 +119,10 @@ function getDisplayDescriptions(sort) {
                     id: 'drifters',
                     label: 'Drifters',
                     icon: ''
+                }, {
+                    id: 'Joker',
+                    label: 'Jokers',
+                    icon: ''
                 }],[{
                     id: 'neutral',
                     label: 'Neutral',
@@ -185,28 +189,7 @@ function process_deck_by_type() {
 
 	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order("type,title").each(function(record) {
 		var type = record.type_code, keywordss = record.keywords_code ? record.keywords_code.split(" - ") : [];
-		if(type == "ice") {
-			var ice_type = [];
-			 if(keywordss.indexOf("barrier") >= 0) {
-				 ice_type.push("barrier");
-			 }
-			 if(keywordss.indexOf("code gate") >= 0) {
-				 ice_type.push("code-gate");
-			 }
-			 if(keywordss.indexOf("sentry") >= 0) {
-				 ice_type.push("sentry");
-			 }
-			 switch(ice_type.length) {
-			 case 0: type = "none"; break;
-			 case 1: type = ice_type.pop(); break;
-			 default: type = "multi"; break;
-			 }
-		}
-		if(type == "program") {
-			 if(keywordss.indexOf("icebreaker") >= 0) {
-				 type = "icebreaker";
-			 }
-		}
+
 		var gang_code = '';
 		if(record.gang != Outfit.gang) {
 			gang_code = record.gang_code;
@@ -216,7 +199,8 @@ function process_deck_by_type() {
 		bytype[type].push({
 			card: record,
 			qty: record.indeck,
-			gang: gang_code
+			gang: gang_code,
+			start: record.start
 		});
 	});
 	bytype.outfit = [{
@@ -269,7 +253,7 @@ function update_deck(options) {
 			if(row.icon) {
 				$('<span>').addClass(DisplaySort+'-icon').html('&'+row.icon+';').prependTo(item);
 			} else if(DisplaySort == "gang") {
-				var imgsrc = (row.id === "neutral" || row.id === "drifters") ? "" : '<img src="'
+				var imgsrc = (row.id === "neutral" || row.id === "drifters" || row.id === "Joker") ? "" : '<img src="'
 					+ Url_GangImage.replace('xxx', row.id)
 					+ '.png">';
 				$('<span>').addClass(DisplaySort+'-icon').html(imgsrc).prependTo(item);
@@ -287,17 +271,17 @@ function update_deck(options) {
 
 	var latestpack = DTDB.data.sets({name:Outfit.pack}).first();
 	if(DisplaySort === 'type') {
-		var preSort = 'value';
+		var preSort = 'rank,title';
 	} else if(DisplaySort === 'gang') {
-		var preSort = 'type';
+		var preSort = 'suit,rank';
 	} else if(DisplaySort === 'suit') {
-		var preSort = 'value';
+		var preSort = 'rank,title';
 	} else if(DisplaySort === 'number') {
 		var preSort = 'code';
 	} else if(DisplaySort === 'title') {
 		var preSort = 'title';
 	} else if(DisplaySort === 'rank') {
-		var preSort = 'type';
+		var preSort = 'suit,title';
 	} 
 	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order(preSort).each(function(record) {
 		var pack = DTDB.data.sets({name:record.pack}).first();
@@ -311,6 +295,7 @@ function update_deck(options) {
 		} else if(DisplaySort === 'gang') {
 			criteria = record.gang_code;
 			if(record.gang_code === 'neutral' && record.type === "Dude") criteria = 'drifters'
+			if(record.type_code == 'joker') criteria = 'Joker';
 		} else if(DisplaySort === 'suit') {
 			criteria = record.suit;
 			if(record.type_code == 'joker') criteria = 'Joker';
@@ -323,6 +308,7 @@ function update_deck(options) {
 			criteria = 'cards';
 		} else if(DisplaySort === 'rank') {
 			criteria = record.rank;
+			if(record.type_code == 'joker') criteria = 'Joker';
 		}
 
 		var face = DTDB.format.face(record);
@@ -392,17 +378,22 @@ function check_composition() {
 	if($('#startingnumbers').size()) {
 		var outfit = outfits.first();
 		
+		var illegalStartingDude = false;
+		
 		var cost_of_starting_posse = 0;
 		var upkeep_of_starting_posse = 0;
 		var production_of_starting_posse = 0;
 		var influence_of_starting_posse = 0;
 		var size_of_starting_posse = 0;
 		startingposse.each(function(record){
+			
 			cost_of_starting_posse += record.start * record.cost;
 			upkeep_of_starting_posse += record.start * record.upkeep;
 			production_of_starting_posse += record.start * record.production;
 			influence_of_starting_posse += record.start * record.influence;
 			size_of_starting_posse += record.start;
+			
+			if(record.gang_code !="neutral" && record.gang_code != outfit.gang_code) illegalStartingDude=true;
 		});
 
 
@@ -413,12 +404,12 @@ function check_composition() {
 				break;
 			}
 		}
-		if(size_of_starting_posse>5){
-			$('#startingcomposition').html("Too many starting dudes.").addClass('text-danger');
-		} else if(outfit.wealth <  cost_of_starting_posse){
+		if(outfit.wealth <  cost_of_starting_posse){
 			$('#startingcomposition').html("Negative starting Ghost Rock.").addClass('text-danger');		
 		} else if(!legal){
 			$('#startingcomposition').html("More than one " + DudeLegalName + " starting.").addClass('text-danger');		
+		} else if(illegalStartingDude){
+			$('#startingcomposition').html("Starting a dude from another outfit.").addClass('text-danger');		
 		} else {
 			$('#startingcomposition').empty();
 		}
@@ -498,13 +489,14 @@ var GangColors = {
 	"weyland-consortium": "#006400"
 };
 
+var types = ["outfit", "dude", "deed", "goods", "spell", "action"];
+var typesstr = ["Outfit", "Dude", "Deed", "Goods", "Spell", "Action"];
+
 function build_bbcode() {
 	var deck = process_deck_by_type(SelectedDeck);
 	var lines = [];
 	lines.push("[b]"+SelectedDeck.name+"[/b]");
 	lines.push("");
-	var types = ["outfit", "event", "hardware", "resource", "icebreaker", "program", "agenda", "asset", "upgrade", "operation", "barrier", "code-gate", "sentry", "none", "multi"];
-	var typesstr = ["Outfit", "Event", "Hardware", "Resource", "Icebreaker", "Program", "Agenda", "Asset", "Upgrade", "Operation", "Barrier", "Code Gate", "Sentry", "Other", "Multi"];
 	$.each(types, function (n, type) {
 		if(deck[type] != null) {
 			if(type == "outfit") {
@@ -521,11 +513,15 @@ function build_bbcode() {
 				var count = deck[type].reduce(function (prev, curr) { return prev + curr.qty; }, 0);
 				lines.push("[b]"+typesstr[n]+"[/b] ("+count+")");
 				$.each(deck[type], function (n, slot) {
+	            	var start ="";
+	            	for(var loop=slot.start; loop>0; loop--) start+="*";
 					lines.push(slot.qty + 'x [url=http://dtdb.co/'+DTDB.locale+'/card/'
 					 + slot.card.code
 					 + ']'
 					 + slot.card.title
-					 + '[/url] [i]('
+					 + '[/url]'
+					 + start
+					 + ' [i]('
 					 + slot.card.pack
 					 + ")[/i]"
 					);
@@ -555,8 +551,6 @@ function build_markdown() {
 	var lines = [];
 	lines.push("# "+SelectedDeck.name);
 	lines.push("");
-	var types = ["outfit", "event", "hardware", "resource", "icebreaker", "program", "agenda", "asset", "upgrade", "operation", "barrier", "code-gate", "sentry", "none", "multi"];
-	var typesstr = ["Outfit", "Event", "Hardware", "Resource", "Icebreaker", "Program", "Agenda", "Asset", "Upgrade", "Operation", "Barrier", "Code Gate", "Sentry", "Other", "Multi"];
 	$.each(types, function (n, type) {
 		if(deck[type] != null) {
 			if(type == "outfit") {
@@ -575,11 +569,15 @@ function build_markdown() {
 				lines.push("## "+typesstr[n]+" ("+count+")");
 				lines.push("");
 				$.each(deck[type], function (n, slot) {
+	            	var start ="";
+	            	for(var loop=slot.start; loop>0; loop--) start+="*";
 					lines.push('* '+ slot.qty + 'x ['
 					 + slot.card.title 
 					 + '](http://dtdb.co/'+DTDB.locale+'/card/'
 					 + slot.card.code
-					 + ') _('
+					 + ')'
+					 + start
+					 + '_('
 					 + slot.card.pack
 					 + ")_"
 					);
@@ -610,8 +608,6 @@ function build_plaintext() {
 	var lines = [];
 	lines.push(SelectedDeck.name);
 	lines.push("");
-	var types = ["outfit", "event", "hardware", "resource", "icebreaker", "program", "agenda", "asset", "upgrade", "operation", "barrier", "code-gate", "sentry", "none", "multi"];
-	var typesstr = ["Outfit", "Event", "Hardware", "Resource", "Icebreaker", "Program", "Agenda", "Asset", "Upgrade", "Operation", "Barrier", "Code Gate", "Sentry", "Other", "Multi"];
 	$.each(types, function (n, type) {
 		if(deck[type] != null) {
 			if(type == "outfit") {
@@ -625,8 +621,11 @@ function build_plaintext() {
 				lines.push("");
 				lines.push(typesstr[n]+" ("+count+")");
 				$.each(deck[type], function (n, slot) {
+	            	var start ="";
+	            	for(var loop=slot.start; loop>0; loop--) start+="*";
 					lines.push(slot.qty + 'x '
 					 + slot.card.title
+					 + start
 					 + ' ('
 					 + slot.card.pack
 					 + ")"

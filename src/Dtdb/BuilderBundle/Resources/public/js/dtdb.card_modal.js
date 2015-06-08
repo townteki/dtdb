@@ -51,12 +51,16 @@ DTDB.card_modal = {};
 			});
 			if(card.code == Outfit.code) {
 				qtyelt.find('label').addClass("disabled").find('input[type=radio]').attr("disabled", true);
+			} else {
+				if(card.keywords != null && card.keywords.search('Token') != -1) {
+					qtyelt.find('label').addClass("disabled").find('input[type=radio]').attr("disabled", true);
+				}
 			}
 			
 			$('#starting').remove();
 			if(card.type_code == 'dude') {
 				var canstart = card.gang_code === 'neutral' || card.gang_code === Outfit.gang_code;				
-				if(canstart) {
+				if(canstart || card.start) {
 					if (card.keywords != null && card.keywords.search('Non-Unique') != -1){
 						var start = '<div class="btn-group modal-start" data-toggle="buttons" id="starting" style="margin-left:5px"></div>';
 						qtyelt.after(start);

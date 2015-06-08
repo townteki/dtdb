@@ -218,8 +218,8 @@ class BuilderController extends Controller
         
         /* @var $deck \Dtdb\BuilderBundle\Entity\Deck */
         $deck = $em->getRepository('DtdbBuilderBundle:Deck')->find($deck_id);
-        if (! $this->getUser() || $this->getUser()->getId() != $deck->getUser()->getId())
-            throw new UnauthorizedHttpException("You don't have access to this deck.");
+        //if (! $this->getUser() || $this->getUser()->getId() != $deck->getUser()->getId())
+        //    throw new UnauthorizedHttpException("You don't have access to this deck.");
             
             /* @var $judge \Dtdb\SocialBundle\Services\Judge */
         $judge = $this->get('judge');
@@ -227,21 +227,13 @@ class BuilderController extends Controller
         
         $lines = array();
         $types = array(
-                "Event",
-                "Hardware",
-                "Resource",
-                "Icebreaker",
-                "Program",
-                "Agenda",
-                "Asset",
-                "Upgrade",
-                "Operation",
-                "Barrier",
-                "Code Gate",
-                "Sentry",
-                "ICE"
+                "Dude",
+                "Deed",
+                "Goods",
+                "Spell",
+                "Action"
         );
-        
+
         $lines[] = $deck->getOutfit()->getTitle() . " (" . $deck->getOutfit()
             ->getPack()
             ->getName() . ")";
@@ -250,12 +242,13 @@ class BuilderController extends Controller
                 $lines[] = "";
                 $lines[] = $type . " (" . $classement[$type]['qty'] . ")";
                 foreach ($classement[$type]['slots'] as $slot) {
-                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . " (" . $slot['card']->getPack()->getName() . ")";
+                	$start ="";
+                	for($loop=$slot['start']; $loop>0; $loop--) $start.="*";
+                    $lines[] = $slot['qty'] . "x " . $slot['card']->getTitle() . $start . " (" . $slot['card']->getPack()->getName() . ")";
                 }
             }
         }
         $lines[] = "";
-        $lines[] = $deck->getDeckSize() . " cards (must be 54)";
         $lines[] = "Cards up to " . $deck->getLastPack()->getName();
         $content = implode("\r\n", $lines);
         
@@ -280,8 +273,8 @@ class BuilderController extends Controller
         
         /* @var $deck \Dtdb\BuilderBundle\Entity\Deck */
         $deck = $em->getRepository('DtdbBuilderBundle:Deck')->find($deck_id);
-        if (! $this->getUser() || $this->getUser()->getId() != $deck->getUser()->getId())
-            throw new UnauthorizedHttpException("You don't have access to this deck.");
+        //if (! $this->getUser() || $this->getUser()->getId() != $deck->getUser()->getId())
+        //    throw new UnauthorizedHttpException("You don't have access to this deck.");
         
         $rd = array();
         $start = array();
@@ -370,8 +363,12 @@ class BuilderController extends Controller
         
         $cancel_edits = (boolean) filter_var($request->get('cancel_edits'), FILTER_SANITIZE_NUMBER_INT);
         if($cancel_edits) {
-            $this->get('decks')->revertDeck($deck);
-            return $this->redirect($this->generateUrl('decks_list'));
+        	if($deck){
+            	$this->get('decks')->revertDeck($deck);
+            	return $this->redirect($this->generateUrl('decks_list'));
+        	} else {
+            	return $this->redirect($this->generateUrl('decks_list'));        		
+        	}
         }
         
         $is_copy = (boolean) filter_var($request->get('copy'), FILTER_SANITIZE_NUMBER_INT);

@@ -14,7 +14,7 @@
 </ol>
 #}
 
-<ol>
+<ol start=0>
 {% for pack in data %}
 <li><a href="{{ pack.url }}">{{ pack.name }}</a><span> {% if pack.known != pack.total %}({{pack.known}}/{{pack.total}}){% endif %}</span></li>
 {% endfor %}

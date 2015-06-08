@@ -771,11 +771,13 @@ function update_base_sets() {
 
 function build_div(record) {
 	var radios = '';
-	for (var i = 0; i <= record.maxqty; i++) {
-		radios += '<label class="btn btn-xs btn-default'
-				+ (i == record.indeck ? ' active' : '')
-				+ '"><input type="radio" name="qty-' + record.code
-				+ '" value="' + i + '">' + i + '</label>';
+	if(record.keywords == null || record.keywords.search('Token') == -1){
+		for (var i = 0; i <= record.maxqty; i++) {
+			radios += '<label class="btn btn-xs btn-default'
+					+ (i == record.indeck ? ' active' : '')
+					+ '"><input type="radio" name="qty-' + record.code
+					+ '" value="' + i + '">' + i + '</label>';
+		}
 	}
 
 	var div;
@@ -804,11 +806,11 @@ function build_div(record) {
 				+ record.code
 				+ '">'
 				+ '<div class="media">'
-				+ '<a class="pull-left card" href="'
+				+ '<div class="media-left"><a class="pull-left card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
 				+ '    <img class="media-object" src="'+record.imagesrc+'">'
-				+ '</a>'
+				+ '</a></div>'
 				+ '<div class="media-body">'
 				+ '    <h4 class="media-heading"><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
@@ -824,11 +826,11 @@ function build_div(record) {
 				+ record.code
 				+ '">'
 				+ '<div class="media">'
-				+ '<a class="pull-left card" href="'
+				+ '<div class="media-left"><a class="pull-left card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})
 				+ '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
 				+ '    <img class="media-object" src="'+record.imagesrc+'">'
-				+ '</a>'
+				+ '</a></div>'
 				+ '<div class="media-body">'
 				+ '    <h5 class="media-heading"><a class="card" href="'
 				+ Routing.generate('cards_zoom', {card_code:record.code})

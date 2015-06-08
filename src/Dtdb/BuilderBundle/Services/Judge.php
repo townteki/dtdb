@@ -28,11 +28,12 @@ class Judge
 			/* @var $card \Dtdb\CardsBundle\Entity\Card */
 			$card = $elt['card'];
 			$qty = $elt['qty'];
+			$start = $elt['start'];
 			$type = $card->getType()->getName();
 			if($type == "Outfit") continue;
-			$elt['gang'] = str_replace(' ', '-', mb_strtolower($card->getGang()->getName()));
+			$elt['gang'] = str_replace(' ', '-', mb_strtolower(($card->getGang()?$card->getGang()->getName():'')));
 			
-			if(!isset($classeur[$type])) $classeur[$type] = array("qty" => 0, "slots" => array());
+			if(!isset($classeur[$type])) $classeur[$type] = array("qty" => 0, "slots" => array(), "start" => 0);
 			$classeur[$type]["slots"][] = $elt;
 			$classeur[$type]["qty"] += $qty;
 		}
@@ -58,6 +59,7 @@ class Judge
 		$startSize = 0;
 		$startGR = 0;
 		$startDudes = array();
+		$gangStarting = array();
 		$dudes = array();
 		$deckComposition = array('Spades' => array(), 'Diams' => array(), 'Hearts' => array(), 'Clubs' => array());
 
@@ -77,8 +79,9 @@ class Judge
 				$deck[] = $card;
 				$deckSize += $qty;
 				if($start != 0){
-					$startSize += $start;
 					$startGR -= $card->getCost();
+					if($card->getGang() != null) 
+						$gangStarting[$card->getGang()->getName()] = $card->getGang();
 				}
 				if($card->getType()->getName() == "Dude"){
 					$legalName = preg_replace("/ \(Exp.\d\)/", "", $card->getTitle());
@@ -125,6 +128,11 @@ class Judge
 			    return 'copies';				
 			}
 		}
+		foreach($gangStarting as $gang){
+			if($gang != $outfit->getGang()){
+			    return 'startingposse';				
+			}
+		}
 		
 		$nb = 0;
 		foreach($deckComposition as $suit => $suitComposition) {
@@ -138,7 +146,7 @@ class Judge
 		if($nb != 52) {
 		    return 'deckSize';
 		}
-		if($startSize > 5 || $startGR < 0) {
+		if($startGR < 0) {
 		    return 'startingposse';
 		}
 		foreach($startDudes as $legalName => $value){
