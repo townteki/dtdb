@@ -271,11 +271,11 @@ function update_deck(options) {
 
 	var latestpack = DTDB.data.sets({name:Outfit.pack}).first();
 	if(DisplaySort === 'type') {
-		var preSort = 'rank,title';
+		var preSort = 'value,title';
 	} else if(DisplaySort === 'gang') {
-		var preSort = 'suit,rank';
+		var preSort = 'type,value';
 	} else if(DisplaySort === 'suit') {
-		var preSort = 'rank,title';
+		var preSort = 'value,title';
 	} else if(DisplaySort === 'number') {
 		var preSort = 'code';
 	} else if(DisplaySort === 'title') {
