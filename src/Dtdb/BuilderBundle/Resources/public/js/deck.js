@@ -7,6 +7,7 @@ var Autosave_timer = null;
 var Deck_changed_since_last_autosave = false;
 var Autosave_running = false;
 var Autosave_period = 60;
+var RankNames = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 
 DTDB.data_loaded.add(function() {
 	var localStorageDisplayColumns;
@@ -78,9 +79,9 @@ DTDB.data_loaded.add(function() {
 	});
 
 	if(Modernizr.touch) {
-		$('#gang_code, #suit').css('width', '100%').addClass('btn-group-vertical');
+		$('#gang_code, #suit, #rank').css('width', '100%').addClass('btn-group-vertical');
 	} else {
-		$('#gang_code, #suit').addClass('btn-group');
+		$('#gang_code, #suit, #rank').addClass('btn-group');
 	}
 	$('#gang_code').empty();
 	$.each(DTDB.data.cards().distinct("gang_code").sort(
@@ -150,6 +151,25 @@ DTDB.data_loaded.add(function() {
 					+ record.code + '"' + checked + '>'
 					+ record.name + '</label></a></li>'
 		);
+	});
+	$('#rank').empty();
+	RankNames.forEach(function(element, index, array){
+		var label = $('<label class="btn btn-default btn-sm" data-code="' + (index+1)
+				+ '" title="'+element+'"><input type="checkbox" name="' + (index+1)
+				+ '">'
+				+ element
+				+ '</label>');
+		if(Modernizr.touch) {
+			label.addClass('btn-block');
+		} else {
+			label.tooltip({container: 'body'});
+		}
+		$('#rank').append(label);
+		
+	});
+	$('#rank').button();
+	$('#rank').children('label').each(function(index, elt) {
+		$(elt).button('toggle');
 	});
 
 	$('input[name=Outfit]').prop("checked", false);
