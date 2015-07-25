@@ -32,6 +32,8 @@ class Decklists
 					d.prettyname,
 					d.creation,
 					d.user_id,
+        			d.tournament_id,
+        			t.description tournament,
 					u.username,
 					u.gang usercolor,
 					u.reputation,
@@ -44,6 +46,7 @@ class Decklists
 					join user u on d.user_id=u.id
 					join card c on d.outfit_id=c.id
 					join favorite f on f.decklist_id=d.id
+        		    left join tournament t on d.tournament_id=t.id
 					where f.user_id=?
 					order by creation desc
 					limit $start, $limit", array(
@@ -78,6 +81,8 @@ class Decklists
 					d.prettyname,
 					d.creation,
 					d.user_id,
+        			d.tournament_id,
+        			t.description tournament,
 					u.username,
 					u.gang usercolor,
 					u.reputation,
@@ -89,6 +94,7 @@ class Decklists
 					from decklist d
 					join user u on d.user_id=u.id
 					join card c on d.outfit_id=c.id
+        			left join tournament t on d.tournament_id=t.id
 					where d.user_id=?
 					order by creation desc
 					limit $start, $limit", array(
@@ -121,6 +127,8 @@ class Decklists
 					d.prettyname,
 					d.creation,
 					d.user_id,
+        			d.tournament_id,
+        			t.description tournament,
 					u.username,
 					u.gang usercolor,
 					u.reputation,
@@ -133,6 +141,7 @@ class Decklists
 					from decklist d
 					join user u on d.user_id=u.id
 					join card c on d.outfit_id=c.id
+        			left join tournament t on d.tournament_id=t.id
 				    where d.creation > DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH)
 				    order by 2*nbvotes/(1+nbjours*nbjours) DESC, nbvotes desc, nbcomments desc
 					limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
@@ -163,6 +172,8 @@ class Decklists
 				d.prettyname,
 				d.creation,
 				d.user_id,
+        		d.tournament_id,
+        		t.description tournament,
 				u.username,
 				u.gang usercolor,
 				u.reputation,
@@ -174,6 +185,7 @@ class Decklists
 				from decklist d
 				join user u on d.user_id=u.id
 				join card c on d.outfit_id=c.id
+        		left join tournament t on d.tournament_id=t.id
 				where nbvotes > 10
 		        order by nbvotes desc, creation desc
 				limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
@@ -204,6 +216,8 @@ class Decklists
 				d.prettyname,
 				d.creation,
 				d.user_id,
+        		d.tournament_id,
+        		t.description tournament,
 				u.username,
 				u.gang usercolor,
 				u.reputation,
@@ -216,12 +230,58 @@ class Decklists
 				from decklist d
 				join user u on d.user_id=u.id
 				join card c on d.outfit_id=c.id
+        		left join tournament t on d.tournament_id=t.id
 				where d.nbcomments > 1
 				order by nbrecentcomments desc, creation desc
 				limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
         
         $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
         
+        return array(
+                "count" => $count,
+                "decklists" => $rows
+        );
+    
+    }
+
+    /**
+     * returns the list of decklists with a non-null tournament
+     * @param integer $limit
+     * @return \Doctrine\DBAL\Driver\PDOStatement
+     */
+    public function tournaments ($start = 0, $limit = 30)
+    {
+        /* @var $dbh \Doctrine\DBAL\Driver\PDOConnection */
+        $dbh = $this->doctrine->getConnection();
+    
+        $rows = $dbh->executeQuery(
+                "SELECT SQL_CALC_FOUND_ROWS
+                d.id,
+                d.name,
+                d.prettyname,
+                d.creation,
+                d.user_id,
+                d.tournament_id,
+                t.description tournament,
+                u.username,
+                u.gang usercolor,
+                u.reputation,
+                u.donation,
+                c.code,
+                c.title identity,
+                d.nbvotes,
+                d.nbfavorites,
+                d.nbcomments
+                from decklist d
+                join user u on d.user_id=u.id
+                join card c on d.gang_id=c.id
+                left join tournament t on d.tournament_id=t.id
+                where d.tournament_id is not null
+                order by creation desc
+                limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
+    
+        $count = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
+    
         return array(
                 "count" => $count,
                 "decklists" => $rows
@@ -246,6 +306,8 @@ class Decklists
 				d.prettyname,
 				d.creation,
 				d.user_id,
+        		d.tournament_id,
+        		t.description tournament,
 				u.username,
 				u.gang usercolor,
 				u.reputation,
@@ -258,6 +320,7 @@ class Decklists
 				join user u on d.user_id=u.id
 				join card c on d.outfit_id=c.id
 				join gang f on d.gang_id=f.id
+        		left join tournament t on d.tournament_id=t.id
 				where f.code=?
 				order by creation desc
 				limit $start, $limit", array(
@@ -290,6 +353,8 @@ class Decklists
 				d.prettyname,
 				d.creation,
 				d.user_id,
+        		d.tournament_id,
+        		t.description tournament,
 				u.username,
 				u.gang usercolor,
 				u.reputation,
@@ -302,6 +367,7 @@ class Decklists
 				join user u on d.user_id=u.id
 				join card c on d.outfit_id=c.id
 				join pack p on d.last_pack_id=p.id
+        		left join tournament t on d.tournament_id=t.id
 				where p.code=?
 				order by creation desc
 				limit $start, $limit", array(
@@ -334,6 +400,8 @@ class Decklists
 				d.prettyname,
 				d.creation,
 				d.user_id,
+        		d.tournament_id,
+        		t.description tournament,
 				u.username,
 				u.gang usercolor,
 				u.reputation,
@@ -348,6 +416,7 @@ class Decklists
 				join user u on d.user_id=u.id
 				join card c on d.outfit_id=c.id
 		        join pack p on d.last_pack_id=p.id
+        		left join tournament t on d.tournament_id=t.id
 				order by creation desc
 				limit $start, $limit")->fetchAll(\PDO::FETCH_ASSOC);
         
@@ -433,6 +502,8 @@ class Decklists
 	            d.prettyname,
 	            d.creation,
 	            d.user_id,
+        		d.tournament_id,
+        		t.description tournament,
 	            u.username,
 	            u.gang usercolor,
 	            u.reputation,
@@ -446,6 +517,7 @@ class Decklists
 	            join card c on d.outfit_id=c.id
 				join pack p on d.last_pack_id=p.id
 	            join gang f on d.gang_id=f.id
+        		left join tournament t on d.tournament_id=t.id
 	            where $where
 	            order by $order desc
 	            limit $start, $limit", $bindings)->fetchAll(\PDO::FETCH_ASSOC);

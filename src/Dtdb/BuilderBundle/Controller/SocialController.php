@@ -98,6 +98,9 @@ class SocialController extends Controller
         $rawdescription = filter_var($request->request->get('description'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
         $description = Markdown::defaultTransform($rawdescription);
         
+        $tournament_id = filter_var($request->request->get('tournament'), FILTER_SANITIZE_NUMBER_INT);
+        $tournament = $em->getRepository('DtdbBuilderBundle:Tournament')->find($tournament_id);
+        
         $decklist = new Decklist();
         $decklist->setName($name);
         $decklist->setPrettyname(preg_replace('/[^a-z0-9]+/', '-', mb_strtolower($name)));
@@ -114,6 +117,7 @@ class SocialController extends Controller
         $decklist->setNbvotes(0);
         $decklist->setNbfavorites(0);
         $decklist->setNbcomments(0);
+        $decklist->setTournament($tournament);
         foreach ($deck->getSlots() as $slot) {
             $card = $slot->getCard();
             $decklistslot = new Decklistslot();
@@ -250,6 +254,10 @@ class SocialController extends Controller
                 $result = $this->get('decklists')->hottopics($start, $limit);
                 $pagetitle = "Hot Topics";
                 break;
+            case 'tournament':
+                $result = $this->get('decklists')->tournaments($start, $limit);
+                $pagetitle = "Tournaments";
+                break;
             case 'popular':
             default:
                 $result = $this->get('decklists')->popular($start, $limit);
@@ -346,6 +354,8 @@ class SocialController extends Controller
 				d.rawdescription,
 				d.description,
 				d.precedent_decklist_id precedent,
+        		d.tournament_id,
+        		t.description tournament,
 				u.id user_id,
 				u.username,
 				u.gang usercolor,
@@ -360,6 +370,7 @@ class SocialController extends Controller
 				join user u on d.user_id=u.id
 				join card c on d.outfit_id=c.id
 				join gang f on d.gang_id=f.id
+        		left join tournament t on d.tournament_id=t.id
 				where d.id=?
 				", array(
                         $decklist_id
@@ -433,6 +444,13 @@ class SocialController extends Controller
 					order by d.creation asc", array(
                         $decklist_id
                 ))->fetchAll();
+					
+		$tournaments = $dbh->executeQuery(
+				"SELECT
+					t.id,
+					t.description
+                FROM tournament t
+                ORDER BY t.description desc")->fetchAll();
         
         return $this->render('DtdbBuilderBundle:Decklist:decklist.html.twig',
                 array(
@@ -442,7 +460,8 @@ class SocialController extends Controller
                         'commenters' => $commenters,
                         'similar' => $similar_decklists,
                         'precedent_decklists' => $precedent_decklists,
-                        'successor_decklists' => $successor_decklists
+                        'successor_decklists' => $successor_decklists,
+                		'tournaments' => $tournaments
                 ), $response);
     
     }
@@ -867,6 +886,9 @@ class SocialController extends Controller
         $rawdescription = trim(filter_var($request->request->get('description'), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
         $description = Markdown::defaultTransform($rawdescription);
         
+        $tournament_id = filter_var($request->request->get('tournament'), FILTER_SANITIZE_NUMBER_INT);
+        $tournament = $em->getRepository('DtdbBuilderBundle:Tournament')->find($tournament_id);
+        
         $derived_from = $request->request->get('derived');
         if(preg_match('/^(\d+)$/', $derived_from, $matches)) {
             
@@ -892,6 +914,7 @@ class SocialController extends Controller
         $decklist->setRawdescription($rawdescription);
         $decklist->setDescription($description);
         $decklist->setPrecedent($precedent_decklist);
+        $decklist->setTournament($tournament);
         $decklist->setTs(new \DateTime());
         $em->flush();
         

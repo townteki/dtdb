@@ -819,4 +819,33 @@ class Decklist
     {
         $this->children->removeElement($children);
     }
+
+    /**
+     * @var \Dtdb\BuilderBundle\Entity\Tournament
+     */
+    private $tournament;
+
+	/**
+	 * Set tournament
+	 *
+	 * @param \Dtdb\BuilderBundle\Entity\Tournament $tournament
+	 * @return Decklist
+	 */
+	public function setTournament(\Dtdb\BuilderBundle\Entity\Tournament $tournament = null)
+	{
+		$this->tournament = $tournament;
+	
+		return $this;
+	}
+	
+	/**
+	 * Get tournament
+	 *
+	 * @return \Dtdb\BuilderBundle\Entity\Tournament
+	 */
+	public function getTournament()
+	{
+		return $this->tournament;
+	}
+	
 }

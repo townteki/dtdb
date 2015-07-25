@@ -13,6 +13,7 @@
 <ul class="nav nav-pills nav-stacked">
 {% set linkurl = path('decklists_list', {type:'popular'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Popular</a></li>
 {% set linkurl = path('decklists_list', {type:'recent'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Recent</a></li>
+{% set linkurl = path('decklists_list', {type:'tournament'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Tournaments</a></li>
 {% set linkurl = path('decklists_list', {type:'hottopics'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Hot topics</a></li>
 {% set linkurl = path('decklists_list', {type:'halloffame'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">Hall of Fame</a></li>
 {% set linkurl = path('decklists_list', {type:'favorites'}) %}<li class="{% if url == linkurl %}active{% endif %}"><a href="{{ linkurl }}">My favorites</a></li>
@@ -72,6 +73,11 @@
 		<a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
 		{% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
 		<small class="reputation">{{ decklist.reputation }}</small>
+        {% if decklist.tournament %}
+		<span class="text-success" style="margin-left:1em">
+            <span class="glyphicon glyphicon-certificate"></span> {{ decklist.tournament }}
+        </span>
+	    {% endif %}
 		
 	</h5>
 </td>

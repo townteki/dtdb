@@ -330,6 +330,15 @@ DoomtownDB is supported by ads. Please whitelist us.
 								<label for="publish-name">Description</label>
 								<textarea class="form-control" name="description" id="publish-deck-description" rows="5" placeholder="Enter a brief explanation of the deck strategy and your significant choices. Type # to enter a card name."></textarea>
 							</div>
+							<div class="form-group">
+								<label for="edit-decklist-tournament">Place high in a tournament</label>
+								<select class="form-control" name="tournament" id="edit-decklist-tournament">
+								<option value="">No</option>
+								{% for tournament in tournaments %}
+								<option value="{{ tournament.id }}">{{ tournament.description }}</option>
+								{% endfor %}
+								</select>
+							</div>
 							<div class="pull-right">
 								<button type="submit" id="btn-publish-submit" class="btn btn-success">Checking...</button>
 								<button type="button" class="btn btn-default" onclick="$('#publishModal').modal('hide')">Cancel</button>

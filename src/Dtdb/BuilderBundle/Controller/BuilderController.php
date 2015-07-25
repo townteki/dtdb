@@ -631,6 +631,13 @@ class BuilderController extends Controller
                         $deck_id
                 ))->fetchAll();
 
+        $tournaments = $dbh->executeQuery(
+				"SELECT
+					t.id,
+					t.description
+                FROM tournament t
+                ORDER BY t.description desc")->fetchAll();
+					
 		$problem = $deck['problem'];
 		$deck['message'] = isset($problem) ? $this->get('judge')->problem($problem) : '';
 		
@@ -639,7 +646,8 @@ class BuilderController extends Controller
                         'pagetitle' => "Deckbuilder",
                         'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
                         'deck' => $deck,
-                        'published_decklists' => $published_decklists
+                        'published_decklists' => $published_decklists,
+                		'tournaments' => $tournaments
                 ));
     
     }
@@ -648,14 +656,20 @@ class BuilderController extends Controller
     {
         /* @var $user \Dtdb\UserBundle\Entity\User */
         $user = $this->getUser();
-        
+        $tournaments = $this->getDoctrine()->getConnection()->executeQuery(
+                "SELECT
+					t.id,
+					t.description
+                FROM tournament t
+                ORDER BY t.description desc")->fetchAll();
         return $this->render('DtdbBuilderBundle:Builder:decks.html.twig',
                 array(
                         'pagetitle' => "My Decks",
                         'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
                         'decks' => $this->get('decks')
                             ->getByUser($user),
-                        'nbmax' => $user->getMaxNbDecks()
+                        'nbmax' => $user->getMaxNbDecks(),
+                		'tournaments' => $tournaments
                 ));
     
     }

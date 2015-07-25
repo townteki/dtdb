@@ -48,6 +48,13 @@ Dtdb\BuilderBundle\Entity\Decklist:
             joinColumn:
                 name: precedent_decklist_id
                 referencedColumnName: id
+        tournament:
+            targetEntity: Tournament
+            nullable: true
+            inversedBy: decklists
+            joinColumn:
+                name: tournament_id
+                referencedColumnName: id
     oneToMany:
         slots:
             targetEntity: Decklistslot
