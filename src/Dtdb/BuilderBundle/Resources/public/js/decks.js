@@ -59,6 +59,29 @@ $(function() {
 			show_deck();
 	    }
 	});
+
+	$('#publish-deck-description').textcomplete(
+			[
+				{
+					match : /\B#([\-+\w]*)$/,
+					search : function(term, callback) {
+						callback(DTDB.data.cards({
+							title : {
+								likenocase : term
+							}
+						}).get());
+					},
+					template : function(value) {
+						return value.title;
+					},
+					replace : function(value) {
+						return '[' + value.title + ']('
+								+ Routing.generate('cards_zoom', {card_code:value.code})
+								+ ')';
+					},
+					index : 1
+				}
+		]);
 });
 
 function decks_upload_all() {
