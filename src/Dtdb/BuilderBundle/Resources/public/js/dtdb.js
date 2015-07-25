@@ -100,6 +100,10 @@ function getDisplayDescriptions(sort) {
             ],
             'gang': [
                 [{
+                    id: 'eaglewardens',
+                    label: 'Eagle Wardens',
+                    icon: ''
+                },{
                     id: 'fourthring',
                     label: 'The Fourth Ring',
                     icon: ''
@@ -110,6 +114,10 @@ function getDisplayDescriptions(sort) {
                 },{
                     id: 'morganco',
                     label: 'Morgan Cattle Co.',
+                    icon: ''
+                },{
+                    id: 'righteousbandits',
+                    label: 'The 108 Righteous Bandits',
                     icon: ''
                 },{
                     id: 'sloanegang',

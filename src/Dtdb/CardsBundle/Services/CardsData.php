@@ -74,9 +74,11 @@ class CardsData
 	{
 		$i=0;
 		$gang_codes = array(
+			'e' => "Eagle Wardens",
 			'f' => "The Fourth Ring",
 			'l' => "Law Dogs",
 			'm' => "Morgan Cattle Co.",
+			'r' => "The 108 Righteous Bandits",
 			's' => "The Sloane Gang"
 		);
 	
