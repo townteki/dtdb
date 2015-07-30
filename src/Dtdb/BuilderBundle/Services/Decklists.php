@@ -274,7 +274,7 @@ class Decklists
                 d.nbcomments
                 from decklist d
                 join user u on d.user_id=u.id
-                join card c on d.gang_id=c.id
+                join card c on d.outfit_id=c.id
                 left join tournament t on d.tournament_id=t.id
                 where d.tournament_id is not null
                 order by creation desc
