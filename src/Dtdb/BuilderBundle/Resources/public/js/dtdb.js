@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 9,
+			version: 10,
 			type: 'info',
-			message: 'Promo cards from OP kits added!<br/>If your experience any trouble, <a href="javascript:localStorage.clear()">clear your browser\'s cache (ctrl+f5)</a>.'
+			message: 'New Factions are in Gomorra (and DTDB)!<br/>Don\'t forget to <a href="javascript:localStorage.clear()">clear your browser\'s cache (ctrl+f5)</a>.'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
