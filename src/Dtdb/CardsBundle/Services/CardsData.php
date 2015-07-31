@@ -562,7 +562,7 @@ class CardsData
 		// suppression des conditions invalides
 		$canDoNumeric = array('r', 'v', 'u', 'p', 'b', 'i', 'c', 'e', 'q');
 		$numeric = array('<', '>');
-		$gangs = array('f','l','m','s','-');
+		$gangs = array('e','f','l','m','r','s','-');
 		foreach($conditions as $i => $l)
 		{
 			if(in_array($l[1], $numeric) && !in_array($l[0], $canDoNumeric)) unset($conditions[$i]);
