@@ -153,8 +153,17 @@ DTDB.data_loaded.add(function() {
 		);
 	});
 	$('#rank').empty();
+	
+	var label = $('<label class="btn btn-default btn-sm" data-code="null" title="-"><input type="checkbox" name="null">-</label>');
+	if(Modernizr.touch) {
+		label.addClass('btn-block');
+	} else {
+		label.tooltip({container: 'body'});
+	}
+	$('#rank').append(label);
+	
 	RankNames.forEach(function(element, index, array){
-		var label = $('<label class="btn btn-default btn-sm" data-code="' + (index+1)
+		label = $('<label class="btn btn-default btn-sm" data-code="' + (index+1)
 				+ '" title="'+element+'"><input type="checkbox" name="' + (index+1)
 				+ '">'
 				+ element
