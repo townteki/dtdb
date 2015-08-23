@@ -177,9 +177,11 @@ DTDB.data_loaded.add(function() {
 		
 	});
 	$('#rank').button();
+	/*
 	$('#rank').children('label').each(function(index, elt) {
 		$(elt).button('toggle');
 	});
+	*/
 
 	$('input[name=Outfit]').prop("checked", false);
 
