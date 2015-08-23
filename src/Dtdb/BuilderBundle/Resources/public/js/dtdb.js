@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 10,
+			version: 11,
 			type: 'info',
-			message: 'New Factions are in Gomorra (and DTDB)!<br/>Don\'t forget to <a href="javascript:localStorage.clear()">clear your browser\'s cache (ctrl+f5)</a>.'
+			message: 'Rules updated<br/>Don\'t forget to <a href="javascript:localStorage.clear()">clear your browser\'s cache (ctrl+f5)</a>.'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
