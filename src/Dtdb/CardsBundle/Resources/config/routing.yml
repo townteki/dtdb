@@ -111,6 +111,14 @@ cards_extraRules:
     requirements:
         _locale: en|fr|de|es|it|pl
 
+cards_collectedRulings:
+    pattern:  /{_locale}/collectedRulings
+    defaults:
+        _controller: DtdbCardsBundle:Default:collectedRulings
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
 cards_structure:
     pattern:  /{_locale}/structure
     defaults:

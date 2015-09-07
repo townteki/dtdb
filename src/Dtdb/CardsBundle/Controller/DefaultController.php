@@ -183,6 +183,17 @@ class DefaultController extends Controller
 		), $response);
 	}
 	
+	function collectedRulingsAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:collectedRulings.html.twig', array(
+		        "pagetitle" => "Collected Rulings",
+		), $response);
+	}
+	
 	function apidocAction()
 	{
 		
