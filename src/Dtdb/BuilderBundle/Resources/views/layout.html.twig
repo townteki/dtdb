@@ -77,7 +77,22 @@ ga('send', 'pageview');
             <li><a href="{{ path('decklists_list', {type:'popular'}) }}">Decklists</a></li>
             <li><a href="{{ path('cards_search') }}">Cards</a></li>
             <li><a href="{{ path('card_reviews_list') }}">Reviews</a></li>
-            <li><a href="{{ path('cards_rules') }}">Rules</a></li>
+            <li class="hidden-sm dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Rules <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation" class="dropdown-header">Official Rules</li>
+                <li><a href="{{ path('cards_rules') }}">Rulebook</a></li>
+                <li><a href="{{ path('cards_faq') }}">FAQ</a></li>
+                <li><a href="{{ path('cards_floor') }}">Floor Rules</a></li>
+                <li class="divider"></li>
+                <li role="presentation" class="dropdown-header">Collected Rulings</li>
+                <li><a href="{{ path('cards_extraRules') }}">Additional Rules</a></li>
+                <li><a href="{{ path('cards_structure') }}">Timing Structures</a></li>
+                <li class="divider"></li>
+                <li role="presentation" class="dropdown-header">Online play</li>
+                <li><a href="{{ path('cards_octgnGuide') }}">Octgn Guide</a></li>
+              </ul>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li id="login">

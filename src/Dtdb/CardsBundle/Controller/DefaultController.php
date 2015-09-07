@@ -127,7 +127,62 @@ class DefaultController extends Controller
 		        "pagetitle" => "Rules",
 		), $response);
 	}
-
+	
+	function extraRulesAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:extraRules.html.twig', array(
+		        "pagetitle" => "Additional Rules",
+		), $response);
+	}
+	
+	function structureAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:structure.html.twig', array(
+		        "pagetitle" => "Turn Structure",
+		), $response);
+	}
+	
+	function faqAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:faq.html.twig', array(
+		        "pagetitle" => "FAQ",
+		), $response);
+	}
+	
+	function floorRulesAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:floorRules.html.twig', array(
+		        "pagetitle" => "Tournament Rules",
+		), $response);
+	}
+	
+	function octgnGuideAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:octgnGuide.html.twig', array(
+		        "pagetitle" => "Guide to OCTGN",
+		), $response);
+	}
+	
 	function apidocAction()
 	{
 		

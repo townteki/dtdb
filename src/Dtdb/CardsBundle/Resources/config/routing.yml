@@ -103,6 +103,46 @@ cards_rules:
     requirements:
         _locale: en|fr|de|es|it|pl
 
+cards_extraRules:
+    pattern:  /{_locale}/extraRules
+    defaults:
+        _controller: DtdbCardsBundle:Default:extraRules
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+cards_structure:
+    pattern:  /{_locale}/structure
+    defaults:
+        _controller: DtdbCardsBundle:Default:structure
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+cards_faq:
+    pattern:  /{_locale}/faq
+    defaults:
+        _controller: DtdbCardsBundle:Default:faq
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+cards_floor:
+    pattern:  /{_locale}/floorRules
+    defaults:
+        _controller: DtdbCardsBundle:Default:floorRules
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+cards_octgnGuide:
+    pattern:  /{_locale}/octgnGuide
+    defaults:
+        _controller: DtdbCardsBundle:Default:octgnGuide
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
 cards_api:
     pattern:  /{_locale}/apidoc
     defaults:

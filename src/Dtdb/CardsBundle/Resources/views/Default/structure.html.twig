@@ -1,0 +1,473 @@
+{% extends 'DtdbBuilderBundle::layout.html.twig' %}
+
+{% block title %}Collected Rulings{% endblock %}
+
+{% block body %}
+<div class="container">
+
+<h1>{{ block('title') }}</h1>
+<article></article>
+<div class="rules structure">
+<table id="table1">
+<h1>Setup and Turn Structure</h1>
+	<tr>
+		<th colspan="2">Setup Procedure</th>
+	</tr>
+	<tr>
+		<td>Reveal outfits</td>
+		<td>Players reveal their starting outfits simultaneously.</td>
+	</tr>
+	<tr>
+		<td>Choose starting posses</td>
+		<td>Players choose and reveal their starting cards simultaneously.</td>
+	</tr>
+	<tr>
+		<td>Shuffle decks</td>
+		<td>Players completely shuffle their decks. Each Player presents his/her deck to his/her opponent for additional shuffling and/or a cut.</td>
+	</tr>
+	<tr>
+		<td>Draw starting hands</td>
+		<td>Players draws starting play hands (normally five cards, NOT up to maximum hand size). </td>
+	</tr>
+	<tr>
+		<td>Use Grifter abilities</td>
+		<td>Players choose whether they are going to use a Grifter ability. Order of activation is decided by a coin toss.</td>
+	</tr>
+	<tr>
+		<td>Match begins</td>
+		<td>Grifter abilities are performed before time for the match has officially begun.</td>
+	</tr>
+	<tr>
+		<th colspan="2">Gamblin' phase</th>
+	</tr>
+	<tr>
+		<td>Place 1 ghost rock into the ante</td>
+		<td>If you have no money at the start of turn, borrow 1 ghost rock from the bank.</td>
+	</tr>
+	<tr>
+		<td>Draw and reveal lowball hands</td>
+		<td>Players set aside their play hands and draw a five-card lowball draw hand from the top of their decks, then reveal them simultaneously.</td>
+	</tr>
+	<tr>
+		<td>Play Cheatin' Resolutions</td>
+		<td>
+			<p>If another player cheats, you can play a Cheatin' Resolution action card from your play hand (not your lowball hand!), or use a Cheatin' Resolution ability printed on one of your cards in play.</p>
+			<p>You cannot play Cheatin' Resolutions if you yourself are cheatin', but other players do not.</p>
+			<p>The previous day's Winner of lowball gets the first opportunity to play a Cheatin' Resolution. (If it is the first turn of the game, pull for low value to determine the first player)</p>
+			<p>Each player can only have one Cheatin' Resolution used against them.</p>
+			<p>Regular (non-Cheatin') Resolutions cannot be played on lowball.</p>
+			<li>If your opponent cheats, you can play <b>Cheatin' Varmint</b> or <b>It's Not What You Know...</b> to lower your own hand rank.</li>
+			<br>
+			<li>If both you and your opponent cheat, but you have the first opportunity to play, you can use <b>Pair of Six-Shooters</b> to make your hand legal, and immune to your opponent's Cheatin' Resolutions.</li>
+		</td>
+	</tr>
+	<tr>
+		<td>Compare hands</td>
+		<td>During lowball, the player with the lowest hand rank wins. If players have hands of the same rank, compare values (A-A-A-K-K beats 2-2-2-3-3 in lowball). Players with exactly tied hands draw new lowball hands to break the tie.</td>
+	</tr>
+	<tr>
+		<td>Award the Winner</td>
+		<td>
+			<p>The Winner takes all the ghost rock from the ante.</p>
+			<p>The Winner goes first during each phase of the day, and wins ties whenever players want to do something at the same time.</p>
+			<p>The Winner keeps that title until a new Winner is determined in the end of the next Gamblin' phase.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Discard lowball hands</td>
+		<td>
+			<li>If you used the spell <b>Fetch</b> during Cheatin' Resolutions, put a card from your lowball hand into your play hand.</li>
+			<p>Finally, players discard their lowball hands and retrieve their play hands.</p>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">Upkeep phase</th>
+	</tr>
+	<tr>
+		<td>Collect income</td>
+		<td>
+			<p>All players collect income from their deeds and outfit cards simultaneously.</p>
+			<p>	If you own a deed but don't control it, neither you nor the controller gains its production.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Repay the bank</td>
+		<td>All players that borrowed ghost rock from the bank during the Gamblin' Phase now have to pay it back.</td>
+	</tr>
+	<tr>
+		<td>Pay upkeep</td>
+		<td>
+			<p>All players pay upkeep for their dudes simultaneously.</p>
+			<p>If you cannot or do not want to pay upkeep for some of your dudes, discard them along with any attached cards.</p>
+			<p>A dude with zero upkeep cannot be discarded this way.</p>
+			<p>For out-of-faction dudes, pay additional upkeep equal to their influence.</p>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">High Noon phase</th>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Starting with the Winner and going clockwise, players take turns to make any of the following plays:</td>
+	</tr>
+	<tr>
+		<td>Actin'</td>
+		<td>
+			<p>Use a Noon ability on an action card in your play hand, or printed on one of your cards in play.</p>
+			<p>Text in bold before the colon is the cost of the ability. If it says <b>Boot</b>, you must boot that card. Unless it's a <b>Job</b>, in which case you must boot the Leader that you choose for that job.</p>
+			<p>Cost are also sometimes present after the colon, in the 	"do X to do Y" format. If you cannot do X, then you will not get to do Y.</p>
+			<p>In order to use an ability, you must be able to fully resolve the first sentence after the colon (called a requirement).</p>
+			<p>Each ability on a card in play can only be used once per day, regardless of whether it boots that card ot not. If a Spell has more than one ability, you can only use one of them per day. Repeat abilites can be used any number of times per day.</p>
+			<p>Abilities on deeds can only be used by that deed's current controller, whether or not the controller is also the owner.</p>
+			<p>Effects of Noon abilities typically last through the end of the Sundown phase.</p>
+			<p>Action cards that initiate shootouts or jobs do not go into the discard pile immediately, instead they stay on the board until the shootout or job ends, and it is another player's turn to make a play.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Movin'</td>
+		<td>
+			<p>As a Noon play, you can move one of your unbooted dudes to another location.</p>
+			<p>A dude can move without booting:</p>
+				<ul>
+				<li>From home to an adjacent location (town square or an adjacent deed)</li>
+				<li>From town square to an in-town deed or to another player's home</li>
+				</ul>
+			<p>A dude has to boot to move:</p>
+				<ul>
+				<li>From home to a non-adjacent location</li>
+				<li>From town square to an out-of-town deed or to your home</li>
+				<li>From any deed to anywhere</li>
+				<li>From another player's home to anywhere</li>
+				</ul>
+			<p>Card effects that move dudes do so without booting them, and they can move booted dudes.</p>
+			<p>Card effects that move dudes must actually make them change location. The only exeption is "move into posse" effects, these actually mean "join a posse"; if a dude can join a posse without changing location, these effects still work.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Callin' Out</td>
+		<td>
+			<p>As a Noon play, you can make one of your unbooted dudes call out an opposing dude at the same location.</p>
+			<p>Dudes staying at their home cannot be called out normally.</p>
+			<p>Card effects that initiate callouts can be used by booted dudes, and against dudes at their home.</p>
+			<p>Unbooted dudes can refuse a callout by moving home booted, even if already at home.</p>
+			<p>Booted dudes cannot refuse a callout.</p>
+			<p>Accepting a callout is different from opposing a job.</p>
+			<li>After a callout is accepted, you can play a React ability like <b>Rope and Ride</b> or <b>Tail Between Yer Legs</b>. You can play several of these in succession, but technically you must give your opponent(s) a chance to React as well after each play.</li>
+		</td>
+	</tr>
+	<tr>
+		<td>Shoppin'</td>
+		<td>
+			<p>As a Noon play, you can bring a dude, deed, spell, or goods card into play from your play hand.</p>
+			<p><b>Dude</b>: Dudes enter play at your home normally.</p>
+			<p><b>Deed</b>: In-town deeds enter play at either end of your street, as the last card in that direction (new deeds can't be placed between existing locations). Out-of-town deeds are placed off to one side.</p>
+			<p><b>Goods</b> and <b>Spells</b> enter play attached to dudes (and sometimes deeds).</p>
+				<ul>
+				<li>Only unbooted dudes in locations you control can attach goods and spells normally.</li>
+				<li>Card effects can attach goods and spells to booted dudes, and in locations you don't control.</li>
+				<li>Dudes can have no more than one <b>Weapon</b> and one <b>Horse</b> attached. If you attach another one, discard the old one.</li>
+				<li><b>Spells</b> can only be attached to dudes with the corresponding skill (Hexes to Hucksters, Miracles to Blessed, Spirits to Shamans).</li>
+				<li><b>Totems</b> can only be attached to locations that you control where you have an unbooted Shaman.</li>
+				<li><b>Gadgets</b> are invented by booting an unbooted Mad Scientist in a location you control.</li>
+				</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>Tradin'</td>
+		<td>
+			<p>As a Noon play, you can transfer goods between your dudes in a location you control</p>
+			<p>Only unbooted dudes can receive goods. Booted dudes can give them away, but cannot receive any.</p>
+			<p>Any number of goods may be traded between any number of dudes as one play.</p>
+			<p>Each goods can only be traded once per day.</p>
+			<p>If a dude ends up with several Weapons and/or Horses attached, choose one of each to keep and discard the rest.</p>
+			<p>Spells cannot be traded.</p>
+			<p>Card effects that transfer goods between dudes allow tradin' to booted dudes, and in locations you don't control.</li>
+		</td>
+	</tr>
+	<tr>
+		<td>Passin'</td>
+		<td>
+			<p>If you cannot or do not want to make any other plays, pass.</p>
+			<p>After both players pass consecutively, the High Noon phase ends, and the Sundown phase starts.</p>
+			<p>If one player announces Pass and then their opponent can also pass to win the game, that opponent must announce "Check" and let that player make another play instead.</p>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">Sundown phase</th>
+	</tr>
+	<tr>
+		<td>
+			<p>Check for Victory conditions</p>
+			<p>Optionally discard one card</p>
+			<p>Refill your play hand</p>
+			<p>Unboot all cards in play</p>
+		</td>
+		<td>
+			<ol>
+			<li>Effects that apply continuously during Sundown start (<i>e.g. Jake Smiley</i>)</li>
+			<li>Check for victory conditions (<i>game possibly ends</i>)</li>
+			<li>Effects that require a check or game state change during Sundown are resolved (<i>e.g. The Sloane Gang outfit</i>) </li>
+			<li>All players may choose to discard one card from their play hand (<i>lowball winner goes first</i>)</li>
+			<li>All players refill their hand to their maximum hand size (<i>normally 5 cards</i>)</li>
+			<li>Unboot all cards</li>
+			<li>Effects that apply continuously during Sundown end</li>
+			<li>Effects that apply until the end of turn end (<i>most Noon abilities</i>)</li>
+			<li>Turn ends, start a new turn</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">Shootouts</th>
+	</tr>
+	<tr>
+		<td>Callout accepted</td>
+		<td>
+			<p>A shootout starts when a dude accepts a call-out, or when a played decides to oppose a job.</p>
+			<p>Both the player and dude doing the callin' out are known as the Leader, while the player and dude being called out are known as the Mark.</p>
+			<p>The shootout takes place at the location of the mark, and does not change for the duration of the shootout.</p>
+			<li><b>Rope and Ride</b> is played before the final location of the shootout is determined.</li>
+			</td>
+	</tr>
+	<tr>
+		<td>Formin' Posses</td>
+		<td>
+			<p>The leader declares their entire posse first. Then, the mark does the same.</p>
+			<p>Dudes already in the location of the shootout can join even if booted. Only unbooted dudes can join from an adjacent location.</p>
+			<li>A dude can't join a posse if there are restrictions that prevent them from moving to the location of the shootout (e.g. <b>Smiling Tom</b>).</li>
+			<p>Once both players have declared their posses, all dudes join simultaneously. Dudes that are not yet in the location of the shootout must boot to move to that location (unless prevented by card effects, e.g. <b>Roan</b>, <b>Mechanical Horse</b>, <b>Clown Carriage</b>, <b>Sloane</b>).</p>
+			<li>Traits and abilities that refer to dudes joining a posse (e.g. <b>Irving Patterson</b>, <b>Ramiro Mendoza</b>, <b>James Ghetty</b>, <b>Lillian Morgan</b>, <b>Jacqueline Isham</b>) trigger now, as well as when dudes join due to Shootout or Resolution plays. The leader is also considered to be joining a posse.</li>
+			<p>Players can never have dudes they control in both posses.</p>
+		</td>
+	</tr>
+	<tr">
+		<td style="border:dashed red; text-align:center">Jobs</td>
+		<td style="border:dashed red">
+			<p>During Jobs, things work in a somewhat different order.</p>
+			<p>Choose one of your <i>unbooted</i> dudes to be the leader of the job.</p>
+				<ul>
+				<li>If the job was started by a dude or one of their attached cards (goods or spell), that dude must be selected as the job's leader.</li>
+				<li>Boot the leader only if the job requires booting as a part of the cost (e.g. "<b>Noon Job, Boot:</b>").</li>
+				</ul>
+			<p>Choose the mark.</p>
+				<ul>
+				<li>The mark can be anywhere, not necessarily close to the leader.</li>
+				<li>You can declare your own cards to be the mark of a job, but in this case you can't defend against the job.</li>
+				</ul>
+			<p>The leader forms a posse.</p>
+				<ul>
+				<li>Dudes that are already in the mark's location can join the posse without booting, and even if booted.</li>
+				<li>Dudes in the leader's location, or in any location adjacent to the location of either the leader or the mark, must boot to join the posse (unless prevented by card effects).</li>
+				<li>All dudes join simultaneously, but they do not move at this point.</li>
+				<li>Check if the job imposes additional requirements on a posse (e.g. <b>Kidnappin'</b>). If those requirements aren't met after the posse is formed, then it is considered to be an illegal posse, and the job immediately fails (all dudes that joined a posse move home booted).</li>
+				</ul>
+			<p>The mark's controller decides whether to oppose the job or not. If they choose to oppose, they must form a posse following the same rules (boot to join from locations adjacent to the mark's location, but do not move there yet).</p>
+				<ul>
+				<li>Note that the dude marked for the job does not necessarily have to join the posse.</li>
+				<li>If the mark's controller does not form a posse, then the mark's owner (if different from its controller) can form a posse. If they do not, then any player (starting with the player to the left of the leader) can form a posse to oppose the job.</li>
+				<li>If no one forms a posse to oppose the job, the job automatically succeeds.</li>
+				</ul>
+			<p>Once both posses are formed, all dudes move to the mark's location simultaneously (without booting), and a shootout starts.</li>
+				<ul>
+				<li>Since actually moving to the job mark's location does not boot anyone, even dudes equipped with <b>Buffalo Rifle</b> will have to move there.</li>
+				</ul>
+			<p>If the leader's posse wins the shootout, or no player forms a defending posse, the job succeeds. Otherwise, the job fails.</p>
+				<ul>
+				<li>After the shootout is over, regardless of the outcome, survivors in the leader's posse move home booted.</li>
+				<li>If the job is successful, resolve its effect. If the mark is no longer in play, it is unaffected.</li>
+				<li>Finally, the remaining posses are dissolved and the job ends.</li>
+				</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>Breakin' and Enterin'</td>
+		<td>
+			<p>If a shootout takes place at a private location, regardless of who started it, all dudes in the shootout that are not controlled by the owner of that location have their bounty increased by 1.</p>
+			<p>A deed's keywords will tell you whether it's public or private. A player's home is always private, and the town square is always public.</p>
+			<p>If a Shootout or Resolution play brings a dude into the shootout at another player's private location, that dude gets 1 bounty, even if they already got bounty for this same shootout.</p>
+				<ul>
+				<li>This works the same way with jobs that raise the bounty of participating dudes (e.g. <b>Ambush</b>, <b>Kidnappin'</b>).</li>
+				</ul>
+		</td>
+	</tr>
+	<tr>
+		<th>Slingin' Lead</th>
+		<td>The shootout is resolved in a series of rounds, until all dudes in one posse are shot dead or flee.</td>
+	</tr>
+	<tr>
+		<td>Step 1. Shootout Plays</td>
+		<td>
+			<p>Shootout abilities must come from either an action card in your play hand, a deed or outfit in play, or a card in your posse (a dude or one of their attached cards).</p>
+			<p>Shootout abilities that bring dudes <i>that are currently in play</i> into a posse can be used can be use even if they originate from a card that is currently outside a posse.</p>
+				<ul>
+				<li>Shootout abilities that bring dudes into play (<b>Raising Hell</b>, <b>Clown Carriage</b>, <b>Spirit Dance</b>, <b>The Pack Awakens</b>) cannot originate from outside a posse.</li>
+				</ul>
+			<p>Shootout abilities can only affect dudes or their attached cards if they are in a posse (unless that ability would bring a card into the posse).</p>
+			<p>Effects of Shootout abilities typically last until the end of the shootout.</p>
+			<p>If a Shootout ability causes one posse to become empty, the shootout ends immediately; skip to step 7.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Step 2. Pick Yer Shooter</td>
+		<td>Choose any dude in your posse to be the main shooter for this round of the shootout. That dude contributes his/her full bullet rating to your draw hand.</td>
+	</tr>
+	<tr>
+		<td>Step 3. Draw!</td>
+		<td>
+			<p>Set aside your play hand and draw cards into your draw hand equal to 5 plus your posse's stud bonus. Your stud bonus equals the full stud rating of your shooter (if they have one), plus one extra for each other stud dude in your posse.</p>
+			<p>You may redraw a number of cards in your draw hand up to your draw bonus. Your draw bonus equals the full draw rating of your shooter (if they have one), plus one extra for each other draw dude in your posse. You must redraw all cards at once, not one card at a time.</p>
+			<p>Even dudes with 0 bullets still contribute 1 bullet, if they're not chosen as the main shooter.</p>
+			<li>If you redraw at least one card, you may draw one extra card for each <b>Auto-Revolver</b> you control (anywhere, not necessarily in a posse).</li>
+			<p>After redrawing, discard down to 5 cards. That's your final draw hand.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Step 4a. Reveal Draw Hands</td>
+		<td>
+			<p>Both players reveal their draw hands.</p>
+			<p>Traits on cards in play that refer to draw hands being revealed can be triggered now (e.g. <b>Philip Swinford</b>, <b>Tommy Harden</b>).</p>
+			<p>After all traits have been triggered, React abilities can be used (e.g. <b>Ace In The Hole</b>).</p>
+			<p>If a player has to discard their hand and draw a new one (e.g. <b>Bottom Dealin'</b>), these traits and React abilities cannot be triggered again.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Step 4b. Resolution Plays</td>
+		<td>
+			<p>Resolution abilities must come from either an action card in your play hand (not your draw hand), a deed or outfit in play, or a card in your posse (i.e a dude or one of their attached cards).</p>
+			<p>Resolution abilities that bring dudes <i>that are currently in play</i> into a posse can be used can be use even if they originate from a card that is currently outside a posse.</p>
+				<ul>
+				<li>Resolution abilities that bring dudes into play (<b>Soul Cage</b>) cannot originate from outside a posse.</li>
+				</ul>
+			<p>Resolution abilities can only affect dudes or their attached cards if they are in a posse (unless that ability would bring a card into the posse).</p>
+			<p>Cheatin' Resolutions can be played if another player has an illegal hand. Each player can only have one Cheatin' ability used against them in every round of the shootout. You cannot play Cheatin' Resolutions if you yourself are cheatin', but other players do not.</p>
+			<p>In multiplayer, any player can play a Cheatin' Resolution action card, even if that player is not in the shootout.</p>
+			<p>If a Resolution ability causes one posse to become empty, the shootout ends immediately; skip to step 7.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Step 5. Take Yer Lumps</td>
+		<td>
+			<p>Compare final hand ranks (draw hand ranks + any modifiers). The player with the highest hand rank wins this round of the shootout. If hand ranks are tied, both the loser and the winner take one casualty each.</p>
+				<ul>
+				<li>When a card effect increases your hand rank, it is considered to be the worst possible hand of its new rank. All hands of rank 11 or higher are equal.</li>
+				<li>When a card effect decreases your hand rank, it is considered to be the best possible hand of its new rank. All hands below rank 1 are considered equal to A-2-3-4-6.</li>
+				<li>If both players have the exact same hand (ignoring suits), there is no winner or loser for this round. In this case, the player who initiated a callout or a job (the Leader) is the first to take casualties and decide whether to flee.</li>
+				</ul>
+			<p>The loser takes a number of casualties equal to the difference between the players' hand ranks, plus any modifiers (e.g. <b>Flame-Thrower</b>, <b>Evanor</b>).</p>
+				<ul>
+				<li>First announce the way you distribute casualties among your dudes and/or Sidekicks.</li>
+				<li>Then resolve casualties one by one, recalculating influence after each casualty is taken if necessary (e.g. for the <b>Undertaker</b>).</li>
+				<li>You can play React abilities to dudes being discarded or aced when each individual casualty is resolved (e.g. <b>Arnold McCadish</b>, <b>Lay On Hands</b>).</li>
+				<li>After you've resolved all casualties, now is the time to play <b>Takin' Ya With Me</b> or <b>Hot Lead Flyin'</b>.</li>
+				</ul>
+			<p>After the loser is done taking casualties, the winner then does the same (even if the loser had to discard or ace all of their dudes).</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Step 6. Run or Gun</td>
+		<td>
+			<p>The loser decides whether any of their dudes flee the shootout (leave the posse and move home booted).</p>
+			<p>Then, the winner decides whether to flee as well. The winner can decide to flee even if the loser's whole posse has fled, or has been wiped out.</p>
+			<p>If the loser decides to stay, and the winner chooses to flee, the loser cannot reconsider.</p>
+		</td>
+	</tr>
+	<tr>
+		<td>Step 7. Chamber Another Round</td>
+		<td>
+			<p>Both players discard their draw hands.</p>
+			<p>If only one posse remains, that player wins the shootout. If both posses have been emptied of dudes, neither player wins the shootout. If both posses still have at least one dude each, go back to step 1 to start the next shootout round.</p>
+		</td>
+	</tr>
+</table>
+
+<table id="table2">
+<h1>Callouts, Jobs, and Shootouts</h1>
+	<tr>
+		<th>Callout</th>
+		<td></td>
+		<th>Job</th>
+	</tr>
+	<tr>
+		<td><li>Callout initiated</li></td>
+		<td></td>
+		<td><li>Job initiated</li>
+			<li>Choose the Leader (boot him if required for the job)</li>
+			<li>Choose the Mark</li>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<li style="color:red">Callout accepted</li>
+			<li type="circle">React window for <b>Rope and Ride, Tail Between Yer Legs</b></li>
+		</td>
+		<td></td>
+		<td style="border:dashed"><li type="circle"><b>Election Day Slaughter</b>: Each other player may unboot a dude in town</li></td>
+	</tr>
+	<tr>
+		<td><li>The Leader forms his posse</li></td>
+		<td></td>
+		<td>
+			<li>The Leader forms his posse</li>
+			<li>Dudes join the posse, booting if not in the mark's location</li>
+			<li type="circle"><b>Kidnappin'</b>: Check if the posse has enough bullets</li>
+			<li type="circle"><b>Ambush, Kidnappin'</b>: Dudes in the posse get bounty</li>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td style="color:red"><li>Job opposed</li></td>
+	</tr>
+	<tr>
+		<td><li>The Mark forms his posse</li></td>
+		<td></td>
+		<td>
+			<li>The Mark forms his posse</li>
+			<li>The dude marked for the job doesn't have to join</li>
+			<li>Dudes join the posse, booting if not in the mark's location</li>
+		</td>
+	</tr>
+	<tr>
+		<td><li>All dudes join their respective posses simultaneously, moving to the mark's location and booting if not there yet</li></td>
+		<td></td>
+		<td><li>All dudes move to the mark's location (without booting)</li></td>
+	</tr>
+	<tr>
+		<td></td>
+		<th>Shootout</th>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<li>Dudes get bounty for Breakin' and Enterin'</li>
+			<br>
+			<li>Step 1. Shootout plays</li>
+			<li>Step 2. Choose your shooter</li>
+			<li>Step 3. Draw</li>
+			<li>Step 4a. Reveal draw hands</li>
+			<li>Step 4b. Resolution plays</li>
+			<li>Step 5. Take casualties</li>
+			<li>Step 6. Stay or flee</li>
+			<li>Step 7. End the shootout or start another round</li>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td><li>Survivors in the leader's posse move home booted</li>
+			<li>Resolve the job (apply "If successful" and other effects)</li>
+			<li>Remaining posses are dissolved</li>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><li>Discard the action card that initiated the callout or job</li></td>
+		<td></td>
+	</tr>
+</table>
+
+</div>
+
+</div>
+{% endblock %}
