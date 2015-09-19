@@ -441,6 +441,7 @@ article.review  header {
 article.review div.review-content {
 	
 }
+article.rules a {target: _blank;}
 article.rules aside{border-left:1px solid blue;padding-left:20px}
 article.rules span.dtr{font-style:italic;white-space:nowrap}
 article.rules p{text-align:justify}
@@ -457,15 +458,15 @@ article.rules table.bordered th, table.bordered td {
     padding: 15px;
 }
 
-
+div.structure a 						{target: _blank;}
 div.structure h1						{ text-align: center; }
-div.structure table					{ border-spacing: 5px; border-collapse: separate;}
+div.structure table						{ border-spacing: 5px; border-collapse: separate;}
 div.structure th, td					{ padding: 10px; }
-div.structure th						{ background-color: #ccc; font-size: 24px; }
+div.structure th						{ background-color: #ccc; font-size: 24px; text-align: center;}
 div.structure #table1	td 				{ border: 1px solid black; }
 div.structure #table1	td:first-child	{ border: none; font-weight: bold; font-size: 20px; width: 25%; }
 div.structure #table2	td				{ border: 2px solid black; }
-div.structure #table2	td:empty			{ border: none; }
+div.structure #table2	td:empty		{ border: none; }
 
 .page-header {
 	border-bottom-color: #ddd;
