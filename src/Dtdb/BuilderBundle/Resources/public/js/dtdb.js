@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 11,
+			version: 12,
 			type: 'info',
-			message: 'Rules updated<br/>Don\'t forget to <a href="javascript:localStorage.clear()">clear your browser\'s cache (ctrl+f5)</a>.'
+			message: 'The Light Shineth over DTDB.\nnew blog in town: <a href="http://the-gadgetorium.blogspot.com.es/">The Gadgetorium</a>'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;

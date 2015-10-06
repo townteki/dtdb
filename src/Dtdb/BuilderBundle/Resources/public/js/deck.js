@@ -698,13 +698,15 @@ function handle_start_change(event) {
 	var index = $(this).closest('.card-container').data('index') || $(this).closest('div.modal').data('index');
 	var start = $(this).prop('checked');
 	var card = DTDB.data.cards({ code: index }).first();
-	if ( !start || card.indeck != 0){
-		DTDB.data.cards({
-			code : index
-		}).update({
-			start : start ? 1 : 0
-		});
-	}
+	var indeck = card.indeck;
+	if (start && indeck == 0) indeck = 1;
+	DTDB.data.cards({
+		code : index
+	}).update({
+		start : start ? 1 : 0,
+		indeck : indeck
+	});
+	refresh_collection();
 	$('div.modal').modal('hide');
 	update_deck();
 }
@@ -713,12 +715,15 @@ function handle_qty_start_change(event) {
 	var index = $(this).closest('.card-container').data('index') || $(this).closest('div.modal').data('index');
 	var start = parseInt($(this).val(), 10);
 	var card = DTDB.data.cards({ code: index }).first();
-	if(card.indeck < start) start = card.indeck;
+	var indeck = card.indeck;
+	if(indeck < start) indeck = start;
 	DTDB.data.cards({
 		code : index
 	}).update({
-		start : start
+		start : start,
+		indeck : indeck
 	});
+	refresh_collection();
 	$('div.modal').modal('hide');
 	update_deck();
 }
