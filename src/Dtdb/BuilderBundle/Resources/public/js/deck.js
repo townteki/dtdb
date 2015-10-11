@@ -68,11 +68,14 @@ DTDB.data_loaded.add(function() {
 	});
 	update_deck();
 	DTDB.data.cards().each(function(record) {
-		var max_qty = 4;
-		if (record.pack_code == 'DTR')
-			max_qty = Math.min(record.quantity * BaseSets, 4);
+		var max_qty;
 		if (record.type_code == "outfit")
 			max_qty = 1;
+		else
+			if (record.pack_code == 'DTR')
+				max_qty = Math.min(record.quantity * BaseSets, 4);
+			else
+				max_qty = record.quantity;
 		DTDB.data.cards(record.___id).update({
 			maxqty : max_qty
 		});
