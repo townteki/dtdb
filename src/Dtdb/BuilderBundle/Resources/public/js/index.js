@@ -26,7 +26,7 @@ function update_cardsearch_result() {
 	if ($.isEmptyObject(query))
 		return;
 	var tabindex = 2;
-	DTDB.data.cards(query).order("title intl").each(
+	DTDB.data.cards(query).order("title asec").each(
 			function(record) {
 				$('#card_search_results').append(
 						'<tr><td><span class="icon icon-' + record.gang_code

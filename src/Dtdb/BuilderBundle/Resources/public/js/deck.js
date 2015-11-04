@@ -895,8 +895,8 @@ function update_filtered() {
 	var sortType = {
 			'rank': ['asec', 'desc'],
 			'suit': ['asec', 'desc'],
-			'title': ['intl', 'intldesc'],
-			'gang': ['intl', 'intldesc'],
+			'title': ['asec', 'desc'],
+			'gang': ['asec', 'desc'],
 			'indeck': ['asec', 'desc']
 	};
 	var order = sortType[Sort][Order > 0 ? 0 : 1];
