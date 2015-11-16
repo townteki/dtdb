@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 12,
+			version: 13,
 			type: 'info',
-			message: 'The Light Shineth over DTDB.\nnew blog in town: <a href="http://the-gadgetorium.blogspot.com.es/">The Gadgetorium</a>'
+			message: 'Dirty deeds is here.\nMeet the community at: <a href="http://gomorragazette.com/">Gomorra Gazette</a>'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
