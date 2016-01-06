@@ -21,14 +21,16 @@
 					<div class="card-info">
         				<div class="card-type">
         					{{ card.type }}
-                            {% if card.keywords %}&bull; {{ card.keywords }}{% endif %}
-        					{% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
+                            {% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
         					{% if not card.influence is null %}&bull; Influence {{ card.influence }}{% endif %}
         					{% if not card.control is null %}&bull; Control {{ card.control }}{% endif %}
         					{% if not card.cost is null %}&bull; Cost {{ card.cost }}{% endif %}
         					{% if not card.wealth is null %}&bull; Wealth {{ card.wealth }}{% endif %}
         					{% if not card.production is null %}&bull; Production {{ card.production }}{% endif %}
         					{% if not card.upkeep is null %}&bull; Upkeep {{ card.upkeep }}{% endif %}
+        				</div>
+        				<div class="card-keywords">
+                            {% if card.keywords %}{{ card.keywords }}{% endif %}
         				</div>
         				<div class="card-text">
         					{{ card.text|raw }}
@@ -38,7 +40,7 @@
         				</div>
         				<div class="card-illustrator">
         					<small>
-        					{{ card.gang }} &bull;
+							{% if card.gang %}<img src="{{ asset('/web/bundles/dtdbbuilder/images/' ~ card.gang_code ~ '-20.png') }}" title="{{ card.gang }}">{% endif %} &bull;
         					{% if card.illustrator %}{{ card.illustrator }} &bull; {% endif %}{{ card.pack }} #{{ card.number }}
         					{% for alternative in card.alternatives %}
         						| <a href="{{ alternative.url }}" title="Alternative">{{ alternative.pack }} #{{ alternative.number }}</a>

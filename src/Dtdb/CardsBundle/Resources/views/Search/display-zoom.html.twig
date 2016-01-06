@@ -24,8 +24,7 @@ DTDB.user.params.card_id = {{ cards[0].id|json_encode|raw }};
 				<div class="panel-body">
     				<div class="card-type">
     					{{ card.type }}
-                        {% if card.keywords %}&bull; {{ card.keywords }}{% endif %}
-    					{% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
+                        {% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
     					{% if not card.influence is null %}&bull; Influence {{ card.influence }}{% endif %}
     					{% if not card.control is null %}&bull; Control {{ card.control }}{% endif %}
     					{% if not card.cost is null %}&bull; Cost {{ card.cost }}{% endif %}
@@ -33,6 +32,9 @@ DTDB.user.params.card_id = {{ cards[0].id|json_encode|raw }};
     					{% if not card.production is null %}&bull; Production {{ card.production }}{% endif %}
     					{% if not card.upkeep is null %}&bull; Upkeep {{ card.upkeep }}{% endif %}
     				</div>
+        			<div class="card-keywords">
+                        {% if card.keywords %}{{ card.keywords }}{% endif %}
+        			</div>
     				<div class="card-text">
     					{{ card.text|raw }}
     				</div>
@@ -41,7 +43,7 @@ DTDB.user.params.card_id = {{ cards[0].id|json_encode|raw }};
     				</div>
     				<div class="card-illustrator">
     					<small>
-    					{{ card.gang }} &bull;
+    					<img src="{{ asset('/web/bundles/dtdbbuilder/images/' ~ card.gang_code ~ '-20.png') }}" title="{{ card.gang }}"> &bull;
     					{% if card.illustrator %}{{ card.illustrator }} &bull; {% endif %}{{ card.pack }} #{{ card.number }}
     					{% for alternative in card.alternatives %}
     						| <a href="{{ alternative.url }}" title="Alternative">{{ alternative.pack }} #{{ alternative.number }}</a>

@@ -35,6 +35,8 @@ h1, #index_page .section{font-family:'IM Fell DW Pica SC', serif;}
 .card-text p{margin:6px}
 .card-flavor{font-style:italic}
 .pack-future, .card-preview{color:red}
+.card-keywords {font-weight:bold;text-align:center}
+.card-extra {text-align:right}
 /* */
 
 

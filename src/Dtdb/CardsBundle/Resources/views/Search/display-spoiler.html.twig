@@ -18,7 +18,6 @@
 		</h5>
 	<p style="font-family:sans-serif">
 		{{ card.type }}
-		{% if card.keywords %}&bull; {{ card.keywords }}{% endif %}
 		{% if not card.bullets is null %}&bull; {{ card.shooter }} {{ card.bullets }}{% endif %}
 		{% if not card.influence is null %}&bull; Influence {{ card.influence }}{% endif %}
 		{% if not card.control is null %}&bull; Control {{ card.control }}{% endif %}
@@ -27,6 +26,9 @@
 		{% if not card.production is null %}&bull; Production {{ card.production }}{% endif %}
 		{% if not card.upkeep is null %}&bull; Upkeep {{ card.upkeep }}{% endif %}
 	</p>
+    <div class="card-keywords">
+        {% if card.keywords %}{{ card.keywords }}{% endif %}
+    </div>
 	<div class="card-text">
 		{{ card.text|raw }}
 	</div>
@@ -37,7 +39,7 @@
 		{{ card.illustrator }}
 	</p>
 	<p style="font-size:12px">
-	   {{ card.pack }} #{{ card.number }}{% if not card.gang is null %} &bull; {{ card.gang }}{% endif %}
+	   {% if not card.gang is null %}<img src="{{ asset('/web/bundles/dtdbbuilder/images/' ~ card.gang_code ~ '-20.png') }}" title="{{ card.gang }}"> &bull; {% endif %}{{ card.pack }} #{{ card.number }}
 	</p>
 </div>
 

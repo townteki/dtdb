@@ -19,8 +19,12 @@ DTDB.tip = {};
 		if (!card)
 			return;
 		var type = '<p class="card-info">' + DTDB.format.type(card) + '</p>';
+		var keywords ='<div class="card-keywords">'+DTDB.format.keywords(card)+'</div>';
 		if (card.strength != null)
 			type += '<p>Strength <b>' + card.strength + '</b></p>';
+		var gang_img = card.gang_code == "neutral" ? "" : '<img src="'
+			+ Url_GangImage.replace('xxx', card.gang_code)
+			+ '.png"> &bull; ';
 		var image_svg = ''; 
 		//if($('#dtdb_svg_hex').length && typeof InstallTrigger === 'undefined') {
 			// no hexagon for Firefox, bad boy!
@@ -40,8 +44,9 @@ DTDB.tip = {};
 								+ '<h4>'
 								+ (card.uniqueness ? "&diams; " : "")
 								+ card.title + '</h4>' + type
+								+ keywords
 								+ '<div class="card-text ">' + DTDB.format.text(card) + '</div>'
-								+ '<p class="card-gang" style="clear:right"><span class="pull-right">' + card.gang + ' &ndash; ' + card.pack + '</span>'
+								+ '<p class="card-gang" style="clear:right"><span class="pull-right">' + gang_img + card.pack + '</span>'
 								+ DTDB.format.face(card)
 								+ '</p></div></div>'
 					},

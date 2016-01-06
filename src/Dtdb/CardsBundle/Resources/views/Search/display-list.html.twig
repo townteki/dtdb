@@ -23,9 +23,9 @@
 		<a href="{{ card.url }}" class="card card-title{% if card.available == false %} card-preview{% endif %}" data-index="{{ card.code }}">{{ card.title }}</a>
 	</td>
 	<td data-th="{% trans %}Gang{% endtrans %}">{% if card.gang %}<img src="{{ asset('/web/bundles/dtdbbuilder/images/' ~ card.gang_code ~ '-20.png') }}" title="{{ card.gang }}">{% endif %}</td>
-	<td data-th="Cost">{{ card.cost }}</td>
 	<td data-th="Type" >{{ card.type }}</td>
-	<td data-th="&hellip;">{{ suits.display_card_face(card.rank, card.suit|lower) }}</td>
+	<td data-th="Value">{{ suits.display_card_face(card.rank, card.suit|lower) }}</td>
+	<td data-th="Cost">{{ card.cost }}</td>
 	<td data-th="{% trans %}Keywords{% endtrans %}">{{ card.keywords }}</td>
 	<td data-th="{% trans %}Pack{% endtrans %}">{{ card.pack }} {{ card.number }}</td>
 </tr>

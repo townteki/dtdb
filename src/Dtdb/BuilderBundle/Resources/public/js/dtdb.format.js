@@ -5,7 +5,6 @@ DTDB.format = {};
 	
 	format.type = function(card) {
 		var type = '<span class="card-type">'+card.type+'</span>';
-		if(card.keywords) type += '<span class="card-keywords">: '+card.keywords+'</span>';
 		if(card.bullets !== null) type += ' &bull; <span class="card-prop">'+card.shooter+' '+card.bullets+'</span>';
 		if(card.influence !== null) type += ' &bull; <span class="card-prop">Influence '+card.influence+'</span>';
 		if(card.control !== null) type += ' &bull; <span class="card-prop">Control '+card.control+'</span>';
@@ -14,6 +13,11 @@ DTDB.format = {};
 		if(card.production !== null) type += ' &bull; <span class="card-prop">Production '+card.production+'</span>';
 		if(card.upkeep !== null) type += ' &bull; <span class="card-prop">Upkeep '+card.upkeep+'</span>';
 		return type;
+	};
+	
+	format.keywords = function(card) {
+		if(card.keywords) return('<span class="card-keywords">'+card.keywords+'</span>');
+		return '';
 	};
 
 	format.text = function(card) {
