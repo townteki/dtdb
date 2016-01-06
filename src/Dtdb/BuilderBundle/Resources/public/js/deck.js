@@ -302,7 +302,7 @@ $(function() {
 	$('#filter-text').on({
 		input : function (event) {
 			var q = $(this).val();
-			if(q.match(/^\w:/)) DTDB.smart_filter.handler(q, refresh_collection);
+			if(q.match(/^\w[:<>!]/)) DTDB.smart_filter.handler(q, refresh_collection);
 			else DTDB.smart_filter.handler('', refresh_collection);
 		}
 	});
