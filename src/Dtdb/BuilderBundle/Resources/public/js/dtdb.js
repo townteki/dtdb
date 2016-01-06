@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 13,
+			version: 14,
 			type: 'info',
-			message: 'Dirty deeds is here.\nMeet the community at: <a href="http://gomorragazette.com/">Gomorra Gazette</a>'
+			message: 'Fool Play added.\niOS issue (finally) fixed!\nCards display changed'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
