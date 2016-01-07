@@ -651,6 +651,7 @@ function handle_input_change(event) {
 		var value = $(elt).attr('name');
 		if(value === "null") value = null;
 		if ($(elt).prop('checked')) {
+			if(columnName == "rank") value=parseInt(value);
 			arr.push(value);
 		}
 		if (columnName == "pack_code" && localStorage) {
