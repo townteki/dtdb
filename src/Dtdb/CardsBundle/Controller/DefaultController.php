@@ -194,6 +194,28 @@ class DefaultController extends Controller
 		), $response);
 	}
 	
+	function oldRulesAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:oldRules.html.twig', array(
+		        "pagetitle" => "Rules Archives",
+		), $response);
+	}
+	
+	function oldFaqsAction()
+	{
+		
+		$response = new Response();
+		$response->setPrivate();
+		
+		return $this->render('DtdbCardsBundle:Default:oldFaqs.html.twig', array(
+		        "pagetitle" => "FAQs Archives",
+		), $response);
+	}
+	
 	function apidocAction()
 	{
 		

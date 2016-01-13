@@ -151,6 +151,22 @@ cards_octgnGuide:
     requirements:
         _locale: en|fr|de|es|it|pl
 
+cards_oldRules:
+    pattern:  /{_locale}/oldRules
+    defaults:
+        _controller: DtdbCardsBundle:Default:oldRules
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
+cards_oldFaqs:
+    pattern:  /{_locale}/oldFaqs
+    defaults:
+        _controller: DtdbCardsBundle:Default:oldFaqs
+        _locale: en
+    requirements:
+        _locale: en|fr|de|es|it|pl
+
 cards_api:
     pattern:  /{_locale}/apidoc
     defaults:
