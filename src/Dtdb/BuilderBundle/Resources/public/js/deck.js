@@ -886,6 +886,7 @@ function build_div(record) {
 }
 
 function is_card_usable(record) {
+	if(record.keywords != null && record.keywords.search('Token') != -1) return false
 	return true;
 }
 
