@@ -1,6 +1,6 @@
 {% extends 'DtdbBuilderBundle::layout.html.twig' %}
 
-{% block title %}FAQ - Version 004-20150701{% endblock %}
+{% block title %}Rulings and FAQ - Version 005-20151210{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -28,14 +28,21 @@
 	</ul>
 <li><a href="#specific">Specific card rulings</a></li>
 	<ul>
+	<li><a href="#jokers">Jokers</a></li>
+		<ul>
+		<li><a href="#all_jokers">All Jokers</a></li>
+		<li><a href="#devils_joker">Devil’s Joker</a></li>
+		</ul>
 	<li><a href="#outfits">Outfits</a></li>
 		<ul>
 		<li><a href="#desrow">Desolation Row</a></li>
 		<li><a href="#lawdogs">Law Dogs</a></li>
+		<li><a href="#sanatorium">The Sanatorium</a></li>
 		<li><a href="#sloanegang">The Sloane Gang</a></li>
 		</ul>
 	<li><a href="#dudes">Dudes</a></li>
 		<ul>
+		<li><a href="#ancestor">Ancestor Spirit</a></li>
 		<li><a href="#arnold">Arnold McCadish</a></li>
 		<li><a href="#barton">Barton Everest</a></li>
 		<li><a href="#clem">Clementine Lepp</a></li>
@@ -44,19 +51,23 @@
 		<li><a href="#ghostly">The Ghostly Gun</a></li>
 		<li><a href="#harold">Harold Aimslee</a></li>
 		<li><a href="#ivor">Ivor Hawley</a></li>
+		<li><a href="#ivor_xp1">Ivor Hawley (Exp.1)</a></li>
 		<li><a href="#james">James Ghetty</a></li>
 		<li><a href="#jon">Jon Longstride</a></li>
+		<li><a href="#kabeda">Kabeda Hakurei</a></li>
 		<li><a href="#kevin">Kevin Wainwright</a></li>
 		<li><a href="#lawrence">Lawrence Blackwood</a></li>
 		<li><a href="#lillian">Lillian Morgan</a></li>
 		<li><a href="#louis">Louis Pasteur</a></li>
 		<li><a href="#maria">Maria Kingsford</a></li>
 		<li><a href="#mortimer">Mortimer Parsons</a></li>
+		<li><a href="#nathan">Nathan Shane</a></li>
 		<li><a href="#nicodemus">Nicodemus Whateley</a></li>
 		<li><a href="#philipxp">Philip Swinford (Exp.1)</a></li>
 		<li><a href="#quaterman">QUATERMAN</a></li>
 		<li><a href="#ramiro">Ramiro Mendoza</a></li>
 		<li><a href="#remy">Remy LaPointe</a></li>
+		<li><a href="#rico">Rico Rodegain</a></li>
 		<li><a href="#sloane">Sloane</a></li>
 		<li><a href="#smilingtom">Smiling Tom</a></li>
 		<li><a href="#tommy">Tommy Harden</a></li>
@@ -66,15 +77,19 @@
 		<ul>
 		<li><a href="#1stbaptist">1st Baptist Church</a></li>
 		<li><a href="#bunkhouse">Bunkhouse</a></li>
+		<li><a href="#tax_office">California Tax Office</a></li>
 		<li><a href="#carters">Carter's Bounties</a></li>
 		<li><a href="#genstore">General Store</a></li>
 		<li><a href="#parish">Gomorra Parish</a></li>
 		<li><a href="#pearlys">Pearly's Palace</a></li>
+		<li><a href="#stagecoach">Stagecoach Office</a></li>
 		<li><a href="#undertaker">Undertaker</a></li>
 		</ul>
 	<li><a href="#actions">Actions</a></li>
 		<ul>
 		<li><a href="#acoach">A Coach Comes to Town</a></li>
+		<li><a href="#never_forget">A Fight They'll Never Forget</a></li>
+		<li><a href="#slight_mod">A Slight Modification</a></li>
 		<li><a href="#ambush">Ambush</a></li>
 		<li><a href="#badcompany">Bad Company</a></li>
 		<li><a href="#bottom">Bottom Dealin'</a></li>
@@ -94,6 +109,7 @@
 		<li><a href="#smartchoice">Make the Smart Choice</a></li>
 		<li><a href="#pinneddown">Pinned Down</a></li>
 		<li><a href="#prayer">Prayer</a></li>
+		<li><a href="#revenge">Rabbit Takes Revenge</a></li>
 		<li><a href="#rope&ride">Rope and Ride</a></li>
 		<li><a href="#runemdown">Run 'Em Down</a></li>
 		<li><a href="#sft">Swinford Finds Trouble</a></li>
@@ -108,14 +124,17 @@
 		<li><a href="#autofeeder">Auto Cattle-Feeder</a></li>
 		<li><a href="#ghostbusters">Bio-charged Neutralizer</a></li>
 		<li><a href="#diable">Diable en Boite</a></li>
+		<li><a href="#duster">Dog's Duster</a></li>
 		<li><a href="#doyle">Doyle's Hoyle</a></li>
 		<li><a href="#fancyhat">Fancy New Hat</a></li>
 		<li><a href="#flamethrower">Flame-Thrower</a></li>
 		<li><a href="#forcefield">Force Field</a></li>
 		<li><a href="#holywheel">Holy Wheel Gun</a></li>
+		<li><a href="#whatever">Idol of Tlazolteotl</a></li>
 		<li><a href="#outlawmask">Outlaw Mask</a></li>
 		<li><a href="#6shooters">Pair of Six Shooters</a></li>
 		<li><a href="#plasmadrill">Plasma Drill</a></li>
+		<li><a href="#quickdraw">Quickdraw Handgun</a></li>
 		<li><a href="#backtothefuture">Telepathy Helmet</a></li>
 		</ul>
 	<li><a href="#spells">Spells</a></li>
@@ -127,15 +146,17 @@
 		<li><a href="#mirror">Mirror Mirror</a></li>
 		<li><a href="#puppet">Puppet</a></li>
 		<li><a href="#raisinghell">Raising Hell</a></li>
+		<li><a href="#shield_of_faith">Shield of Faith</a></li>
 		</ul>
 	</ul>
 </ul>
 </nav>
 
+<p><span style="color: red;">Note: Recent updates to the FAQ are color coded to aid identification.</span></p>
 <h2 id="rules">The rules and mechanics</h2>
 <h3 id="grifters">Grifters</h3>
 <ul>
-<li>As per the Doomtown Tournament Floor Rules, the decision of whether to use a Grifter is taken by
+<li>As per the <a href="http://dtdb.co/en/floorRules">Doomtown Tournament Floor Rules</a>, the decision of whether to use a Grifter is taken by
 each player simultaneously, using the red/blue chip process.</li>
 <li>Once it is determined who will be using their Grifters, the players must then determine the order
 randomly, using a coin toss or similar.</li>
@@ -326,6 +347,27 @@ called out on private land, but the shootout takes place on public land due to a
 
 <h2 id="specific"=>Specific card rulings</h2>
 <br>
+
+<span style="color: red;">
+
+<h3 id="jokers">Jokers</h3>
+<br>
+<h4 id="all_jokers"><a href="http://dtdb.co/en/card/01144" class="card card-title" data-index="01144"><span style="color: red;">All Jokers</span></a></h4>
+<ul>
+<li>A joker is only aced from a draw hand when it is included in the final five cards of that hand. If an
+effect removes a joker from a draw hand, that joker is not considered used within the draw hand,
+and so is not aced.</li>
+<li>The suit and value of a joker is declared when it is revealed. Should the joker be discarded during
+Resolution, it no longer has a value and immediately reverts to being just a joker.</li>
+</ul>
+<h4 id="devils_joker"><a href="http://dtdb.co/en/card/10040" class="card card-title" data-index="10040"><span style="color: red;">Devil&#039;s Joker</span></a></h4>
+<ul>
+<li>The hand rank bonus only applies while the joker is in your draw hand. Should it be removed before
+hand ranks are compared, the bonus is lost.</li>
+</ul>
+
+</span>
+
 <h3 id="outfits">Outfits</h3>
 <br>
 <h4 id="desrow"><a href="http://dtdb.co/en/card/05004" class="card card-title" data-index="05004">Desolation Row</a></h4>
@@ -342,6 +384,16 @@ bullets applied.</li>
 the chosen target dude.</li>
 <li>Can be used on your own dudes to make them wanted.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="sanatorium"><a href="http://dtdb.co/en/card/10001" class="card card-title" data-index="10001"><span style="color: red;">The Sanatorium</span></a></h4>
+<ul>
+<li>Cannot give the Huckster bonus to a dude who does not already have the Huckster skill.</li>
+</ul>
+
+</span>
+
 <h4 id="sloanegang"><a href="http://dtdb.co/en/card/01004" class="card card-title" data-index="01004">The Sloane Gang</a></h4>
 <ul>
 <li>The control point is gained during Sundown, after victory conditions are checked at the start of
@@ -352,6 +404,16 @@ who puppeted your dude.</li>
 </ul>
 <h3 id="dudes">Dudes</h3>
 <br>
+
+<span style="color: red;">
+
+<h4 id="ancestor"><a href="http://dtdb.co/en/card/09041" class="card card-title" data-index="09041"><span style="color: red;">Ancestor Spirit</span></a></h4>
+<ul>
+<li>Is removed from play as soon as it leaves a location, and so never arrives at its destination.</li>
+</ul>
+
+</span>
+
 <h4 id="arnold"><a href="http://dtdb.co/en/card/01008" class="card card-title" data-index="01008">Arnold McCadish</a></h4>
 <ul>
 <li>The dude still counts as a casualty for other effects (e.g. Takin' Ya With Me).</li>
@@ -404,6 +466,17 @@ card.</li>
 a one-per-hex
 bonus.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="ivor_xp1"><a href="http://dtdb.co/en/card/10011" class="card card-title" data-index="10011"><span style="color: red;">Ivor Hawley (Exp.1)</span></a></h4>
+<ul>
+<li>When using his react, if he is aced by a Mad Scientist to bring a Wretched into play, he can then be
+selected as the second Abomination to be brought into play. Note: currently under review.</li>
+</ul>
+
+</span>
+
 <h4 id="james"><a href="http://dtdb.co/en/card/01028" class="card card-title" data-index="01028">James Ghetty</a></h4>
 <ul>
 <li>The Ghost Rock may be used to pay for an Auto Revolver (or other Goods if Concealed Weapons
@@ -415,6 +488,16 @@ Raising Hell.</li>
 <ul>
 <li>Allows an ability to be reused later in the turn, does not require or allow immediate use.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="kabeda"><a href="http://dtdb.co/en/card/11006" class="card card-title" data-index="11006"><span style="color: red;">Kabeda Hakurei</span></a></h4>
+<ul>
+<li>Whenever a Totem's ability refers to "this location", it is referring to Kabeda's location.</li>
+</ul>
+
+</span>
+
 <h4 id="kevin"><a href="http://dtdb.co/en/card/01011" class="card card-title" data-index="01011">Kevin Wainwright</a></h4>
 <ul>
 <li>Moving is a requirement of the ability, so he must actually change location (ie start in a different
@@ -444,6 +527,16 @@ Raising Hell.</li>
 <ul>
 <li>After being sent home, his influence can still be modified using other card effects.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="nathan"><a href="http://dtdb.co/en/card/08004" class="card card-title" data-index="08004"><span style="color: red;">Nathan Shane</span></a></h4>
+<ul>
+<li>If Nathan's bullets are greater than the current number of cards in the opponent’s hand, you cannot use his ability.</li>
+</ul>
+
+</span>
+
 <h4 id="nicodemus"><a href="http://dtdb.co/en/card/05019" class="card card-title" data-index="05019">Nicodemus Whateley</a></h4>
 <ul>
 <li>Can boot to give himself a control point.</li>
@@ -480,6 +573,18 @@ demands payment.</li>
 <li>His ability cannot raise his bullet rating above 5, even if he has bonuses from other sources such as
 weapons.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="rico"><a href="http://dtdb.co/en/card/11013" class="card card-title" data-index="11013"><span style="color: red;">Rico Rodegain</span></a></h4>
+<ul>
+<li>While the replacement gang must still follow all the normal rules of a starting gang, it is still subject
+to modifications based on card effects from the replacement dudes e.g. including Xiaodan Li would
+allow the replacement gang to contain six dudes.</li>
+</ul>
+
+</span>
+
 <h4 id="sloane"><a href="http://dtdb.co/en/card/01044" class="card card-title" data-index="01044">Sloane</a></h4>
 <ul>
 <li>Does not enter play wanted, but once she has a bounty it cannot be reduced below the stated
@@ -517,6 +622,19 @@ checked but before effects such as Yan Li's Tailoring wear off.</li>
 <li><b>Technical Errata</b>: It should be read as "Dudes with 0 or 1 influence (excluding any modifiers from
 this deed) have +1 influence while at this deed."</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="tax_office"><a href="http://dtdb.co/en/card/05021" class="card card-title" data-index="05021"><span style="color: red;">California Tax Office</span></a></h4>
+<ul>
+<li>Sets upkeep for the following turn to zero, regardless of any changes that might occur during the
+remainder of the current turn.</li>
+<li>The additional upkeep required for out of faction dudes also applies if you are required to pay
+upkeep outside of the Upkeep Phase.</li>
+</ul>
+
+</span>
+
 <h4 id="carters"><a href="http://dtdb.co/en/card/01073" class="card card-title" data-index="01073">Carter&#039;s Bounties</a></h4>
 <ul>
 <li>Can be used to move a dude into the posse from the same location, including a dude that had
@@ -538,6 +656,18 @@ Once done, shootout plays are made as per the rulebook, starting with the Winner
 Winner and control Pearly's Palace, this means you get to make two consecutive shootout plays if
 you wish.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="stagecoach"><a href="http://dtdb.co/en/card/01066" class="card card-title" data-index="01066"><span style="color: red;">Stagecoach Office</span></a></h4>
+<ul>
+<li>Can be used to redirect a dude coming into play via a card effect. Should such an effect move the
+dude away from the location of a shootout, then unless the effect itself specifies otherwise, the dude
+does not join a posse and is not part of the shootout.</li>
+</ul>
+
+</span>
+
 <h4 id="undertaker"><a href="http://dtdb.co/en/card/01076" class="card card-title" data-index="01076">Undertaker</a></h4>
 <ul>
 <li>If a shootout takes place at the Undertaker, control is determined *after* each casualty arrives in
@@ -553,6 +683,24 @@ rock.</li>
 <ul>
 <li>Players only get ghost rock from this job if they still have dudes in their posse at the end of the job.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="never_forget"><a href="http://dtdb.co/en/card/08019" class="card card-title" data-index="08019"><span style="color: red;">A Fight They&#039;ll Never Forget</span></a></h4>
+<ul>
+<li>If a shooter leaves the shootout during the Resolution phase but remains in play, he will not receive
+the control points for any opposing dudes that are aced.</li>
+</ul>
+<h4 id="slight_mod"><a href="http://dtdb.co/en/card/11022" class="card card-title" data-index="11022"><span style="color: red;">A Slight Modification</span></a></h4>
+<ul>
+<li>When used to prevent an ability on an action card, that action card is still discarded.</li>
+<li>Costs paid to use the prevented ability are negated. Therefore any cards that were booted to use
+the ability are now unbooted, ghost rock is returned from the bank, and so forth.</li>
+<li>The prevented ability is still considered used for the turn.</li>
+</ul>
+
+</span>
+
 <h4 id="ambush"><a href="http://dtdb.co/en/card/01114" class="card card-title" data-index="01114">Ambush</a></h4>
 <ul>
 <li>Check the status of the Mark each time a dude enters the leader's posse, and if the mark is not
@@ -669,6 +817,17 @@ go.</li>
 <li>Can be used to attach the Miracle as a shootout action, and in an uncontrolled location as both a
 Noon and Shootout play.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="revenge"><a href="http://dtdb.co/en/card/11023" class="card card-title" data-index="11023"><span style="color: red;">Rabbit Takes Revenge</span></a></h4>
+<ul>
+<li>If the affected dudes are due to be aced or discarded, they could not be saved by a card effect if
+that effect would then send them home booted, as that would result in them leaving the shootout.</li>
+</ul>
+
+</span>
+
 <h4 id="rope&ride"><a href="http://dtdb.co/en/card/06019" class="card card-title" data-index="06019">Rope and Ride</a></h4>
 <ul>
 <li>Can be used even if your leader does not have a horse attached.</li>
@@ -711,9 +870,12 @@ their cards are discarded. Then they redraw.</li>
 </ul>
 <h4 id="unprepared"><a href="http://dtdb.co/en/card/01134" class="card card-title" data-index="01134">Unprepared</a></h4>
 <ul>
-<li><b>Technical Errata</b>: It should be read as "<b>Shootout</b>: Choose a dude. Boot that dude and their attached cards. That dude gets -1
-bullets and cannot use abilities. Their attached cards lose all traits, abilities, and bullet
+<li><span style="color: red;"><b>Technical Errata</b>: It should be read as</span></li>
+ <ul>
+	<li>"<b>Shootout</b>: Choose a dude. Boot that dude and their attached cards. That dude gets -1
+bullets and cannot use <span style="color: red;">their</span> abilities. Their attached cards lose all traits, abilities, and bullet
 bonuses."</li>
+ </ul>
 </ul>
 <h3 id="goods">Goods</h3>
 <br>
@@ -742,7 +904,21 @@ Hound or Unprepared (although the latter still affects the dude carrying the BCN
 <ul>
 <li>Cannot be used if the dude in question is saved with Lay on Hands or something similar that
 prevents the dude from being aced or discarded.</li>
+<span style="color: red;">
+<li>If a dude has been assigned to cover casualties, removing him from the posse with the Diable en
+Boite will not prevent those casualties being applied and the dude aced or discarded.</li>
+</span>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="duster"><a href="http://dtdb.co/en/card/08013" class="card card-title" data-index="08013"><span style="color: red;">Dog&#039;s Duster</span></a></h4>
+<ul>
+<li>The dude performing the callout does not have to be the dude wearing the duster.</li>
+</ul>
+
+</span>
+
 <h4 id="doyle"><a href="http://dtdb.co/en/card/01096" class="card card-title" data-index="01096">Doyle&#039;s Hoyle</a></h4>
 <ul>
 <li><b>Technical Errata</b>: It should be read as:</li>
@@ -755,9 +931,8 @@ your final draw hand, you still get the bonus to your hand rank.</li>
 </ul>
 <h4 id="fancyhat"><a href="http://dtdb.co/en/card/06016" class="card card-title" data-index="06016">Fancy New Hat</a></h4>
 <ul>
-<li>Only prevents influence reductions from the point that the hat is equipped. Preexisting
-reductions
-still apply.</li>
+<li>Any preexisting influence reductions are ignored while a Fancy New Hat is equipped.</li>
+<li>Once the Fancy New Hat is equipped, any subsequent influence reductions are ignored.</li>
 </ul>
 <h4 id="flamethrower"><a href="http://dtdb.co/en/card/01091" class="card card-title" data-index="01091">Flame-Thrower</a></h4>
 <ul>
@@ -781,6 +956,17 @@ ability is played.</li>
 can select which applies. Once that first casualty has been chosen, any other effects currently in
 play that require a dude to be selected as the first casualty are ignored.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="whatever"><a href="http://dtdb.co/en/card/09030" class="card card-title" data-index="09030"><span style="color: red;">Idol of Tlazolteotl</span></a></h4>
+<ul>
+<li>To determine whether the new deed is legal, examine whether the card could attach to the deed
+when it first entered play. If it could, it is legal to move the attached card to that deed.</li>
+</ul>
+
+</span>
+
 <h4 id="outlawmask"><a href="http://dtdb.co/en/card/05024" class="card card-title" data-index="05024">Outlaw Mask</a></h4>
 <ul>
 <li>A dude may equip more than one Outlaw Mask.</li>
@@ -790,12 +976,27 @@ play that require a dude to be selected as the first casualty are ignored.</li>
 <li>If this makes your hand illegal and you have not been hit by a Cheatin' card this resolution phase,
 you may now be.</li>
 <li>Can be used during Lowball.</li>
+<span style="color: red;">
+<li>If the modified card is discarded, it immediately reverts to its original value for the purposes of any
+effects that check the value of the discarded card.</li>
+</span>
 </ul>
 <h4 id="plasmadrill"><a href="http://dtdb.co/en/card/02015" class="card card-title" data-index="02015">Plasma Drill</a></h4>
 <ul>
 <li>If a player Plasma Drills a 0 production deed, the owner cannot refuse to pay zero ghost rock in
 order to discard the deed.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="quickdraw"><a href="http://dtdb.co/en/card/01093" class="card card-title" data-index="01093"><span style="color: red;">Quickdraw Handgun</span></a></h4>
+<ul>
+<li>Any bonuses applied to your hand rank before this switches hands are applied to your new hand - they
+do not follow your draw hand to the other player.</li>
+</ul>
+
+</span>
+
 <h4 id="backtothefuture"><a href="http://dtdb.co/en/card/02013" class="card card-title" data-index="02013">Telepathy Helmet</a></h4>
 <ul>
 <li>If a dude wearing this is hit by Unprepared, the dude is not affected but the Helmet is now blanked.
@@ -843,6 +1044,16 @@ Hole) then that Abomination cannot enter play.</li>
 <li>The Abomination that enters play may be the card aced from your draw hand.</li>
 <li>The Abomination joins the hucksters posse therefore enters play at the location of the shootout.</li>
 </ul>
+
+<span style="color: red;">
+
+<h4 id="shield_of_faith"><a href="http://dtdb.co/en/card/06018" class="card card-title" data-index="06018"><span style="color: red;">Shield of Faith</span></a></h4>
+<ul>
+<li>Cannot prevent dude cards in a draw or play hand from being aced.</li>
+</ul>
+
+</span>
+
 </article>
 
 </div>
