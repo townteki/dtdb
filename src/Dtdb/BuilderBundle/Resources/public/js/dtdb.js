@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 14,
+			version: 15,
 			type: 'info',
-			message: 'Fool Play added.\niOS issue (finally) fixed!\nCards display changed'
+			message: 'Rules updated!'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
