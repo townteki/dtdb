@@ -69,7 +69,7 @@
 		<a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a>
 	</h4>
 	<h5 class="username author">
-		<span class="pull-right decklist-creation">{{ decklist.creation|date('M d') }}</span>
+		<span class="pull-right decklist-creation">{{ decklist.creation|date('d M Y') }}</span>
 		<a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
 		{% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator" title="DoomtownDB Gracious Donator"></span>{% endif %}
 		<small class="reputation">{{ decklist.reputation }}</small>
