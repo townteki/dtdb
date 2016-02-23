@@ -7,6 +7,7 @@ $(function() {
 	$('.list-group').on({
 		mouseenter: function(event) {
 			var card_code = $(this).data('code');
+			card_code = String(card_code);
 			var card = DTDB.data.cards({code:card_code}).first();
 			$('#cardimg').prop('src', card.imagesrc);
 		}	
