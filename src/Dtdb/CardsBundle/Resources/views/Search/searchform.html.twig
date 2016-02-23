@@ -107,7 +107,7 @@
 		<div class="form-group">
 			<label for="k">{% trans %}Keywords{% endtrans %}</label>
 			<div>
-				<select class="form-control" name="k" id="k"><option value="">{% trans %}Any{% endtrans %}</option><option value=" ">{% trans %}None{% endtrans %}</option>{% for keyword in keywords %}<option value="{{ keyword }}">{{ keyword }}</option>{% endfor %}</select>
+				<select class="form-control" name="k" id="k"><option value="">{% trans %}Any{% endtrans %}</option>{% for keyword in keywords %}<option value="{{ keyword }}">{{ keyword }}</option>{% endfor %}</select>
 			</div>
 		</div>
 		
