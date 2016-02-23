@@ -396,6 +396,10 @@ function check_composition() {
 		startingposse.each(function(record){
 			
 			cost_of_starting_posse += record.start * record.cost;
+			// reducing cost by one for grifters in Den of Thieves
+			if(outfit.code=="10003" && (record.keywords != null && record.keywords.search('Grifter') != -1) ){
+				cost_of_starting_posse -= record.start;
+			}
 			upkeep_of_starting_posse += record.start * record.upkeep;
 			production_of_starting_posse += record.start * record.production;
 			influence_of_starting_posse += record.start * record.influence;
