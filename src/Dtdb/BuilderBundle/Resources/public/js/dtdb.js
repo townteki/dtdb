@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 15,
-			type: 'info',
-			message: 'Rules updated!'
+			version: 16,
+			type: 'warning',
+			message: 'Due to maintenance action, modifications made between July 25th amd July 27th might be loss. The site will go back to normal by July 27th! Sorry for the inconvenience!'
 	};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
