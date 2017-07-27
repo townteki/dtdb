@@ -13,7 +13,7 @@ var Outfit = null,
 	SelectedDeck = DeckDB().first(),
 	Url_GangImage = '{{  asset('/web/bundles/dtdbbuilder/images/xxx-20.png') }}',
 	DisplaySort = 'suit';
-	
+
 </script>
 {% endblock %}
 {% block body %}
@@ -37,7 +37,7 @@ var Outfit = null,
 
 <h2 class="section">Decklist of the week </h2>
 <h3><a class="decklist-name" href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a></h3>
-	
+
 <!-- Outfit and Stats -->
 <div class="row">
 	<div class="col-sm-2">
@@ -50,9 +50,9 @@ var Outfit = null,
 	</div>
 </div>
 <!-- Identity and Stats -->
-	
+
 <div id="deck-content" class="row"></div>
-    
+
 <h4 class="decklist-author author">
     Description by the author:
     <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}" class="username {{ decklist.usercolor }}">{{ decklist.username }}</a>
@@ -96,7 +96,7 @@ var Outfit = null,
 	</tr>
 	{% endfor %}
 	</table>
-	
+
 </div><!-- #recent_decklists -->
 
 </div>
@@ -119,6 +119,10 @@ var Outfit = null,
 	</tbody>
 	</table>
 </div><!-- #card_search -->
+
+<div id="discord_widget">
+	<iframe src="https://discordapp.com/widget?id=227387666046386176&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+</div>
 
 <div id="recent_other">
 		<h3 class="section">Card reviews <a href="{{ path('card_reviews_list') }}" class="small">more</a></h3>

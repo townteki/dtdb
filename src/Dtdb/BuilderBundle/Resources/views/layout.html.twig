@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="129x129" href="{{  asset('/web/bundles/dtdbbuilder/images/apple-touch-icon.png') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
-    
+
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/jquery.qtip.css">
     <link href='https://fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC|Noto+Sans:400,700,400italic,700italic|Anaheim|Ultra&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('/web/bundles/dtdbbuilder/css/style.css') }}">
-    
+
     <script src="{{ asset('/web/bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-    
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.1.1/jquery.qtip.js"></script>
@@ -68,7 +68,7 @@ ga('send', 'pageview');
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          
+
           <a class="navbar-brand" href="{{ path('deck_builder_index') }}"><img src="{{  asset('/web/bundles/dtdbbuilder/images/icon.png') }}" class="img-responsive navbar-icon">DoomtownDB</a>
         </div>
         <div class="navbar-collapse collapse">
@@ -112,40 +112,39 @@ ga('send', 'pageview');
         {% endblock %}
       </div>
     </nav>
-  
+
 {% block body %}{% endblock %}
     <div id="push"></div>
   </div>
     <div id="footer" class="hidden-print">
     <div class="container">
-    
+
 {% block footer %}
 <div class="row">
     <div class="col-xs-12">
-    
+
     <ul class="list-inline pull-right">
     {% if locales is defined %}
 	{{ locales|raw }}
 	{% endif %}
     </ul>
-    
+
     <ul class="list-inline">
     <li><a href="{{ path('cards_about') }}">About</a></li>
     <li><a href="{{ path('cards_changelog') }}">Change Log</a></li>
     <li><a href="javascript:localStorage.clear()">Clear data</a></li>
     </ul>
-    
+
     <p>
-    Designed and built by <a href="//twitter.com/alsciende">@alsciende</a>
+    Designed and built by <a href="//twitter.com/alsciende">@alsciende</a>. dtdb.co Creator/Maintainer Emeritus <a href="//twitter.com/platypusDT">@platypusDT</a>.
     </p>
     <p>
-    Maintained and Improved by <a href="//twitter.com/platypusDT">@platypusDT</a>
+    Maintained by Blargg.
     </p>
-    
     <p>
-    Bug reports and Feature Requests on <a href="https://bitbucket.org/platypusDT/dtdb/issues?status=new&status=open" target="_blank">BitBucket</a>
+    Bug reports and Feature Requests on <a href="https://bitbucket.org/justintwynn/dtdb/issues?status=new&status=open" target="_blank">BitBucket</a>
     </p>
-    <p> 
+    <p>
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="V7PQYGJHAZWHC">
@@ -153,7 +152,7 @@ ga('send', 'pageview');
 		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"> to dtdb.co (EUR) !
 	</form>
 	</p>
-    <p> 
+    <p>
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="HATCFZBSQ36PJ">
@@ -161,10 +160,10 @@ ga('send', 'pageview');
 		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"> to dtdb.co (USD) !
 	</form>
 	</p>
-    
+
 
     <p style="color:#333">
-    The information presented on this site about Doomtown, both literal and graphical, is copyrighted by AEG.
+    Doomtown: Reloaded and Deadlands copyright <a href="//peginc.com">Pinnacle Entertainment Group</a>.
     </p>
 
     </div>
