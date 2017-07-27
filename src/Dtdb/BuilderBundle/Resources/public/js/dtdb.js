@@ -7,8 +7,7 @@ function display_notification()
 	var Notification = {
 			version: 16,
 			type: 'warning',
-			message: 'Due to maintenance action, modifications made between July 25th amd July 27th might be loss. The site will go back to normal by July 27th! Sorry for the inconvenience!'
-	};
+			message: 'DoomtownDB is under new management (Thanks Platypus for your service!)'};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
 	var alert = $('<div class="alert alert-'+Notification.type+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+Notification.message+'</div>');
