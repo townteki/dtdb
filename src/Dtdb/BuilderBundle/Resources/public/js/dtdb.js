@@ -4,11 +4,11 @@ if (typeof DTDB != "object")
 function display_notification()
 {
 	if(!localStorage) return;
-	/*var Notification = {
+	var Notification = {
 			version: 16,
 			type: 'warning',
 			message: 'DoomtownDB is under new management (Thanks Platypus for your service!)'};
-	};*/
+	};
 
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
