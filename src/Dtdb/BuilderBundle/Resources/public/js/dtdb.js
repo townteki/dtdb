@@ -8,13 +8,11 @@ function display_notification()
 			version: 16,
 			type: 'warning',
 			message: 'DoomtownDB is under new management (Thanks Platypus for your service!)'};
-	};
-
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
 	var alert = $('<div class="alert alert-'+Notification.type+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+Notification.message+'</div>');
 	alert.bind('closed.bs.alert', function () {
-		localStorage.setItem('notification', Notification.version);
+		localStorage.setItem('notification', Notification.version);  
 	});
 	$('#wrapper>div.container').prepend(alert);
 }
@@ -189,7 +187,7 @@ function getDisplayDescriptions(sort) {
 
 
 function process_deck_by_type() {
-
+	
 	var bytype = {};
 	Outfit = DTDB.data.cards({indeck:{'gt':0},type_code:'outfit'}).first();
 	if(!Outfit) {
@@ -203,7 +201,7 @@ function process_deck_by_type() {
 		if(record.gang != Outfit.gang) {
 			gang_code = record.gang_code;
 		}
-
+		
 		if(bytype[type] == null) bytype[type] = [];
 		bytype[type].push({
 			card: record,
@@ -217,7 +215,7 @@ function process_deck_by_type() {
 		qty: 1,
 		gang: ''
 	}];
-
+	
 	return bytype;
 }
 
@@ -226,7 +224,7 @@ function update_deck(options) {
 	if(options) {
 		if(options.restrainOneColumn) restrainOneColumn = options.restrainOneColumn;
 	}
-
+	
 	Outfit = DTDB.data.cards({indeck:{'gt':0},type_code:'outfit'}).first();
 	if(!Outfit) return;
 
@@ -236,10 +234,10 @@ function update_deck(options) {
 			DeckDistribution[i][j] = 0;
 		}
 	}
-
+	
 	var displayDescription = getDisplayDescriptions(DisplaySort);
 	if(displayDescription == null) return;
-
+	
 	if(DisplaySort === 'number' && displayDescription.length === 0) {
 		var rows = [];
 		DTDB.data.sets().each(function (record) {
@@ -250,7 +248,7 @@ function update_deck(options) {
 	if(restrainOneColumn && displayDescription.length == 2) {
 		displayDescription = [ displayDescription[0].concat(displayDescription[1]) ];
 	}
-
+	
 	$('#deck-content').empty();
 	var cols_size = 12/displayDescription.length;
 	for(var colnum=0; colnum<displayDescription.length; colnum++) {
@@ -271,7 +269,7 @@ function update_deck(options) {
 			div.append(item).append(content);
 		}
 	}
-
+	
 	var cabinet = {};
 	DudeIndeck = [];
 	DudeStarter = [];
@@ -291,14 +289,14 @@ function update_deck(options) {
 		var preSort = 'title';
 	} else if(DisplaySort === 'rank') {
 		var preSort = 'suit,title';
-	}
+	} 
 	DTDB.data.cards({indeck:{'gt':0},type_code:{'!is':'outfit'}}).order(preSort).each(function(record) {
 		var pack = DTDB.data.sets({name:record.pack}).first();
 		if(latestpack.cyclenumber < pack.cyclenumber || (latestpack.cyclenumber == pack.cyclenumber && latestpack.number < pack.number)) latestpack = pack;
-
+		
 		var criteria = null;
 		var additional_info = '';
-
+		
 		if(DisplaySort === 'type') {
 			criteria = record.type_code;
 		} else if(DisplaySort === 'gang') {
@@ -323,28 +321,28 @@ function update_deck(options) {
 		var face = DTDB.format.face(record);
 		var item = $('<div>'+record.indeck+'x '+face+' <a href="'+Routing.generate('cards_zoom', {card_code:record.code})+'" class="card'+(record.start ? ' card-start'+record.start : '')+'" data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="'+record.code+'">'+record.title+'</a> '+additional_info+'</div>');
 		item.appendTo($('#deck-content .deck-'+criteria));
-
+		
 		cabinet[criteria] |= 0;
 		cabinet[criteria] = cabinet[criteria] + record.indeck;
 		$('#deck-content .deck-'+criteria).prev().show().find('span:last').html(cabinet[criteria]);
-
+		
 		if(record.suit) {
 			DeckDistribution[SuitNumbers[record.suit]][record.rank] += record.indeck;
 		}
-
+		
 		if(record.type === "Dude"){
 			var DudeLegalName = record.title;
 			DudeLegalName = DudeLegalName.replace(/ \(Exp.\d\)/,"");
 			if(DudeIndeck[DudeLegalName] == null){
 				DudeIndeck[DudeLegalName] = record.indeck;
 			} else {
-				DudeIndeck[DudeLegalName] += record.indeck;
+				DudeIndeck[DudeLegalName] += record.indeck;		
 			}
 			if(record.start){
 				if(DudeStarter[DudeLegalName] == null){
 					DudeStarter[DudeLegalName] = true;
 				} else {
-					DudeStarter[DudeLegalName] = false;
+					DudeStarter[DudeLegalName] = false;		
 				}
 			}
 		}
@@ -359,13 +357,10 @@ function update_deck(options) {
 function check_composition() {
 	var startingposse = DTDB.data.cards({indeck:{'gt':0},start:{'gt':0}});
 	var outfits = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'outfit'}});
-	var legends = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'legend'}});
 	var number_of_outfits = outfits.select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
 	var number_of_jokers = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'joker'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-  var number_of_legends = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'legend'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
 	var number_of_others = DTDB.data.cards({indeck:{'gt':0},suit:{'!is':null}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
-
-
+	
 	if($('#cardcount').size()) {
 		$('#cardcount').html(number_of_others+" cards with printed value (required 52)")[number_of_others !=  52 ? 'addClass' : 'removeClass']("text-danger");
 	}
@@ -379,8 +374,6 @@ function check_composition() {
 	}
 	if(number_of_outfits != 1) {
 		$('#deckcomposition').html("Must have exactly one outfit.").addClass('text-danger');
-	} else if(number_of_legends > 1) {
-		$('#deckcomposition').html("Must have no more than 1 legend.").addClass('text-danger');
 	} else if(number_of_jokers > 2) {
 		$('#deckcomposition').html("Must have no more than 2 jokers.").addClass('text-danger');
 	} else if(!legal) {
@@ -388,20 +381,19 @@ function check_composition() {
 	} else {
 		$('#deckcomposition').empty();
 	}
-
+	
 	if($('#startingnumbers').size()) {
 		var outfit = outfits.first();
-		var legend = legends.first();
-
+		
 		var illegalStartingDude = false;
-
+		
 		var cost_of_starting_posse = 0;
 		var upkeep_of_starting_posse = 0;
 		var production_of_starting_posse = 0;
 		var influence_of_starting_posse = 0;
 		var size_of_starting_posse = 0;
 		startingposse.each(function(record){
-
+			
 			cost_of_starting_posse += record.start * record.cost;
 			// reducing cost by one for grifters in Den of Thieves
 			if(outfit.code=="10003" && (record.keywords != null && record.keywords.search('Grifter') != -1) ){
@@ -411,7 +403,7 @@ function check_composition() {
 			production_of_starting_posse += record.start * record.production;
 			influence_of_starting_posse += record.start * record.influence;
 			size_of_starting_posse += record.start;
-
+			
 			if(record.gang_code !="neutral" && record.gang_code != outfit.gang_code) illegalStartingDude=true;
 		});
 
@@ -423,21 +415,19 @@ function check_composition() {
 				break;
 			}
 		}
-		var totalwealth = outfit.wealth + legend.wealth;
-		var totalproduction = outfit.production + legend.production;
-		if(totalwealth <  cost_of_starting_posse){
-			$('#startingcomposition').html("Negative starting Ghost Rock.").addClass('text-danger');
+		if(outfit.wealth <  cost_of_starting_posse){
+			$('#startingcomposition').html("Negative starting Ghost Rock.").addClass('text-danger');		
 		} else if(!legal){
-			$('#startingcomposition').html("More than one " + DudeLegalName + " starting.").addClass('text-danger');
+			$('#startingcomposition').html("More than one " + DudeLegalName + " starting.").addClass('text-danger');		
 		} else if(illegalStartingDude){
-			$('#startingcomposition').html("Starting a dude from another outfit.").addClass('text-danger');
+			$('#startingcomposition').html("Starting a dude from another outfit.").addClass('text-danger');		
 		} else {
 			$('#startingcomposition').empty();
 		}
 
-		$('#startingnumbers').html('Starting with '+(totalwealth-cost_of_starting_posse)+' wealth, '+(totalproduction+production_of_starting_posse-upkeep_of_starting_posse)+' income and '+influence_of_starting_posse+' influence');
+		$('#startingnumbers').html('Starting with '+(outfit.wealth-cost_of_starting_posse)+' wealth, '+(outfit.production+production_of_starting_posse-upkeep_of_starting_posse)+' income and '+influence_of_starting_posse+' influence');
 	}
-
+	
 }
 function check_distribution() {
 	var legal = true;
@@ -463,14 +453,14 @@ var SuitNumbers = { Spades: 0, Diams: 1, Hearts: 2, Clubs: 3 };
 var SuitNames = [ 'Spades', 'Diams', 'Hearts', 'Clubs' ];
 var RankNames = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 $(function () {
-
+	
 	if(Modernizr.touch) {
 		$('#svg').remove();
 		$('form.external').removeAttr('target');
 	}
-
+		
 	display_notification();
-
+	
 	$.each([ 'table-predecessor', 'table-successor', 'table-draw-simulator', 'table-suggestions' ], function (i, table_id) {
 		var table = $('#'+table_id);
 		if(!table.size()) return;
@@ -479,7 +469,7 @@ $(function () {
 		toggle.on({click: toggle_table});
 		head.prepend(toggle);
 	});
-
+	
 	$('#oddsModal').on({change: oddsModalCalculator}, 'input');
 });
 
@@ -510,8 +500,8 @@ var GangColors = {
 	"weyland-consortium": "#006400"
 };
 
-var types = ["outfit", "dude", "deed", "goods", "spell", "action", "legend"];
-var typesstr = ["Outfit", "Dude", "Deed", "Goods", "Spell", "Action", "Legend"];
+var types = ["outfit", "dude", "deed", "goods", "spell", "action"];
+var typesstr = ["Outfit", "Dude", "Deed", "Goods", "Spell", "Action"];
 
 function build_bbcode() {
 	var deck = process_deck_by_type(SelectedDeck);
@@ -593,7 +583,7 @@ function build_markdown() {
 	            	var start ="";
 	            	for(var loop=slot.start; loop>0; loop--) start+="*";
 					lines.push('* '+ slot.qty + 'x ['
-					 + slot.card.title
+					 + slot.card.title 
 					 + '](http://dtdb.co/'+DTDB.locale+'/card/'
 					 + slot.card.code
 					 + ')'
@@ -603,7 +593,7 @@ function build_markdown() {
 					 + ")_"
 					);
 				});
-
+				
 			}
 		}
 	});
@@ -652,7 +642,7 @@ function build_plaintext() {
 					 + ")"
 					);
 				});
-
+				
 			}
 		}
 	});
