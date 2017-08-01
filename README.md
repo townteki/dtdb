@@ -9,7 +9,7 @@
 - Create the database: `php app/console doctrine:database:create`
 - Create the tables: `php app/console doctrine:schema:update --force`
 - If the above command fails, edit app/config/parameters.yml and try again
-- execute php app/console assets:install --symlink
+- execute `php app/console assets:install --symlink`
 - Import the data: mysql -u root -p dtdb< dtdb-cards.sql
 - Configure your web server with the correct DocRoot
 - Point your browser to `/web/app_dev.php`
