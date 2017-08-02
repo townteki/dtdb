@@ -105,11 +105,13 @@ ga('send', 'pageview');
                 <a href="#" class="dropdown-toggle loginname" data-toggle="dropdown">Account <b class="caret"></b></a>
             </li>
           </ul>
-          <form class="navbar-form navbar-right hidden-xs hidden-sm external" action="{{ path('cards_find') }}" target="_blank">
+          <form class="navbar-form navbar-right hidden-xs hidden-sm external" method="GET" action="{{ path('cards_processSearchForm') }}" role="form" target="_blank">
             <div class="form-group">
-              <input type="text" placeholder="Card Search" class="form-control" name="q">
             </div>
           </form>
+          <table class="table table-condensed table-striped">
+        	   <tbody id="card_search_results"></tbody>
+        	</table>
         </div><!--/.navbar-collapse -->
         {% endblock %}
       </div>
@@ -141,7 +143,7 @@ ga('send', 'pageview');
     Designed and built by <a href="//twitter.com/alsciende">@alsciende</a>. dtdb.co Creator/Maintainer Emeritus <a href="//twitter.com/platypusDT">@platypusDT</a>.
     </p>
     <p>
-    Maintained by Blargg.
+    Maintained by <a href="mailto:admin@dtdb.co">Blargg</a>.
     </p>
     <p>
     Bug reports and Feature Requests on <a href="https://bitbucket.org/justintwynn/dtdb/issues?status=new&status=open" target="_blank">BitBucket</a>

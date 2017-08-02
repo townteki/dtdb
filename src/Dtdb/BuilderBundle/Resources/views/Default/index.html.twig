@@ -125,13 +125,13 @@ var Outfit = null,
 	    jQuery(function($) {
 	      $("#PBRSS").rss("http://pineboxentertainment.com/feed/",
 	      {
-	        entryTemplate:'<li><a href="{url}">[{author}] {title}</a><br/></li>'
+	        entryTemplate:'<li><a href="{url}">{title} - [{author}]</a><br/></li>'
 	      })
 	    })
 	  </script>
 </div>
 <div id="PBRSS" style="border-style:solid; border-radius:5px;border-width:2px;border-color:lightgray;";>
-	<a href="http://pineboxentertainment.com/"><img src="/pineboxentertainment.png" alt="Pine Box Entertainment"</a>
+	<a href="http://pineboxentertainment.com/" style="display:block; padding:4px 4px 4px 15px"><img src="{{ asset('/web/bundles/dtdbbuilder/images/pineboxentertainment.png') }}" width="214" height="60" alt="Pine Box Entertainment"></a>
 </div>
 
 <div id="discord" style="padding:10px">
