@@ -120,10 +120,37 @@ var Outfit = null,
 	</table>
 </div><!-- #card_search -->
 
-<div class="discord-widget">
+<div id="PineboxRSS">
 	<script type="text/javascript">
+	    jQuery(function($) {
+	      $("#PBRSS").rss("http://pineboxentertainment.com/feed/",
+	      {
+	        entryTemplate:'<li><a href="{url}">[{author}] {title}</a><br/></li>'
+	      })
+	    })
+	  </script>
+</div>
+<div id="PBRSS" style="border-style:solid; border-radius:5px;border-width:2px;border-color:lightgray;";>
+	<a href="http://pineboxentertainment.com/"><img src="/pineboxentertainment.png" alt="Pine Box Entertainment"</a>
+</div>
+
+<div id="discord" style="padding:10px">
+	<script type="text/javascript">
+
+	  discordWidget.init({
+		  serverId: '227387666046386176',
+		  title: 'Doomtown: Reloaded Discord',
+		  join: true,
+		  alphabetical: false,
+		  theme: 'light',
+		  showAllUsers: false,
+			hideChannels: true
+		});
+
 		discordWidget.render();
-	</script>
+	 </script>
+</div>
+<div class="discord-widget">
 </div>
 
 <div id="recent_other">
