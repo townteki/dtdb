@@ -7,4 +7,3 @@ discordWidget.init({
   theme: 'light',
   showAllUsers: false
 });
-discordWidget.render();
