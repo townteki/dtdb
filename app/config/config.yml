@@ -79,8 +79,8 @@ fos_user:
     firewall_name: main
     user_class: Dtdb\UserBundle\Entity\User
     from_email:
-        address:        alsciende@gmail.com
-        sender_name:    Dtdb
+        address:        admin@dtdb.co
+        sender_name:    DoomtownDB
     registration:
         confirmation:
             enabled:    true # change to true for required email confirmation
@@ -111,4 +111,3 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
-            
