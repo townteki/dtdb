@@ -51,7 +51,7 @@ var discordWidget = discordWidget || (function(){
           default:
           themeFile = 'light.min.css';
         }
-        $('head').append('<link rel="stylesheet" href="../css/' + themeFile + '" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="//cdn.jsdelivr.net/discord-widget/' + version + '/' + themeFile + '" type="text/css" />');        $('head').append('<link rel="stylesheet" href="../css/' + themeFile + '" type="text/css" />');
 
         var url = 'https://discordapp.com/api/servers/' + _params.serverId + '/embed.json';
 
