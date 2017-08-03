@@ -113,4 +113,7 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
+<<<<<<< HEAD
             
+=======
+>>>>>>> 30c650f5f12a7621db4a03560711486857d5c641
