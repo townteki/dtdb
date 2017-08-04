@@ -25,7 +25,7 @@ var Outfit = null,
 <div class="col-lg-8">
 
 <div class="page-header">
-<h1 style="font-size:72px">DoomtownDB</h1>
+<h1>DoomtownDB</h1>
 <p class="">You can explore the public <a href="{{ path('decklists_list', {type:'popular'}) }}">decklists</a> or start building your own <a href="{{ path('decks_list') }}">decks</a>.</p>
 </div>
 
@@ -120,26 +120,29 @@ var Outfit = null,
 	</table>
 </div><!-- #card_search -->
 
-<div id="PineboxRSS">
+
+<div id="feed_load">
 	<script type="text/javascript">
-	    jQuery(function($) {
-	      $("#PBRSS").rss("http://pineboxentertainment.com/feed/",
-	      {
-	        entryTemplate:'<li><a href="{url}">{title} - [{author}]</a><br/></li>'
-	      })
-	    })
-	  </script>
+    	jQuery(function($) {
+      	$("#PineboxRSS").rss("http://pineboxentertainment.com/feed/",
+      	{
+			limit: 7,
+        	entryTemplate:'<li><a href="{url}">{title} - [{author}]</a><br/></li>'
+      	})
+    	})
+  	</script>
 </div>
-<div id="PBRSS" style="border-style:solid; border-radius:5px;border-width:2px;border-color:lightgray;";>
+<div class="RSS" id="PineboxRSS">
 	<a href="http://pineboxentertainment.com/" style="display:block; padding:4px 4px 4px 15px"><img src="{{ asset('/web/bundles/dtdbbuilder/images/pineboxentertainment.png') }}" width="214" height="60" alt="Pine Box Entertainment"></a>
 </div>
+
 
 <div id="discord" style="padding:10px">
 	<script type="text/javascript">
 
 	  discordWidget.init({
 		  serverId: '227387666046386176',
-		  title: 'Doomtown: Reloaded Discord',
+		  title: '<img src=' + "{{ asset('/web/bundles/dtdbbuilder/images/doomtown-reloaded-logo2.png') }}" + ' width="66" height="30"> on Discord',
 		  join: true,
 		  alphabetical: false,
 		  theme: 'light',

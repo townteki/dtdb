@@ -16,11 +16,33 @@ h2,h3,h4,h5,h6,.navbar{font-family:inherit;}
 /* copy text */
 body {font-family: 'Noto Sans', sans-serif;}
 /* main headers */
-h1, #index_page .section{font-family:'IM Fell DW Pica SC', serif;}
+h1, #index_page .section{font-family:'IM Fell DW Pica SC', serif}
 /* brand name */
 .page-header h1, .navbar-brand  {font-family:'IM Fell DW Pica SC', serif}
+.page-header h1 {
+
+	font-size: 40px;
+	font-size: 4vmax;
+}
 /* brand icon */
 .navbar-icon {width:30px; float:left; padding-right:5px}
+
+/* Override Discord External CSS */
+#right-column > div.discord-widget > p.discord-users-online {
+	font-size: 1em!important;
+	text-align: left;
+}
+
+/*RSS*/
+.RSS {
+	font-family:'Anaheim',sans-serif;
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 2px;
+	border-color: lightgray;
+	list-style-image: url('../images/neutral-20.png');
+}
+
 /* decklist names and user names */
 .decklist-name{font-family:'Anaheim',sans-serif}
 .reputation{font-family:'Anaheim',sans-serif}
@@ -232,7 +254,7 @@ font-family: serif;
 
 #index_page .section {
 	color: crimson;
-	
+
 }
 .deck-list-group-item {
 	box-sizing: content-box;
@@ -302,7 +324,7 @@ transform-origin: 0 75px;
 }
 #deck_browser_center div img {
 		box-shadow: 0 0 20px 10px white;
-	
+
 }
 #deck_browser_right div {
 	-webkit-transform-origin: 100% 0;
@@ -323,7 +345,7 @@ border-radius: 10px;
 #deck_gallery td > div > img { height: 100% ; border: 1px solid white; border-radius: 10px;}
 #deck_gallery td > div > div { background: rgba(0, 0, 0, 0.5); position: absolute; left: 1px; bottom: 1px; color: white; width: 24px; height: 24px; line-height: 24px; font-size: 16px; font-weight: bold; text-align: center; border-radius: 15px; font-family: monospace }
 
-@-webkit-keyframes animDonator { 
+@-webkit-keyframes animDonator {
     0% { color: rgba(255,223,48, 1); }
     100% { color: rgba(255,223,48, 0.2); }
 }
@@ -401,24 +423,24 @@ div.deck-composition td.level-3 { background: #7F6A54; }
 div.deck-composition td.level-4 { background: #40352A; }
 
 .card-start { font-weight: bold }
-.card-start::after { 
+.card-start::after {
     content: "*";
 }
 
 .card-start1 { font-weight: bold }
-.card-start1::after { 
+.card-start1::after {
     content: "*";
 }
 .card-start2 { font-weight: bold }
-.card-start2::after { 
+.card-start2::after {
     content: "**";
 }
 .card-start3 { font-weight: bold }
-.card-start3::after { 
+.card-start3::after {
     content: "***";
 }
 .card-start4 { font-weight: bold }
-.card-start4::after { 
+.card-start4::after {
     content: "****";
 }
 
@@ -441,7 +463,7 @@ article.review  header {
 	margin-bottom: 1em;
 }
 article.review div.review-content {
-	
+
 }
 article.rules a {target: _blank;}
 article.rules aside{border-left:1px solid blue;padding-left:20px}
