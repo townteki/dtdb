@@ -126,7 +126,8 @@ var Outfit = null,
     	jQuery(function($) {
       	$("#PineboxRSS").rss("http://pineboxentertainment.com/feed/",
       	{
-			limit: 7,
+		ssl: true,
+		limit: 7,
         	entryTemplate:'<li><a href="{url}">{title} - [{author}]</a><br/></li>'
       	})
     	})
