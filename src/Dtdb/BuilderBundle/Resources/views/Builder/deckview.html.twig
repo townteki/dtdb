@@ -19,7 +19,7 @@ var Outfit = null,
 	HideDisabled = true,
 	Url_GangImage = '{{  asset('/web/bundles/dtdbbuilder/images/xxx-20.png') }}',
 	ShowOnlyDeck = false;
-	
+
 </script>
 {% endblock %}
 
@@ -53,6 +53,7 @@ var Outfit = null,
 <div class="row">
 	<div class="col-sm-12">
 		<h3 id="outfit"></h3>
+		<h5 id="legend"></h5>
 		<div id="startingnumbers"></div>
 		<div id="cardcount"></div>
 		<div id="latestpack"></div>
@@ -76,11 +77,11 @@ var Outfit = null,
     <button type="button" id="btn-print" class="btn btn-info"><span class="glyphicon glyphicon-print"></span> Print</button>
 
 	<button type="button" id="btn-edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
-	
+
 	<button type="button" id="btn-publish" disabled="disabled" class="btn btn-success"><span class="glyphicon glyphicon-share"></span> Publish</button>
-	
+
 	<button type="button" id="btn-delete" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
-	
+
 	<div class="btn-group">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 			<span class="glyphicon glyphicon-download"></span> Download <span class="caret"></span>
@@ -117,7 +118,7 @@ var Outfit = null,
 </div>
 </div>
 </div>
-	
+
 <!-- Description -->
 <div class="panel panel-default">
   <div class="panel-heading">

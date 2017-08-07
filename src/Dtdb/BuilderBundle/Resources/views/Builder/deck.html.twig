@@ -16,6 +16,7 @@ var Filters = {},
 	Sort = "rank",
 	Order = 1,
 	Outfit = null,
+	Legend = null,
 	DeckSize = 0,
 	Deck = {{ deck.slots|json_encode|raw }},
 	Deck_id = {{ deck.id|json_encode|raw }},
@@ -25,7 +26,7 @@ var Filters = {},
 	DisplaySort = 'suit',
 	HideDisabled = true,
 	ShowOnlyDeck = false;
-	
+
 </script>
 
 {% endblock %}
@@ -47,6 +48,7 @@ var Filters = {},
 	</div><!-- /.col-sm-3 -->
 	<div class="col-sm-9">
 		<h4 id="outfit"></h4>
+		<h5 id="legend"></h5>
 		<div class="btn-group">
 			<button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
 				<span class="glyphicon glyphicon-sort"></span> Sort <span class="caret"></span>
@@ -116,10 +118,10 @@ var Filters = {},
     <li role="presentation"><a href="#tab-pane-check" aria-controls="tab-pane-check" role="tab" data-toggle="tab">Check</a></li>
     <li role="presentation"><a href="#tab-pane-history" aria-controls="tab-pane-history" role="tab" data-toggle="tab" id="tab-header-history">History</a></li>
    </ul>
-  
+
    <!-- Tab panes -->
   <div class="tab-content">
-  
+
    <div role="tabpanel" class="tab-pane active" id="tab-pane-build">
 
 <div class="row">
@@ -148,7 +150,7 @@ var Filters = {},
 		</div><!-- /.btn-group -->
 	</div><!-- /.col-sm-6 -->
 </div><!-- /.row -->
-			
+
 <!-- Search Bar -->
 <div class="row">
 	<div class="col-sm-12" style="margin-bottom:10px">
@@ -192,7 +194,7 @@ var Filters = {},
 	<div id="collection-grid" class="col-sm-12"></div>
 </div><!-- /.row -->
 <!-- Collection Table -->
-	
+
     </div>
     <div role="tabpanel" class="tab-pane" id="tab-pane-infos">
 
@@ -213,7 +215,7 @@ var Filters = {},
 
     </div>
 	<div role="tabpanel" class="tab-pane" id="tab-pane-check">
-    
+
 <!-- Draw Simulator -->
 <table class="table table-condensed" id="table-draw-simulator">
 <thead>
@@ -230,7 +232,7 @@ var Filters = {},
 
     </div>
     <div role="tabpanel" class="tab-pane" id="tab-pane-history">
-    
+
 <!-- History -->
 <div class="row">
 	<div class="col-sm-12">
@@ -251,7 +253,7 @@ var Filters = {},
 	</div><!-- /.col-sm-12 -->
 </div><!-- /.row -->
 <!-- History -->
-    
+
 <!-- Published decklists Table -->
 <table class="table table-condensed" id="table-predecessor">
 	<thead>
@@ -277,10 +279,10 @@ var Filters = {},
 </div>
 </div>
 </div>
-	
+
 </div><!-- .col-md-8 -->
 <!-- Right-side Column -->
-	
+
 </div><!-- .row -->
 </div><!-- .container -->
 

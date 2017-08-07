@@ -16,7 +16,7 @@ var Outfit = null,
 	DisplaySort = 'suit';
 
 DTDB.user.params.decklist_id = Decklist.id;
-	
+
 </script>
 {% endblock %}
 {% block body %}
@@ -50,7 +50,7 @@ DTDB.user.params.decklist_id = Decklist.id;
 <div class="col-md-6">
 
 <div id="deck">
-	
+
 <!-- Outfit and Stats -->
 <div class="row">
 	<div class="col-sm-3">
@@ -58,6 +58,7 @@ DTDB.user.params.decklist_id = Decklist.id;
 	</div><!-- /.col-md-3 -->
 	<div class="col-sm-9">
 		<h3 id="outfit"></h3>
+		<h5 id="legend"></h5>
 		<div id="btn-group-decklist">
 		    <form action="{{ path('deck_copy', {decklist_id:decklist.id}) }}" method="POST" style="display:inline">
 			     <button type="submit" id="btn-copy" class="btn btn-default  btn-xs"><span class="glyphicon glyphicon-save"></span> Copy</button>

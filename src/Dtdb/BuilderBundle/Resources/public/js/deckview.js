@@ -22,7 +22,7 @@ DTDB.data_loaded.add(function() {
 	});
 	update_deck();
 	DTDB.deck_gallery.update();
-	
+
 	$('html,body').css('height', 'auto');
 	$('.container').show();
 });
@@ -80,9 +80,9 @@ $(function() {
 	$('#btn-group-deck').on({
 		click: do_action_deck
 	}, 'button[id],a[id]');
-	
+
 	$('#btn-publish').prop('disabled', !!SelectedDeck.problem);
-	
+
 	$('#publish-deck-description').textcomplete(
 			[
 				{
@@ -117,7 +117,7 @@ function confirm_publish() {
 		  if(response == "") {
 			  $('#btn-publish-submit').text("Go").prop('disabled', false);
 		  }
-		  else 
+		  else
 		  {
 			  $('#publish-deck-form').prepend('<div id="publish-form-alert" class="alert alert-danger">That deck cannot be published because <a href="'+response+'">another decklist</a> already has the same composition.</div>');
 			  $('#btn-publish-submit').text("Refused");
@@ -141,6 +141,6 @@ function confirm_delete() {
 
 
 function switch_to_web_view() {
-	$('#deck').html('<div class="row"><div class="col-sm-12"><h3 id="outfit"></h3><div id="startingnumbers"></div><div id="cardcount"></div><div id="latestpack"></div></div></div><div class="row" id="deck-content" style="margin-bottom:10px"></div>');
+	$('#deck').html('<div class="row"><div class="col-sm-12"><h3 id="outfit"></h3><h5 id="legend"></h5><div id="startingnumbers"></div><div id="cardcount"></div><div id="latestpack"></div></div></div><div class="row" id="deck-content" style="margin-bottom:10px"></div>');
 	update_deck();
 }
