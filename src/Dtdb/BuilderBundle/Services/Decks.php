@@ -18,7 +18,7 @@ class Decks
         $this->diff = $diff;
         $this->logger = $logger;
 	}
-    
+
 
     public function getByUser ($user)
     {
@@ -35,6 +35,18 @@ class Decks
                 d.problem,
 				c.title outfit_title,
                 c.code outfit_code,
+								(select title from card
+									inner join deckslot on card.id = deckslot.card_id
+									where deck_id = d.id
+									and card_id in
+										(select id from card where type_id IN
+     									(select ID from type where name = 'Legend')) limit 1) legend_title,
+								(select code from card
+									inner join deckslot on card.id = deckslot.card_id
+									where deck_id = d.id
+									and card_id in
+										(select id from card where type_id IN
+											(select ID from type where name = 'Legend')) limit 1) legend_code,
 				g.code gang_code,
                 p.cycle_id cycle_id,
                 p.number pack_number
@@ -47,7 +59,7 @@ class Decks
                         $user->getId()
                 ))
             ->fetchAll();
-        
+
         $rows = $dbh->executeQuery(
                 "SELECT
 				s.deck_id,
@@ -61,7 +73,7 @@ class Decks
                         $user->getId()
                 ))
             ->fetchAll();
-        
+
         $cards = array();
         foreach ($rows as $row) {
             $deck_id = $row['deck_id'];
@@ -73,7 +85,7 @@ class Decks
             }
             $cards[$deck_id][] = $row;
         }
-        
+
         foreach ($decks as $i => $deck) {
             $decks[$i]['cards'] = $cards[$deck['id']];
             $decks[$i]['unsaved'] = intval($decks[$i]['unsaved']);
@@ -85,12 +97,12 @@ class Decks
             if($decks[$i]['unsaved'] > 0) {
                 $problem_message = "This deck has unsaved changes.";
             }
-            
+
             $decks[$i]['message'] =  $problem_message;
         }
-        
+
         return $decks;
-    
+
     }
 
     public function getById ($deck_id)
@@ -116,7 +128,7 @@ class Decks
                         $deck_id
                 ))
             ->fetch();
-        
+
         $rows = $dbh->executeQuery(
                 "SELECT
 				s.deck_id,
@@ -130,7 +142,7 @@ class Decks
                         $deck_id
                 ))
             ->fetchAll();
-        
+
         $cards = array();
         foreach ($rows as $row) {
             $deck_id = $row['deck_id'];
@@ -139,26 +151,26 @@ class Decks
             $row['start'] = intval($row['start']);
             $cards[] = $row;
         }
-        
+
         $deck['cards'] = $cards;
         $deck['tags'] = $deck['tags'] ? explode(' ', $deck['tags']) : array();
         $problem = $deck['problem'];
         $deck['message'] = isset($problem) ? $this->judge->problem($problem) : '';
-        
+
         return $deck;
     }
-    
+
 
     public function saveDeck ($user, $deck, $decklist_id, $name, $description, $tags, $content, $source_deck)
     {
         $deck_content = array();
-        
+
         if ($decklist_id) {
             $decklist = $this->doctrine->getRepository('DtdbBuilderBundle:Decklist')->find($decklist_id);
             if ($decklist)
                 $deck->setParent($decklist);
         }
-        
+
         $deck->setName($name);
         $deck->setDescription($description);
         $deck->setUser($user);
@@ -207,7 +219,7 @@ class Decks
         $this->doctrine->persist($deck);
 
         // on the deck content
-        
+
         if($source_deck) {
             $quantities = array_map(function ($value) {
                 return $value['quantity'];
@@ -241,7 +253,7 @@ class Decks
             $deck->removeSlot($slot);
             $this->doctrine->remove($slot);
         }
-         
+
         foreach ($content as $card_code => $info) {
             $card = $cards[$card_code];
             $card = $cards[$card_code];
@@ -264,13 +276,13 @@ class Decks
             $deck->setProblem(NULL);
             $deck->setDeckSize($analyse['deckSize']);
         }
-        
+
         $deck->setDateupdate(new \DateTime());
         $this->doctrine->flush();
-        
+
         return $deck->getId();
     }
-    
+
     public function revertDeck($deck)
     {
         $changes = $deck->getChanges();
@@ -284,6 +296,6 @@ class Decks
         }
         $this->doctrine->flush();
     }
-    
-    
+
+
 }

@@ -263,6 +263,7 @@ font-family: serif;
 .deck-list-group-item.selected {
 	background: #eee !important;
 }
+
 .deck-list-group-item div.deck-list-outfit-image {
 	width: 80px;
 	height: 80px;
@@ -272,6 +273,19 @@ font-family: serif;
 	background-position: 50% 25%;
 	position: absolute;
 	right: 15px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+.deck-list-group-item div.deck-list-legend-image {
+	width: 80px;
+	height: 80px;
+	border-radius: 40px;
+	background-repeat: no-repeat;
+	background-size: 100px;
+	background-position: 50% 25%;
+	position: absolute;
+	right: 50px;
 	top: 0;
 	bottom: 0;
 	margin: auto;

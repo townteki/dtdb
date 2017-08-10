@@ -284,6 +284,10 @@ function update_deck(options) {
 		$('#legend').html('<a href="'+Routing.generate('cards_zoom', {card_code:Legend.code})+'" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="'+Legend.code+'">'+Legend.title+'</a>');
 		$('#img_legend').prop('src', Legend.imagesrc);
 	}
+	else {
+		$('#legend').html('');
+		$('#img_legend').prop('src', '');
+	}
 
 
 	var latestpack = DTDB.data.sets({name:Outfit.pack}).first();
