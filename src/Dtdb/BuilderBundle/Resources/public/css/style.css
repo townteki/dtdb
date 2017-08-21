@@ -278,16 +278,17 @@ font-family: serif;
 	margin: auto;
 }
 .deck-list-group-item div.deck-list-legend-image {
-	width: 80px;
+	width: 40px;
 	height: 80px;
-	border-radius: 40px;
+	border-bottom-right-radius: 40px;
+	border-top-right-radius: 40px;
 	background-repeat: no-repeat;
 	background-size: 100px;
 	background-position: 50% 25%;
 	position: absolute;
-	right: 50px;
+	right: 15px;
 	top: 0;
-	bottom: 0;
+	bottom: 0px;
 	margin: auto;
 }
 #deck_browser {
