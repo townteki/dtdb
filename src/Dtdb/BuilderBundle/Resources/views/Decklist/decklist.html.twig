@@ -17,6 +17,13 @@ var Outfit = null,
 
 DTDB.user.params.decklist_id = Decklist.id;
 
+$(document).ready(function() {
+	var imageSrc = $('image[id="img_legend"]').attr('src');
+  if ( imageSrc !== undefined ) {
+      	$("#decksummary").removeClass('col-sm-6').addClass('col-sm-9');
+			}
+});
+
 </script>
 {% endblock %}
 {% block body %}
@@ -59,7 +66,7 @@ DTDB.user.params.decklist_id = Decklist.id;
 	<div class="col-sm-3">
 		<img id="img_legend" src="" class="img-responsive  hidden-xs">
 	</div>
-	<div class="col-sm-6">
+	<div id="decksummary" class="col-sm-6">
 		<h3 id="outfit"></h3>
 		<h5 id="legend"></h5>
 		<div id="btn-group-decklist">
