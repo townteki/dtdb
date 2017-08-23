@@ -246,7 +246,7 @@ function send_favorite() {
 	});
 }
 
-$(window).load(function() {
+$(document).ready(function() {
 	var imageSrc = $('#img_legend').attr('src');
   if ( imageSrc === "" ) {
       	$("#decksummary").removeClass('col-sm-6').addClass('col-sm-9');

@@ -57,7 +57,7 @@ $(function() {
 
 });
 
-$(window).load(function() {
+$(document).ready(function() {
 	var imageSrc = $('#img_legend').attr('src');
   if ( imageSrc === "" ) {
       	$("#decksummary").removeClass('col-sm-8').addClass('col-sm-10');
