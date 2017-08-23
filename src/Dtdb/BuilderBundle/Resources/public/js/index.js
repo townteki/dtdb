@@ -56,3 +56,10 @@ $(function() {
 	});
 
 });
+
+$(document).ready(function() {
+	var imageSrc = $('image[id="img_legend"]').attr('src');
+  if ( imageSrc === undefined ) {
+      	$("#decksummary").removeClass('col-sm-8').addClass('col-sm-10');
+			}
+});

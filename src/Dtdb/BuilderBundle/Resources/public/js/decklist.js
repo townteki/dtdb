@@ -22,7 +22,7 @@ DTDB.data_loaded.add(function() {
 });
 
 function setup_comment_form() {
-	
+
 	var form = $('<form method="POST" action="'+Routing.generate('decklist_comment')+'"><input type="hidden" name="id" value="'+Decklist.id+'"><div class="form-group">'
 			+ '<textarea id="comment-form-text" class="form-control" rows="4" name="comment" placeholder="Enter your comment in Markdown format. Type # to enter a card name. Type @ to enter a user name."></textarea>'
 			+ '</div><div class="well text-muted" id="comment-form-preview"><small>Preview. Look <a href="http://daringfireball.net/projects/markdown/dingus">here</a> for a Markdown syntax reference.</small></div>'
@@ -41,7 +41,7 @@ function setup_comment_form() {
 		});
 		event.preventDefault();
 	});
-	
+
 	$('#decklist-social-icon-comment').on('click', function() {
 		$('#comment-form-text').trigger('focus');
 	});
@@ -54,7 +54,7 @@ function setup_comment_form() {
 			$('#comment-form-preview').html(converter.makeHtml($('#comment-form-text').val()));
 		}
 	);
-	
+
 	$('#comment-form-text').textcomplete(
 			[
 					{
@@ -95,12 +95,12 @@ function setup_comment_form() {
 }
 
 function setup_social_icons() {
-	
+
 	if(!DTDB.user.data || DTDB.user.data.is_author || DTDB.user.data.is_liked) {
 		var element = $('#decklist-social-icon-like');
 		element.replaceWith($('<span class="social-icon-like"></span').html(element.html()));
 	}
-	
+
 	if(!DTDB.user.data) {
 		var element = $('#decklist-social-icon-favorite');
 		element.replaceWith($('<span class="social-icon-favorite"></span').html(element.html()));
@@ -111,12 +111,12 @@ function setup_social_icons() {
 		var element = $('#decklist-social-icon-favorite');
 		element.attr('title', "Add to favorites");
 	}
-	
+
 	if(!DTDB.user.data) {
 		var element = $('#decklist-social-icon-comment');
 		element.replaceWith($('<span class="social-icon-comment"></span').html(element.html()));
 	}
-	
+
 	$('#decklist-social-icons>a').tooltip();
 
 }
@@ -142,7 +142,7 @@ $(function() {
 		}
 		setup_social_icons();
 	})
-	
+
 	$(document).on('click', '#decklist-edit', edit_form);
 	$(document).on('click', '#decklist-delete', delete_form);
 	$(document).on('click', '#decklist-social-icon-like', send_like);
@@ -150,7 +150,7 @@ $(function() {
 	$(document).on('click', '#btn-group-decklist button[id],a[id]', do_action_decklist);
 	$(document).on('click', '#btn-compare', compare_form);
 	$(document).on('click', '#btn-compare-submit', compare_submit);
-	
+
 	$('#menu-sort').on({
 		change : function(event) {
 			if ($(this).attr('id').match(/btn-sort-(\w+)/)) {
@@ -159,7 +159,14 @@ $(function() {
 			}
 		}
 	}, 'a');
-	
+
+});
+
+$(document).ready(function() {
+	var imageSrc = $('image[id="img_legend"]').attr('src');
+  if ( imageSrc === undefined ) {
+      	$("#decksummary").removeClass('col-sm-6').addClass('col-sm-9');
+			}
 });
 
 function compare_submit() {
