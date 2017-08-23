@@ -57,9 +57,9 @@ $(function() {
 
 });
 
-$(document).ready(function() {
-	var imageSrc = $('image[id="img_legend"]').attr('src');
-  if ( imageSrc === undefined ) {
+$(window).load(function() {
+	var imageSrc = $('#img_legend').attr('src');
+  if ( imageSrc === "" ) {
       	$("#decksummary").removeClass('col-sm-8').addClass('col-sm-10');
 			}
 });

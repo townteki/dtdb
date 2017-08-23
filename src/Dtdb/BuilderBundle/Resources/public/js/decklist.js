@@ -162,13 +162,6 @@ $(function() {
 
 });
 
-$(document).ready(function() {
-	var imageSrc = $('image[id="img_legend"]').attr('src');
-  if ( imageSrc === undefined ) {
-      	$("#decksummary").removeClass('col-sm-6').addClass('col-sm-9');
-			}
-});
-
 function compare_submit() {
 	var url = $('#decklist2_url').val();
 	var id;
@@ -252,3 +245,10 @@ function send_favorite() {
 		obj.tooltip('show');
 	});
 }
+
+$(window).load(function() {
+	var imageSrc = $('#img_legend').attr('src');
+  if ( imageSrc === "" ) {
+      	$("#decksummary").removeClass('col-sm-6').addClass('col-sm-9');
+			}
+});
