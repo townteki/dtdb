@@ -5,9 +5,9 @@ function display_notification()
 {
 	if(!localStorage) return;
 	var Notification = {
-			version: 16,
-			type: 'warning',
-			message: 'DoomtownDB is under new management (Thanks Platypus for your service!)'};
+		version: 17,
+		type: 'info',
+		message: '<a href="https://www.kickstarter.com/projects/545820095/doomtown-reloaded-there-comes-a-reckoning">New Expansion There Comes a Reckoning is Live on Kickstarter!</a>'};
     var localStorageNotification = parseInt(localStorage.getItem('notification'));
     if(localStorageNotification >= Notification.version) return;
 	var alert = $('<div class="alert alert-'+Notification.type+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+Notification.message+'</div>');
