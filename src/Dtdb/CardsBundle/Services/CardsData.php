@@ -68,8 +68,8 @@ class CardsData
 		}
 		return $packs;
 	}
-    
-	
+
+
 	public function get_search_rows($conditions, $sortorder, $forceempty = false)
 	{
 		$i=0;
@@ -81,7 +81,7 @@ class CardsData
 			'r' => "The 108 Righteous Bandits",
 			's' => "The Sloane Gang"
 		);
-	
+
 		// construction de la requete sql
 		$qb = $this->doctrine->getRepository('DtdbCardsBundle:Card')->createQueryBuilder('c');
 		$qb->leftJoin('c.pack', 'p')
@@ -90,7 +90,7 @@ class CardsData
 			->leftJoin('c.gang', 'g')
 			->leftJoin('t.suit', 's')
 			->leftJoin('c.shooter', 'h');
-		
+
 		foreach($conditions as $condition)
 		{
 			$type = array_shift($condition);
@@ -356,7 +356,7 @@ class CardsData
 					break;
 			}
 		}
-		
+
 		if(!$i && !$forceempty) {
 			return;
 		}
@@ -371,7 +371,7 @@ class CardsData
 		$qb->addOrderBy('c.code');
 		$query = $qb->getQuery();
 		$rows = $query->getResult();
-		
+
 		for($i=0; $i<count($rows); $i++)
 		{
 			while(isset($rows[$i+1]) && $rows[$i]->getTitle() == $rows[$i+1]->getTitle() && $rows[$i]->getPack()->getCode() == "alt")
@@ -380,7 +380,7 @@ class CardsData
 				array_splice($rows, $i+1, 1);
 			}
 		}
-		
+
 		return $rows;
 	}
 
@@ -406,7 +406,7 @@ class CardsData
 		}
 		return $alternatives;
 	}
-	
+
 	/**
 	 *
 	 * @param \Dtdb\CardsBundle\Entity\Card $card
@@ -419,16 +419,16 @@ class CardsData
 	    static $cacheApi = array();
 
 	    $locale = $this->request_stack->getCurrentRequest()->getLocale();
-	    
+
 	    if(!$api && isset($cache[$card->getId()]) && isset($cache[$card->getId()][$locale])) {
 	        return $cache[$card->getId()][$locale];
 	    }
 	    if($api && isset($cacheApi[$card->getId()]) && isset($cacheApi[$card->getId()][$locale])) {
 	        return $cacheApi[$card->getId()][$locale];
 	    }
-	    
+
 		$dbh = $this->doctrine->getConnection();
-		
+
 		$cardinfo = array(
 				"id" => $card->getId(),
 				"last-modified" => $card->getTs()->format('c'),
@@ -458,14 +458,15 @@ class CardsData
 		        "bullets" => $card->getBullets(),
 		        "influence" => $card->getInfluence(),
 		        "control" => $card->getControl(),
-		        "wealth" => $card->getWealth()
+		        "wealth" => $card->getWealth(),
+			 "octgnid" => $card->getOctgnid()
 		);
 
 		$cardinfo['value'] = $cardinfo['suit'].$cardinfo['rank'];
 		$cardinfo['url'] = $this->router->generate('cards_zoom', array('card_code' => $card->getCode(), '_locale' => $locale), true);
 
 		$cardinfo['imagesrc'] = "";
-		
+
 		if($locale != 'en' && file_exists($this->dir . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $card->getCode() . ".jpg"))
 		{
 			$cardinfo['imagesrc'] = "/web/bundles/dtdbcards/images/cards/$locale/". $card->getCode() . ".jpg";
@@ -474,7 +475,7 @@ class CardsData
 		{
 		    $cardinfo['imagesrc'] = "/web/bundles/dtdbcards/images/cards/en/". $card->getCode() . ".jpg";
 		}
-		
+
 		if($api) {
 			unset($cardinfo['id']);
 			unset($cardinfo['id_set']);
@@ -484,17 +485,17 @@ class CardsData
 			$cardinfo['text'] = implode(array_map(function ($l) { return "<p>$l</p>"; }, explode("\r\n", $cardinfo['text'])));
 		    $cache[$card->getId()][$locale] = $cardinfo;
 		}
-		 
+
 		return $cardinfo;
 	}
-	
+
 	public function syntax($query)
 	{
 		// renvoie une liste de conditions (array)
 		// chaque condition est un tableau à n>1 éléments
 		// le premier est le type de condition (0 ou 1 caractère)
 		// les suivants sont les arguments, en OR
-		
+
 		$query = preg_replace('/\s+/u', ' ', trim($query));
 
 		$list = array();
@@ -556,7 +557,7 @@ class CardsData
 		}
 		return $list;
 	}
-	
+
 	public function validateConditions(&$conditions)
 	{
 		// suppression des conditions invalides
@@ -590,12 +591,12 @@ class CardsData
 				$conditions
 		));
 	}
-	
+
 
 	public function get_reviews($card)
 	{
 	    $reviews = $this->doctrine->getRepository('DtdbBuilderBundle:Review')->findBy(array('card' => $card), array('nbvotes' => 'DESC'));
-	
+
 	    $response = array();
 	    foreach($reviews as $review) {
 	        /* @var $review \Dtdb\BuilderBundle\Entity\Review */
@@ -612,9 +613,9 @@ class CardsData
 	                'nbvotes' => $review->getNbvotes()
 	        );
 	    }
-	
+
 	    return $response;
 	}
-		
-    
+
+
 }
