@@ -57,17 +57,17 @@ class Deck
     private $slots;
 
     /**
-     * @var \Dtdb\UserBundle\Entity\User
+     * @var \Dtdb\BuilderBundle\Entity\User
      */
     private $user;
 
     /**
-     * @var Dtdb\CardsBundle\Entity\Card
+     * @var Dtdb\BuilderBundle\Entity\Card
      */
     private $outfit;
     
     /**
-     * @var Dtdb\CardsBundle\Entity\Pack
+     * @var Dtdb\BuilderBundle\Entity\Pack
      */
     private $lastPack;
     
@@ -242,10 +242,10 @@ class Deck
     /**
      * Set user
      *
-     * @param \Dtdb\UserBundle\Entity\User $user
+     * @param \Dtdb\BuilderBundle\Entity\User $user
      * @return Deck
      */
-    public function setUser(\Dtdb\UserBundle\Entity\User $user = null)
+    public function setUser(\Dtdb\BuilderBundle\Entity\User $user = null)
     {
         $this->user = $user;
     
@@ -255,7 +255,7 @@ class Deck
     /**
      * Get user
      *
-     * @return \Dtdb\UserBundle\Entity\User
+     * @return \Dtdb\BuilderBundle\Entity\User
      */
     public function getUser()
     {
@@ -265,7 +265,7 @@ class Deck
     /**
      * Set outfit
      *
-     * @param \Dtdb\CardsBundle\Entity\Card $outfit
+     * @param \Dtdb\BuilderBundle\Entity\Card $outfit
      * @return Deck
      */
     public function setOutfit($outfit)
@@ -278,7 +278,7 @@ class Deck
     /**
      * Get outfit
      *
-     * @return \Dtdb\CardsBundle\Entity\Card
+     * @return \Dtdb\BuilderBundle\Entity\Card
      */
     public function getOutfit()
     {
@@ -288,7 +288,7 @@ class Deck
     /**
      * Set lastPack
      *
-     * @param \Dtdb\CardsBundle\Entity\Pack $lastPack
+     * @param \Dtdb\BuilderBundle\Entity\Pack $lastPack
      * @return Deck
      */
     public function setLastPack($lastPack)
@@ -301,7 +301,7 @@ class Deck
     /**
      * Get lastPack
      *
-     * @return \Dtdb\CardsBundle\Entity\Pack
+     * @return \Dtdb\BuilderBundle\Entity\Pack
      */
     public function getLastPack()
     {

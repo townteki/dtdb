@@ -29,7 +29,7 @@ class IndexController extends Controller
         return $this->render('DtdbBuilderBundle:Default:index.html.twig',
                 array(
                         'pagetitle' => "Doomtown Cards and Deckbuilder",
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'decklists' => $decklists_recent,
                         'decklist' => $decklist,
                         'reviews' => $reviews_recent,

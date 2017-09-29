@@ -25,7 +25,7 @@ class Decklistslot
     private $decklist;
 
     /**
-     * @var Dtdb\CardsBundle\Entity\Card
+     * @var Dtdb\BuilderBundle\Entity\Card
      */
     private $card;
     

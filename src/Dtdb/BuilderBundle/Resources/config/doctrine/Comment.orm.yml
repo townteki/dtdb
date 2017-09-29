@@ -4,7 +4,7 @@ Dtdb\BuilderBundle\Entity\Comment:
     repositoryClass: Dtdb\BuilderBundle\Entity\CommentRepository
     manyToOne:
         author:
-            targetEntity: Dtdb\UserBundle\Entity\User
+            targetEntity: Dtdb\BuilderBundle\Entity\User
             nullable: false
             inversedBy: comments
             joinColumn:

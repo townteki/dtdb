@@ -3,7 +3,7 @@
 namespace Dtdb\BuilderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Dtdb\UserBundle\Entity\User;
+use Dtdb\BuilderBundle\Entity\User;
 
 /**
  * Review
@@ -41,12 +41,12 @@ class Review
     private $nbvotes;
 
     /**
-     * @var \Dtdb\CardsBundle\Entity\Card
+     * @var \Dtdb\BuilderBundle\Entity\Card
      */
     private $card;
 
     /**
-     * @var \Dtdb\UserBundle\Entity\User
+     * @var \Dtdb\BuilderBundle\Entity\User
      */
     private $user;
 
@@ -191,10 +191,10 @@ class Review
     /**
      * Set card
      *
-     * @param \Dtdb\CardsBundle\Entity\Card $card
+     * @param \Dtdb\BuilderBundle\Entity\Card $card
      * @return Review
      */
-    public function setCard(\Dtdb\CardsBundle\Entity\Card $card = null)
+    public function setCard(\Dtdb\BuilderBundle\Entity\Card $card = null)
     {
         $this->card = $card;
 
@@ -204,7 +204,7 @@ class Review
     /**
      * Get card
      *
-     * @return \Dtdb\CardsBundle\Entity\Card
+     * @return \Dtdb\BuilderBundle\Entity\Card
      */
     public function getCard()
     {
@@ -214,7 +214,7 @@ class Review
     /**
      * Set user
      *
-     * @param \Dtdb\UserBundle\Entity\User $user
+     * @param \Dtdb\BuilderBundle\Entity\User $user
      * @return Review
      */
     public function setUser(User $user = null)
@@ -227,7 +227,7 @@ class Review
     /**
      * Get user
      *
-     * @return \Dtdb\UserBundle\Entity\User
+     * @return \Dtdb\BuilderBundle\Entity\User
      */
     public function getUser()
     {
@@ -237,10 +237,10 @@ class Review
     /**
      * Add votes
      *
-     * @param \Dtdb\UserBundle\Entity\User $votes
+     * @param \Dtdb\BuilderBundle\Entity\User $votes
      * @return Review
      */
-    public function addVote(\Dtdb\UserBundle\Entity\User $user)
+    public function addVote(\Dtdb\BuilderBundle\Entity\User $user)
     {
         $this->votes[] = $user;
 
@@ -250,9 +250,9 @@ class Review
     /**
      * Remove votes
      *
-     * @param \Dtdb\UserBundle\Entity\User $votes
+     * @param \Dtdb\BuilderBundle\Entity\User $votes
      */
-    public function removeVote(\Dtdb\UserBundle\Entity\User $votes)
+    public function removeVote(\Dtdb\BuilderBundle\Entity\User $votes)
     {
         $this->votes->removeElement($votes);
     }

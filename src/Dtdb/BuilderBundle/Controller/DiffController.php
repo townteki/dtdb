@@ -40,7 +40,7 @@ class DiffController extends Controller
         
         $content1 = array();
         foreach($listings[0] as $code => $qty) {
-            $card = $em->getRepository('DtdbCardsBundle:Card')->findOneBy(array('code' => $code));
+            $card = $em->getRepository('DtdbBuilderBundle:Card')->findOneBy(array('code' => $code));
             if($card) $content1[] = array(
                     'title' => $card->getTitle($locale),
                     'code' => $code,
@@ -50,7 +50,7 @@ class DiffController extends Controller
         
         $content2 = array();
         foreach($listings[1] as $code => $qty) {
-            $card = $em->getRepository('DtdbCardsBundle:Card')->findOneBy(array('code' => $code));
+            $card = $em->getRepository('DtdbBuilderBundle:Card')->findOneBy(array('code' => $code));
             if($card) $content2[] = array(
                     'title' => $card->getTitle($locale),
                     'code' => $code,
@@ -60,7 +60,7 @@ class DiffController extends Controller
         
         $shared = array();
         foreach($intersect as $code => $qty) {
-            $card = $em->getRepository('DtdbCardsBundle:Card')->findOneBy(array('code' => $code));
+            $card = $em->getRepository('DtdbBuilderBundle:Card')->findOneBy(array('code' => $code));
             if($card) $shared[] = array(
                     'title' => $card->getTitle($locale),
                     'code' => $code,

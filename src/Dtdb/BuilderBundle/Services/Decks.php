@@ -176,10 +176,10 @@ class Decks
         $deck->setUser($user);
         $outfit = null;
         $cards = array();
-        /* @var $latestPack \Dtdb\CardsBundle\Entity\Pack */
+        /* @var $latestPack \Dtdb\BuilderBundle\Entity\Pack */
         $latestPack = null;
         foreach ($content as $card_code => $info) {
-            $card = $this->doctrine->getRepository('DtdbCardsBundle:Card')->findOneBy(array(
+            $card = $this->doctrine->getRepository('DtdbBuilderBundle:Card')->findOneBy(array(
                     "code" => $card_code
             ));
             if(!$card) continue;
@@ -202,7 +202,7 @@ class Decks
         if ($outfit) {
             $deck->setOutfit($outfit);
         } else {
-            $outfit = $this->doctrine->getRepository('DtdbCardsBundle:Card')->findAll();
+            $outfit = $this->doctrine->getRepository('DtdbBuilderBundle:Card')->findAll();
             $cards[$outfit->getCode()] = $outfit;
             $content[$outfit->getCode()] = 1;
             $deck->setOutfit($outfit);

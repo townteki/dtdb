@@ -79,7 +79,7 @@ swiftmailer:
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: Dtdb\UserBundle\Entity\User
+    user_class: Dtdb\BuilderBundle\Entity\User
     from_email:
         address:        admin@dtdb.co
         sender_name:    DoomtownDB
@@ -94,10 +94,10 @@ fos_user:
 
 fos_oauth_server:
     db_driver: orm
-    client_class:        Dtdb\UserBundle\Entity\Client
-    access_token_class:  Dtdb\UserBundle\Entity\AccessToken
-    refresh_token_class: Dtdb\UserBundle\Entity\RefreshToken
-    auth_code_class:     Dtdb\UserBundle\Entity\AuthCode
+    client_class:        Dtdb\BuilderBundle\Entity\Client
+    access_token_class:  Dtdb\BuilderBundle\Entity\AccessToken
+    refresh_token_class: Dtdb\BuilderBundle\Entity\RefreshToken
+    auth_code_class:     Dtdb\BuilderBundle\Entity\AuthCode
     service:
         user_provider: fos_user.user_provider.username
         options:

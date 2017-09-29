@@ -1,0 +1,30 @@
+admin_shooter:
+    path:     /
+    defaults: { _controller: "DtdbBuilderBundle:Shooter:index" }
+
+admin_shooter_show:
+    path:     /{id}/show
+    defaults: { _controller: "DtdbBuilderBundle:Shooter:show" }
+
+admin_shooter_new:
+    path:     /new
+    defaults: { _controller: "DtdbBuilderBundle:Shooter:new" }
+
+admin_shooter_create:
+    path:     /create
+    defaults: { _controller: "DtdbBuilderBundle:Shooter:create" }
+    requirements: { _method: post }
+
+admin_shooter_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtdbBuilderBundle:Shooter:edit" }
+
+admin_shooter_update:
+    path:     /{id}/update
+    defaults: { _controller: "DtdbBuilderBundle:Shooter:update" }
+    requirements: { _method: post|put }
+
+admin_shooter_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DtdbBuilderBundle:Shooter:delete" }
+    requirements: { _method: post|delete }

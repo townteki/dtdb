@@ -6,7 +6,8 @@ parameters:
     reviews.class: Dtdb\BuilderBundle\Services\Reviews
     texts.class: Dtdb\BuilderBundle\Services\Texts
     diff.class: Dtdb\BuilderBundle\Services\Diff
-    
+    cards_data.class: Dtdb\BuilderBundle\Services\CardsData
+
 services:
     judge:
         class: %judge.class%
@@ -29,6 +30,6 @@ services:
     diff:
         class: %diff.class%
         arguments: [@doctrine.orm.entity_manager]
-        
-
-
+    cards_data:
+        class: %cards_data.class%
+        arguments: [@doctrine, @request_stack, @router, %cardimages_dir%]

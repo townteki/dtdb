@@ -1,0 +1,30 @@
+admin_cards:
+    pattern:  /
+    defaults: { _controller: "DtdbBuilderBundle:Cards:index" }
+
+admin_cards_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "DtdbBuilderBundle:Cards:show" }
+
+admin_cards_new:
+    pattern:  /new
+    defaults: { _controller: "DtdbBuilderBundle:Cards:new" }
+
+admin_cards_create:
+    pattern:  /create
+    defaults: { _controller: "DtdbBuilderBundle:Cards:create" }
+    requirements: { _method: post }
+
+admin_cards_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "DtdbBuilderBundle:Cards:edit" }
+
+admin_cards_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "DtdbBuilderBundle:Cards:update" }
+    requirements: { _method: post }
+
+admin_cards_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DtdbBuilderBundle:Cards:delete" }
+    requirements: { _method: post }

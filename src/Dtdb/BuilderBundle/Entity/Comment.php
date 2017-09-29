@@ -3,7 +3,7 @@
 namespace Dtdb\BuilderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Dtdb\UserBundle\Entity\User;
+use Dtdb\BuilderBundle\Entity\User;
 use Dtdb\BuilderBundle\Entity\Decklist;
 
 /**

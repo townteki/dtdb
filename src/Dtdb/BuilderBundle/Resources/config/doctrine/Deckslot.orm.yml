@@ -11,7 +11,7 @@ Dtdb\BuilderBundle\Entity\Deckslot:
                 name: deck_id
                 referencedColumnName: id
         card:
-            targetEntity: Dtdb\CardsBundle\Entity\Card
+            targetEntity: Dtdb\BuilderBundle\Entity\Card
             nullable: false
             joinColumn:
                 name: card_id

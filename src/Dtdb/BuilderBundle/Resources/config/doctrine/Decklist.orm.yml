@@ -7,28 +7,28 @@ Dtdb\BuilderBundle\Entity\Decklist:
             columns: [ creation ]
     manyToOne:
         user:
-            targetEntity: Dtdb\UserBundle\Entity\User
+            targetEntity: Dtdb\BuilderBundle\Entity\User
             nullable: false
             inversedBy: decklists
             joinColumn:
                 name: user_id
                 referencedColumnName: id
         outfit:
-            targetEntity: Dtdb\CardsBundle\Entity\Card
+            targetEntity: Dtdb\BuilderBundle\Entity\Card
             nullable: false
             inversedBy: decklists
             joinColumn:
                 name: outfit_id
                 referencedColumnName: id
         gang:
-            targetEntity: Dtdb\CardsBundle\Entity\Gang
+            targetEntity: Dtdb\BuilderBundle\Entity\Gang
             nullable: false
             inversedBy: decklists
             joinColumn:
                 name: gang_id
                 referencedColumnName: id
         lastPack:
-            targetEntity: Dtdb\CardsBundle\Entity\Pack
+            targetEntity: Dtdb\BuilderBundle\Entity\Pack
             nullable: false
             inversedBy: decklists
             joinColumn:
@@ -72,7 +72,7 @@ Dtdb\BuilderBundle\Entity\Decklist:
             mappedBy: parent
     manyToMany:
         favorites:
-            targetEntity: Dtdb\UserBundle\Entity\User
+            targetEntity: Dtdb\BuilderBundle\Entity\User
             inversedBy: favorites
             joinTable:
                 name: favorite
@@ -84,7 +84,7 @@ Dtdb\BuilderBundle\Entity\Decklist:
                         referencedColumnName: id
             cascade: ["persist"]
         votes:
-            targetEntity: Dtdb\UserBundle\Entity\User
+            targetEntity: Dtdb\BuilderBundle\Entity\User
             inversedBy: votes
             joinTable:
                 name: vote

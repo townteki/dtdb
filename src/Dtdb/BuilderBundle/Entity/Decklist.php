@@ -4,7 +4,7 @@ namespace Dtdb\BuilderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Dtdb\UserBundle\Entity\User;
+use Dtdb\BuilderBundle\Entity\User;
 use Dtdb\BuilderBundle\Entity\Decklistslot;
 use Dtdb\BuilderBundle\Entity\Comment;
 
@@ -74,22 +74,22 @@ class Decklist
     private $nbcomments;
     
     /**
-     * @var Dtdb\UserBundle\Entity\User
+     * @var Dtdb\BuilderBundle\Entity\User
      */
     private $user;
 
     /**
-     * @var Dtdb\CardsBundle\Entity\Card
+     * @var Dtdb\BuilderBundle\Entity\Card
      */
     private $outfit;
 
     /**
-     * @var Dtdb\CardsBundle\Entity\Gang
+     * @var Dtdb\BuilderBundle\Entity\Gang
      */
     private $gang;
     
     /**
-     * @var Dtdb\CardsBundle\Entity\Pack
+     * @var Dtdb\BuilderBundle\Entity\Pack
      */
     private $lastPack;
     
@@ -392,7 +392,7 @@ class Decklist
     /**
      * Get user
      *
-     * @return \Dtdb\UserBundle\Entity\User
+     * @return \Dtdb\BuilderBundle\Entity\User
      */
     public function getUser()
     {
@@ -402,7 +402,7 @@ class Decklist
     /**
      * Set outfit
      *
-     * @param \Dtdb\CardsBundle\Entity\Card $outfit
+     * @param \Dtdb\BuilderBundle\Entity\Card $outfit
      * @return Deck
      */
     public function setOutfit($outfit)
@@ -415,7 +415,7 @@ class Decklist
     /**
      * Get outfit
      *
-     * @return \Dtdb\CardsBundle\Entity\Card
+     * @return \Dtdb\BuilderBundle\Entity\Card
      */
     public function getOutfit()
     {
@@ -463,7 +463,7 @@ class Decklist
     /**
      * Set lastPack
      *
-     * @param \Dtdb\CardsBundle\Entity\Pack $lastPack
+     * @param \Dtdb\BuilderBundle\Entity\Pack $lastPack
      * @return Deck
      */
     public function setLastPack($lastPack)
@@ -476,7 +476,7 @@ class Decklist
     /**
      * Get lastPack
      *
-     * @return \Dtdb\CardsBundle\Entity\Pack
+     * @return \Dtdb\BuilderBundle\Entity\Pack
      */
     public function getLastPack()
     {
@@ -486,7 +486,7 @@ class Decklist
     /**
      * Set gang
      *
-     * @param \Dtdb\CardsBundle\Entity\Gang $gang
+     * @param \Dtdb\BuilderBundle\Entity\Gang $gang
      * @return Deck
      */
     public function setGang($gang)
@@ -499,7 +499,7 @@ class Decklist
     /**
      * Get gang
      *
-     * @return \Dtdb\CardsBundle\Entity\Gang
+     * @return \Dtdb\BuilderBundle\Entity\Gang
      */
     public function getGang()
     {
@@ -648,9 +648,9 @@ class Decklist
     /**
      * Remove favorites
      *
-     * @param \Dtdb\UserBundle\Entity\User $favorites
+     * @param \Dtdb\BuilderBundle\Entity\User $favorites
      */
-    public function removeFavorite(\Dtdb\UserBundle\Entity\User $favorites)
+    public function removeFavorite(\Dtdb\BuilderBundle\Entity\User $favorites)
     {
         $this->favorites->removeElement($favorites);
     }
@@ -658,9 +658,9 @@ class Decklist
     /**
      * Remove votes
      *
-     * @param \Dtdb\UserBundle\Entity\User $votes
+     * @param \Dtdb\BuilderBundle\Entity\User $votes
      */
-    public function removeVote(\Dtdb\UserBundle\Entity\User $votes)
+    public function removeVote(\Dtdb\BuilderBundle\Entity\User $votes)
     {
         $this->votes->removeElement($votes);
     }

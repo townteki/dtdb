@@ -7,20 +7,20 @@ Dtdb\BuilderBundle\Entity\Deck:
             columns: [ dateupdate ]
     manyToOne:
         user:
-            targetEntity: Dtdb\UserBundle\Entity\User
+            targetEntity: Dtdb\BuilderBundle\Entity\User
             nullable: false
             inversedBy: decks
             joinColumn:
                 name: user_id
                 referencedColumnName: id
         outfit:
-            targetEntity: Dtdb\CardsBundle\Entity\Card
+            targetEntity: Dtdb\BuilderBundle\Entity\Card
             nullable: false
             joinColumn:
                 name: outfit_id
                 referencedColumnName: id
         lastPack:
-            targetEntity: Dtdb\CardsBundle\Entity\Pack
+            targetEntity: Dtdb\BuilderBundle\Entity\Pack
             nullable: false
             joinColumn:
                 name: last_pack_id

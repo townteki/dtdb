@@ -11,7 +11,7 @@ use Dtdb\BuilderBundle\Entity\Deckslot;
 use Dtdb\BuilderBundle\Entity\Decklist;
 use Dtdb\BuilderBundle\Entity\Decklistslot;
 use Dtdb\BuilderBundle\Entity\Comment;
-use Dtdb\UserBundle\Entity\User;
+use Dtdb\BuilderBundle\Entity\User;
 use \Michelf\Markdown;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -315,7 +315,7 @@ class SocialController extends Controller
         return $this->render('DtdbBuilderBundle:Decklist:decklists.html.twig',
                 array(
                         'pagetitle' => $pagetitle,
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'decklists' => $decklists,
                         'packs' => $packs,
                         'gangs' => $gangs,
@@ -455,7 +455,7 @@ class SocialController extends Controller
         return $this->render('DtdbBuilderBundle:Decklist:decklist.html.twig',
                 array(
                         'pagetitle' => $decklist['name'],
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'decklist' => $decklist,
                         'commenters' => $commenters,
                         'similar' => $similar_decklists,
@@ -585,7 +585,7 @@ class SocialController extends Controller
             }
             foreach($mentionned_usernames as $mentionned_username) {
                 /* @var $mentionned_user User */
-                $mentionned_user = $this->getDoctrine()->getRepository('DtdbUserBundle:User')->findOneBy(array('username' => $mentionned_username));
+                $mentionned_user = $this->getDoctrine()->getRepository('DtdbBuilderBundle:User')->findOneBy(array('username' => $mentionned_username));
                 if($mentionned_user && $mentionned_user->getNotifMention()) {
                     if(!isset($spool[$mentionned_user->getEmail()])) {
                         $spool[$mentionned_user->getEmail()] = 'DtdbBuilderBundle:Emails:newcomment_mentionned.html.twig';
@@ -979,8 +979,8 @@ class SocialController extends Controller
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine')->getManager();
 
-        /* @var $user \Dtdb\UserBundle\Entity\User */
-        $user = $em->getRepository('DtdbUserBundle:User')->find($user_id);
+        /* @var $user \Dtdb\BuilderBundle\Entity\User */
+        $user = $em->getRepository('DtdbBuilderBundle:User')->find($user_id);
         if (! $user)
             throw new NotFoundHttpException("No such user.");
 
@@ -1022,7 +1022,7 @@ class SocialController extends Controller
                 array(
                         'pagetitle' => $user->getUsername(),
                         'user' => $user,
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'decklists' => $decklists,
                         'url' => $request
                             ->getRequestUri(),
@@ -1050,7 +1050,7 @@ class SocialController extends Controller
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine')->getManager();
 
-        /* @var $user \Dtdb\UserBundle\Entity\User */
+        /* @var $user \Dtdb\BuilderBundle\Entity\User */
         $user = $this->getUser();
 
         $limit = 100;
@@ -1106,7 +1106,7 @@ class SocialController extends Controller
         return $this->render('DtdbBuilderBundle:Default:usercomments.html.twig',
                 array(
                         'user' => $user,
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'comments' => $comments,
                         'url' => $request
                             ->getRequestUri(),
@@ -1179,7 +1179,7 @@ class SocialController extends Controller
 
         return $this->render('DtdbBuilderBundle:Default:allcomments.html.twig',
                 array(
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'comments' => $comments,
                         'url' => $request
                             ->getRequestUri(),

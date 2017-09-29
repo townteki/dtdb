@@ -1,0 +1,28 @@
+Dtdb\BuilderBundle\Entity\Cycle:
+    type: entity
+    table: cycle
+    indexes:
+        code_index:
+            columns: [ code ]
+        number_index:
+            columns: [ number ]
+    oneToMany:
+        packs:
+            orderBy: { 'number': 'ASC' }
+            targetEntity: Pack
+            mappedBy: cycle
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        code:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255
+        number:
+            type: smallint
+    lifecycleCallbacks: {  }

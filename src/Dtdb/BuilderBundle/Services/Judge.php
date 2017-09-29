@@ -16,7 +16,7 @@ class Judge
 	/**
 	 * Decoupe un deckcontent pour son affichage par type
 	 *
-	 * @param \Dtdb\CardsBundle\Entity\Card $outfit
+	 * @param \Dtdb\BuilderBundle\Entity\Card $outfit
 	 */
 	public function classe($cards, $outfit)
 	{
@@ -25,7 +25,7 @@ class Judge
 		$classeur = array();
 		/* @var $slot \Dtdb\BuilderBundle\Entity\Deckslot */
 		foreach($cards as $elt) {
-			/* @var $card \Dtdb\CardsBundle\Entity\Card */
+			/* @var $card \Dtdb\BuilderBundle\Entity\Card */
 			$card = $elt['card'];
 			$qty = $elt['qty'];
 			$start = $elt['start'];

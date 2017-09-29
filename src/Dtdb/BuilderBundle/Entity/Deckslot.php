@@ -25,7 +25,7 @@ class Deckslot
     private $deck;
 
     /**
-     * @var Dtdb\CardsBundle\Entity\Card
+     * @var Dtdb\BuilderBundle\Entity\Card
      */
     private $card;
     
@@ -101,7 +101,7 @@ class Deckslot
     /**
      * Get card
      *
-     * @return \Dtdb\CardsBundle\Entity\Card
+     * @return \Dtdb\BuilderBundle\Entity\Card
      */
     public function getCard()
     {

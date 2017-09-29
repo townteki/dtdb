@@ -21,8 +21,6 @@ class AppKernel extends Kernel
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new Dtdb\BuilderBundle\DtdbBuilderBundle(),
-            new Dtdb\UserBundle\DtdbUserBundle(),
-            new Dtdb\CardsBundle\DtdbCardsBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle()
         );
 
@@ -39,16 +37,16 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
-    
+
     public function getCacheDir()
     {
     	return $this->rootDir.'/cache/'.$this->environment;
     }
-    
+
     public function getLogDir()
     {
     	return $this->rootDir.'/logs/'.$this->environment;
     }
 
-    
+
 }

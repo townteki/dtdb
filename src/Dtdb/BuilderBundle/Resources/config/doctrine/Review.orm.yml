@@ -6,20 +6,20 @@ Dtdb\BuilderBundle\Entity\Review:
             columns: [ card_id, user_id ]
     manyToOne:
         card:
-            targetEntity: Dtdb\CardsBundle\Entity\Card
+            targetEntity: Dtdb\BuilderBundle\Entity\Card
             inversedBy: reviews
             joinColumn:
                 name: card_id
                 referencedColumnName: id
         user:
-            targetEntity: Dtdb\UserBundle\Entity\User
+            targetEntity: Dtdb\BuilderBundle\Entity\User
             inversedBy: reviews
             joinColumn:
                 name: user_id
                 referencedColumnName: id
     manyToMany:
         votes:
-            targetEntity: Dtdb\UserBundle\Entity\User
+            targetEntity: Dtdb\BuilderBundle\Entity\User
             inversedBy: reviewvotes
             joinTable:
                 name: reviewvote

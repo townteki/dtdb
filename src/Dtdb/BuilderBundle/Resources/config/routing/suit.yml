@@ -1,0 +1,30 @@
+admin_suit:
+    path:     /
+    defaults: { _controller: "DtdbBuilderBundle:Suit:index" }
+
+admin_suit_show:
+    path:     /{id}/show
+    defaults: { _controller: "DtdbBuilderBundle:Suit:show" }
+
+admin_suit_new:
+    path:     /new
+    defaults: { _controller: "DtdbBuilderBundle:Suit:new" }
+
+admin_suit_create:
+    path:     /create
+    defaults: { _controller: "DtdbBuilderBundle:Suit:create" }
+    requirements: { _method: post }
+
+admin_suit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DtdbBuilderBundle:Suit:edit" }
+
+admin_suit_update:
+    path:     /{id}/update
+    defaults: { _controller: "DtdbBuilderBundle:Suit:update" }
+    requirements: { _method: post|put }
+
+admin_suit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DtdbBuilderBundle:Suit:delete" }
+    requirements: { _method: post|delete }

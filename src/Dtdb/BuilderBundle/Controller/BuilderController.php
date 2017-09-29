@@ -6,7 +6,7 @@ use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
 use Dtdb\BuilderBundle\Entity\Deck;
 use Dtdb\BuilderBundle\Entity\Deckslot;
-use Dtdb\CardsBundle\Entity\Card;
+use Dtdb\BuilderBundle\Entity\Card;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Dtdb\BuilderBundle\Entity\Deckchange;
@@ -25,11 +25,11 @@ class BuilderController extends Controller
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine')->getManager();
         
-        $type = $em->getRepository('DtdbCardsBundle:Type')->findOneBy(array(
+        $type = $em->getRepository('DtdbBuilderBundle:Type')->findOneBy(array(
                 "name" => "Outfit"
         ));
         
-        $identities = $em->getRepository('DtdbCardsBundle:Card')->findBy(array(
+        $identities = $em->getRepository('DtdbBuilderBundle:Card')->findBy(array(
                 "type" => $type
         ), array(
                 "gang" => "ASC",
@@ -39,7 +39,7 @@ class BuilderController extends Controller
         return $this->render('DtdbBuilderBundle:Builder:initbuild.html.twig',
                 array(
                         'pagetitle' => "New deck",
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         "identities" => array_filter($identities,
                                 function  ($iden)
                                 {
@@ -60,7 +60,7 @@ class BuilderController extends Controller
         $em = $this->get('doctrine')->getManager();
         
         /* @var $card Card */
-        $card = $em->getRepository('DtdbCardsBundle:Card')->findOneBy(array(
+        $card = $em->getRepository('DtdbBuilderBundle:Card')->findOneBy(array(
                 "code" => $card_code
         ));
         if (! $card)
@@ -75,7 +75,7 @@ class BuilderController extends Controller
         return $this->render('DtdbBuilderBundle:Builder:deck.html.twig',
                 array(
                         'pagetitle' => "Deckbuilder",
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'deck' => array(
                                 "slots" => $arr,
                                 "name" => "New Deck",
@@ -99,7 +99,7 @@ class BuilderController extends Controller
         return $this->render('DtdbBuilderBundle:Builder:directimport.html.twig',
                 array(
                         'pagetitle' => "Import a deck",
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig')
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig')
                 ), $response);
     
     }
@@ -163,7 +163,7 @@ class BuilderController extends Controller
                     } else {
                         continue;
                     }
-            $card = $em->getRepository('DtdbCardsBundle:Card')->findOneBy(array(
+            $card = $em->getRepository('DtdbBuilderBundle:Card')->findOneBy(array(
                     'title' => $name
             ));
             if ($card) {
@@ -191,7 +191,7 @@ class BuilderController extends Controller
         $content = array();
         foreach ($cardcrawler as $domElement) {
             $quantity = intval($domElement->getAttribute('qty'));
-            $card = $em->getRepository('DtdbCardsBundle:Card')->findOneBy(array(
+            $card = $em->getRepository('DtdbBuilderBundle:Card')->findOneBy(array(
                     'octgnid' => $domElement->getAttribute('id')
             ));
             if ($card) {
@@ -570,7 +570,7 @@ class BuilderController extends Controller
         return $this->render('DtdbBuilderBundle:Builder:deck.html.twig',
                 array(
                         'pagetitle' => "Deckbuilder",
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'deck' => $deck,
                         'published_decklists' => $published_decklists
                 ));
@@ -644,7 +644,7 @@ class BuilderController extends Controller
         return $this->render('DtdbBuilderBundle:Builder:deckview.html.twig',
                 array(
                         'pagetitle' => "Deckbuilder",
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'deck' => $deck,
                         'published_decklists' => $published_decklists,
                 		'tournaments' => $tournaments
@@ -654,7 +654,7 @@ class BuilderController extends Controller
 
     public function listAction ()
     {
-        /* @var $user \Dtdb\UserBundle\Entity\User */
+        /* @var $user \Dtdb\BuilderBundle\Entity\User */
         $user = $this->getUser();
         $tournaments = $this->getDoctrine()->getConnection()->executeQuery(
                 "SELECT
@@ -665,7 +665,7 @@ class BuilderController extends Controller
         return $this->render('DtdbBuilderBundle:Builder:decks.html.twig',
                 array(
                         'pagetitle' => "My Decks",
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'decks' => $this->get('decks')
                             ->getByUser($user),
                         'nbmax' => $user->getMaxNbDecks(),
@@ -724,7 +724,7 @@ class BuilderController extends Controller
     
     public function downloadallAction()
     {
-        /* @var $user \Dtdb\UserBundle\Entity\User */
+        /* @var $user \Dtdb\BuilderBundle\Entity\User */
         $user = $this->getUser();
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine')->getManager();
@@ -741,7 +741,7 @@ class BuilderController extends Controller
                 $content = array();
                 foreach($deck['cards'] as $slot)
                 {
-                    $card = $em->getRepository('DtdbCardsBundle:Card')->findOneBy(array('code' => $slot['card_code']));
+                    $card = $em->getRepository('DtdbBuilderBundle:Card')->findOneBy(array('code' => $slot['card_code']));
                     if(!$card) continue;
                     $cardtitle = $card->getTitle();
                     $packname = $card->getPack()->getName();

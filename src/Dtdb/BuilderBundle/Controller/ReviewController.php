@@ -4,7 +4,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpFoundation\Response;
 use Dtdb\BuilderBundle\Entity\Review;
-use Dtdb\CardsBundle\Entity\Card;
+use Dtdb\BuilderBundle\Entity\Card;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,7 +19,7 @@ class ReviewController extends Controller
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine')->getManager();
         
-        /* @var $user \Dtdb\UserBundle\Entity\User */
+        /* @var $user \Dtdb\BuilderBundle\Entity\User */
         $user = $this->getUser();
         if(!$user) {
             throw new UnauthorizedHttpException();
@@ -32,7 +32,7 @@ class ReviewController extends Controller
         
         $card_id = filter_var($request->get('card_id'), FILTER_SANITIZE_NUMBER_INT);
         /* @var $card Card */
-        $card = $em->getRepository('DtdbCardsBundle:Card')->find($card_id);
+        $card = $em->getRepository('DtdbBuilderBundle:Card')->find($card_id);
         if(!$card) {
             throw new BadRequestHttpException();
         }
@@ -74,7 +74,7 @@ class ReviewController extends Controller
         /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->get('doctrine')->getManager();
     
-        /* @var $user \Dtdb\UserBundle\Entity\User */
+        /* @var $user \Dtdb\BuilderBundle\Entity\User */
         $user = $this->getUser();
         if(!$user) {
             throw new UnauthorizedHttpException();
@@ -220,7 +220,7 @@ class ReviewController extends Controller
         $maxcount = $dbh->executeQuery("SELECT FOUND_ROWS()")->fetch(\PDO::FETCH_NUM)[0];
         
         foreach($reviews as $i => $review) {
-            $card = $em->getRepository('DtdbCardsBundle:Card')->find($review['card_id']);
+            $card = $em->getRepository('DtdbBuilderBundle:Card')->find($review['card_id']);
             $cardinfo = $this->get('cards_data')->getCardInfo($card, false);
 			$reviews[$i]['card'] = $cardinfo;
         }
@@ -251,7 +251,7 @@ class ReviewController extends Controller
         return $this->render('DtdbBuilderBundle:Reviews:reviews.html.twig',
                 array(
                         'pagetitle' => $pagetitle,
-                        'locales' => $this->renderView('DtdbCardsBundle:Default:langs.html.twig'),
+                        'locales' => $this->renderView('DtdbBuilderBundle:Default:langs.html.twig'),
                         'reviews' => $reviews,
                         'url' => $this->getRequest()
                         ->getRequestUri(),

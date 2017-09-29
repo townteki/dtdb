@@ -1,0 +1,30 @@
+admin_rulings:
+    pattern:  /
+    defaults: { _controller: "DtdbBuilderBundle:Rulings:index" }
+
+admin_rulings_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "DtdbBuilderBundle:Rulings:show" }
+
+admin_rulings_new:
+    pattern:  /new
+    defaults: { _controller: "DtdbBuilderBundle:Rulings:new" }
+
+admin_rulings_create:
+    pattern:  /create
+    defaults: { _controller: "DtdbBuilderBundle:Rulings:create" }
+    requirements: { _method: post }
+
+admin_rulings_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "DtdbBuilderBundle:Rulings:edit" }
+
+admin_rulings_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "DtdbBuilderBundle:Rulings:update" }
+    requirements: { _method: post }
+
+admin_rulings_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "DtdbBuilderBundle:Rulings:delete" }
+    requirements: { _method: post }
