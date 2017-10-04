@@ -13,8 +13,12 @@
     <card qty="{{ card.qty }}" id="{{ card.id }}">{{ card.name }}</card>
 {% endfor %}
   </section>
+{% if legend %}
   <section name="Legend" shared="False">
     <card qty="1" id="{{ legend.id }}">{{ legend.name }}</card>
   </section>
+{% else %}
+  <section name="Legend" shared="False" />
+{% endif %}
   <notes><![CDATA[{{ description }}]]></notes>
 </deck>
