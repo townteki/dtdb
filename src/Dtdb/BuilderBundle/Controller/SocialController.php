@@ -804,10 +804,18 @@ class SocialController extends Controller
         $rd = array();
         $start = array();
         $outfit = null;
+        $legend = null;
         /** @var $slot Decklistslot */
         foreach ($decklist->getSlots() as $slot) {
             if ($slot->getCard()->getType()->getName() == "Outfit") {
                 $outfit = array(
+                        "id" => $slot->getCard()->getOctgnid(),
+                        "name" => $slot->getCard()->getTitle()
+                );
+            } else if($slot->getCard()
+                ->getType()
+                ->getName() == "Legend") {
+                $legend = array(
                         "id" => $slot->getCard()->getOctgnid(),
                         "name" => $slot->getCard()->getTitle()
                 );
@@ -838,18 +846,19 @@ class SocialController extends Controller
         if (empty($outfit)) {
             return new Response('no outfit found');
         }
-        return $this->octgnexport("$name.o8d", $outfit, $rd, $start, $decklist->getRawdescription(), $response);
+        return $this->octgnexport("$name.o8d", $outfit, $legend, $rd, $start, $decklist->getRawdescription(), $response);
 
     }
 
     /*
 	 * does the "downloadable file" part of the export
 	 */
-    public function octgnexport ($filename, $outfit, $rd, $start, $description, $response)
+    public function octgnexport ($filename, $outfit, $legend, $rd, $start, $description, $response)
     {
 
         $content = $this->renderView('DtdbBuilderBundle::octgn.xml.twig', array(
                 "outfit" => $outfit,
+                "legend" => $legend,
                 "start" => $start,
                 "deck" => $rd,
                 "description" => strip_tags($description)
