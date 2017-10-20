@@ -469,11 +469,11 @@ class CardsData
 
 		if($locale != 'en' && file_exists($this->dir . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $card->getCode() . ".jpg"))
 		{
-			$cardinfo['imagesrc'] = "/web/bundles/dtdbcards/images/cards/$locale/". $card->getCode() . ".jpg";
+			$cardinfo['imagesrc'] = "/web/bundles/dtdbbuilder/images/cards/$locale/". $card->getCode() . ".jpg";
 		}
 		else if(file_exists($this->dir . DIRECTORY_SEPARATOR . "en" . DIRECTORY_SEPARATOR . $card->getCode() . ".jpg"))
 		{
-		    $cardinfo['imagesrc'] = "/web/bundles/dtdbcards/images/cards/en/". $card->getCode() . ".jpg";
+		    $cardinfo['imagesrc'] = "/web/bundles/dtdbbuilder/images/cards/en/". $card->getCode() . ".jpg";
 		}
 
 		if($api) {
