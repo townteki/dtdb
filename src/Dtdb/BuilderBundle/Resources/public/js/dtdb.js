@@ -264,7 +264,7 @@ function update_deck(options) {
 			if(row.icon) {
 				$('<span>').addClass(DisplaySort+'-icon').html('&'+row.icon+';').prependTo(item);
 			} else if(DisplaySort == "gang") {
-				var imgsrc = (row.id === "drifters") ? "" : '<img src="'
+				var imgsrc = (row.id === "neutral" || row.id === "drifters" || row.id === "Joker") ? "" : '<img src="'
 					+ Url_GangImage.replace('xxx', row.id)
 					+ '.png">';
 				$('<span>').addClass(DisplaySort+'-icon').html(imgsrc).prependTo(item);
