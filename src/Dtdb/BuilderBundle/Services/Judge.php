@@ -12,7 +12,7 @@ class Judge
 	public function __construct($doctrine) {
 		$this->doctrine = $doctrine;
 	}
-	
+
 	/**
 	 * Decoupe un deckcontent pour son affichage par type
 	 *
@@ -21,7 +21,7 @@ class Judge
 	public function classe($cards, $outfit)
 	{
 		$analyse = $this->analyse($cards);
-		
+
 		$classeur = array();
 		/* @var $slot \Dtdb\BuilderBundle\Entity\Deckslot */
 		foreach($cards as $elt) {
@@ -32,7 +32,7 @@ class Judge
 			$type = $card->getType()->getName();
 			if($type == "Outfit") continue;
 			$elt['gang'] = str_replace(' ', '-', mb_strtolower(($card->getGang()?$card->getGang()->getName():'')));
-			
+
 			if(!isset($classeur[$type])) $classeur[$type] = array("qty" => 0, "slots" => array(), "start" => 0);
 			$classeur[$type]["slots"][] = $elt;
 			$classeur[$type]["qty"] += $qty;
@@ -44,7 +44,7 @@ class Judge
 		}
 		return $classeur;
 	}
-	
+
     /**
      * Analyse un deckcontent et renvoie un code indiquant le pbl du deck
      *
@@ -80,7 +80,7 @@ class Judge
 				$deckSize += $qty;
 				if($start != 0){
 					$startGR -= $card->getCost();
-					if($card->getGang() != null) 
+					if($card->getGang() != null)
 						$gangStarting[$card->getGang()->getName()] = $card->getGang();
 				}
 				if($card->getType()->getName() == "Dude"){
@@ -107,33 +107,37 @@ class Judge
 			    }
 			}
 		}
-		
+
 		if(!isset($outfit)) {
 			return 'outfit';
 		}
-		
+
+		if($outfit->getTitle() == '108 Worldly Desires') {
+			return 'banned';
+		}
+
 		if($nb_jokers > 2) {
 		    return 'jokers';
 		}
-		
+
 		foreach($deck as $card) {
 			$qty = $cards[$card->getCode()]['qty'];
-			
+
 			if($qty > 4) {
 			    return 'copies';
 			}
 		}
 		foreach($dudes as $legalName => $qty){
 			if($qty > 4){
-			    return 'copies';				
+			    return 'copies';
 			}
 		}
 		foreach($gangStarting as $gang){
 			if($gang != $outfit->getGang()){
-			    return 'startingposse';				
+			    return 'startingposse';
 			}
 		}
-		
+
 		$nb = 0;
 		foreach($deckComposition as $suit => $suitComposition) {
 		    foreach($suitComposition as $rank => $qty) {
@@ -151,15 +155,15 @@ class Judge
 		}
 		foreach($startDudes as $legalName => $value){
 			if($value == false){
-			    return 'startingposse';				
+			    return 'startingposse';
 			}
 		}
-		
+
 		return array(
 			'deckSize' => $deckSize
 		);
 	}
-	
+
 	public function problem($problem)
 	{
 		switch($problem) {
@@ -169,7 +173,8 @@ class Judge
 			case 'values': return "The deck has more than 4 cards with a given value."; break;
 			case 'jokers': return "The deck has more than 2 Jokers."; break;
 			case 'startingposse': return "Illegal starting posse."; break;
+			case 'banned': return "Deck contains cards banned from competitive play."; break;
 		}
 	}
-	
+
 }
