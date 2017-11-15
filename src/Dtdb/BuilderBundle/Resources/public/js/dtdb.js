@@ -394,8 +394,13 @@ function check_composition() {
 		$('#deckcomposition').html("Must have no more than 1 legend.").addClass('text-danger');
 	} else if(number_of_jokers > 2) {
 		$('#deckcomposition').html("Must have no more than 2 jokers.").addClass('text-danger');
+<<<<<<< Updated upstream
 	} else if(outfits.first().code == "11001") {
 		$('#deckcomposition').html("108 Worldly Desires is Banned from Competitive Play.").addClass('text-danger');
+=======
+	} else if(outfit.code == "11001") {
+		$('#deckcomposition'.html("108 Worldly Desires is Banned in Official Play").addClass('text-danger');
+>>>>>>> Stashed changes
 	} else if(!legal) {
 		$('#deckcomposition').html("Too many dudes with same name: "+DudeLegalName).addClass('text-danger');
 	} else {
