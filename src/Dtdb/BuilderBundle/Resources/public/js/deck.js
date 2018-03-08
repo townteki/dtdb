@@ -96,10 +96,10 @@ DTDB.data_loaded.add(function() {
 					return 1
 				}
 				if(b === "drifter"){
-					return -1					
+					return -1
 				}
 				if(a === "drifter"){
-					return 1					
+					return 1
 				}
 				return (a < b ? -1 : (a > b ? 1 : 0));
 			}), function(index, record) {
@@ -156,7 +156,7 @@ DTDB.data_loaded.add(function() {
 		);
 	});
 	$('#rank').empty();
-	
+
 	var label = $('<label class="btn btn-default btn-sm" data-code="null" title="-"><input type="checkbox" name="null">-</label>');
 	if(Modernizr.touch) {
 		label.addClass('btn-block');
@@ -164,7 +164,7 @@ DTDB.data_loaded.add(function() {
 		label.tooltip({container: 'body'});
 	}
 	$('#rank').append(label);
-	
+
 	RankNames.forEach(function(element, index, array){
 		label = $('<label class="btn btn-default btn-sm" data-code="' + (index+1)
 				+ '" title="'+element+'"><input type="checkbox" name="' + (index+1)
@@ -177,7 +177,7 @@ DTDB.data_loaded.add(function() {
 			label.tooltip({container: 'body'});
 		}
 		$('#rank').append(label);
-		
+
 	});
 	$('#rank').button();
 	/*
@@ -227,7 +227,7 @@ DTDB.data_loaded.add(function() {
 	    });
 		cb(matches);
 	}
-	
+
 	$('#filter-text').typeahead({
 		  hint: true,
 		  highlight: true,
@@ -237,7 +237,7 @@ DTDB.data_loaded.add(function() {
 		displayKey: 'value',
 		source: findMatches
 	});
-	
+
 	$('html,body').css('height', 'auto');
 	$('.container').show();
 });
@@ -265,7 +265,7 @@ $(function() {
 
 	$('#filter-text').on('typeahead:selected typeahead:autocompleted',
 			DTDB.card_modal.typeahead);
-	
+
 	$(document).on('hidden.bs.modal', function (event) {
 		if(InputByTitle) {
 			setTimeout(function () {
@@ -273,7 +273,7 @@ $(function() {
 			}, 100);
 		}
 	});
-	
+
 	$('#pack_code,.search-buttons').on({
 		change : handle_input_change,
 		click : function(event) {
@@ -478,7 +478,7 @@ $(function() {
 								"<li>e: expansion name</li>" +
 								"<li>t: card type</li>" +
 								"<li>k: keyword</li>" +
-								"<li>g: gang (l, s, f ,m, -)</li>" +
+								"<li>g: gang (r, e, l, s, f, m, -)</li>" +
 								"<li>s: bullet type (stud, draw, bonus)</li>" +
 								"<li>r: cost</li>" +
 								"<li>v: value</li>" +
@@ -489,14 +489,15 @@ $(function() {
 								"<li>c: control</li>" +
 								"<li>w: wealth, starting stash</li>" +
 								"<li>f: flavor text</li>" +
-								"<li>a: artist name</li></ul>" +
+								"<li>a: artist name</li>" +
+								"<li>(e.g. k:\"mad scientist 2\" i>0)</li></ul>" +
 								"<h5>Operator</h5>" +
 								"<ul style=\"text-align:left\"><li>: &ndash; equals/includes</li>" +
 								"<li>! &ndash; different from</li>" +
 								"<li>< &ndash; less than</li>" +
 								"<li>> &ndash; more than</li></ul>"
 					});
-	
+
 	var converter = new Markdown.Converter();
 	$('#description').on(
 			'keyup',
@@ -527,12 +528,12 @@ $(function() {
 						index : 1
 					}
 			]);
-	
+
 	$('#tbody-history').on('click', 'a[role=button]', load_snapshot);
 	$.each(History, function (index, snapshot) {
 		add_snapshot(snapshot);
 	});
-	
+
 	$('#menu-sort').on({
 		change : function(event) {
 			if ($(this).attr('id').match(/btn-sort-(\w+)/)) {
@@ -541,7 +542,7 @@ $(function() {
 			}
 		}
 	}, 'a');
-	
+
 	setInterval(autosave_interval, 1000);
 });
 function autosave_interval() {
@@ -558,32 +559,32 @@ function autosave_interval() {
 function add_snapshot(snapshot) {
 	snapshot.datecreation = snapshot.datecreation ? moment(snapshot.datecreation) : moment();
 	Snapshots.push(snapshot);
-	
+
 	var list = [];
 	if(snapshot.variation) {
 		$.each(snapshot.variation[0], function (code, qty) {
 			var card = DTDB.data.cards({code:code}).first();
-			if(!card) return; 
+			if(!card) return;
 			list.push('+'+qty+' '+'<a href="'+Routing.generate('cards_zoom',{card_code:code})+'" class="card" data-index="'+code+'">'+card.title+'</a>');
 		});
 		$.each(snapshot.variation[1], function (code, qty) {
 			var card = DTDB.data.cards({code:code}).first();
-			if(!card) return; 
+			if(!card) return;
 			list.push('&minus;'+qty+' '+'<a href="'+Routing.generate('cards_zoom',{card_code:code})+'" class="card" data-index="'+code+'">'+card.title+'</a>');
 		});
 	} else {
 		list.push("First version");
 	}
-	
+
 	$('#tbody-history').prepend('<tr'+(snapshot.saved ? '' : ' class="warning"')+'><td>'+snapshot.datecreation.calendar()+(snapshot.saved ? '' : ' (unsaved)')+'</td><td>'+list.join('<br>')+'</td><td><a role="button" href="#" data-index="'+(Snapshots.length-1)+'"">Revert</a></td></tr>');
-	
+
 	Autosave_timer = -1; // start timer
 }
 function load_snapshot(event) {
 	var index = $(this).data('index');
 	var snapshot = Snapshots[index];
 	if(!snapshot) return;
-	
+
 	DTDB.data.cards().each(function(record) {
 		var indeck = 0;
 		if (snapshot.content[record.code]) {
@@ -791,7 +792,7 @@ function handle_quantity_change(event) {
 	DTDB.suggestions.compute();
 	if (InputByTitle)
 		$('#filter-text').typeahead('setQuery', '').focus().blur();
-	
+
 	Deck_changed_since_last_autosave = true;
 }
 
@@ -893,7 +894,7 @@ function is_card_usable(record) {
 function update_filtered() {
 	$('#collection-table').empty();
 	$('#collection-grid').empty();
-	
+
 	var sortType = {
 			'rank': ['asec', 'desc'],
 			'suit': ['asec', 'desc'],
