@@ -372,6 +372,7 @@ function check_composition() {
 	var startingposse = DTDB.data.cards({indeck:{'gt':0},start:{'gt':0}});
 	var outfits = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'outfit'}});
 	var legends = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'legend'}});
+	var showboating = DTDB.data.cards({indeck:{'gt':0},code:{'is':'17020'}});
 	var number_of_outfits = outfits.select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
 	var number_of_legends = legends.select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
 	var number_of_jokers = DTDB.data.cards({indeck:{'gt':0},type_code:{'is':'joker'}}).select("indeck").reduce(function (previousValue, currentValue) { return previousValue+currentValue; }, 0);
@@ -394,13 +395,10 @@ function check_composition() {
 		$('#deckcomposition').html("Must have no more than 1 legend.").addClass('text-danger');
 	} else if(number_of_jokers > 2) {
 		$('#deckcomposition').html("Must have no more than 2 jokers.").addClass('text-danger');
-<<<<<<< Updated upstream
 	} else if(outfits.first().code == "11001") {
 		$('#deckcomposition').html("108 Worldly Desires is Banned from Competitive Play.").addClass('text-danger');
-=======
-	} else if(outfit.code == "11001") {
-		$('#deckcomposition'.html("108 Worldly Desires is Banned in Official Play").addClass('text-danger');
->>>>>>> Stashed changes
+	} else if(showboating.first().code == "17020") {
+		$('#deckcomposition').html("Showboating is Banned from Competitive Play.").addClass('text-danger');
 	} else if(!legal) {
 		$('#deckcomposition').html("Too many dudes with same name: "+DudeLegalName).addClass('text-danger');
 	} else {

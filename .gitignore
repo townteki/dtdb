@@ -13,3 +13,4 @@ src/Dtdb/CardsBundle/Resources/public/images/cards
 .project
 .DS_Store
 .htaccess
+.tags
