@@ -99,28 +99,28 @@ function getDisplayDescriptions(sort) {
             ],
             'gang': [
                 [{
-                    id: 'eaglewardens',
-                    label: 'Eagle Wardens',
+                    id: '1stpeoples',
+                    label: 'First Peoples',
                     icon: ''
                 },{
-                    id: 'fourthring',
-                    label: 'The Fourth Ring',
+                    id: 'fearmongers',
+                    label: 'Fearmongers',
                     icon: ''
                 },{
                     id: 'lawdogs',
                     label: 'Law Dogs',
                     icon: ''
                 },{
-                    id: 'morganco',
-                    label: 'Morgan Cattle Co.',
+                    id: 'entrepreneurs',
+                    label: 'Entrepreneurs',
                     icon: ''
                 },{
-                    id: 'righteousbandits',
-                    label: 'The 108 Righteous Bandits',
+                    id: 'anarchists',
+                    label: 'Anarchists',
                     icon: ''
                 },{
-                    id: 'sloanegang',
-                    label: 'The Sloane Gang',
+                    id: 'outlaws',
+                    label: 'Outlaws',
                     icon: ''
                 },{
                     id: 'drifters',
