@@ -74,12 +74,12 @@ class CardsData
 	{
 		$i=0;
 		$gang_codes = array(
-			'e' => "Eagle Wardens",
-			'f' => "The Fourth Ring",
+			'1' => "First Peoples",
+			'f' => "Fearmongers",
 			'l' => "Law Dogs",
-			'm' => "Morgan Cattle Co.",
-			'r' => "The 108 Righteous Bandits",
-			's' => "The Sloane Gang"
+			'e' => "Entrepreneurs",
+			'a' => "Anarchists",
+			'o' => "Outlaws"
 		);
 
 		// construction de la requete sql
