@@ -533,8 +533,8 @@ var GangColors = {
 	"weyland-consortium": "#006400"
 };
 
-var types = ["outfit", "dude", "deed", "goods", "spell", "action", "legend"];
-var typesstr = ["Outfit", "Dude", "Deed", "Goods", "Spell", "Action", "Legend"];
+var types = ["outfit", "dude", "deed", "goods", "spell", "action", "legend", "joker"];
+var typesstr = ["Outfit", "Dude", "Deed", "Goods", "Spell", "Action", "Legend", "Joker"];
 
 function build_bbcode() {
 	var deck = process_deck_by_type(SelectedDeck);
