@@ -235,8 +235,11 @@ DTDB.data_loaded.add(function() {
 	function findMatches(q, cb) {
 		if(q.match(/^\w:/)) return;
 		var matches = DTDB.data.cards({title: {likenocase: q}}).map(function (record) {
-	    	return { value: record.title };
-	    });
+			return {
+				value: record.title,
+				code: record.code
+			};
+		});
 		cb(matches);
 	}
 
