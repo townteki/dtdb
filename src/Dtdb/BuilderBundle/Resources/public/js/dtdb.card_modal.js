@@ -18,8 +18,7 @@ DTDB.card_modal = {};
 	};
 
 	card_modal.typeahead = function (event, data) {
-		var card = DTDB.data.cards({title:data.value}).first();
-		fill_modal(card.code);
+		fill_modal(data.code);
 		$('#cardModal').modal('show');
 		InputByTitle = true;
 	};
