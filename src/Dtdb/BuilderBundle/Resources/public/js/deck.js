@@ -1,6 +1,7 @@
 var InputByTitle = false;
 var DisplayColumns = 1;
 var BaseSets = 2;
+var WweSets = 2;
 var Buttons_Behavior = 'cumulative';
 var Snapshots = []; // deck contents autosaved
 var Autosave_timer = null;
@@ -28,6 +29,15 @@ DTDB.data_loaded.add(function() {
 		BaseSets = localStorageBaseSets;
 	}
 	$('input[name=base-set-' + BaseSets + ']').prop('checked', true);
+
+	var localStorageWweSets;
+	if (localStorage
+			&& (localStorageWweSets = parseInt(localStorage
+					.getItem('wwe_sets'), 10)) !== null
+			&& [ 1, 2 ].indexOf(localStorageWweSets) > -1) {
+		WweSets = localStorageWweSets;
+	}
+	$('input[name=weird-west-' + WweSets + ']').prop('checked', true);
 
 	var localStorageSuggestions;
 	if (localStorage
@@ -74,6 +84,8 @@ DTDB.data_loaded.add(function() {
 		else
 			if (record.pack_code == 'DTR')
 				max_qty = Math.min(record.quantity * BaseSets, 4);
+			else if (record.pack_code == 'DT2')
+				max_qty = Math.min(record.quantity * WweSets, 4);
 			else
 				max_qty = record.quantity;
 		DTDB.data.cards(record.___id).update({
@@ -388,22 +400,40 @@ $(function() {
 	$('input[name=base-set-1]').on({
 		change : function(event) {
 			$('input[name=base-set-2]').prop('checked', false);
-			$('input[name=base-set-3]').prop('checked', false);
 			BaseSets = 1;
 			if (localStorage)
 				localStorage.setItem('base_sets', BaseSets);
-			update_base_sets();
+			update_base_sets('DTR');
 			refresh_collection();
 		}
 	});
 	$('input[name=base-set-2]').on({
 		change : function(event) {
 			$('input[name=base-set-1]').prop('checked', false);
-			$('input[name=base-set-3]').prop('checked', false);
 			BaseSets = 2;
 			if (localStorage)
 				localStorage.setItem('base_sets', BaseSets);
-			update_base_sets();
+			update_base_sets('DTR');
+			refresh_collection();
+		}
+	});
+	$('input[name=weird-west-1]').on({
+		change : function(event) {
+			$('input[name=weird-west-2]').prop('checked', false);
+			WweSets = 1;
+			if (localStorage)
+				localStorage.setItem('wwe_sets', WweSets);
+			update_base_sets('DT2');
+			refresh_collection();
+		}
+	});
+	$('input[name=weird-west-2]').on({
+		change : function(event) {
+			$('input[name=weird-west-1]').prop('checked', false);
+			WweSets = 2;
+			if (localStorage)
+				localStorage.setItem('wwe_sets', WweSets);
+			update_base_sets('DT2');
 			refresh_collection();
 		}
 	});
@@ -796,12 +826,13 @@ function handle_quantity_change(event) {
 	Deck_changed_since_last_autosave = true;
 }
 
-function update_base_sets() {
+function update_base_sets(pack_code) {
 	CardDivs = [ null, {}, {}, {} ];
 	DTDB.data.cards({
-		pack_code : 'DTR'
+		pack_code : pack_code
 	}).each(function(record) {
-		var max_qty = Math.min(record.quantity * BaseSets, 4);
+		var quantity = pack_code === 'DTR' ? record.quantity * BaseSets : record.quantity * WweSets;
+		var max_qty = Math.min(quantity, 4);
 		if (record.type_code == "outfit" || record.limited)
 			max_qty = 1;
 		DTDB.data.cards(record.___id).update({
