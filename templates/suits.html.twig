@@ -1,0 +1,28 @@
+{% macro display_card_face(rank, suit) %}
+    <span class="card-face card-face-{{ suit }}">
+        {% if rank %}
+            <span class="card-rank rank-{{ rank }}">
+                {% if rank == 1 %}
+                    A
+                {% else %}
+                    {% if rank == 11 %}
+                        J
+                    {% else %}
+                        {% if rank == 12 %}
+                            Q
+                        {% else %}
+                            {% if rank == 13 %}
+                                K
+                            {% else %}
+                                {{ rank }}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </span>
+        {% endif %}
+        {% if suit %}
+            <span class="card-suit suit-{{ suit }}"></span>
+        {% endif %}
+    </span>
+{% endmacro %}

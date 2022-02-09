@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <script type="text/javascript">
+        $(function () {
+            $('.list-group').on({
+                mouseenter: function (event) {
+                    var card_code = $(this).data('code');
+                    card_code = String(card_code);
+                    var card = DTDB.data.cards({code: card_code}).first();
+                    $('#cardimg').prop('src', card.imagesrc);
+                }
+            }, 'a');
+        });
+    </script>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading"><b>Choose your outfit</b></div>
+                    <!-- List group -->
+                    <div class="list-group">
+                        {% for outfit in identities %}
+                            <a href="{{ path('deck_initbuild', {card_code:outfit.code}) }}" class="list-group-item"
+                               data-code="{{ outfit.code }}">
+                                <span class="icon icon-{{ outfit.gang.code }} {{ outfit.gang.code }}"></span>
+                                <span>{{ outfit.title(app.request.locale) }}</span> <span
+                                        class="small">({{ outfit.pack.name }})</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <img src="" class="img-responsive" id="cardimg">
+            </div>
+        </div>
+    </div>
+{% endblock %}

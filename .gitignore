@@ -1,16 +1,37 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> dtdb
+# ignore routing and translation files for the frontend
+/public/js/fos_js_routes.js
+/public/js/translations/
+
+# Symfony v2 related
+# Todo: remove after upgrade to SF v4.
 web/bundles/
-app/bootstrap.php.cache
-app/cache/*
-app/config/parameters.yml
-app/logs/*
-build/
-vendor/
-bin/
-composer.phar
-src/Dtdb/CardsBundle/Resources/public/images/cards
+
+# workspace gunk, ignore
 .settings/
 .buildpath
 .project
 .DS_Store
-.htaccess
 .tags
+###< dtdb

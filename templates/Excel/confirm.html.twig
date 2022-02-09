@@ -1,0 +1,21 @@
+{% autoescape false %}
+    <h3>{{ locale }}</h3>
+    <table style="width:100%;table-layout:fixed;border-collapse:separate;cell-spacing:1px">
+        {% for card in cards %}
+            <tr{% if card.warning %} style="background:red"{% endif %}>
+                <td>{{ card.code }}</td>
+                <td>{{ card.oldtitle }}</td>
+                <td>{{ card.title }}</td>
+                <td>{{ card.oldkeywords }}</td>
+                <td>{{ card.keywords }}</td>
+                <td>{{ card.oldtext|nl2br }}</td>
+                <td>{{ card.text|nl2br }}</td>
+                <td>{{ card.oldflavor }}</td>
+                <td>{{ card.flavor }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <form action="{{ path('excel_confirm') }}">
+        <input type="submit" value="Validate"/>
+    </form>
+{% endautoescape %}

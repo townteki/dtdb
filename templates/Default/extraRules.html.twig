@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title %}Totem & Kung-Fu{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>{{ block('title') }}</h1>
+        <article class="rules">
+            <h3 id="totem">Totem</h3>
+            <p>Totem is a new keyword found on Spirits, representing the charms and fetishes used by Shamans to focus
+                their tribal spirits and ancestors at a chosen site.</p>
+            <p>Unlike a normal Spirit, when a Totem enters play it must be attached to a location you control, at which
+                you have an unbooted Shaman. Some Totems may have further restrictions on the locations to which they
+                can be attached, such as only to deeds, or only to your home.</p>
+            <p>Any Shaman at the same location may use a totem, regardless of the totem's controller. A Shaman uses such
+                a Totem in exactly the same way (and with the same clauses, costs or restrictions) as they would a
+                Spirit attached to them.</p>
+            <h3 id="kungfu">Kung-Fu</h3>
+            <p>Kung Fu is a new keyword found on dudes which represents their training in the martial arts.</p>
+            <p>A dude with Kung Fu will have a rating (typically between 0 and 4) associated with it which is added to
+                that dude's value while he is in play. Having a Kung Fu rating also allows a dude to perform Kung Fu
+                Tests and utilise Techniques as described below.</p>
+            <p>When chaining techniques into a Combo, the dude's Kung Fu rating determines the maximum number of
+                additional techniques that can be chained, beyond the initial technique. Although Kung Fu may at first
+                seem similar to skills such as Huckster and Blessed, it is not considered a skill and is not affected by
+                cards referring to skills.</p>
+            <h4>Technique</h4>
+            <p>A technique is a special kind of action card that requires you to choose a Kung Fu dude and have them
+                succeed a Kung Fu Test in order to play.</p>
+            <p>To perform a Kung Fu test, make a pull and compare its value to the value of the dude chosen (including
+                all bonuses such as his Kung Fu rating). If your pull is a lower value than that of the performing dude,
+                the technique succeeds and you use the ability on the technique. Otherwise the technique fails and
+                nothing happens (the ability has been used to no effect, and it's the next player's turn to make a
+                play). Any reference to "your dude" or "this dude" on a technique refers to the dude who performed the
+                Kung Fu Test.</p>
+            <h4>Tao Techniques and Combos</h4>
+            <p>Tao Techniques are techniques that are part of a specific school or discipline and can be played in
+                combination with other Techniques from the same Tao. These techniques will have their Tao indicated on
+                the card (for example Tao of Zhu Bajie or Tao of the Jade Rabbit) and many also include a Combo
+                requirement, indicating that you can quickly follow up with another technique before your opponent has a
+                chance to make a play.</p>
+            <p>After you successfully play a Tao Technique check to see if you have satisfied the combo requirement (if
+                any) on the bottom of the card, if so you may immediately choose and play a different Technique of the
+                same Tao from your hand or discard pile choosing the same dude to perform the Kung Fu test. Not all Tao
+                Techniques are able to chain into subsequent techniques, but they can all be used to chain from prior
+                Techniques of the same Tao. The same dude must be chosen to perform the Kung-Fu test for all Techniques
+                in a combo and the maximum number of additional techniques that can be chained is that dude's Kung Fu
+                rating.</p>
+            <p>Unlike other action cards, a tao technique is not placed in the discard pile after resolution, instead it
+                remains in play until the end of the phase in which it was played so you will not be able to use the
+                same Tao Technique card twice within a single phase. A Shootout Tao Technique would be discarded at the
+                end of the "Make Plays" step of the shootout, immediately before either player picks their shooter. A
+                Noon Tao Technique is discarded at the end of High Noon, immediately before you check for a winner.</p>
+        </article>
+    </div>
+{% endblock %}

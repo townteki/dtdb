@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+    <script src="{{ asset('/js/dtdb.deck_browser.js') }}"></script>
+    <script src="{{ asset('/js/dtdb.smart_filter.js') }}"></script>
+    <script src="{{ asset('/js/index.js') }}"></script>
+    <script type="text/javascript">
+        var Outfit = null,
+            Decklist = {{ decklist|json_encode|raw }},
+            DeckDB = TAFFY([Decklist]),
+            SelectedDeck = DeckDB().first(),
+            Url_GangImage = '{{ asset('/images/xxx-20.png') }}',
+            DisplaySort = 'suit';
+    </script>
+{% endblock %}
+{% block body %}
+    <div class="container" id="index_page">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="page-header">
+                    <h1>DoomtownDB</h1>
+                    <p class="">You can explore the public <a href="{{ path('decklists_list', {type:'popular'}) }}">decklists</a>
+                        or start building your own <a href="{{ path('decks_list') }}">decks</a>.</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-md-push-4">
+                        {% if decklist %}
+                            <div id="highlight" class="decklist">
+                                <h2 class="section">Decklist of the week </h2>
+                                <h3><a class="decklist-name"
+                                       href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a>
+                                </h3>
+                                <!-- Outfit and Stats -->
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <img id="img_outfit" src="" class="img-responsive hidden-xs">
+                                    </div><!-- /.col-md-3 -->
+                                    <div class="col-sm-2">
+                                        <img id="img_legend" src="" class="img-responsive hidden-xs">
+                                    </div>
+                                    <div id="decksummary" class="col-sm-8">
+                                        <h4 id="outfit"></h4>
+                                        <h6 id="legend"></h6>
+                                        <div id="startingnumbers"></div>
+                                        <div id="latestpack" class="small"></div>
+                                    </div>
+                                </div>
+                                <!-- Identity and Stats -->
+                                <div id="deck-content" class="row"></div>
+                                <h4 class="decklist-author author">
+                                    Description by the author:
+                                    <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}"
+                                       class="username {{ decklist.usercolor }}">{{ decklist.username }}</a>
+                                    {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator"
+                                                                        title="DoomtownDB Gracious Donator"></span>{% endif %}
+                                    <small title="User Reputation" class="reputation">{{ decklist.reputation }}</small>
+                                </h4>
+                                {{ decklist.description|raw }}
+                            </div> <!-- #highlight -->
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 col-md-pull-8" id="recent_decklists">
+                        <h3 class="section">
+                            Last 10 decklists <a href="{{ path('decklists_list', {type:'recent'}) }}" class="small">more</a>
+                        </h3>
+                        <table class="table table-decklists">
+                            {% for decklist in decklists %}
+                                <tr>
+                                    <td>
+                                        <img src="{{ asset('/images/cards/en/' ~ decklist.code ~ '.jpg') }}"
+                                             style="width:52px">
+                                    </td>
+                                    <td class="decklists">
+                                        <div>
+                                            <a class="decklist-name"
+                                               href="{{ path('decklist_detail', { 'decklist_id': decklist.id, 'decklist_name': decklist.prettyname|e('url') }) }}">{{ decklist.name }}</a>
+                                        </div>
+                                        <div class="small">
+                                            <i>{{ decklist.lastpack }}</i>
+                                        </div>
+                                        <div class="author small">
+                                            <a href="{{ path('user_profile_view', {user_id:decklist.user_id,user_name:decklist.username|e('url')}) }}"
+                                               class="{{ decklist.usercolor }}">{{ decklist.username }}</a>
+                                            {% if decklist.donation > 0 %}<span class="glyphicon glyphicon-gift donator"
+                                                                                title="DoomtownDB Gracious Donator"></span>{% endif %}
+                                            <small class="reputation">{{ decklist.reputation }}</small>
+                                        </div>
+                                        <div class="small decklist-social">
+                                            <span class="glyphicon glyphicon-heart social-icon-like"></span> {{ decklist.nbvotes }}
+                                            <span class="glyphicon glyphicon-star social-icon-favorite"></span> {{ decklist.nbfavorites }}
+                                            <span class="glyphicon glyphicon-comment social-icon-comment"></span> {{ decklist.nbcomments }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div><!-- #recent_decklists -->
+                </div>
+            </div>
+            <div class="col-lg-4" id="right-column">
+                <div id="card_search">
+                    <h3 class="section">Card search <a href="{{ path('cards_about') }}" class="small">?</a></h3>
+                    <form method="GET" action="{{ path('cards_processSearchForm') }}" role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="card_search_form" name="q"
+                                   placeholder="Enter card name or query" autocomplete="off" tabindex="1">
+                        </div>
+                    </form>
+                    <table class="table table-condensed table-striped">
+                        <tbody id="card_search_results">
+                        </tbody>
+                    </table>
+                </div><!-- #card_search -->
+                <div id="feed_load">
+                    <script type="text/javascript">
+                        jQuery(function ($) {
+                            $("#PineboxRSS").rss("http://pineboxentertainment.com/feed/",
+                                {
+                                    ssl: true,
+                                    limit: 7,
+                                    entryTemplate: '<li><a href="{url}">{title} - [{author}]</a><br/></li>'
+                                })
+                        });
+                    </script>
+                </div>
+                <div class="RSS" id="PineboxRSS">
+                    <a href="http://pineboxentertainment.com/" style="display:block; padding:4px 4px 4px 15px"><img
+                                src="{{ asset('/images/pineboxentertainment.png') }}" width="214" height="60"
+                                alt="Pine Box Entertainment"></a>
+                </div>
+                <div id="discord" style="padding:10px">
+                    <script type="text/javascript">
+                        discordWidget.init({
+                            serverId: '227387666046386176',
+                            title: '<img src=' + "{{ asset('/images/doomtown-reloaded-logo2.png') }}" + ' width="66" height="30"> on Discord',
+                            join: true,
+                            alphabetical: false,
+                            theme: 'light',
+                            showAllUsers: false,
+                            hideChannels: true
+                        });
+                        discordWidget.render();
+                    </script>
+                </div>
+                <div class="discord-widget"></div>
+                <div id="recent_other">
+                    <h3 class="section">Card reviews <a href="{{ path('card_reviews_list') }}" class="small">more</a>
+                    </h3>
+                    <div class="reviews">
+                        {% for review in reviews %}
+                            <article class="review">
+                                <div>
+                                    <span class="pull-right"><span
+                                                class="glyphicon glyphicon-heart social-icon-like"></span> {{ review.nbvotes }}</span>
+                                    <a href="{{ path('cards_zoom', {card_code:review.card_code}) }}#review-{{ review.id }}"
+                                       class="card">{{ review.card_title }}</a>
+                                </div>
+                                <div class="small">
+                                    by
+                                    <a href="{{ path('user_profile_view', {user_id:review.user_id,user_name:review.username|e('url')}) }}"
+                                       class="username {{ review.usercolor }}">{{ review.username }}</a>
+                                    {% if review.donation > 0 %}<span class="glyphicon glyphicon-gift donator"
+                                                                      title="DoomtownDB Gracious Donator"></span>{% endif %}
+                                    <small class="reputation">{{ review.reputation }}</small>
+                                </div>
+                                <p><small>{{ review.rawtext|raw }}</small></p>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div><!-- #recent_other} -->
+            </div><!-- #right-column -->
+        </div> <!-- .row -->
+    </div> <!-- .container -->
+{% endblock %}
