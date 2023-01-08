@@ -235,7 +235,7 @@ DTDB.data_loaded.add(function () {
         if (q.match(/^\w:/)) return;
         var matches = DTDB.data.cards({title: {likenocase: q}}).map(function (record) {
             return {
-                value: record.title,
+                value: record.title + (record.isMultiple ? (' [' + record.pack_code  + ']') : ''),
                 code: record.code,
             };
         });
@@ -599,12 +599,24 @@ function add_snapshot(snapshot) {
         $.each(snapshot.variation[0], function (code, qty) {
             var card = DTDB.data.cards({code: code}).first();
             if (!card) return;
-            list.push('+' + qty + ' ' + '<a href="' + Routing.generate('cards_zoom', {card_code: code}) + '" class="card" data-index="' + code + '">' + card.title + '</a>');
+            list.push(
+                '+' + qty + ' '
+                + '<a href="' + Routing.generate('cards_zoom', {card_code: code}) + '" class="card" data-index="' + code + '">'
+                + card.title
+                + (card.isMultiple ? (' [' + card.pack_code  + ']') : '')
+                + '</a>'
+            );
         });
         $.each(snapshot.variation[1], function (code, qty) {
             var card = DTDB.data.cards({code: code}).first();
             if (!card) return;
-            list.push('&minus;' + qty + ' ' + '<a href="' + Routing.generate('cards_zoom', {card_code: code}) + '" class="card" data-index="' + code + '">' + card.title + '</a>');
+            list.push(
+                '&minus;' + qty + ' '
+                + '<a href="' + Routing.generate('cards_zoom', {card_code: code}) + '" class="card" data-index="' + code + '">'
+                + card.title
+                + (card.isMultiple ? (' [' + card.pack_code  + ']') : '')
+                + '</a>'
+            );
         });
     } else {
         list.push("First version");
@@ -877,7 +889,9 @@ function build_div(record) {
                 + '</div></td><td><a class="card" href="'
                 + Routing.generate('cards_zoom', {card_code: record.code})
                 + '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-                + record.title + '</a></td><td class="value-' + record.rank
+                + record.title
+                + (record.isMultiple ? (' [' + record.pack_code  + ']') : '')
+                + '</a></td><td class="value-' + record.rank
                 + '">' + DTDB.format.rank(record) + '</td><td class="suit" title="' + record.suit
                 + '">' + DTDB.format.suit(record) + '</td><td class="gang" title="' + record.gang + '">'
                 + imgsrc + '</td></tr>');
@@ -898,7 +912,9 @@ function build_div(record) {
                 + '    <h4 class="media-heading"><a class="card" href="'
                 + Routing.generate('cards_zoom', {card_code: record.code})
                 + '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-                + record.title + '</a></h4>'
+                + record.title
+                + (record.isMultiple ? (' [' + record.pack_code  + ']') : '')
+                + '</a></h4>'
                 + '    <div class="btn-group" data-toggle="buttons">' + radios
                 + '</div>' + '</div>' + '</div>' + '</div>');
             break;
@@ -918,7 +934,9 @@ function build_div(record) {
                 + '    <h5 class="media-heading"><a class="card" href="'
                 + Routing.generate('cards_zoom', {card_code: record.code})
                 + '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-                + record.title + '</a></h5>'
+                + record.title
+                + (record.isMultiple ? (' [' + record.pack_code  + ']') : '')
+                + '</a></h5>'
                 + '    <div class="btn-group" data-toggle="buttons">' + radios
                 + '</div>' + '</div>' + '</div>' + '</div>');
             break;

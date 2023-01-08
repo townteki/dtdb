@@ -117,7 +117,9 @@ DTDB.suggestions = {};
             + '</div></td><td>' + DTDB.format.face(record) + ' <a class="card" href="'
             + Routing.generate('cards_zoom', {card_code: record.code})
             + '" data-target="#cardModal" data-remote="false" data-toggle="modal">'
-            + record.title + '</a></td></tr>');
+            + record.title
+            + (record.isMultiple ? (' [' + record.pack_code  + ']') : '')
+            + '</a></td></tr>');
 
         return div;
     }

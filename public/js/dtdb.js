@@ -277,10 +277,23 @@ function update_deck(options) {
     var cabinet = {};
     DudeIndeck = [];
     DudeStarter = [];
-    $('#outfit').html('<a href="' + Routing.generate('cards_zoom', {card_code: Outfit.code}) + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Outfit.code + '">' + Outfit.title + '</a>');
+    $('#outfit').html(
+        '<a href="'
+        + Routing.generate('cards_zoom', {card_code: Outfit.code})
+        + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Outfit.code + '">'
+        + Outfit.title
+        + (Outfit.isMultiple ? (' [' + Outfit.pack_code  + ']') : '')
+        + '</a>');
     $('#img_outfit').prop('src', Outfit.imagesrc);
     if (Legend) {
-        $('#legend').html('<a href="' + Routing.generate('cards_zoom', {card_code: Legend.code}) + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Legend.code + '">' + Legend.title + '</a>');
+        $('#legend').html(
+            '<a href="'
+            + Routing.generate('cards_zoom', {card_code: Legend.code})
+            + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Legend.code + '">'
+            + (Legend.isMultiple ? (' [' + Legend.pack_code  + ']') : '')
+            + Legend.title +
+            '</a>'
+        );
         $('#img_legend').prop('src', Legend.imagesrc);
     } else {
         $('#legend').html('');
@@ -331,7 +344,17 @@ function update_deck(options) {
         }
 
         var face = DTDB.format.face(record);
-        var item = $('<div>' + record.indeck + 'x ' + face + ' <a href="' + Routing.generate('cards_zoom', {card_code: record.code}) + '" class="card' + (record.start ? ' card-start' + record.start : '') + '" data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="' + record.code + '">' + record.title + '</a> ' + additional_info + '</div>');
+        var item = $(
+            '<div>' + record.indeck + 'x ' + face
+            + ' <a href="' + Routing.generate('cards_zoom', {card_code: record.code}) + '"'
+            + ' class="card' + (record.start ? ' card-start' + record.start : '') + '" '
+            + ' data-toggle="modal" data-remote="false" data-target="#cardModal" data-index="' + record.code + '">'
+            + record.title
+            + (record.isMultiple ? (' [' + record.pack_code  + ']') : '')
+            + '</a> '
+            + additional_info
+            + '</div>'
+        );
         item.appendTo($('#deck-content .deck-' + criteria));
 
         cabinet[criteria] |= 0;

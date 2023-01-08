@@ -114,7 +114,15 @@ function do_diff(ids) {
     var list = $('<ul></ul>').appendTo(container);
     $.each(intersect, function (card_code, qty) {
         var card = DTDB.data.cards({code: card_code}).first();
-        if (card) list.append('<li>' + card.title + ' x' + qty + '</li>');
+        if (card) list.append(
+            '<li>'
+            + card.title
+            + (card.isMultiple ? (' [' + card.pack_code  + ']') : '')
+            + ' x'
+            + qty
+            +
+            '</li>'
+        );
     });
 
     for (var i = 0; i < listings.length; i++) {
@@ -122,7 +130,13 @@ function do_diff(ids) {
         var list = $('<ul></ul>').appendTo(container);
         $.each(listings[i], function (card_code, qty) {
             var card = DTDB.data.cards({code: card_code}).first();
-            if (card) list.append('<li>' + card.title + ' x' + qty + '</li>');
+            if (card) list.append(
+                '<li>'
+                + card.title
+                + (card.isMultiple ? (' [' + card.pack_code  + ']') : '')
+                + ' x'
+                + qty
+                + '</li>');
         });
     }
     $('#diffModal').modal('show');
@@ -190,7 +204,14 @@ function do_diff_collection(ids) {
     var list = $('<ul></ul>').appendTo(container);
     $.each(intersect, function (card_code, qty) {
         var card = DTDB.data.cards({code: card_code}).first();
-        if (card) list.append('<li>' + card.title + ' x' + qty + '</li>');
+        if (card) list.append(
+            '<li>'
+            + card.title
+            + (card.isMultiple ? (' [' + card.pack_code  + ']') : '')
+            + ' x'
+            + qty
+            + '</li>'
+        );
     });
 
     for (var i = 0; i < listings.length; i++) {
@@ -198,7 +219,14 @@ function do_diff_collection(ids) {
         var list = $('<ul></ul>').appendTo(container);
         $.each(listings[i], function (card_code, qty) {
             var card = DTDB.data.cards({code: card_code}).first();
-            if (card) list.append('<li>' + card.title + ' x' + qty + '</li>');
+            if (card) list.append(
+                '<li>'
+                + card.title
+                + (card.isMultiple ? (' [' + card.pack_code  + ']') : '')
+                + ' x'
+                + qty
+                + '</li>'
+            );
         });
     }
     $('#diffModal').modal('show');
