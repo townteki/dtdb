@@ -4,6 +4,7 @@
     <script src="{{ asset('/js/reviews.js') }}"></script>
     <script type="text/javascript">
         DTDB.user.params.card_id = {{ cards[0].id|json_encode|raw }};
+        var Url_GangImage = '{{ asset('/images/xxx-20.png') }}';
     </script>{% endblock %}
 {% block main %}
     {% for i in 0..cards|length-1 %}{% set card = cards[i] %}
