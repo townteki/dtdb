@@ -68,6 +68,6 @@ $(function () {
             }
         });
         line.insertBefore($('#card'));
-        $(event.target).typeahead('setQuery', '');
+        $(event.target).typeahead('val', '');
     });
 })

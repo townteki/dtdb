@@ -844,7 +844,7 @@ function handle_quantity_change(event) {
     $('div.modal').modal('hide');
     DTDB.suggestions.compute();
     if (InputByTitle)
-        $('#filter-text').typeahead('setQuery', '').focus().blur();
+        $('#filter-text').typeahead('val', '').focus().blur();
 
     Deck_changed_since_last_autosave = true;
 }
