@@ -170,6 +170,65 @@ class SocialController extends AbstractController
 
     /**
      * @Route(
+     *     "/{_locale}/decklists/search",
+     *     name="decklists_searchform",
+     *     locale="en",
+     *     methods={"GET"},
+     *     requirements={
+     *         "_locale"="en|fr|de|es|it|pl"
+     *     }
+     * )
+     * @param EntityManagerInterface $entityManager
+     * @param $longCache
+     * @param Request $request
+     * @return Response
+     */
+    public function searchAction(EntityManagerInterface $entityManager, $longCache, Request $request)
+    {
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge($longCache);
+
+        $dbh = $entityManager->getConnection();
+        $gangs = $dbh->executeQuery(
+            "SELECT
+            f.name,
+            f.code
+            FROM gang f
+            ORDER BY f.name ASC"
+        )->fetchAll();
+
+        $packs = $dbh->executeQuery(
+            "SELECT
+            p.name,
+            p.code,
+            '' AS selected
+            FROM pack p
+            WHERE p.released IS NOT NULL
+            ORDER BY p.released DESC"
+        )->fetchAll();
+
+        return $this->render(
+            'Search/search.html.twig',
+            [
+                'pagetitle' => 'Decklist Search',
+                'url' => $request->getRequestUri(),
+                'gangs' => $gangs,
+                'form' => $this->renderView(
+                    'Search/form.html.twig',
+                    [
+                        'packs' => $packs,
+                        'author' => '',
+                        'title' => ''
+                    ]
+                ),
+            ],
+            $response
+        );
+    }
+
+    /**
+     * @Route(
      *     "/{_locale}/decklists/{type}/{page}",
      *     name="decklists_list",
      *     locale="en",
@@ -1238,65 +1297,6 @@ class SocialController extends AbstractController
                 'pages' => $pages,
                 'prevurl' => $currpage == 1 ? null : $this->generateUrl($route, ["page" => $prevpage]),
                 'nexturl' => $currpage == $nbpages ? null : $this->generateUrl($route, ["page" => $nextpage])
-            ],
-            $response
-        );
-    }
-
-    /**
-     * @Route(
-     *     "/{_locale}/decklists/search",
-     *     name="decklists_searchform",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl"
-     *     }
-     * )
-     * @param EntityManagerInterface $entityManager
-     * @param $longCache
-     * @param Request $request
-     * @return Response
-     */
-    public function searchAction(EntityManagerInterface $entityManager, $longCache, Request $request)
-    {
-        $response = new Response();
-        $response->setPublic();
-        $response->setMaxAge($longCache);
-
-        $dbh = $entityManager->getConnection();
-        $gangs = $dbh->executeQuery(
-            "SELECT
-            f.name,
-            f.code
-            FROM gang f
-            ORDER BY f.name ASC"
-        )->fetchAll();
-
-        $packs = $dbh->executeQuery(
-            "SELECT
-            p.name,
-            p.code,
-            '' AS selected
-            FROM pack p
-            WHERE p.released IS NOT NULL
-            ORDER BY p.released DESC"
-        )->fetchAll();
-
-        return $this->render(
-            'Search/search.html.twig',
-            [
-                'pagetitle' => 'Decklist Search',
-                'url' => $request->getRequestUri(),
-                'gangs' => $gangs,
-                'form' => $this->renderView(
-                    'Search/form.html.twig',
-                    [
-                        'packs' => $packs,
-                        'author' => '',
-                        'title' => ''
-                    ]
-                ),
             ],
             $response
         );
