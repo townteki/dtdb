@@ -20,7 +20,7 @@ class FlagCardsDuplicatedByTitleCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('app:maintenance:flag-cards-duplicated-by-title')
+            ->setName('dtdb:flag-cards-duplicated-by-title')
             ->setDescription('Flags cards duplicated by title as such.');
     }
 
