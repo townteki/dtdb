@@ -111,25 +111,21 @@
     {% block body %}{% endblock %}
     <div id="push"></div>
 </div>
-<div id="footer" class="hidden-print">
+<footer class="hidden-print">
     <div class="container">
-
         {% block footer %}
             <div class="row">
                 <div class="col-xs-12">
-
                     <ul class="list-inline pull-right">
                         {% if locales is defined %}
                             {{ locales|raw }}
                         {% endif %}
                     </ul>
-
                     <ul class="list-inline">
                         <li><a href="{{ path('cards_about') }}">About</a></li>
                         <li><a href="{{ path('cards_changelog') }}">Change Log</a></li>
                         <li><a href="javascript:localStorage.clear()">Clear data</a></li>
                     </ul>
-
                     <p>
                         Designed and built by <a href="//twitter.com/alsciende">@alsciende</a>. dtdb.co Creator/Maintainer Emeritus <a href="//twitter.com/platypusDT">@platypusDT</a>.
                     </p>
@@ -142,8 +138,6 @@
                     <p>
                         DoomtownDB is supported by the community to stay ad-free. <a href="https://paypal.me/Blargg">Donate here.</a>
                     </p>
-
-
                     <p style="color:#333">
                         Doomtown: Reloaded and Deadlands copyright <a href="//peginc.com"><img src="{{  asset('/images/pinnacle.png') }}" width="143" height="40" alt="Pinnacle Entertainment Group"></a>.
                     </p>
@@ -151,8 +145,7 @@
                 </div>
             </div>
         {% endblock %}
-
     </div>
-</div>
+</footer>
 </body>
 </html>
