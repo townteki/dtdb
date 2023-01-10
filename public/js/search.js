@@ -10,7 +10,10 @@ DTDB.data_loaded.add(function () {
     function findMatches(q, cb) {
         if (q.match(/^\w:/)) return;
         var matches = DTDB.data.cards({title: {likenocase: q}}).map(function (record) {
-            return {value: record.title};
+            return {
+                value: record.title + (record.isMultiple ? (' [' + record.pack_code  + ']') : ''),
+                code: record.code,
+            };
         });
         cb(matches);
     }
@@ -53,7 +56,7 @@ DTDB.data_loaded.add(function () {
 $(function () {
     $('#card').on('typeahead:selected typeahead:autocompleted', function (event, data) {
         var card = DTDB.data.cards({
-            title: data.value
+            code: data.code
         }).first();
         var line = $('<p class="background-' + card.gang_code + '-20" style="padding: 3px 5px;border-radius: 3px;border: 1px solid silver"><button type="button" class="close" aria-hidden="true">&times;</button><input type="hidden" name="cards[]" value="' + card.code + '">' +
             card.title
