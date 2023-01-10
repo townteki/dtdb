@@ -17,11 +17,11 @@ class SuggestionsCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         ini_set('memory_limit', '1G');
-        $webdir = $this->getContainer()->get('kernel')->getRootDir() . "/../web";
-        file_put_contents($webdir . "/suggestions.json", json_encode($this->getSuggestions()));
+        $projectRootDir = $this->getContainer()->get('kernel')->getProjectDir();
+        file_put_contents($projectRootDir . "/public/suggestions.json", json_encode($this->getSuggestions()));
         $output->writeln('done');
         return 0;
     }

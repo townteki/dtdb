@@ -23,7 +23,7 @@
 # ignore routing and translation files for the frontend
 /public/js/fos_js_routes.js
 /public/js/translations/
-
+/public/suggestions.json
 # Symfony v2 related
 # Todo: remove after upgrade to SF v4.
 web/bundles/

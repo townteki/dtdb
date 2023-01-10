@@ -13,7 +13,7 @@ DTDB.suggestions = {};
     suggestions.number = 3;
 
     suggestions.query = function () {
-        suggestions.promise = $.ajax('/web/suggestions.json', {
+        suggestions.promise = $.ajax('/suggestions.json', {
             dataTYpe: 'json',
             success: function (data) {
                 suggestions.codesFromindex = data.index;
