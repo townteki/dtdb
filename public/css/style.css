@@ -643,7 +643,7 @@ tbody .btn-group {
 
 #deck_browser div {
     width: 10px;
-    overflow: show;
+    overflow: visible;
     display: inline-block;
     position: relative;
 }
@@ -903,10 +903,6 @@ article.review div.review-content {
 
 }
 
-article.rules a {
-    target: _blank;
-}
-
 article.rules aside {
     border-left: 1px solid blue;
     padding-left: 20px
@@ -954,10 +950,6 @@ article.rules table.bordered, table.bordered th, table.bordered td {
 
 article.rules table.bordered th, table.bordered td {
     padding: 15px;
-}
-
-div.structure a {
-    target: _blank;
 }
 
 div.structure h1 {
