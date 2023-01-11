@@ -13,6 +13,7 @@ and that your machine has PHP (7.4), MySQL (5.7+), and a web-server (e.g. Apache
 - Run `php bin/console doctrine:database:create` to create the  database, it will be empty.
 - Run `php bin/console doctrine:migrations:migrate` to set up the database structure (e.g. tables).
 - Load the default data set. See [install/README.md](install/README.md) for instructions.
+- Run `php bin/console assets:install` to install web assets from bundles.
 - Run `php bin/console bazinga:js-translation:dump public/js` to export translation files for the frontend.
 - Run `php bin/console fos:js-routing:dump --target=public/js/fos_js_routes.js` to export routes for the frontend.
 - Configure your web server to point to the `/public` directory as your web root.
