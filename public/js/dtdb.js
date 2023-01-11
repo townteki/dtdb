@@ -561,17 +561,6 @@ function toggle_table(event) {
     });
 }
 
-var GangColors = {
-    "anarch": "#FF4500",
-    "criminal": "#4169E1",
-    "shaper": "#32CD32",
-    "neutral": "#708090",
-    "haas-bioroid": "#8A2BE2",
-    "jinteki": "#DC143C",
-    "nbn": "#FF8C00",
-    "weyland-consortium": "#006400"
-};
-
 var types = ["outfit", "dude", "deed", "goods", "spell", "action", "legend", "joker"];
 var typesstr = ["Outfit", "Dude", "Deed", "Goods", "Spell", "Action", "Legend", "Joker"];
 
