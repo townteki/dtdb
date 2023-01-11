@@ -137,26 +137,6 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/changelog",
-     *     name="cards_changelog",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function changelogAction()
-    {
-
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/changelog.html.twig', ["pagetitle" => "Change Log"], $response);
-    }
-
-    /**
-     * @Route(
      *     "/{_locale}/rules",
      *     name="cards_rules",
      *     locale="en",
