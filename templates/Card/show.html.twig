@@ -1,85 +1,93 @@
 {% extends 'base.html.twig' %}
 {% block body -%}
-    <h1>Card</h1>
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Ts</th>
-                <td>{{ entity.ts|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Code</th>
-                <td>{{ entity.code }}</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>{{ entity.number }}</td>
-            </tr>
-            <tr>
-                <th>Quantity</th>
-                <td>{{ entity.quantity }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ entity.title }}</td>
-            </tr>
-            <tr>
-                <th>Keywords</th>
-                <td>{{ entity.keywords }}</td>
-            </tr>
-            <tr>
-                <th>Text</th>
-                <td>{{ entity.text }}</td>
-            </tr>
-            <tr>
-                <th>Flavor</th>
-                <td>{{ entity.flavor }}</td>
-            </tr>
-            <tr>
-                <th>Illustrator</th>
-                <td>{{ entity.illustrator }}</td>
-            </tr>
-            <tr>
-                <th>Cost</th>
-                <td>{{ entity.cost }}</td>
-            </tr>
-            <tr>
-                <th>Value</th>
-                <td>{{ entity.rank }}</td>
-            </tr>
-            <tr>
-                <th>Upkeep</th>
-                <td>{{ entity.upkeep }}</td>
-            </tr>
-            <tr>
-                <th>Production</th>
-                <td>{{ entity.production }}</td>
-            </tr>
-            <tr>
-                <th>Bullets</th>
-                <td>{{ entity.bullets }}</td>
-            </tr>
-            <tr>
-                <th>Influence</th>
-                <td>{{ entity.influence }}</td>
-            </tr>
-            <tr>
-                <th>Control</th>
-                <td>{{ entity.control }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('admin_card') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('admin_card_edit', { 'id': entity.id }) }}">Edit</a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+    <div class="container-fluid main">
+        <div class="row">
+            <div class="col">
+                <div class="page-header">
+                    <h1>Card</h1>
+                </div>
+                <table class="record_properties">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ entity.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ts</th>
+                        <td>{{ entity.ts|date('Y-m-d H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Code</th>
+                        <td>{{ entity.code }}</td>
+                    </tr>
+                    <tr>
+                        <th>Number</th>
+                        <td>{{ entity.number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td>{{ entity.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ entity.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Keywords</th>
+                        <td>{{ entity.keywords }}</td>
+                    </tr>
+                    <tr>
+                        <th>Text</th>
+                        <td>{{ entity.text }}</td>
+                    </tr>
+                    <tr>
+                        <th>Flavor</th>
+                        <td>{{ entity.flavor }}</td>
+                    </tr>
+                    <tr>
+                        <th>Illustrator</th>
+                        <td>{{ entity.illustrator }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cost</th>
+                        <td>{{ entity.cost }}</td>
+                    </tr>
+                    <tr>
+                        <th>Value</th>
+                        <td>{{ entity.rank }}</td>
+                    </tr>
+                    <tr>
+                        <th>Upkeep</th>
+                        <td>{{ entity.upkeep }}</td>
+                    </tr>
+                    <tr>
+                        <th>Production</th>
+                        <td>{{ entity.production }}</td>
+                    </tr>
+                    <tr>
+                        <th>Bullets</th>
+                        <td>{{ entity.bullets }}</td>
+                    </tr>
+                    <tr>
+                        <th>Influence</th>
+                        <td>{{ entity.influence }}</td>
+                    </tr>
+                    <tr>
+                        <th>Control</th>
+                        <td>{{ entity.control }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <ul class="record_actions">
+                    <li>
+                        <a href="{{ path('admin_card') }}">Back to the list</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_card_edit', { 'id': entity.id }) }}">Edit</a>
+                    </li>
+                    <li>{{ form(delete_form) }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

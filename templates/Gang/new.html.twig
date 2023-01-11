@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
-
 {% block body -%}
-    <h1>Gang creation</h1>
-
-    {{ form(form) }}
-
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('admin_gang') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
+    <div class="container-fluid main">
+        <div class="row">
+            <div class="col">
+                <div class="page-header">
+                    <h1>Gang creation</h1>
+                </div>
+                {{ form(form) }}
+                <ul class="record_actions">
+                    <li>
+                        <a href="{{ path('admin_gang') }}">
+                            Back to the list
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}
