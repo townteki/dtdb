@@ -709,7 +709,7 @@ class SocialController extends AbstractController
 
     /**
      * @Route(
-     *     "/user/comment",
+     *     "/user/like",
      *     name="decklist_like",
      *     methods={"POST"}
      * )
