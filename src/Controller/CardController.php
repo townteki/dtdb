@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Card;
 use App\Form\Type\CardType;
+use App\Repository\CardRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -31,10 +32,11 @@ class CardController extends AbstractController
     /**
      * @Route("/admin/card/create", name="admin_card_create", methods={"POST"})
      * @param EntityManagerInterface $entityManager
+     * @param CardRepository $repository
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function createAction(EntityManagerInterface $entityManager, Request $request)
+    public function createAction(EntityManagerInterface $entityManager, CardRepository $repository, Request $request)
     {
         $entity = new Card();
         $form = $this->createCreateForm($entity);
@@ -42,6 +44,7 @@ class CardController extends AbstractController
         if ($form->isValid()) {
             $entityManager->persist($entity);
             $entityManager->flush();
+            $repository->updateIsMultipleFlagOnAllCards();
             return $this->redirect($this->generateUrl('admin_card_show', ['id' => $entity->getId()]));
         }
         return $this->render('Card/new.html.twig', [
@@ -106,12 +109,17 @@ class CardController extends AbstractController
     /**
      * @Route("/admin/card/{id}/update", name="admin_card_update", methods={"POST", "PUT"})
      * @param EntityManagerInterface $entityManager
+     * @param CardRepository $repository
      * @param Request $request
      * @param $id
      * @return RedirectResponse|Response
      */
-    public function updateAction(EntityManagerInterface $entityManager, Request $request, $id)
-    {
+    public function updateAction(
+        EntityManagerInterface $entityManager,
+        CardRepository $repository,
+        Request $request,
+        $id
+    ) {
         /* @var Card $entity */
         $entity = $entityManager->getRepository(Card::class)->find($id);
         if (!$entity) {
@@ -122,6 +130,7 @@ class CardController extends AbstractController
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {
             $entityManager->flush();
+            $repository->updateIsMultipleFlagOnAllCards();
             return $this->redirect($this->generateUrl('admin_card_edit', ['id' => $id]));
         }
         return $this->render('Card/edit.html.twig', [
@@ -134,12 +143,17 @@ class CardController extends AbstractController
     /**
      * @Route("/admin/card/{id}/delete", name="admin_card_delete", methods={"POST", "DELETE"})
      * @param EntityManagerInterface $entityManager
+     * @param CardRepository $repository
      * @param Request $request
      * @param $id
      * @return RedirectResponse
      */
-    public function deleteAction(EntityManagerInterface $entityManager, Request $request, $id)
-    {
+    public function deleteAction(
+        EntityManagerInterface $entityManager,
+        CardRepository $repository,
+        Request $request,
+        $id
+    ) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -149,6 +163,7 @@ class CardController extends AbstractController
             }
             $entityManager->remove($entity);
             $entityManager->flush();
+            $repository->updateIsMultipleFlagOnAllCards();
         }
         return $this->redirect($this->generateUrl('admin_card'));
     }

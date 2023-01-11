@@ -9,6 +9,7 @@ use App\Entity\Shooter;
 use App\Entity\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -45,7 +46,8 @@ class CardType extends AbstractType
                 'gang',
                 EntityType::class,
                 array('class' => Gang::class, 'choice_label' => 'name', 'required' => false)
-            );
+            )
+            ->add('isMultiple', HiddenType::class, array('data' => '0'));
     }
 
     public function configureOptions(OptionsResolver $resolver)
