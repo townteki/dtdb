@@ -102,7 +102,7 @@ class Card
     /**
      * @var int
      *
-     * @ORM\Column(name="rank", type="smallint", nullable=true)
+     * @ORM\Column(name="handrank", type="smallint", nullable=true)
      */
     protected $rank;
 
@@ -160,7 +160,7 @@ class Card
      *
      * @ORM\Column(name="is_multiple", type="boolean", nullable=false)
      */
-    protected $isMultiple;
+    protected $isMultiple = false;
 
     /**
      * @var Collection
