@@ -8,6 +8,7 @@ parameters:
   long_cache: '%env(int:APP_CACHE_LONG)%'
   short_cache: '%env(int:APP_CACHE_SHORT)%'
   supported_locales: en
+  allow_search_engine_tracking: "%env(bool:APP_ALLOW_SEARCH_ENGINE_TRACKING)%"
 services:
     # default configuration for services in *this* file
     _defaults:
