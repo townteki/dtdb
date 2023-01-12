@@ -863,7 +863,7 @@ class BuilderController extends AbstractController
     {
         $user = $this->getUser();
         $decks = $decks->getByUser($user);
-        $file = tempnam("tmp", "zip");
+        $file = tempnam(sys_get_temp_dir(), "zip");
         $zip = new ZipArchive();
         $res = $zip->open($file, ZipArchive::OVERWRITE);
         $repository = $entityManager->getRepository(Card::class);
