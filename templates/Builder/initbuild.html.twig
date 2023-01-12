@@ -1,32 +1,31 @@
 {% extends 'base.html.twig' %}
-{% block body %}
+{% block head %}
     <script type="text/javascript">
-        $(function () {
-            $('.list-group').on({
-                mouseenter: function (event) {
-                    var card_code = $(this).data('code');
-                    card_code = String(card_code);
-                    var card = DTDB.data.cards({code: card_code}).first();
-                    $('#cardimg').prop('src', card.imagesrc);
-                }
-            }, 'a');
-        });
+        var Url_GangImage = '{{ asset('/images/xxx-20.png') }}';
     </script>
+{% endblock %}
+{% block body %}
     <div class="container main">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <div class="panel panel-default">
                     <!-- Default panel contents -->
                     <div class="panel-heading"><b>Choose your outfit</b></div>
                     <!-- List group -->
                     <div class="list-group">
                         {% for outfit in identities %}
-                            <a href="{{ path('deck_initbuild', {card_code:outfit.code}) }}" class="list-group-item"
-                               data-code="{{ outfit.code }}">
-                                <span class="icon icon-{{ outfit.gang.code }} {{ outfit.gang.code }}"></span>
-                                <span>{{ outfit.title(app.request.locale) }}</span> <span
-                                        class="small">({{ outfit.pack.name }})</span>
-                            </a>
+                            <div class="list-group-item">
+                                <a href="{{ path('deck_initbuild', {card_code:outfit.code}) }}"
+                                   data-index="{{ outfit.code }}">
+                                    {% if outfit.gang %}
+                                        <img src="{{ asset('/images/' ~ outfit.gang.code ~ '-20.png') }}"
+                                             alt="{{ outfit.gang.name }}"
+                                             title="{{ outfit.gang.name }}">
+                                    {% endif %}
+                                    <span>{{ outfit.title(app.request.locale) }}</span> <span
+                                            class="small">({{ outfit.pack.name }})</span>
+                                </a>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
