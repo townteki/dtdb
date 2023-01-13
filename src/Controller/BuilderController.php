@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use ZipArchive;
@@ -136,10 +137,16 @@ class BuilderController extends AbstractController
      *     }
      * )
      * @param int $longCache
+     * @param SessionInterface $session
      * @return Response
      */
-    public function importAction($longCache)
+    public function importAction($longCache, SessionInterface $session)
     {
+        // the deck import code is broken. for the time being, send the user back to their "my decks" page.
+        // @todo fix this or throw this out. [ST 2023/01/12]
+        $session->getFlashBag()->set('error', "Deck import is currently not available.");
+        return $this->redirect($this->generateUrl('decks_list'));
+
         $response = new Response();
         $response->setPublic();
         $response->setMaxAge($longCache);
@@ -170,6 +177,9 @@ class BuilderController extends AbstractController
      */
     public function fileimportAction(EntityManagerInterface $entityManager, Request $request)
     {
+        // the deck import code is broken. for the time being, send the user back to their "my decks" page.
+        // @todo fix this or throw this out. [ST 2023/01/12]
+        throw new NotFoundHttpException('Deck upload via file import is currently not available.');
         $filetype = filter_var($request->get('type'), FILTER_SANITIZE_STRING);
         $uploadedFile = $request->files->get('upfile');
         if (! isset($uploadedFile)) {
@@ -908,6 +918,11 @@ class BuilderController extends AbstractController
         Decks $decks,
         Request $request
     ) {
+        // the deck import code is broken. for the time being, send the user back to their "my decks" page.
+        // @todo fix this or throw this out. [ST 2023/01/12]
+        $session->getFlashBag()->set('error', "Deck upload is currently not available.");
+        return $this->redirect($this->generateUrl('decks_list'));
+
         // time-consuming task
         ini_set('max_execution_time', 300);
 

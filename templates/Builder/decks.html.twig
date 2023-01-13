@@ -33,18 +33,22 @@
                         <div class="col-md-12">
                             <a href="{{ path('deck_buildform') }}" class="btn btn-default btn-sm"><span
                                         class="glyphicon glyphicon-plus"></span> New Deck</a>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle btn-sm"
-                                        data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-import"></span> Import Deck <span
-                                            class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ path('deck_import') }}" id="btn-import-paste">Copy/paste</a></li>
-                                    <li><a href="#" onclick="$('#fileModal').modal('show')"
-                                           id="btn-import-file">File</a></li>
-                                </ul>
-                            </div>
+{#
+    The deck import functionality has been (temporarily) disabled b/c it's broken.
+    @todo fix or remove this permanently [ST 2023/01/12]
+#}
+{#                            <div class="btn-group">#}
+{#                                <button type="button" class="btn btn-default dropdown-toggle btn-sm"#}
+{#                                        data-toggle="dropdown">#}
+{#                                    <span class="glyphicon glyphicon-import"></span> Import Deck <span#}
+{#                                            class="caret"></span>#}
+{#                                </button>#}
+{#                                <ul class="dropdown-menu" role="menu">#}
+{#                                    <li><a href="{{ path('deck_import') }}" id="btn-import-paste">Copy/paste</a></li>#}
+{#                                    <li><a href="#" onclick="$('#fileModal').modal('show')"#}
+{#                                           id="btn-import-file">File</a></li>#}
+{#                                </ul>#}
+{#                            </div>#}
                         </div>
                     </div>
                     <div class="row" style="margin-bottom:10px">
@@ -112,9 +116,13 @@
                         <div class="col-md-12">
                             <a role="button" class="btn btn-default btn-sm" href="{{ path('decks_download_all') }}">Download
                                 all decks</a>
-                            <button role="button" class="btn btn-default btn-sm" id="decks_upload_all">Upload all
-                                decks
-                            </button>
+{#
+    The deck import functionality has been (temporarily) disabled b/c it's broken.
+    @todo fix or remove this permanently [ST 2023/01/12]
+#}
+{#                            <button role="button" class="btn btn-default btn-sm" id="decks_upload_all">Upload all#}
+{#                                decks#}
+{#                            </button>#}
                         </div>
                     </div>
                     <div class="row" style="margin-bottom:10px">
@@ -219,25 +227,40 @@
                     them
                     or even <span class="fake-inline-button text-primary"><span
                                 class="glyphicon glyphicon-envelope"></span> Email</span> them.</p>
-                <p>So what are you waiting for? To create your first deck, you can either <span
-                            class="fake-inline-button text-primary"><span class="glyphicon glyphicon-plus"></span> Build</span>
-                    one from scratch using the Deckbuilder,
-                    <span class="fake-inline-button text-primary"><span class="glyphicon glyphicon-import"></span> Import</span>
-                    one from the web,
-                    or <span class="fake-inline-button text-primary"><span class="glyphicon glyphicon-upload"></span> Upload</span>
-                    a deck file in Octgn or simple text format.</p>
+                <p>So what are you waiting for? To create your first deck,
+{#
+    shortened instructions while deck import is disabled.
+    @todo remove once deck import is available again [ST 2023/01/12]
+#}
+                    <span class="fake-inline-button text-primary"><span class="glyphicon glyphicon-plus"></span>Build</span> one from scratch using the Deckbuilder.
+{#
+    The deck import functionality has been (temporarily) disabled b/c it's broken.
+    @todo fix or remove this permanently [ST 2023/01/12]
+#}
+{#                <p>So what are you waiting for? To create your first deck, you can either <span#}
+{#                            class="fake-inline-button text-primary"><span class="glyphicon glyphicon-plus"></span> Build</span>#}
+{#                    one from scratch using the Deckbuilder,#}
+{#                    <span class="fake-inline-button text-primary"><span class="glyphicon glyphicon-import"></span> Import</span>#}
+{#                    one from the web,#}
+{#                    or <span class="fake-inline-button text-primary"><span class="glyphicon glyphicon-upload"></span> Upload</span>#}
+{#                    a deck file in Octgn or simple text format.#}
+                </p>
             </div>
         </div>
         <div style="text-align:center">
             <a href="{{ path('deck_buildform') }}" class="btn btn-default btn-lg"><span
                         class="glyphicon glyphicon-plus"></span> Build</a>
-            <a href="{{ path('deck_import') }}" class="btn btn-default btn-lg"><span
-                        class="glyphicon glyphicon-import"></span> Import</a>
-            <button type="button" class="btn btn-default btn-lg" onclick="$('#fileModal').modal('show')"><span
-                        class="glyphicon glyphicon-upload"></span> Upload
-            </button>
-            <button type="button" class="btn btn-default btn-lg" onclick="$('#archiveModal').modal('show')"><span
-                        class="glyphicon glyphicon-upload"></span> Upload archive</button>
+{#
+    The deck import functionality has been (temporarily) disabled b/c it's broken.
+    @todo uncomment the instructions below when import is fixed, or remove this permanently. [ST 2023/01/12]
+#}
+{#            <a href="{{ path('deck_import') }}" class="btn btn-default btn-lg"><span#}
+{#                        class="glyphicon glyphicon-import"></span> Import</a>#}
+{#            <button type="button" class="btn btn-default btn-lg" onclick="$('#fileModal').modal('show')"><span#}
+{#                        class="glyphicon glyphicon-upload"></span> Upload#}
+{#            </button>#}
+{#            <button type="button" class="btn btn-default btn-lg" onclick="$('#archiveModal').modal('show')"><span#}
+{#                        class="glyphicon glyphicon-upload"></span> Upload archive</button>#}
         </div>
     {% endif %}
     <!-- Modal -->
