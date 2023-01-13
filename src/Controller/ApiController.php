@@ -205,7 +205,7 @@ class ApiController extends AbstractController
 
         $conditions = $cardsData->syntax("e:$pack_code");
         $cardsData->validateConditions($conditions);
-        $query = $this->get('cards_data')->buildQueryFromConditions($conditions);
+        $query = $cardsData->buildQueryFromConditions($conditions);
 
         $cards = [];
         $last_modified = new DateTime();
