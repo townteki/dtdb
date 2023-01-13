@@ -145,8 +145,10 @@
                                        data-gang="{{ deck.gang_code }}">
                                         <div class="deck-list-outfit-image" title="{{ deck.outfit_title }}"
                                              style="background-image:url({{ asset('/images/cards/en/'~deck.outfit_code~'.jpg') }})"></div>
-                                        <div class="deck-list-legend-image" title="{{ deck.legend_title }}"
-                                             style="background-image:url({{ asset('/images/cards/en/'~deck.legend_code~'.jpg') }})"></div>
+                                        {%if deck.legend_code %}
+                                            <div class="deck-list-legend-image" title="{{ deck.legend_title }}"
+                                                 style="background-image:url({{ asset('/images/cards/en/'~deck.legend_code~'.jpg') }})"></div>
+                                        {% endif %}
                                         <h4 class="decklist-name">{{ deck.name }}{% if deck.message %} <span
                                                     class="glyphicon glyphicon-exclamation-sign text-danger"
                                                     title="{{ deck.message }}"></span>{% endif %}</h4>
