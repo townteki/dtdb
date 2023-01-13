@@ -108,8 +108,10 @@ class ApiController extends AbstractController
         $content = json_encode($cards);
         if (isset($jsonp)) {
             $content = "$jsonp($content)";
+            $response->headers->set('Content-Type', 'application/javascript');
+        } else {
+            $response->headers->set('Content-Type', 'application/json');
         }
-        $response->headers->set('Content-Type', 'application/javascript');
         $response->setContent($content);
         return $response;
     }
