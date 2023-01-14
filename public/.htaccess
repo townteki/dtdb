@@ -19,6 +19,9 @@ DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    # Rewrite legacy card image URLs.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^web/bundles/dtdbcards/images/cards/en/(.*)$ /images/cards/en/$1 [R=301,L]
 
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
