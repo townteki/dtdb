@@ -1,0 +1,15 @@
+# FOSUserBundle Configuration
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: App\Entity\User
+    registration:
+        confirmation:
+            enabled: false
+    resetting:
+        token_ttl: 86400
+    from_email:
+        address: admin@dtdb.co
+        sender_name: DoomtownDB
+    service:
+        mailer: fos_user.mailer.twig_swift

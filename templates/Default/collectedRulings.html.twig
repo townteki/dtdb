@@ -1,0 +1,804 @@
+{% extends 'base.html.twig' %}
+{% block title %}Collected Rulings{% endblock %}
+{% block body %}
+    <div class="container main">
+        <h1>{{ block('title') }}</h1>
+        <article class="rules">
+            <nav class="inner">
+                <ul>
+                    <li>
+                        <a href="#sb04">Frontier Justice</a>
+                        <ul>
+                            <li><a href="#louis">Louis Pasteur</a></li>
+                            <li><a href="#jail">Gomorra Jail</a></li>
+                            <li><a href="#diable">Diable en Boite</a></li>
+                            <li><a href="#rmm">Recursive Motion Machine</a></li>
+                            <li><a href="#fancyhat">Fancy New Hat</a></li>
+                            <li><a href="#shield">Shield of Faith</a></li>
+                            <li><a href="#rope&ride">Rope and Ride</a></li>
+                            <li><a href="#incubation">Incubation</a></li>
+                            <li><a href="#flight">Flight of the Lepus</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#sb05">No Turning Back</a>
+                        <ul>
+                            <li><a href="#ebenezer">Ebenezer Springfield</a></li>
+                            <li><a href="#elanderxp">Elander Boldman (Exp.1)</a></li>
+                            <li><a href="#antheia">Antheia Pansofia</a></li>
+                            <li><a href="#harry">Harry Highbinder</a></li>
+                            <li><a href="#isham">Jacqueline Isham</a></li>
+                            <li><a href="#asyncoil">Asyncoil Gun</a></li>
+                            <li><a href="#scoop">Scoop Hound</a></li>
+                            <li><a href="#tonic">Vitality Tonic</a></li>
+                            <li><a href="#ntb">No Turning Back</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#sb06">Nightmare at Noon</a>
+                        <ul>
+                            <li><a href="#nathan">Nathan Shane</a></li>
+                            <li><a href="#warren">Warren Graves</a></li>
+                            <li><a href="#radcliffe">John "Aces" Radcliffe</a></li>
+                            <li><a href="#duster">Dog's Duster</a></li>
+                            <li><a href="#fsatat">For Such a Time as This</a></li>
+                            <li><a href="#treasure">Buried Treasure</a></li>
+                            <li><a href="#n@n">Nightmare at Noon</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#fp01">Immovable Object, Unstoppable Force</a>
+                        <ul>
+                            <li><a href="#ben">Benjamin Washington</a></li>
+                            <li><a href="#randall">Randall</a></li>
+                            <li><a href="#hamshanks">Hamshanks</a></li>
+                            <li><a href="#sarah">Sarah Meoquanee</a></li>
+                            <li><a href="#crow">Laughing Crow</a></li>
+                            <li><a href="#nunchucks">Nunchucks</a></li>
+                            <li><a href="#whatever">Idol of Tlazolteotl</a></li>
+                            <li><a href="#spirittrail">Spirit Trail</a></li>
+                            <li><a href="#packawakens">The Pack Awakens</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#pb02">The Light Shineth</a>
+                        <ul>
+                            <li><a href="#sanatorium">The Sanatorium</a></li>
+                            <li><a href="#den_of_thieves">Den of Thieves</a></li>
+                            <li><a href="#badger">Michael "The Badger" Dodge</a></li>
+                            <li><a href="#ivor_xp1">Ivor Hawley (Exp.1)</a></li>
+                            <li><a href="#deborah">Deborah West</a></li>
+                            <li><a href="#wretched">The Wretched</a></li>
+                            <li><a href="#extra_bet">The Extra Bet</a></li>
+                            <li><a href="#mutant_cattle">Mutant Cattle</a></li>
+                            <li><a href="#guard_dog">Rich Man's Guard Dog</a></li>
+                            <li><a href="#deception">Rabbit's Deception</a></li>
+                            <li><a href="#devils_joker">Devil's Joker</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#sb07">Dirty Deeds</a>
+                        <ul>
+                            <li><a href="#108">108 Worldly Desires</a></li>
+                            <li><a href="#stables">Morgan Stables</a></li>
+                            <li><a href="#xiang">Xiang Fang</a></li>
+                            <li><a href="#kabeda">Kabeda Hakurei</a></li>
+                            <li><a href="#rico">Rico Rodegain</a></li>
+                            <li><a href="#hideout">Maza Gang Hideout</a></li>
+                            <li><a href="#miasmatic">Miasmatic Purifier</a></li>
+                            <li><a href="#press">Disgenuine Currency Press</a></li>
+                            <li><a href="#accident">An Accidental Reunion</a></li>
+                            <li><a href="#mod">A Slight Modification</a></li>
+                            <li><a href="#revenge">Rabbit Takes Revenge</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <h2 id="sb04">Frontier Justice</h2>
+            <br>
+
+            <h4 id="louis"><a href="{{ path('cards_zoom', { card_code: "06006" }) }}" class="card card-title"
+                              data-index="06006">Louis
+                    Pasteur</a></h4>
+            <ul>
+                <li>Louis makes the skill check, not the player, so Doyle's Hoyle can be used. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113597#p1467534">Source</a>)
+            </ul>
+
+            <h4 id="jail"><a href="{{ path('cards_zoom', { card_code: "06011" }) }}" class="card card-title"
+                             data-index="06011">Gomorra
+                    Jail</a></h4>
+            <ul>
+                <li>Shootouts take place during the High Noon phase.
+            </ul>
+
+            <h4 id="diable"><a href="{{ path('cards_zoom', { card_code: "06012" }) }}" class="card card-title"
+                               data-index="06012">Diable en
+                    Boite</a></h4>
+            <ul>
+                <li>As it is a React ability (not Resolution), if it causes one posse to become empty, it will not
+                    immediately stop the shootout, and so the other player will still have to take casualties (if
+                    applicable). (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113784#p1471110">Source</a>)
+                <li>If the equipped dude is saved with Arnold McCadish or Lay On Hands, you cannot activate the React
+                    ability. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113960#p1473630">Source</a>)
+                <li>Once you assign casualties to a dude, removing him from the shootout will not prevent you from
+                    having to resolve these casualties. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115275"
+                            target="_blank">Source</a>)
+            </ul>
+
+            <h4 id="rmm"><a href="{{ path('cards_zoom', { card_code: "06014" }) }}" class="card card-title"
+                            data-index="06014">Recursive
+                    Motion Machine</a></h4>
+            <ul>
+                <li>If a card effect says "move this dude into a posse", but the dude doesn't actually change location,
+                    you cannot use the React ability. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113784#p1471110">Source</a>)
+            </ul>
+
+            <h4 id="fancyhat"><a href="{{ path('cards_zoom', { card_code: "06016" }) }}" class="card card-title"
+                                 data-index="06016">Fancy
+                    New Hat</a></h4>
+            <ul>
+                <li>Any pre-existing influence-reducing effects are ignored as long as the Hat is worn.
+                <li>Any subsequent influence-reducing effects are prevented as long as the Hat is worn.
+                <li>Does not protect from traits (Hustings) or your own effects (Mortimer Parsons) (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113730#p1469940">Source</a>)
+            </ul>
+
+            <h4 id="shield"><a href="{{ path('cards_zoom', { card_code: "06018" }) }}" class="card card-title"
+                               data-index="06018">Shield of
+                    Faith</a></h4>
+            <ul>
+                <li>Your casualties are reduced by 1 only for this round; the rest of the effect applies for the whole
+                    shootout.
+                <li>Protects from Takin' Ya With Me and Hot Lead Flyin'.
+                <li>In the event of a tie in hand ranks, only the loser must discard/ace dudes (if it's a perfect tie,
+                    i.e. two Dead Man's Hands, then there is no loser). (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114058#p1474905">Source</a>)
+                <li>Casualties still apply, and the winner still has to cover as many as they can (matters if they have
+                    Harrowed dudes or Sidekicks. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114735#p1483709">Source</a>)
+                <li>A player can ace opposing dudes if he owns them (i.e. affected by Puppet). (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114582#p1481895">Source</a>)
+                <li>Dude cards can still be discarded/aced from a player's hand (i.e. by This'll Hurt In The Mornin'). (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114829#p1484521">Source</a>)
+            </ul>
+
+            <h4 id="rope&ride"><a href="{{ path('cards_zoom', { card_code: "06019" }) }}" class="card card-title"
+                                  data-index="06019">Rope
+                    and Ride</a></h4>
+            <ul>
+                <li>Opposing a job is not the same as accepting a callout. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114833#p1484540">Source</a>)
+                <li>You can use two of these in succession, if your dude has an unbooted horse. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114310#p1478471">Source</a>)
+                <li>If you call out a dude at an opponent's private location, then move them to a public location, your
+                    dudes will not get any bounty for breakin' and enterin'. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113860#p1471988">Source</a>)
+            </ul>
+
+            <h4 id="incubation"><a href="{{ path('cards_zoom', { card_code: "06020" }) }}" class="card card-title"
+                                   data-index="06020">Incubation</a>
+            </h4>
+            <ul>
+                <li>The affected dude's controller cannot use the ability printed on this card to reattach it to another
+                    dude. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113784#p1471119">Source</a>)
+                <li>Forget cannot be used to remove the ability to discard Incubation from a dude. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114169#p1476548">Source</a>)
+            </ul>
+
+            <h4 id="flight"><a href="{{ path('cards_zoom', { card_code: "06021" }) }}" class="card card-title"
+                               data-index="06021">Flight of
+                    the Lepus</a></h4>
+            <ul>
+                <li>You can choose your dudes and opposing dudes at the same time. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113761#p1470083">Source</a>)
+                <li>You must boot either all of them or none. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114398#p1479644">Source</a>)
+                <li>If you choose Tyxarglenak, you may also choose any hucksters in the opposing posse. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113938#p1475274">Source</a>)
+            </ul>
+
+            <h2 id="sb05">No Turning Back</h2>
+            <br>
+
+            <h4 id="ebenezer"><a href="{{ path('cards_zoom', { card_code: "07003" }) }}" class="card card-title"
+                                 data-index="07003">Ebenezer
+                    Springfield</a></h4>
+            <ul>
+                <li>'Affects' means 'Has a direct effect on your dude. Including boot/discard/ace your dude, turn him
+                    from stud to draw, increase/decrease bullets/influence/value. Does not include an indirect effect
+                    such as discarding an attached goods even if the loss of the goods affects the dude.' (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114278#p1478300">Source</a>)
+            </ul>
+
+            <h4 id="elanderxp"><a href="{{ path('cards_zoom', { card_code: "07004" }) }}" class="card card-title"
+                                  data-index="07004">Elander
+                    Boldman (Exp.1)</a></h4>
+            <ul>
+                <li>If he is in a shootout, his ability cannot be used to unboot a Gadget outside of the shootout. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113994#p1478316">Source</a>)
+            </ul>
+
+            <h4 id="antheia"><a href="{{ path('cards_zoom', { card_code: "07005" }) }}" class="card card-title"
+                                data-index="07005">Antheia
+                    Pansofia</a></h4>
+            <ul>
+                <li>If Slade Lighbody pulls a club, then uses his ability and pulls another club, Antheia's bonus will
+                    apply twice. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114309#p1478448">Source</a>)
+            </ul>
+
+            <h4 id="harry"><a href="{{ path('cards_zoom', { card_code: "07006" }) }}" class="card card-title"
+                              data-index="07006">Harry
+                    Highbinder</a></h4>
+            <ul>
+                <li>Controlling the town square means you can attach goods to your dudes there by Shoppin' or Tradin',
+                    attach Totems to the town square itself (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114723#p1483507">Source</a>), and
+                    also use Stagecoach Office to bring in new dudes there.
+            </ul>
+
+            <h4 id="isham"><a href="{{ path('cards_zoom', { card_code: "07009" }) }}" class="card card-title"
+                              data-index="07009">Jacqueline
+                    Isham</a></h4>
+            <ul>
+                <li>Don't forget to announce that you're using her ability, it doesn't trigger automatically.
+                <li>Her ability can be used if any of your dudes (including herself) accepted a callout or opposed a
+                    job. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114579#p1481950">Source</a>)
+                <li>She remains a stud until the end of shootout. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114204#p1476946">Source</a>)
+            </ul>
+
+            <h4 id="asyncoil"><a href="{{ path('cards_zoom', { card_code: "07013" }) }}" class="card card-title"
+                                 data-index="07013">Asyncoil
+                    Gun</a></h4>
+            <ul>
+                <li>The equipped dude makes the pull, not the player, so Doyle's Hoyle can be used. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114151#p1476298">Source</a>)
+            </ul>
+
+            <h4 id="scoop"><a href="{{ path('cards_zoom', { card_code: "07014" }) }}" class="card card-title"
+                              data-index="07014">Scoop
+                    Hound</a></h4>
+            <ul>
+                <li>Prevents Shootout plays that bring new dudes into play and move them into a posse (Raising Hell,
+                    Clown Carriage, Hired Help, Shane & Graves Security, Spirit Dance, The Pack Awakens). (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=113984#p1474030">Source</a>)
+            </ul>
+
+            <h4 id="tonic"><a href="{{ path('cards_zoom', { card_code: "07016" }) }}" class="card card-title"
+                              data-index="07016">Vitality
+                    Tonic</a></h4>
+            <ul>
+                <li>If the React ability is used, effects that trigger on a dude being aced (The Brute, The Undertaker)
+                    do not trigger. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114281#p1478286">Source</a>)
+                <li>If a dude is supposed to be aced to cover casualties but is saved with the Tonic's ability, that
+                    dude is now considered as being discarded as a casualty, and thus can be further saved by Arnold
+                    McCadish. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114322#p1478579">Source</a>)
+            </ul>
+
+            <h4 id="ntb"><a href="{{ path('cards_zoom', { card_code: "07021" }) }}" class="card card-title"
+                            data-index="07021">No Turning
+                    Back</a></h4>
+            <ul>
+                <li>Token dudes can be aced normally. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114386#p1479472">Source</a>)
+                <li>Acing a dude is part of the cost ("do X to do Y" format), thus React abilities cannot be used to
+                    save that dude from being aced (Dr. Emanuel Ashbel, Vitality Tonic, Lay On Hands), but a Harrewed
+                    dude will get discarded, not aced. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114454#p1480433">Source</a>)
+                <li>Will set casualties to zero after Takin' Ya With Me and Hot Lead Flyin' increase them, effectively
+                    negating these cards. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114734#p1483705">Source</a>)
+            </ul>
+
+            <h2 id="sb06">Nightmare at Noon</h2>
+            <br>
+
+            <h4 id="nathan"><a href="{{ path('cards_zoom', { card_code: "08004" }) }}" class="card card-title"
+                               data-index="08004">Nathan
+                    Shane</a></h4>
+            <ul>
+                <li>Nathan's ability cannot be used if his bullet value is higher than the number of cards in your
+                    opponent's hand. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115497"
+                                         target="_blank">Source</a>)
+            </ul>
+
+            <h4 id="warren"><a href="{{ path('cards_zoom', { card_code: "08005" }) }}" class="card card-title"
+                               data-index="08005">Warren
+                    Graves</a></h4>
+            <ul>
+                <li>Warren's ability can be used even if the only dude in a posse is about to get discarded / aced /
+                    sent home, and the shootout will not end immediately. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114814#p1484371">Source</a>)
+            </ul>
+
+            <h4 id="radcliffe"><a href="{{ path('cards_zoom', { card_code: "08007" }) }}" class="card card-title"
+                                  data-index="08007">John
+                    &quot;Aces&quot; Radcliffe</a></h4>
+            <ul>
+                <li>The effect of John's trait lasts until the end of the shootout. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114813#p1487984">Source</a>)
+            </ul>
+
+            <h4 id="duster"><a href="{{ path('cards_zoom', { card_code: "08013" }) }}" class="card card-title"
+                               data-index="08013">Dog&#039;s
+                    Duster</a></h4>
+            <ul>
+                <li>Only prevents non-wanted Deputies from gaining a bounty for participating in a shootout at your
+                    opponent's private location (breakin' and enterin'). Does not affect dudes who are already wanted,
+                    and dudes participating in a Kidnappin'.
+                </li>
+                <li>The dude issuing a callout doesn't have to be the same dude that's wearing the Duster. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115511"
+                            target="_blank">Source</a>)
+            </ul>
+
+            <h4 id="fsatat"><a href="{{ path('cards_zoom', { card_code: "08017" }) }}" class="card card-title"
+                               data-index="08017">For Such a
+                    Time as This</a></h4>
+            <ul>
+                <li>'This Miracle's skill check' means pull + modifiers, not difficulty.</li>
+                <li>This card is aced only if the job succeeds and the spell is still in play. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=115076#p1487985">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="treasure"><a href="{{ path('cards_zoom', { card_code: "08020" }) }}" class="card card-title"
+                                 data-index="08020">Buried
+                    Treasure</a></h4>
+            <ul>
+                <li>Acing a dude card from the discard pile triggers the Undertaker.</li>
+            </ul>
+
+            <h4 id="n@n"><a href="{{ path('cards_zoom', { card_code: "08021" }) }}" class="card card-title"
+                            data-index="08021">Nightmare at
+                    Noon</a></h4>
+            <ul>
+                <li>Only one Headline action can be played per shootout, for both players.</li>
+                <li>Bullets are checked only once, when this card is played. Reducing bullets after that will not turn
+                    stud dudes into draws. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115226#p1488912"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h2 id="fp01">Immovable Object, Unstoppable Force</h2>
+            <br>
+
+            <h4 id="ben"><a href="{{ path('cards_zoom', { card_code: "09003" }) }}" class="card card-title"
+                            data-index="09003">Benjamin
+                    Washington</a></h4>
+            <ul>
+                <li>If you discard several cards, you may choose several dudes and give -2 upkeep to each one. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114730#p1483612">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="randall"><a href="{{ path('cards_zoom', { card_code: "09005" }) }}" class="card card-title"
+                                data-index="09005">Randall</a></h4>
+            <ul>
+                <li>At the start of the game you draw exactly 5 cards, not up to your maximum hand size. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114729#p1483609">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="hamshanks"><a href="{{ path('cards_zoom', { card_code: "09010" }) }}" class="card card-title"
+                                  data-index="09010">Hamshanks</a>
+            </h4>
+            <ul>
+                <li>If Hamshanks is unbooted in a location you control and is equipped with a Mayfair Family Deck while
+                    Tyxarglenak is also present, their protection effects cancel each other. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=115146#p1487982">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="sarah"><a href="{{ path('cards_zoom', { card_code: "09025" }) }}" class="card card-title"
+                              data-index="09025">Sarah
+                    Meoquanee</a></h4>
+            <ul>
+                <li>Her trait references the Spirit keyword that spells have, not Spirit tokens. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114682#p1483180">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="crow"><a href="{{ path('cards_zoom', { card_code: "09027" }) }}" class="card card-title"
+                             data-index="09027">Laughing
+                    Crow</a></h4>
+            <ul>
+                <li>You can attach revealed Spirit spells to any of your Shamans anywhere, including booted and in
+                    locations you don't control. This does not apply to Totems. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114780#p1484044">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="nunchucks"><a href="{{ path('cards_zoom', { card_code: "09029" }) }}" class="card card-title"
+                                  data-index="09029">Nunchucks</a>
+            </h4>
+            <ul>
+                <li>Can be used to affect pulls performed by the opponent or opposing dudes (skill checks, etc.) (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114844#p1484606">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="whatever"><a href="{{ path('cards_zoom', { card_code: "09030" }) }}" class="card card-title"
+                                 data-index="09030">Idol of
+                    Tlazolteotl</a></h4>
+            <ul>
+                <li>To attach something legally means to attach it to something it could legally attach to as it enters
+                    play. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114963#p1485907">Source</a>) That
+                    also means you can only re-attch Totems to locations that you control where you have an unbooted
+                    Shaman. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114966#p1485927">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="spirittrail"><a href="{{ path('cards_zoom', { card_code: "09033" }) }}" class="card card-title"
+                                    data-index="09033">Spirit
+                    Trail</a></h4>
+            <ul>
+                <li>If one Spirit Trail is attached to your home and another one to any deed (even out of town), your
+                    dudes can move from home to that deed without booting, as these locations are now adjacent. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114728#p1483608">Source</a>)
+                </li>
+                <li>A Shaman with a Buffalo Rifle can join the shootout at that deed from home, without moving or
+                    booting, and can use Totems attached to your home.
+                </li>
+            </ul>
+
+            <h4 id="packawakens"><a href="{{ path('cards_zoom', { card_code: "09035" }) }}" class="card card-title"
+                                    data-index="09035">The
+                    Pack Awakens</a></h4>
+            <ul>
+                <li>Can be used only if your Shaman is present at this location and is participating in the shootout.
+                    (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114678#p1483164">Source</a>)
+                </li>
+                <li>Enemy Gunslinger tokens also become Harrowed.</li>
+                <li>General Store cannot be used to attach Totems to locations you don't control, or locations where you
+                    only have a booted Shaman. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=114694#p1483884">Source</a>)
+                </li>
+            </ul>
+
+            <h2 id="pb02">The Light Shineth</h2>
+            <br>
+
+            <h4 id="sanatorium">
+                <a class="card card-title" data-index="10001" href="{{ path('cards_zoom', { card_code: "10001" }) }}"
+                   target="_blank">The
+                    Sanatorium</a></h4>
+            <ul>
+                <li>Can only give +1 Huckster skill to a dude who already has the Huckster keyword. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115283#p1489076"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="den_of_thieves">
+                <a class="card card-title" data-index="10003" href="{{ path('cards_zoom', { card_code: "10003" }) }}"
+                   target="_blank">Den of
+                    Thieves</a></h4>
+            <ul>
+                <li>The cost-reducing effect applies to Grifters in your starting posse and in your deck. Consequently,
+                    using No Turning Back's noon ability to ace a Grifter will net you less money.
+                </li>
+                <li>If you want to use multiple Grifter abilities, you must use one, then pass the priority to your
+                    opponent before using the other one.
+                </li>
+                <li>If using the React ability during a shootout, you can put bounty on Grifters that are not in the
+                    posse.
+                </li>
+                <li>Traits that trigger when a draw hand is revealed trigger before the Den's react ability makes the
+                    hand illegal. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115295#p1489357"
+                                      target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="badger">
+                <a class="card card-title" data-index="10006" href="{{ path('cards_zoom', { card_code: "10006" }) }}"
+                   target="_blank">Michael
+                    "The Badger" Dodge</a></h4>
+            <ul>
+                <li>The Badger's trait sets his bullet type to stud when a Melee weapon is attached to him, it is not a
+                    constant check. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115237#p1488658"
+                                        target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="ivor_xp1">
+                <a class="card card-title" data-index="10011" href="{{ path('cards_zoom', { card_code: "10011" }) }}"
+                   target="_blank">Ivor
+                    Hawley (Exp.1)</a></h4>
+            <ul>
+                <li>Ivor's trait reduces his cost when he's in any game zone (in play, in boot hill, etc.), including
+                    for purposes like Soul Cage.
+                </li>
+                <li>Ivor gets the discount for himself if you play him from boot hill (you pay costs first, then the
+                    dude enters play). (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115306"
+                                           target="_blank">Source</a>)
+                </li>
+                <li>All starting dudes are put into play simultaneously, so Ivor doesn't get any discount for other
+                    Abominations in the starting posse. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115302"
+                            target="_blank">Source</a>)
+                </li>
+                <li>When using Ivor's ability, you play Abominations or Hexes one by one, not simultaneously. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115326#p1489354"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="deborah">
+                <a class="card card-title" data-index="10012" href="{{ path('cards_zoom', { card_code: "10012" }) }}"
+                   target="_blank">Deborah
+                    West</a></h4>
+            <ul>
+                <li>If Deborah issues a callout, she remains the leader (and stud) for the duration of the resulting
+                    shootout, even if she leaves the posse. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115307"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="wretched">
+                <a class="card card-title" data-index="10019" href="{{ path('cards_zoom', { card_code: "10019" }) }}"
+                   target="_blank">The
+                    Wretched</a></h4>
+            <ul>
+                <li>The Wretched can be invented by Valeria Batten. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115299#p1489155"
+                            target="_blank">Source</a>)
+                </li>
+                <li>The Wretched enters play at the Mad Scientist's location by default, unless another effect makes it
+                    enter play someplace else (e.g. Clown Carriage, Raising Hell, Soul Cage, Stagecoach Office).
+                </li>
+                <li>If The Wretched enters play during a shootout, the inventing Mad Scientist doesn't have to be in the
+                    posse, or in the location of the shootout. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115327"
+                            target="_blank">Source</a>)
+                </li>
+                <li>If The Wretched enters play at a location with no other dudes present, it must ace itself. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115328#p1489356"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="extra_bet">
+                <a class="card card-title" data-index="10020" href="{{ path('cards_zoom', { card_code: "10020" }) }}"
+                   target="_blank">The
+                    Extra Bet</a></h4>
+            <ul>
+                <li>Replace a card after lowball hands are drawn but before they are revealed. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115256"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="mutant_cattle">
+                <a class="card card-title" data-index="10024" href="{{ path('cards_zoom', { card_code: "10024" }) }}"
+                   target="_blank">Mutant
+                    Cattle</a></h4>
+            <ul>
+                <li>The effect triggers from the discard pile, so Unprepared or Phantom Fingers will not prevent it. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115308"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="guard_dog">
+                <a class="card card-title" data-index="10027" href="{{ path('cards_zoom', { card_code: "10027" }) }}"
+                   target="_blank">Rich
+                    Man's Guard Dog</a></h4>
+            <ul>
+                <li>If invented during a shootout, the Mad Scientist doesn't have to be in the posse, or in the location
+                    of the shootout. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115309"
+                                         target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="deception">
+                <a class="card card-title" data-index="10035" href="{{ path('cards_zoom', { card_code: "10035" }) }}"
+                   target="_blank">Rabbit's
+                    Deception</a></h4>
+            <ul>
+                <li>If you send your only dude home and your posse becomes empty, the shootout immediately ends, and you
+                    cannot combo. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115493#p1490319"
+                                      target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="devils_joker">
+                <a class="card card-title" data-index="10040" href="{{ path('cards_zoom', { card_code: "10040" }) }}"
+                   target="_blank">Devil's
+                    Joker</a></h4>
+            <ul>
+                <li>+2 hand rank modifier applies as long as the Devil's Joker is in the draw hand. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115297"
+                            target="_blank">Source</a>)
+                </li>
+                <li><a href="{{ path('cards_zoom', { card_code: "03018" }) }}" target="_blank">Fetch</a> grabs a card
+                    after hand ranks are
+                    locked, so you don't lose the +2 bonus. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115406#p1490402"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h2 id="sb07">Dirty Deeds</h2>
+            <br>
+
+            <h4 id="108">
+                <a class="card card-title" data-index="11001" href="{{ path('cards_zoom', { card_code: "11001" }) }}"
+                   target="_blank">108
+                    Worldly Desires</a></h4>
+            <ul>
+                <li>If used along with <a href="{{ path('cards_zoom', { card_code: "10020" }) }}" target="_blank">The
+                        Extra Bet</a>,
+                    discard-then-draw first (for The Extra Bet), then draw-then-discard (for 108 Worldly Desires). (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115464"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="stables">
+                <a class="card card-title" data-index="11003" href="{{ path('cards_zoom', { card_code: "11003" }) }}"
+                   target="_blank">Morgan
+                    Stables</a></h4>
+            <ul>
+                <li>Use the react ability only if your dude actually changed location.</li>
+                <li>If you use a Noon ability to move your dude and initiate a shootout (e.g. <a
+                            href="{{ path('cards_zoom', { card_code: "01125" }) }}" target="_blank">Run 'Em Down!</a>),
+                    wait for the
+                    shootout to end before using the Stables' react ability to cycle a card and make another Noon play.
+                    (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115469" target="_blank">Source</a>)
+                </li>
+                <li>If you use a Shootout ability to send your only dude home (e.g. <a
+                            href="{{ path('cards_zoom', { card_code: "11019" }) }}" target="_blank">Personal
+                        Ornothopter</a>), you can make
+                    another play before the shootout ends.
+                </li>
+                <li>If you play <a href="{{ path('cards_zoom', { card_code: "01143" }) }}" target="_blank">A Secret
+                        Tunnel</a> then react
+                    with Morgan Stables, you can make two additional Noon plays. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115470"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="xiang_fang">
+                <a class="card card-title" data-index="11004" href="{{ path('cards_zoom', { card_code: "11004" }) }}"
+                   target="_blank">Xiang
+                    Fang</a></h4>
+            <ul>
+                <li>If you set your home's production to 0, spend all your money, then borrow from the bank during the
+                    gamblin' phase and lose lowball, you must repay to the bank during the following upkeep phase (next
+                    turn). (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115465" target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="kabeda">
+                <a class="card card-title" data-index="11006" href="{{ path('cards_zoom', { card_code: "11006" }) }}"
+                   target="_blank">Kabeda
+                    Hakurei</a></h4>
+            <ul>
+                <li>If a Totem's ability refers to "this location", it means Kabeda's location. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115466"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="rico">
+                <a class="card card-title" data-index="11013" href="{{ path('cards_zoom', { card_code: "11013" }) }}"
+                   target="_blank">Rico
+                    Rodegain</a></h4>
+            <ul>
+                <li>You cannot get a startable deed (e.g. <a href="{{ path('cards_zoom', { card_code: "06011" }) }}"
+                                                             target="_blank">Gomorra
+                        Jail</a>).
+                </li>
+                <li>You cannot get a second Grifter (unless you're playing <a
+                            href="{{ path('cards_zoom', { card_code: "10003" }) }}"
+                            target="_blank">Den of Thieves</a>).
+                </li>
+                <li>You cannot get 5 new dudes unless one of them is <a
+                            href="{{ path('cards_zoom', { card_code: "09006" }) }}"
+                            target="_blank">Xiaodan Li</a>. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115428"
+                            target="_blank">Source</a>)
+                </li>
+                <li>In a multiplayer game, look at one opponent's hand. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115442"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="hideout">
+                <a class="card card-title" data-index="11014" href="{{ path('cards_zoom', { card_code: "11014" }) }}"
+                   target="_blank">Maza
+                    Gang Hideout</a></h4>
+            <ul>
+                <li>Under the new movement rules, dudes cannot move to this deed from town square without booting as a
+                    standard Movin' play.
+                </li>
+            </ul>
+
+            <h4 id="miasmatic">
+                <a class="card card-title" data-index="11015" href="{{ path('cards_zoom', { card_code: "11015" }) }}"
+                   target="_blank">Miasmatic
+                    Purifier</a></h4>
+            <ul>
+                <li>If a deed is discarded, all dudes there go home booted.</li>
+                <li><a href="{{ path('cards_zoom', { card_code: "08012" }) }}" target="_blank">Testing Range</a> cannot
+                    be used to pull
+                    again. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115467" target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="press">
+                <a class="card card-title" data-index="11016" href="{{ path('cards_zoom', { card_code: "11016" }) }}"
+                   target="_blank">Disgenuine
+                    Currency Press</a></h4>
+            <ul>
+                <li>The second trait triggers from the discard pile, so <a
+                            href="{{ path('cards_zoom', { card_code: "01134" }) }}"
+                            target="_blank">Unprepared</a> or <a
+                            href="{{ path('cards_zoom', { card_code: "10030" }) }}" target="_blank">Phantom Fingers</a>
+                    will not prevent it.
+                    (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115308" target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="accident">
+                <a class="card card-title" data-index="11021" href="{{ path('cards_zoom', { card_code: "11021" }) }}"
+                   target="_blank">An
+                    Accidental Reunion</a></h4>
+            <ul>
+                <li>Paying 2 ghost rock to return this card to hand is part of the effect, therefore you cannot pay for
+                    it with <a href="{{ path('cards_zoom', { card_code: "01028" }) }}" target="_blank">James Ghetty</a>
+                    or <a
+                            href="{{ path('cards_zoom', { card_code: "02006" }) }}" target="_blank">Lillian Morgan</a>.
+                    (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115490#p1490312"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="mod">
+                <a class="card card-title" data-index="11022" href="{{ path('cards_zoom', { card_code: "11022" }) }}"
+                   target="_blank">A
+                    Slight Modification</a></h4>
+            <ul>
+                <li>Playing an action card includes using an ability on that card.</li>
+                <li>Play this after your opponent declares the use of an ability, but before they pay any costs (ghost
+                    rock, booting cards, making a pull). Your opponent is still considered to have used that ability for
+                    this turn. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115419" target="_blank">Source</a>)
+                </li>
+                <li>If played to counter a Headline action, no other Headlines can be played during this shootout. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&t=115520" target="_blank">Source</a>)
+                </li>
+                <li>Equipping cards as shootout plays (<a href="{{ path('cards_zoom', { card_code: "01089" }) }}"
+                                                          target="_blank">Auto-Revolver</a>,
+                    <a href="{{ path('cards_zoom', { card_code: "01120" }) }}" target="_blank">Concealed Weapons</a>) is
+                    different from
+                    using Shootout abilities. (<a
+                            href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115179#p1488882"
+                            target="_blank">Source</a>)
+                </li>
+            </ul>
+
+            <h4 id="revenge">
+                <a class="card card-title" data-index="11023" href="{{ path('cards_zoom', { card_code: "11023" }) }}"
+                   target="_blank">Rabbit
+                    Takes Revenge</a></h4>
+            <ul>
+                <li>Affected dudes cannot flee the shootout, and cannot be saved from being discarded or aced by moving
+                    home booted. (<a href="http://www.alderac.com/forum/viewtopic.php?f=375&amp;t=115468"
+                                     target="_blank">Source</a>)
+                </li>
+            </ul>
+        </article>
+    </div>
+{% endblock %}

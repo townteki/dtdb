@@ -1,0 +1,33 @@
+<div class="row">
+    <form method="GET" action="{{ path('cards_find') }}" id="search-form" role="form">
+        <div class="col-sm-4">
+            <div class="input-group" style="margin-bottom:.5em">
+                <input class="form-control" size="30" name="q" id="search-input" tabindex="1"
+                       value="{{ q|default('') }}" title="Search tips:
+   e: expansion (word)
+   t: type (word)
+   k: keywords (word)
+   g: gang (letter)
+   s: shooter (word)
+   x: text (word)
+   r: cost (number)
+   w: wealth (number)
+   v: value (number)
+   u: upkeep (number)
+   p: production (number)
+   b: bullets (number)
+   i: influence (number)
+   c: control (number)
+   f: flavor (word)
+   a: artist (word)
+   d: release date (date)
+
+Example: [ t:dude g:l ] displays all Law Dogs dudes">
+                <span class="input-group-btn">
+              <button class="btn btn-primary" type="submit">{% trans %}Search{% endtrans %}</button>
+          </span>
+            </div><!-- /input-group -->
+        </div>
+        {% include 'Default/searchoptions.html.twig' %}
+    </form>
+</div>

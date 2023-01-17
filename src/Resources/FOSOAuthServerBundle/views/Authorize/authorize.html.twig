@@ -1,0 +1,42 @@
+{% extends "FOSOAuthServerBundle::layout.html.twig" %}
+{% block navbar %}
+    <div class="navbar-header">
+        <span class="navbar-brand">
+            <img src="{{  asset('/images/icon.png') }}" class="img-responsive navbar-icon"> DoomtownDB
+        </span>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">DoomtownDB Authorization</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            The application <strong>{{ client.name }}</strong> would like to connect to your account.
+                        </p>
+                        <p>
+                            If you agree, <strong>{{ client.name }}</strong> will be able to perform the following operations on
+                            your behalf:
+                        </p>
+                        <ul>
+                            <li><em>Modify your private deck or create a new one on DoomtownDB.</em></li>
+                            <li><em>Publish your private deck on DoomtownDB.</em></li>
+                        </ul>
+                        <div class="form">
+                            {% block fos_oauth_server_content %}
+                                {% include "@FOSOAuthServerBundle/Authorize/authorize_content.html.twig" %}
+                            {% endblock fos_oauth_server_content %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

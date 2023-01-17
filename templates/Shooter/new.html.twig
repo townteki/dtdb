@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body -%}
+    <div class="container-fluid main">
+        <div class="row">
+            <div class="col">
+                <div class="page-header">
+                    <h1>Shooter creation</h1>
+                </div>
+                {{ form(form) }}
+                <ul class="record_actions">
+                    <li>
+                        <a href="{{ path('admin_shooter') }}">
+                            Back to the list
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

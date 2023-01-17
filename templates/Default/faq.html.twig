@@ -1,0 +1,1403 @@
+{% extends 'base.html.twig' %}
+{% block title %}Rulings and FAQ - Version 005-20151210{% endblock %}
+{% block body %}
+    <div class="container main">
+        <h1>{{ block('title') }}</h1>
+        <article class="rules">
+            <nav class="inner rop">
+                <ul>
+                    <li><a href="#grifters">Grifters</a></li>
+                    <li>
+                        <a href="#turn">Turn Sequence clarifications</a>
+                        <ul>
+                            <li><a href="#sundown">Sundown</a></li>
+                            <li><a href="#shootouts">Shootouts</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#general">General Rulings</a>
+                        <ul>
+                            <li><a href="#jobs">Jobs</a></li>
+                            <li><a href="#sidekicks">Sidekicks</a></li>
+                            <li><a href="#actions&abilities">Actions and Abilities</a></li>
+                            <li><a href="#weapons">Weapons</a></li>
+                            <li><a href="#unique">Uniqueness</a></li>
+                            <li><a href="#bounties">Bounties</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#specific">Specific card rulings</a>
+                        <ul>
+                            <li><a href="#jokers">Jokers</a>
+                                <ul>
+                                    <li><a href="#all_jokers">All Jokers</a></li>
+                                    <li><a href="#devils_joker">Devil&#039;s Joker</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#outfits">Outfits</a>
+                                <ul>
+                                    <li><a href="#desrow">Desolation Row</a></li>
+                                    <li><a href="#lawdogs">Law Dogs</a></li>
+                                    <li><a href="#sanatorium">The Sanatorium</a></li>
+                                    <li><a href="#sloanegang">The Sloane Gang</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#dudes">Dudes</a>
+                                <ul>
+                                    <li><a href="#ancestor">Ancestor Spirit</a></li>
+                                    <li><a href="#arnold">Arnold McCadish</a></li>
+                                    <li><a href="#barton">Barton Everest</a></li>
+                                    <li><a href="#clem">Clementine Lepp</a></li>
+                                    <li><a href="#drdawn">Dr Dawn Edwards / Eve Henry</a></li>
+                                    <li><a href="#fixer">The Fixer</a></li>
+                                    <li><a href="#ghostly">The Ghostly Gun</a></li>
+                                    <li><a href="#harold">Harold Aimslee</a></li>
+                                    <li><a href="#ivor">Ivor Hawley</a></li>
+                                    <li><a href="#ivor_xp1">Ivor Hawley (Exp.1)</a></li>
+                                    <li><a href="#james">James Ghetty</a></li>
+                                    <li><a href="#jon">Jon Longstride</a></li>
+                                    <li><a href="#kabeda">Kabeda Hakurei</a></li>
+                                    <li><a href="#kevin">Kevin Wainwright</a></li>
+                                    <li><a href="#lawrence">Lawrence Blackwood</a></li>
+                                    <li><a href="#lillian">Lillian Morgan</a></li>
+                                    <li><a href="#louis">Louis Pasteur</a></li>
+                                    <li><a href="#maria">Maria Kingsford</a></li>
+                                    <li><a href="#mortimer">Mortimer Parsons</a></li>
+                                    <li><a href="#nathan">Nathan Shane</a></li>
+                                    <li><a href="#nicodemus">Nicodemus Whateley</a></li>
+                                    <li><a href="#philipxp">Philip Swinford (Exp.1)</a></li>
+                                    <li><a href="#quaterman">QUATERMAN</a></li>
+                                    <li><a href="#ramiro">Ramiro Mendoza</a></li>
+                                    <li><a href="#remy">Remy LaPointe</a></li>
+                                    <li><a href="#rico">Rico Rodegain</a></li>
+                                    <li><a href="#sloane">Sloane</a></li>
+                                    <li><a href="#smilingtom">Smiling Tom</a></li>
+                                    <li><a href="#tommy">Tommy Harden</a></li>
+                                    <li><a href="#william">William Specks</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#deeds">Deeds</a>
+                                <ul>
+                                    <li><a href="#1stbaptist">1st Baptist Church</a></li>
+                                    <li><a href="#bunkhouse">Bunkhouse</a></li>
+                                    <li><a href="#tax_office">California Tax Office</a></li>
+                                    <li><a href="#carters">Carter's Bounties</a></li>
+                                    <li><a href="#genstore">General Store</a></li>
+                                    <li><a href="#parish">Gomorra Parish</a></li>
+                                    <li><a href="#pearlys">Pearly's Palace</a></li>
+                                    <li><a href="#stagecoach">Stagecoach Office</a></li>
+                                    <li><a href="#undertaker">Undertaker</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#actions">Actions</a>
+                                <ul>
+                                    <li><a href="#acoach">A Coach Comes to Town</a></li>
+                                    <li><a href="#never_forget">A Fight They'll Never Forget</a></li>
+                                    <li><a href="#slight_mod">A Slight Modification</a></li>
+                                    <li><a href="#ambush">Ambush</a></li>
+                                    <li><a href="#badcompany">Bad Company</a></li>
+                                    <li><a href="#bottom">Bottom Dealin'</a></li>
+                                    <li><a href="#bh">Bounty Hunter</a></li>
+                                    <li><a href="#varmint">Cheatin Varmint</a></li>
+                                    <li><a href="#coachwhip">Coachwhip</a></li>
+                                    <li><a href="#concealed">Concealed Weapons</a></li>
+                                    <li><a href="#eds">Election Day Slaughter</a></li>
+                                    <li><a href="#flight">Flight of the Lepus</a></li>
+                                    <li><a href="#freshhorses">Fresh Horses</a></li>
+                                    <li><a href="#goodstiff">Good Stiff Drink</a></li>
+                                    <li><a href="#hotlead">Hot Lead Flyin'</a></li>
+                                    <li><a href="#incubation">Incubation</a></li>
+                                    <li><a href="#iwyk">It's Who You Know</a></li>
+                                    <li><a href="#kidnappin">Kidnappin'</a></li>
+                                    <li><a href="#magdistr">Magical Distraction</a></li>
+                                    <li><a href="#smartchoice">Make the Smart Choice</a></li>
+                                    <li><a href="#pinneddown">Pinned Down</a></li>
+                                    <li><a href="#prayer">Prayer</a></li>
+                                    <li><a href="#revenge">Rabbit Takes Revenge</a></li>
+                                    <li><a href="#rope&ride">Rope and Ride</a></li>
+                                    <li><a href="#runemdown">Run 'Em Down</a></li>
+                                    <li><a href="#sft">Swinford Finds Trouble</a></li>
+                                    <li><a href="#stakes">The Stakes Just Rose</a></li>
+                                    <li><a href="#takin">Takin' Ya With Me</a></li>
+                                    <li><a href="#mornin">This'll Hurt in the Mornin'</a></li>
+                                    <li><a href="#unprepared">Unprepared</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#goods">Goods</a>
+                                <ul>
+                                    <li><a href="#autorevolver">Auto-Revolver</a></li>
+                                    <li><a href="#autofeeder">Auto Cattle-Feeder</a></li>
+                                    <li><a href="#ghostbusters">Bio-charged Neutralizer</a></li>
+                                    <li><a href="#diable">Diable en Boite</a></li>
+                                    <li><a href="#duster">Dog's Duster</a></li>
+                                    <li><a href="#doyle">Doyle's Hoyle</a></li>
+                                    <li><a href="#fancyhat">Fancy New Hat</a></li>
+                                    <li><a href="#flamethrower">Flame-Thrower</a></li>
+                                    <li><a href="#forcefield">Force Field</a></li>
+                                    <li><a href="#holywheel">Holy Wheel Gun</a></li>
+                                    <li><a href="#whatever">Idol of Tlazolteotl</a></li>
+                                    <li><a href="#outlawmask">Outlaw Mask</a></li>
+                                    <li><a href="#6shooters">Pair of Six Shooters</a></li>
+                                    <li><a href="#plasmadrill">Plasma Drill</a></li>
+                                    <li><a href="#quickdraw">Quickdraw Handgun</a></li>
+                                    <li><a href="#backtothefuture">Telepathy Helmet</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#spells">Spells</a>
+                                <ul>
+                                    <li><a href="#aceinthehole">Ace in the Hole</a></li>
+                                    <li><a href="#fetch">Fetch</a></li>
+                                    <li><a href="#holyroller">Holy Roller</a></li>
+                                    <li><a href="#layonhands">Lay On Hands</a></li>
+                                    <li><a href="#mirror">Mirror Mirror</a></li>
+                                    <li><a href="#puppet">Puppet</a></li>
+                                    <li><a href="#raisinghell">Raising Hell</a></li>
+                                    <li><a href="#shield_of_faith">Shield of Faith</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <p>
+                <span style="color: red;">Note: Recent updates to the FAQ are color coded to aid identification.</span>
+            </p>
+            <h2 id="rules">The rules and mechanics</h2>
+            <h3 id="grifters">Grifters</h3>
+            <ul>
+                <li>As per the <a href="http://dtdb.co/en/floorRules">Doomtown Tournament Floor Rules</a>, the decision
+                    of whether to use a Grifter is taken by
+                    each player simultaneously, using the red/blue chip process.
+                </li>
+                <li>Once it is determined who will be using their Grifters, the players must then determine the order
+                    randomly, using a coin toss or similar.
+                </li>
+            </ul>
+            <h2 id="turn">Turn Sequence clarifications</h2>
+            <h3 id="sundown">Sundown</h3>
+            <ul>
+                <li>Traits or effects that apply continuously during Sundown start</li>
+                <li>Check for victory conditions (game possibly ends)</li>
+                <li>Effects that require a check or game state change during Sundown (e.g. Sloane Gang outfit) are
+                    resolved
+                </li>
+                <li>All players may choose to discard one card from their play hand - Winner goes first.</li>
+                <li>All players refill their hand to their maximum hand size (normally 5 cards)</li>
+                <li>Unboot all cards</li>
+                <li>Effects that apply "during Sundown" end</li>
+                <li>Effects that apply until the end of turn end</li>
+                <li>Turn ends, start a new turn.</li>
+            </ul>
+            <h3 id="shootouts">Shootouts</h3>
+            <h4 id="">Step 1. Make Plays</h4>
+            <ul>
+                <li>Winner (of Lowball), or first player clockwise from winner if winner has no dudes in fight gets the
+                    first
+                    opportunity to perform a Shootout ability.
+                </li>
+                <li>Shootout abilities must come from a dude in the fight, from cards attached to a dude in the fight,
+                    from an Action card, or move someone into the fight. A player may use a React printed on any card
+                    if the relevant trigger is met.
+                </li>
+                <li>A card ability may be used to move a dude into or out of a posse from/to the same location as the
+                    shootout, as entering or leaving a posse fulfils the movement requirement of any such ability.
+                </li>
+                <li>Each player with dudes in the fight may perform an ability when it is their turn until all players
+                    pass,
+                    even if they have previously passed during this round of the fight. However, once all players have
+                    passed the step ends immediately
+                </li>
+                <li>If at any point before casualties are taken there is only one posse with dudes left in the shootout,
+                    the
+                    shootout immediately ends and that posse wins . Card abilities may not be used to move dudes back
+                    into an empty posse, as the shootout is already over.
+                </li>
+            </ul>
+            <h4 id="">Step 2. Pick Yer Shooter</h4>
+            <ul>
+                <li>Any dude in each posse may be chosen, even if not controlled by the Leader or Mark. Card effects
+                    may determine this choice.
+                </li>
+            </ul>
+            <h4 id="">Step 3. Draw!</h4>
+            <ul>
+                <li>If the lead shooter has zero bullets, they contribute nothing, all other dudes, including those with
+                    zero bullets, contribute 1 only, choosing a zero bullet dude as lead shooter if there is any other
+                    option reduces your shooting ability.
+                </li>
+                <li>Players should determine how much of their Draw bonus they will use then discard simultaneously.
+                    Each player may, if they wish, examine their opponents discarded cards, but only after revealing
+                    their own discards.
+                </li>
+            </ul>
+            <h4 id="">Step 4a. Reveal</h4>
+            <ul>
+                <li>Reveal effects apply first, before any Resolution plays can be made.</li>
+                <li>Reveal effects are only applied to, or as a result of, the initially revealed hands this round, they
+                    do
+                    not get a chance to trigger during Resolution if a hand is changed by a Resolution effect
+                </li>
+                <li>Reveal effects happen simultaneously, if either player believes it matters, the Winner can choose
+                    the order to process them.
+                </li>
+                <li>Reveal effects normally apply for that round, and continue to do so if the hand is changed</li>
+                <li>The value of a joker is declared as part of Reveal and before Resolution plays. You may view your
+                    opponents hand before declaring the suit and value of your joker, but once declared, it cannot be
+                    changed.
+                </li>
+            </ul>
+            <h4 id="">Step 4b. Resolution plays</h4>
+            <ul>
+                <li>Winner (of Lowball), or first player clockwise from winner if winner has no dudes in fight gets the
+                    first
+                    opportunity to perform a Resolution ability.
+                </li>
+                <li>Resolution abilities must come from a dude in the fight, from cards attached to a dude in the fight,
+                    from an Action card, or move someone into the fight. A player may use a React printed on any card
+                    if the relevant trigger is met.
+                </li>
+                <li>Note: Cheatin' cards are not React cards and are played during the Resolution step alongside
+                    other Resolution plays
+                </li>
+                <li>A Cheatin' ability may only be used when another player has a Cheatin' hand.If you are the only
+                    player Cheatin' you may not use a Cheatin' ability.
+                </li>
+                <li>Cheatin' resolution abilities require that a different player is currently Cheatin' and they haven't
+                    already had a Cheatin' ability used against them to their hand this draw. A currently legal hand
+                    cannot have a Cheatin' ability used against it, even if that hand was previously illegal.
+                </li>
+                <li>If a draw hand that was legal on reveal is changed as a result of a resolution ability, it may now
+                    be
+                    treated as a Cheatin' hand, the requirement is that the hand be Cheatin' at the time the resolution
+                    ability is played.
+                </li>
+                <li>A player may only have one Cheatin' ability triggered by their draw hand per resolution step,
+                    regardless of how many times their hand changes to or from legal to Cheatin' during that resolution
+                    step.
+                </li>
+            </ul>
+            <h4 id="">Step 5. Take Yer Lumps</h4>
+            <ul>
+                <li>Modifiers to hand rank are cumulative and last for the round</li>
+                <li>Modifiers that take a hand rank below 1 or above 11 are still there but not counted for casualties,
+                    modifiers back the other way have to bring it back below the minimum or maximum (ie if a hand has
+                    rank 8, has modifiers giving it +6 and 2
+                    it is still above 11 and counts as being rank 11)
+                </li>
+                <li>If hands are exactly tied, there is no winner or loser for that round, the leader chooses casualties
+                    first.
+                </li>
+                <li>There is no suit comparison, two (eg) straight flushes with the same numeric values are an exact tie
+                    regardless of suit.
+                </li>
+                <li>Each player must try to 'fairly cover' casualties as exactly as possible, you must discard one dude
+                    if
+                    you have one casualty (you cannot ace a dude for one casualty), and must ace all your dudes if
+                    your casualty number is twice or more the number of dudes you have in the posse.
+                </li>
+                <li>The loser of the round first chooses all their dudes that will become casualties and what will
+                    happen
+                    to them. After nominating all their casualties, each casualty is resolved one at a time. Reactions
+                    to
+                    the loser taking casualties (Takin Ya With me, Hot Lead Flying) are played after the loser finishes.
+                <li>When the loser has resolved their casualties, the winner of the round then chooses theirs and then
+                    resolves them in the same way.
+                </li>
+                <li>Card abilities that happen when a dude is being discarded or aced as a casualty (especially
+                    "healing" reacts) can change or prevent the discard or acing from taking place, this still counts
+                    for
+                    the purpose of fulfilling casualty numbers.
+                </li>
+                <li>Sidekicks attached to a dude selected as a casualty can still be selected in the same round as the
+                    dude has not yet left play.
+                </li>
+            </ul>
+            <h4 id="">Step 6. Run or Gun</h4>
+            <ul>
+                <li>Dudes that flee count as moving, even if the shootout is in their own home</li>
+                <li>You may choose to have some dudes run and some stay, this can include the original mark if this is
+                    a shootout resulting from a callout.
+                </li>
+            </ul>
+            <h4 id="">Step 7. Chamber another Round</h4>
+            <ul>
+                <li>If both posses still have dudes remaining, another round of the shoutout happens automatically.</li>
+                <li>If not, all shootout effects end and the game returns to where it was, or the job is resolved</li>
+            </ul>
+            <h2 id="general">General Rulings</h2>
+            <h3 id="jobs">Jobs</h3>
+            <ul>
+                <li>The mark's location is defined during step 4, "Saddle Up", when the leader's posse moves. Even if
+                    the mark subsequently moves (e.g. by Pistol Whip or fleeing under step 6), the job can still succeed
+                    if
+                    the attacking posse is there at the end of the job shootout.
+                </li>
+                <li>The attacking posse only needs one dude to remain to claim victory, even if the original leader dies
+                    or is sent home
+                </li>
+                <li>If the job was created by an ability on a dude and that dude dies or is discarded, keep them to one
+                    side until the job is resolved in case the job text needs referencing (they still count as having
+                    been
+                    aced or discarded for the purpose of other card effects).
+                </li>
+                <li>The Leader starting the job only boots if the card requires it as a cost (eg: A Coach Comes To Town
+                    does not require the leader to boot, Ambush does)
+                </li>
+                <li>Remember that moving to the location of the Job does not boot anyone. Instead, dudes other than
+                    the leader must boot to join the posse if they are not at the location of the mark, and the leader
+                    must
+                    boot if the job ability states that he must. Once the posse is formed, it moves to the location of
+                    the
+                    mark with no further booting required.
+                </li>
+                <li>It is possible to mark your own cards with jobs, as long as the job itself does not specify an
+                    opposing
+                    card. If you do, you cannot defend against the job, but other players can still choose to do so in
+                    order to prevent the job from succeeding.
+                </li>
+            </ul>
+            <h3 id="sidekicks">Sidekicks</h3>
+            <ul>
+                <li>A dude may attach any number of sidekicks.</li>
+                <li>The sidekick must be attached to a dude in the posse in order to be used</li>
+                <li>Sidekicks cover a casualty in the same way as dudes do, they don't reduce the number taken, they
+                    count as one.
+                </li>
+                <li>If another card effect checks the bullet rating of a casualty, a sidekick has 0 bullets</li>
+                <li>Cannot be used to replace a casualty required by, for example, Pinned Down</li>
+                <li>Can be selected as a casualty if the dude attached to has already been selected for that round, all
+                    casualties are selected then each is resolved.
+                </li>
+            </ul>
+            <h3 id="actions&abilities">Actions and Abilities</h3>
+            <ul>
+                <li>The first sentence after the colon is a requirement that defines whether an ability can be used. NB,
+                    a requirement is not a cost, negating costs does not remove the requirement. All other clauses after
+                    the first sentence must be done if possible.
+                </li>
+                <li>Only Cheatin' Resolutions may be played during lowball. NonCheatin'
+                    Resolution abilities are
+                    limited to shootout draw hands only.
+                </li>
+                <li>During multiplay,
+                    players with no dudes in the shootout are limited to Cheatin' Resolution abilities
+                    only.
+                </li>
+            </ul>
+            <h3 id="weapons">Weapons</h3>
+            <ul>
+                <li>Add their bullet bonus (if any) to the dude they're attached to even when booted, unless a card
+                    effect says otherwise
+                    Searching
+                </li>
+                <li>When a card effect allows you to search for a card, you are not obliged to choose one you find. You
+                    simply declare that you are not retrieving a card, and continue play (after shuffling your deck if
+                    you
+                    searched it).
+                </li>
+            </ul>
+            <h3 id="unique">Uniqueness</h3>
+            <ul>
+                <li>You check for Unique status at the point of entering play, if while a card is in play another copy
+                    goes
+                    to Boot Hill (e.g. through Ace in the Hole) this has no effect on the card while it is still in
+                    play, it does
+                    make it harder to return the card to play (e.g. with Raising Hell).
+                </li>
+            </ul>
+            <h3 id="bounties">Bounties</h3>
+            <ul>
+                <li>If a Dude leaves a posse (e.g. Pistol Whip) and then reenters (e.g. The Stakes Just Rose), they
+                    count
+                    as entering the posse and receive a second bounty if for a job that makes you wanted or in a
+                    shootout on private ground
+                </li>
+                <li>Card effects that add to a bounty may target dudes with no bounty unless they say otherwise</li>
+                <li>The key to gaining bounty is the location of the shootout, not the location of the callout. If a
+                    dude is
+                    called out on private land, but the shootout takes place on public land due to a card effect e.g.
+                    Rope
+                    & Ride, no bounty is added.
+                </li>
+            </ul>
+
+            <h2 id="specific">Specific card rulings</h2>
+            <h3 id="jokers" style="color: red;">Jokers</h3>
+            <h4 id="all_jokers">
+                <a href="{{ path('cards_zoom', { card_code: "01144" }) }}" class="card card-title" data-index="01144">
+                    <span style="color: red;">All Jokers</span>
+                </a>
+            </h4>
+            <ul style="color: red;">
+                <li>A joker is only aced from a draw hand when it is included in the final five cards of that hand. If
+                    an
+                    effect removes a joker from a draw hand, that joker is not considered used within the draw hand,
+                    and so is not aced.
+                </li>
+                <li>The suit and value of a joker is declared when it is revealed. Should the joker be discarded during
+                    Resolution, it no longer has a value and immediately reverts to being just a joker.
+                </li>
+            </ul>
+            <h4 id="devils_joker">
+                <a href="{{ path('cards_zoom', { card_code: "10040" }) }}" class="card card-title" data-index="10040">
+                    <span style="color: red;">Devil&#039;s Joker</span>
+                </a>
+            </h4>
+            <ul style="color: red;">
+                <li>The hand rank bonus only applies while the joker is in your draw hand. Should it be removed before
+                    hand ranks are compared, the bonus is lost.
+                </li>
+            </ul>
+            <h3 id="outfits">Outfits</h3>
+            <h4 id="desrow">
+                <a href="{{ path('cards_zoom', { card_code: "05004" }) }}" class="card card-title" data-index="05004">
+                    Desolation Row
+                </a>
+            </h4>
+            <ul>
+                <li>When checking Desolation Row, the shootout has ended by the time you make the check, so any
+                    bullets gained or lost during the shootout no longer apply. For example, a dude who was Blood
+                    Cursed during the shootout will no longer have the 2
+                    bullets applied.
+                </li>
+                <li>Only the leader gets 2 bounty, and you gain ghost rock equal to the leader's bullets only.</li>
+            </ul>
+            <h4 id="lawdogs">
+                <a href="{{ path('cards_zoom', { card_code: "01002" }) }}" class="card card-title" data-index="01002">
+                    Law Dogs
+                </a>
+            </h4>
+            <ul>
+                <li>To use this ability, you only need to boot just enough dudes with combined influence greater than
+                    the chosen target dude.
+                </li>
+                <li>Can be used on your own dudes to make them wanted.</li>
+            </ul>
+            <h4 id="sanatorium"><a href="{{ path('cards_zoom', { card_code: "10001" }) }}" class="card card-title"
+                                   data-index="10001"><span
+                            style="color: red;">The Sanatorium</span></a></h4>
+            <ul style="color: red;">
+                <li>Cannot give the Huckster bonus to a dude who does not already have the Huckster skill.</li>
+            </ul>
+            <h4 id="sloanegang">
+                <a href="{{ path('cards_zoom', { card_code: "01004" }) }}" class="card card-title" data-index="01004">
+                    The Sloane Gang
+                </a>
+            </h4>
+            <ul>
+                <li>The control point is gained during Sundown, after victory conditions are checked at the start of
+                    Sundown so cannot count for that turn.
+                </li>
+                <li>If someone puppets your dude after you use this ability, you still get to choose whether to add a
+                    control point or take ghost rock, and if you choose the latter you gain the ghost rock, not the
+                    player
+                    who puppeted your dude.
+                </li>
+            </ul>
+            <h3 id="dudes">Dudes</h3>
+            <h4 id="ancestor">
+                <a href="{{ path('cards_zoom', { card_code: "09041" }) }}" class="card card-title" data-index="09041">
+                    <span style="color: red;">Ancestor Spirit</span>
+                </a>
+            </h4>
+            <ul style="color: red;">
+                <li>Is removed from play as soon as it leaves a location, and so never arrives at its destination.</li>
+            </ul>
+            <h4 id="arnold">
+                <a href="{{ path('cards_zoom', { card_code: "01008" }) }}" class="card card-title" data-index="01008">
+                    Arnold McCadish
+                </a>
+            </h4>
+            <ul>
+                <li>The dude still counts as a casualty for other effects (e.g. Takin' Ya With Me).</li>
+                <li>Attached cards stay with the dude, they're not at any point actually discarded.</li>
+                <li>Can be used to save a dude who was originally aced, but is now being discarded due to another
+                    card effect (e.g. Dr Emanuel Ashbel).
+                </li>
+            </ul>
+            <h4 id="barton"><a href="{{ path('cards_zoom', { card_code: "01040" }) }}" class="card card-title"
+                               data-index="01040">Barton
+                    Everest</a></h4>
+            <ul>
+                <li>Trait triggers on reveal (step 4a above) and lasts for that round, is cumulative with other hand
+                    rank
+                    modifiers and continues to apply if Barton is aced or leaves the shootout.
+                </li>
+            </ul>
+            <h4 id="clem"><a href="{{ path('cards_zoom', { card_code: "01045" }) }}" class="card card-title"
+                             data-index="01045">Clementine
+                    Lepp</a></h4>
+            <ul>
+                <li>A Bounty Hunter can be played against Clementine, but will have no effect and is immediately
+                    removed from play.
+                </li>
+            </ul>
+            <h4 id="drdawn"><a href="{{ path('cards_zoom', { card_code: "01052" }) }}" class="card card-title"
+                               data-index="01052">Dr. Dawn
+                    Edwards</a> / <a href="{{ path('cards_zoom', { card_code: "01054" }) }}" class="card card-title"
+                                     data-index="01054">Eve
+                    Henry</a></h4>
+            <ul>
+                <li>If brought into play by the discard of the other, they enter play unbooted in the normal manner,
+                    effects do not carry over.
+                </li>
+                <li>They do not enter the Shootout</li>
+                <li>They must actually be discarded, effects that prevent discard (e.g. Arnold McCadish) prevent the
+                    trigger for the trait.
+                </li>
+                <li>You may search your deck even if you know the card is not present as that knowledge is not public
+                    (it may be in your hand, etc).
+                </li>
+            </ul>
+            <h4 id="fixer"><a href="{{ path('cards_zoom', { card_code: "05014" }) }}" class="card card-title"
+                              data-index="05014">The
+                    Fixer</a></h4>
+            <ul>
+                <li>Discard the cards from the top of your deck.</li>
+            </ul>
+            <h4 id="ghostly"><a href="{{ path('cards_zoom', { card_code: "01009" }) }}" class="card card-title"
+                                data-index="01009">The
+                    Ghostly Gun</a></h4>
+            <ul>
+                <li>If his ability is used when he is the last member of his posse the shootout ends and you skip to
+                    step
+                    7 as per page 23.
+                </li>
+                <li>It is a Resolution ability, Cheatin' abilities may still be played on the hand he is now in if, at
+                    the time
+                    the Cheatin' ability is played the hand is illegal and his owner hasn't already been targeted by a
+                    Cheatin' ability that draw.
+                </li>
+                <li>His value must be declared when you use the ability.</li>
+            </ul>
+            <h4 id="harold"><a href="{{ path('cards_zoom', { card_code: "01032" }) }}" class="card card-title"
+                               data-index="01032">Harold
+                    Aimslee</a></h4>
+            <ul>
+                <li>You must have a non-Weapon
+                    Gadget in your discard pile in order to use the ability and discard a
+                    card.
+                </li>
+            </ul>
+            <h4 id="ivor"><a href="{{ path('cards_zoom', { card_code: "01014" }) }}" class="card card-title"
+                             data-index="01014">Ivor
+                    Hawley</a></h4>
+            <ul>
+                <li>His trait checks to see if he has one (or more) hexes attached and if so gives him the bonus, it's
+                    not
+                    a one-per-hex
+                    bonus.
+                </li>
+            </ul>
+
+            <h4 id="ivor_xp1"><a href="{{ path('cards_zoom', { card_code: "10011" }) }}" class="card card-title"
+                                 data-index="10011"><span
+                            style="color: red;">Ivor Hawley (Exp.1)</span></a></h4>
+            <ul style="color: red;">
+                <li>When using his react, if he is aced by a Mad Scientist to bring a Wretched into play, he can then be
+                    selected as the second Abomination to be brought into play. Note: currently under review.
+                </li>
+            </ul>
+            <h4 id="james"><a href="{{ path('cards_zoom', { card_code: "01028" }) }}" class="card card-title"
+                              data-index="01028">James
+                    Ghetty</a></h4>
+            <ul>
+                <li>The Ghost Rock may be used to pay for an Auto Revolver (or other Goods if Concealed Weapons
+                    has been played).
+                </li>
+                <li>May not be used to pay secondary costs, such as paying for an Abomination brought into play using
+                    Raising Hell.
+                </li>
+            </ul>
+            <h4 id="jon"><a href="{{ path('cards_zoom', { card_code: "01029" }) }}" class="card card-title"
+                            data-index="01029">Jon
+                    Longstride</a></h4>
+            <ul>
+                <li>Allows an ability to be reused later in the turn, does not require or allow immediate use.</li>
+            </ul>
+            <h4 id="kabeda"><a href="{{ path('cards_zoom', { card_code: "11006" }) }}" class="card card-title"
+                               data-index="11006"><span
+                            style="color: red;">Kabeda Hakurei</span></a></h4>
+            <ul style="color: red;">
+                <li>Whenever a Totem's ability refers to "this location", it is referring to Kabeda's location.</li>
+            </ul>
+            <h4 id="kevin"><a href="{{ path('cards_zoom', { card_code: "01011" }) }}" class="card card-title"
+                              data-index="01011">Kevin
+                    Wainwright</a></h4>
+            <ul>
+                <li>Moving is a requirement of the ability, so he must actually change location (ie start in a different
+                    location to the Huckster).
+                </li>
+            </ul>
+            <h4 id="lawrence"><a href="{{ path('cards_zoom', { card_code: "01037" }) }}" class="card card-title"
+                                 data-index="01037">Lawrence
+                    Blackwood</a></h4>
+            <ul>
+                <li>The control point gained from his action is in addition to any other control points he might gain
+                    (eg
+                    from the Sloane Gang outfit).
+                </li>
+            </ul>
+            <h4 id="lillian"><a href="{{ path('cards_zoom', { card_code: "02006" }) }}" class="card card-title"
+                                data-index="02006">Lillian
+                    Morgan</a></h4>
+            <ul>
+                <li>The Ghost Rock may be used to pay for an Auto Revolver (or other Goods if Concealed Weapons
+                    has been played).
+                </li>
+                <li>May not be used to pay secondary costs, such as paying for an Abomination brought into play using
+                    Raising Hell.
+                </li>
+            </ul>
+            <h4 id="louis"><a href="{{ path('cards_zoom', { card_code: "06006" }) }}" class="card card-title"
+                              data-index="06006">Louis
+                    Pasteur</a></h4>
+            <ul>
+                <li>Louis must make the Mad Scientist skill test.</li>
+            </ul>
+            <h4 id="maria"><a href="{{ path('cards_zoom', { card_code: "05015" }) }}" class="card card-title"
+                              data-index="05015">Maria
+                    Kingsford</a></h4>
+            <ul>
+                <li>She does not add her bounty to her Huckster check when using a hex to enter the shootout.</li>
+            </ul>
+            <h4 id="mortimer"><a href="{{ path('cards_zoom', { card_code: "03003" }) }}" class="card card-title"
+                                 data-index="03003">Mortimer
+                    Parsons</a></h4>
+            <ul>
+                <li>After being sent home, his influence can still be modified using other card effects.</li>
+            </ul>
+            <h4 id="nathan"><a href="{{ path('cards_zoom', { card_code: "08004" }) }}" class="card card-title"
+                               data-index="08004"><span
+                            style="color: red;">Nathan Shane</span></a></h4>
+            <ul style="color: red;">
+                <li>If Nathan's bullets are greater than the current number of cards in the opponent&#039;s hand, you cannot
+                    use his ability.
+                </li>
+            </ul>
+            <h4 id="nicodemus"><a href="{{ path('cards_zoom', { card_code: "05019" }) }}" class="card card-title"
+                                  data-index="05019">Nicodemus
+                    Whateley</a></h4>
+            <ul>
+                <li>Can boot to give himself a control point.</li>
+                <li>At sundown, or when moving home, he loses all control points, not just those gained from his
+                    ability.
+                </li>
+            </ul>
+            <h4 id="philipxp"><a href="{{ path('cards_zoom', { card_code: "04003" }) }}" class="card card-title"
+                                 data-index="04003">Philip
+                    Swinford (Exp.1)</a></h4>
+            <ul>
+                <li>In a multiplayer
+                    game, you do not need to be in the shootout to use his ability i.e. you do not need a
+                    draw hand.
+                </li>
+            </ul>
+            <h4 id="quaterman"><a href="{{ path('cards_zoom', { card_code: "04010" }) }}" class="card card-title"
+                                  data-index="04010">QUATERMAN</a>
+            </h4>
+            <ul>
+                <li>Only cards attached to QUATERMAN can affect its bullets.</li>
+                <li>Cannot use abilities that require him to boot.</li>
+                <li>Can go on Jobs at other locations, because it is the job rules that boot it, not the job card
+                    itself.
+                </li>
+                <li>Can be brought into play elsewhere using the Stagecoach Office.</li>
+                <li>Can be brought into play using Recruitment Drive, but the Mad Scientist must still boot in a
+                    controlled location and pass a skill check.
+                </li>
+            </ul>
+            <h4 id="ramiro"><a href="{{ path('cards_zoom', { card_code: "01047" }) }}" class="card card-title"
+                               data-index="01047">Ramiro
+                    Mendoza</a></h4>
+            <ul>
+                <li>You must pay the ghost rock if Mendoza is the Leader or the Target, as per page 21 of the rulebook,
+                    as well as when he joins a posse formed by someone else.
+                </li>
+                <li>You must have the ghost rock when declaring he's joining, you cannot use ghost rock gained
+                    through, for example, Irving Patterson's trait.
+                </li>
+                <li>If Mendoza is wanted and his controller doesn't pay him, he is discarded (and leaves town), thus no
+                    bounty is rewarded, he was neither discarded during a shootout nor by a card ability.
+                </li>
+                <li>If using an ability to move Mendoza into an existing shootout, he is still joining a posse and still
+                    demands payment.
+                </li>
+            </ul>
+            <h4 id="remy"><a href="{{ path('cards_zoom', { card_code: "01033" }) }}" class="card card-title"
+                             data-index="01033">Rémy
+                    Lapointe</a></h4>
+            <ul>
+                <li>His ability cannot raise his bullet rating above 5, even if he has bonuses from other sources such
+                    as
+                    weapons.
+                </li>
+            </ul>
+
+            <h4 id="rico">
+                <a href="{{ path('cards_zoom', { card_code: "11013" }) }}"
+                   class="card card-title"
+                   data-index="11013">
+                    <span style="color: red;">Rico Rodegain</span>
+                </a>
+            </h4>
+            <ul style="color: red;">
+                <li>While the replacement gang must still follow all the normal rules of a starting gang, it is still
+                    subject
+                    to modifications based on card effects from the replacement dudes e.g. including Xiaodan Li would
+                    allow the replacement gang to contain six dudes.
+                </li>
+            </ul>
+            <h4 id="sloane"><a href="{{ path('cards_zoom', { card_code: "01044" }) }}" class="card card-title"
+                               data-index="01044">Sloane</a>
+            </h4>
+            <ul>
+                <li>Does not enter play wanted, but once she has a bounty it cannot be reduced below the stated
+                    minimum
+                </li>
+                <li>Does not grant booted dudes the ability to join a posse</li>
+                <li>Your dudes in her location may join a posse without booting even if she does not.</li>
+                <li>Must still boot to start the job if the job ability requires the leader to boot</li>
+            </ul>
+            <h4 id="smilingtom"><a href="{{ path('cards_zoom', { card_code: "04002" }) }}" class="card card-title"
+                                   data-index="04002">Smiling
+                    Tom</a></h4>
+            <ul>
+                <li>Cannot form or join a posse for a job unless there is already a Fourth Ring dude at the location of
+                    the mark.
+                </li>
+            </ul>
+            <h4 id="tommy"><a href="{{ path('cards_zoom', { card_code: "01018" }) }}" class="card card-title"
+                              data-index="01018">Tommy
+                    Harden</a></h4>
+            <ul>
+                <li>Trait triggers on reveal of a Cheatin' hand (step 4a above) and lasts for that round, is cumulative
+                    with other hand rank modifiers and continues to apply both if Tommy is aced or leaves the shootout
+                    and if the hand subsequently becomes legal through other card effects.
+                </li>
+            </ul>
+            <h4 id="william"><a href="{{ path('cards_zoom', { card_code: "05011" }) }}" class="card card-title"
+                                data-index="05011">William
+                    Specks</a></h4>
+            <ul>
+                <li>As inventing a gadget requires a Mad Scientist to boot, William cannot also boot to reduce the cost
+                    of a gadget he is inventing.
+                </li>
+            </ul>
+            <h3 id="deeds">Deeds</h3>
+            <h4 id="1stbaptist"><a href="{{ path('cards_zoom', { card_code: "01059" }) }}" class="card card-title"
+                                   data-index="01059">1st
+                    Baptist Church</a></h4>
+            <ul>
+                <li>The extra card is gained when hands are refilled during Sundown, after Victory Conditions are
+                    checked but before effects such as Yan Li's Tailoring wear off.
+                </li>
+                <li>It only affects the Play Hand, not Draw Hands.</li>
+            </ul>
+            <h4 id="bunkhouse"><a href="{{ path('cards_zoom', { card_code: "01071" }) }}" class="card card-title"
+                                  data-index="01071">Bunkhouse</a>
+            </h4>
+            <ul>
+                <li><b>Technical Errata</b>: It should be read as "Dudes with 0 or 1 influence (excluding any modifiers
+                    from
+                    this deed) have +1 influence while at this deed."
+                </li>
+            </ul>
+            <h4 id="tax_office"><a href="{{ path('cards_zoom', { card_code: "05021" }) }}" class="card card-title"
+                                   data-index="05021"><span
+                            style="color: red;">California Tax Office</span></a></h4>
+            <ul style="color: red;">
+                <li>Sets upkeep for the following turn to zero, regardless of any changes that might occur during the
+                    remainder of the current turn.
+                </li>
+                <li>The additional upkeep required for out of faction dudes also applies if you are required to pay
+                    upkeep outside of the Upkeep Phase.
+                </li>
+            </ul>
+            <h4 id="carters"><a href="{{ path('cards_zoom', { card_code: "01073" }) }}" class="card card-title"
+                                data-index="01073">Carter&#039;s
+                    Bounties</a></h4>
+            <ul>
+                <li>Can be used to move a dude into the posse from the same location, including a dude that had
+                    previously left the posse.
+                </li>
+            </ul>
+            <h4 id="genstore"><a href="{{ path('cards_zoom', { card_code: "01077" }) }}" class="card card-title"
+                                 data-index="01077">General
+                    Store</a></h4>
+            <ul>
+                <li>As with all card effects that attach goods and spells, the goods can be attached to a booted dude,
+                    and to a dude in a location you don't control.
+                </li>
+            </ul>
+            <h4 id="parish"><a href="{{ path('cards_zoom', { card_code: "01057" }) }}" class="card card-title"
+                               data-index="01057">Gomorra
+                    Parish</a></h4>
+            <ul>
+                <li>Cards aced are still in Boot Hill and count for Uniqueness.</li>
+            </ul>
+            <h4 id="pearlys"><a href="{{ path('cards_zoom', { card_code: "01064" }) }}" class="card card-title"
+                                data-index="01064">Pearly&#039;s
+                    Palace</a></h4>
+            <ul>
+                <li>Using this ability, you get to make a shootout play before the normal round of shootout plays
+                    begins.
+                    Once done, shootout plays are made as per the rulebook, starting with the Winner. If you are the
+                    Winner and control Pearly's Palace, this means you get to make two consecutive shootout plays if
+                    you wish.
+                </li>
+            </ul>
+
+            <h4 id="stagecoach"><a href="{{ path('cards_zoom', { card_code: "01066" }) }}" class="card card-title"
+                                   data-index="01066"><span
+                            style="color: red;">Stagecoach Office</span></a></h4>
+            <ul style="color: red;">
+                <li>Can be used to redirect a dude coming into play via a card effect. Should such an effect move the
+                    dude away from the location of a shootout, then unless the effect itself specifies otherwise, the
+                    dude
+                    does not join a posse and is not part of the shootout.
+                </li>
+            </ul>
+            <h4 id="undertaker"><a href="{{ path('cards_zoom', { card_code: "01076" }) }}" class="card card-title"
+                                   data-index="01076">Undertaker</a>
+            </h4>
+            <ul>
+                <li>If a shootout takes place at the Undertaker, control is determined *after* each casualty arrives in
+                    Boot Hill, and so that casualty does not count their influence towards control of the deed.
+                <li>Casualties are chosen and resolved one at a time, so after each dude is aced in a shootout, control
+                    of the Undertaker is rechecked before paying out the ghost rock.
+                </li>
+                <li>If you ace a dude card from your hand, using cards such as Raising Hell, you can claim the 2 ghost
+                    rock.
+                </li>
+            </ul>
+            <h3 id="actions">Actions</h3>
+            <h4 id="acoach"><a href="{{ path('cards_zoom', { card_code: "01135" }) }}" class="card card-title"
+                               data-index="01135">A Coach
+                    Comes to Town</a></h4>
+            <ul>
+                <li>Players only get ghost rock from this job if they still have dudes in their posse at the end of the
+                    job.
+                </li>
+            </ul>
+            <h4 id="never_forget"><a href="{{ path('cards_zoom', { card_code: "08019" }) }}" class="card card-title"
+                                     data-index="08019"><span
+                            style="color: red;">A Fight They&#039;ll Never Forget</span></a></h4>
+            <ul style="color: red;">
+                <li>If a shooter leaves the shootout during the Resolution phase but remains in play, he will not
+                    receive
+                    the control points for any opposing dudes that are aced.
+                </li>
+            </ul>
+            <h4 id="slight_mod"><a href="{{ path('cards_zoom', { card_code: "11022" }) }}" class="card card-title"
+                                   data-index="11022"><span
+                            style="color: red;">A Slight Modification</span></a></h4>
+            <ul style="color: red;">
+                <li>When used to prevent an ability on an action card, that action card is still discarded.</li>
+                <li>Costs paid to use the prevented ability are negated. Therefore any cards that were booted to use
+                    the ability are now unbooted, ghost rock is returned from the bank, and so forth.
+                </li>
+                <li>The prevented ability is still considered used for the turn.</li>
+            </ul>
+            <h4 id="ambush"><a href="{{ path('cards_zoom', { card_code: "01114" }) }}" class="card card-title"
+                               data-index="01114">Ambush</a>
+            </h4>
+            <ul>
+                <li>Check the status of the Mark each time a dude enters the leader's posse, and if the mark is not
+                    wanted at that point, raise the bounty on the dude by 1.
+                </li>
+                <li>If the mark has been aced or discarded (or otherwise left play) at the point a dude enters the
+                    leader's posse, the mark cannot be wanted and therefore the bounty on the dude is increased by
+                    one.
+                </li>
+            </ul>
+            <h4 id="badcompany"><a href="{{ path('cards_zoom', { card_code: "01117" }) }}" class="card card-title"
+                                   data-index="01117">Bad
+                    Company</a></h4>
+            <ul>
+                <li>Responsibility is defined in the same way as bounty payments, it must be the direct result of a card
+                    ability or as a shootout casualty.
+                </li>
+            </ul>
+            <h4 id="bottom"><a href="{{ path('cards_zoom', { card_code: "01108" }) }}" class="card card-title"
+                               data-index="01108">Bottom
+                    Dealin&#039;</a></h4>
+            <ul>
+                <li>After receiving your new hand from your opponent's deck, you can interact with that hand.
+                <li>The Ghostly Gun, Pair of Six Shooters and Doyle's Hoyle can all be used to switch cards in your
+                    new hand.
+                </li>
+                <li>As per the errata regarding other players cards, Fetch cannot be used to take your opponent's cards
+                    into your play hand.
+                </li>
+                <li>The player who plays Bottom Dealin' chooses the suit and value of any Jokers that are revealed.</li>
+            </ul>
+            <h4 id="bh"><a href="{{ path('cards_zoom', { card_code: "01126" }) }}" class="card card-title"
+                           data-index="01126">Bounty
+                    Hunter</a></h4>
+            <ul>
+                <li>The Gunslinger becomes wanted if at an opponents private location as per page 22.</li>
+                <li>The Gunslinger is under the control of the player that played the card.</li>
+            </ul>
+            <h4 id="varmint"><a href="{{ path('cards_zoom', { card_code: "01129" }) }}" class="card card-title"
+                                data-index="01129">Cheatin&#039;
+                    Varmint</a></h4>
+            <ul>
+                <li>You may use its effect to reduce your draw hand.</li>
+                <li>Any player with a draw hand may have its rank reduced, even if used as a Cheatin' resolution, it
+                    does not have to be the Cheatin' hand.
+                </li>
+                <li>When you play the card, choose which ability to use if either is valid, you may not use both from
+                    one
+                    copy of the card in one play.
+                </li>
+            </ul>
+            <h4 id="coachwhip"><a href="{{ path('cards_zoom', { card_code: "01115" }) }}" class="card card-title"
+                                  data-index="01115">Coachwhip!</a>
+            </h4>
+            <ul>
+                <li>If used during Shootout Resolution, the dude must be in a posse as per page 23.</li>
+            </ul>
+            <h4 id="concealed"><a href="{{ path('cards_zoom', { card_code: "01120" }) }}" class="card card-title"
+                                  data-index="01120">Concealed
+                    Weapons</a></h4>
+            <ul>
+                <li><b>Technical Errata</b>: It should be read as "<b>Noon</b>: Your dudes may attach goods and spells (<i>as
+                        Shoppin'</i>) at locations you do not control, and as Shootout plays."
+                </li>
+                <li>Does not allow you to attach goods or spells to a booted dude.</li>
+            </ul>
+            <h4 id="eds"><a href="{{ path('cards_zoom', { card_code: "04021" }) }}" class="card card-title"
+                            data-index="04021">Election Day
+                    Slaughter</a></h4>
+            <ul>
+                <li>Players get to unboot an in town dude before declaring whether they will oppose the job.</li>
+            </ul>
+            <h4 id="flight"><a href="{{ path('cards_zoom', { card_code: "06021" }) }}" class="card card-title"
+                               data-index="06021">Flight of
+                    the Lepus</a></h4>
+            <ul>
+                <li>You can select one of your dudes and one of the dudes controlled by the player with the illegal draw
+                    hand.
+                </li>
+                <li>If the opposing posse includes Tyx and a Huckster, you can select Tyx, or you can select Tyx and
+                    the Huckster, but you cannot select the Huckster on its own.
+                </li>
+            </ul>
+            <h4 id="freshhorses"><a href="{{ path('cards_zoom', { card_code: "01130" }) }}" class="card card-title"
+                                    data-index="01130">Fresh
+                    Horses</a></h4>
+            <ul>
+                <li>Horses affected may use printed abilities again this turn, they are not required to do so
+                    immediately.
+                </li>
+            </ul>
+            <h4 id="goodstiff"><a href="{{ path('cards_zoom', { card_code: "01141" }) }}" class="card card-title"
+                                  data-index="01141">Good
+                    Stiff Drink</a></h4>
+            <ul>
+                <li>Allows an ability to be reused later in the turn, does not require or allow immediate use.</li>
+            </ul>
+            <h4 id="hotlead"><a href="{{ path('cards_zoom', { card_code: "01121" }) }}" class="card card-title"
+                                data-index="01121">Hot Lead
+                    Flyin&#039;</a></h4>
+            <ul>
+                <li>"After you take casualties" is a timing window description, not a reference to a number of
+                    casualties,
+                    and losing the round is something that can happen even taking zero casualties (for example if
+                    Sheriff Dave Montreal's trait has applied that round).
+                </li>
+            </ul>
+            <h4 id="incubation"><a href="{{ path('cards_zoom', { card_code: "06020" }) }}" class="card card-title"
+                                   data-index="06020">Incubation</a>
+            </h4>
+            <ul>
+                <li>The ability to attach this to a booted dude at their home can only be used when the card is being
+                    played from your hand, not after it is attached to a dude.
+                </li>
+            </ul>
+            <h4 id="iwyk"><a href="{{ path('cards_zoom', { card_code: "03019" }) }}" class="card card-title"
+                             data-index="03019">...It&#039;s
+                    Who You Know</a></h4>
+            <ul>
+                <li>The dudes' influence is only used to determine the number of cards drawn when building your draw
+                    hand. Effects that play off bullets (e.g. Shotgun) still use the dude's bullet rating.
+                </li>
+            </ul>
+            <h4 id="kidnappin"><a href="{{ path('cards_zoom', { card_code: "01123" }) }}" class="card card-title"
+                                  data-index="01123">Kidnappin&#039;</a>
+            </h4>
+            <ul>
+                <li>Each time a dude enters the leader's posse, raise the bounty on the dude by 1 (in addition to any
+                    bounty received for shootin' in a private location).
+                </li>
+            </ul>
+            <h4 id="magdistr"><a href="{{ path('cards_zoom', { card_code: "01131" }) }}" class="card card-title"
+                                 data-index="01131">Magical
+                    Distraction</a></h4>
+            <ul>
+                <li>Does not replace your actual hand, does not prevent you also being hit by a Cheatin' card.</li>
+                <li>Sets your base hand rank for the round, modifiers still apply, changes to the content of your actual
+                    hand have no further effect (e.g. Ace in the Hole, Bottom Dealin).
+                </li>
+                <li>The dude that discards the spell is not making the pull, so cannot be combined with Doyle's Hoyle.
+                </li>
+                <li>You must have a dude with a spell attached in your posse in order to play the card.</li>
+            </ul>
+            <h4 id="smartchoice"><a href="{{ path('cards_zoom', { card_code: "01109" }) }}" class="card card-title"
+                                    data-index="01109">Make
+                    the Smart Choice</a></h4>
+            <ul>
+                <li>You may target your own dudes with this ability.</li>
+                <li>The bullet penalty lasts until end of shootout, so if the dude is moved back into that shootout the
+                    penalty still applies, but the next shootout they're back to normal.
+                </li>
+            </ul>
+            <h4 id="pinneddown"><a href="{{ path('cards_zoom', { card_code: "01124" }) }}" class="card card-title"
+                                   data-index="01124">Pinned
+                    Down</a></h4>
+            <ul>
+                <li>By first casualty, this effect means the next casualty to be taken by the opposing player after this
+                    ability is played.
+                </li>
+                <li><b>Amendment</b>: If multiple effects have been played that claim the first casualty, the player
+                    selecting
+                    that casualty can select which applies. Once that first casualty has been chosen, any other effects
+                    currently in play that require a dude to be selected as the first casualty are ignored.
+                </li>
+                <li>The required number of casualties are chosen and then each is resolved, so a Sidekick attached to
+                    a Pinned Down dude may still be used. If the dude is the only casualty, the sidekick goes when they
+                    go.
+                </li>
+                <li>If there are enough other dudes or sidekicks to cover all casualties, the dude can be discarded.
+                </li>
+            </ul>
+            <h4 id="prayer"><a href="{{ path('cards_zoom', { card_code: "05039" }) }}" class="card card-title"
+                               data-index="05039">Prayer</a>
+            </h4>
+            <ul>
+                <li>Can be used to attach the Miracle as a shootout action, and in an uncontrolled location as both a
+                    Noon and Shootout play.
+                </li>
+            </ul>
+            <h4 id="revenge"><a href="{{ path('cards_zoom', { card_code: "11023" }) }}" class="card card-title"
+                                data-index="11023"><span
+                            style="color: red;">Rabbit Takes Revenge</span></a></h4>
+            <ul style="color: red;">
+                <li>If the affected dudes are due to be aced or discarded, they could not be saved by a card effect if
+                    that effect would then send them home booted, as that would result in them leaving the shootout.
+                </li>
+            </ul>
+
+            <h4 id="rope&ride"><a href="{{ path('cards_zoom', { card_code: "06019" }) }}" class="card card-title"
+                                  data-index="06019">Rope
+                    and Ride</a></h4>
+            <ul>
+                <li>Can be used even if your leader does not have a horse attached.</li>
+            </ul>
+            <h4 id="runemdown"><a href="{{ path('cards_zoom', { card_code: "01125" }) }}" class="card card-title"
+                                  data-index="01125">Run
+                    &#039;Em Down!</a></h4>
+            <ul>
+                <li>The opposing dude may already be booted.</li>
+                <li>You must have at least one dude in play with a horse in order to play the card.</li>
+                <li>Any of your dudes at the opposing dude's location may call them out, it does not have to be
+                    someone that moved in.
+                </li>
+            </ul>
+            <h4 id="sft"><a href="{{ path('cards_zoom', { card_code: "05035" }) }}" class="card card-title"
+                            data-index="05035">Swinford
+                    Finds Trouble</a></h4>
+            <ul>
+                <li>A dude in the opposing posse can be selected twice, the first time to boot him and the second to
+                    send him home.
+                </li>
+            </ul>
+            <h4 id="stakes"><a href="{{ path('cards_zoom', { card_code: "01112" }) }}" class="card card-title"
+                               data-index="01112">The Stakes
+                    Just Rose</a></h4>
+            <ul>
+                <li>Can be played on a dude at the same location as the shootout but not currently in either posse,
+                    including a dude that has previously left a posse.
+                </li>
+            </ul>
+            <h4 id="takin"><a href="{{ path('cards_zoom', { card_code: "01140" }) }}" class="card card-title"
+                              data-index="01140">Takin&#039;
+                    Ya With Me</a></h4>
+            <ul>
+                <li>Take the value at the point the card is resolved (ie, the dudes are in Boot Hill with no modifiers).
+                    There is no card memory.
+                </li>
+                <li>If a casualty has not left play (e.g. thanks to Arnold McCadish) then their current Bullet value
+                    counts,
+                    including all modifiers (e.g. Weapons, Pistol Whip).
+                </li>
+                <li>Must be played after loser of the round takes their casualties, but before the winner does, cannot
+                    be
+                    played after the winner takes casualties.
+                </li>
+                <li>Cards without a bullet stat (such as sidekicks) count as having zero bullets for this card.</li>
+                <li>Token dudes that have been aced are out of play when this effect applies, and so are considered to
+                    have zero bullets.
+                </li>
+                <li>Can be played even if the loser took no casualties (e.g. Dave Montreal was present), the trigger is
+                    a
+                    timing step - no casualties counts as zero bullets in this case.
+                </li>
+            </ul>
+            <h4 id="mornin"><a href="{{ path('cards_zoom', { card_code: "05038" }) }}" class="card card-title"
+                               data-index="05038">This&#039;ll
+                    Hurt in the Mornin&#039;</a></h4>
+            <ul>
+                <li>With regards to the timing of the discards, your opponent must pay the ghost rock or ace the card as
+                    their cards are discarded. Then they redraw.
+                </li>
+            </ul>
+            <h4 id="unprepared"><a href="{{ path('cards_zoom', { card_code: "01134" }) }}" class="card card-title"
+                                   data-index="01134">Unprepared</a>
+            </h4>
+            <ul>
+                <li><span style="color: red;"><b>Technical Errata</b>: It should be read as</span>
+                    <ul>
+                        <li><b>Shootout</b>: Choose a dude. Boot that dude and their attached cards. That dude gets -1
+                            bullets and cannot use <span style="color: red;">their</span> abilities. Their attached cards
+                            lose all traits, abilities, and bullet
+                            bonuses.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3 id="goods">Goods</h3>
+            <h4 id="autorevolver"><a href="{{ path('cards_zoom', { card_code: "01089" }) }}" class="card card-title"
+                                     data-index="01089">Auto-Revolver</a>
+            </h4>
+            <ul>
+                <li>Costs (including booting the mad scientist) must still be paid, so the scientist must boot in a
+                    controlled location and pass a skill check.
+                </li>
+                <li>The dude carrying the AutoRevolver
+                    does not need to be in the shootout in order to draw the
+                    additional card.
+                </li>
+                <li>If you have multiple Auto-Revolvers
+                    in play, each can be used to draw an additional card.
+                </li>
+            </ul>
+            <h4 id="autofeeder"><a href="{{ path('cards_zoom', { card_code: "01099" }) }}" class="card card-title"
+                                   data-index="01099">Auto
+                    Cattle-Feeder</a></h4>
+            <ul>
+                <li>The scientist does not have to be at the ranch.</li>
+                <li>More than one can be attached to the same deed.</li>
+            </ul>
+            <h4 id="ghostbusters"><a href="{{ path('cards_zoom', { card_code: "05026" }) }}" class="card card-title"
+                                     data-index="05026">Bio-Charged
+                    Neutralizer</a></h4>
+            <ul>
+                <li>Only the BCN cannot be affected by other players cards, so a Sun In Yer Eyes will still turn this
+                    dude into a draw. The BCN is not affected by cards that affect attached goods, such as Faithful
+                    Hound or Unprepared (although the latter still affects the dude carrying the BCN).
+                </li>
+            </ul>
+            <h4 id="diable"><a href="{{ path('cards_zoom', { card_code: "06012" }) }}" class="card card-title"
+                               data-index="06012">Diable en
+                    Boite</a></h4>
+            <ul>
+                <li>Cannot be used if the dude in question is saved with Lay on Hands or something similar that
+                    prevents the dude from being aced or discarded.
+                </li>
+                <li style="color: red;">If a dude has been assigned to cover casualties, removing him from the posse
+                    with the Diable en
+                    Boite will not prevent those casualties being applied and the dude aced or discarded.
+                </li>
+
+            </ul>
+            <h4 id="duster"><a href="{{ path('cards_zoom', { card_code: "08013" }) }}" class="card card-title"
+                               data-index="08013"><span
+                            style="color: red;">Dog&#039;s Duster</span></a></h4>
+            <ul style="color: red;">
+                <li>The dude performing the callout does not have to be the dude wearing the duster.</li>
+            </ul>
+            <h4 id="doyle"><a href="{{ path('cards_zoom', { card_code: "01096" }) }}" class="card card-title"
+                              data-index="01096">Doyle&#039;s
+                    Hoyle</a></h4>
+            <ul>
+                <li><b>Technical Errata</b>: It should be read as:
+                    <ul>
+                        <li><b>React, Boot</b>: After this dude makes a pull, discard the pull to replace it with this card.</li>
+                        <li><b>Resolution, Boot</b>: Discard a card from your draw hand to replace it with this card. If the
+                            discarded card was a 2, raise your hand rank by one.</li>
+                    </ul>
+                </li>
+                <li>If the resolution ability is used to discard a 2 from your hand, but Doyle's Hoyle does not form
+                    part of
+                    your final draw hand, you still get the bonus to your hand rank.
+                </li>
+            </ul>
+            <h4 id="fancyhat"><a href="{{ path('cards_zoom', { card_code: "06016" }) }}" class="card card-title"
+                                 data-index="06016">Fancy
+                    New Hat</a></h4>
+            <ul>
+                <li>Any preexisting influence reductions are ignored while a Fancy New Hat is equipped.</li>
+                <li>Once the Fancy New Hat is equipped, any subsequent influence reductions are ignored.</li>
+            </ul>
+            <h4 id="flamethrower"><a href="{{ path('cards_zoom', { card_code: "01091" }) }}" class="card card-title"
+                                     data-index="01091">Flame-Thrower</a>
+            </h4>
+            <ul>
+                <li>If the ability has been used, the controller must take an extra casualty if they lose the round.
+                </li>
+                <li>In the event of tied hand ranks, the lowest poker hand still counts as the loser for this effect.
+                </li>
+                <li>In the event of an exact tie for hand value, there is no winner or loser (e.g. identical hands).
+                </li>
+            </ul>
+            <h4 id="forcefield"><a href="{{ path('cards_zoom', { card_code: "01092" }) }}" class="card card-title"
+                                   data-index="01092">Force
+                    Field</a></h4>
+            <ul>
+                <li>This can raise your hand rank to be equal to your opponent and force both players to take a
+                    casualty.
+                </li>
+                <li>It's a +X bonus set when the ability is used the maximum +X takes into account other bonuses.
+                    Abilities played subsequently may further increase or decrease hand ranks.
+                </li>
+                <li>May be used multiple times in the same round whenever hand ranks are different.</li>
+            </ul>
+            <h4 id="holywheel"><a href="{{ path('cards_zoom', { card_code: "03015" }) }}" class="card card-title"
+                                  data-index="03015">Holy
+                    Wheel Gun</a></h4>
+            <ul>
+                <li>By first casualty, this effect means the next casualty to be taken by the opposing player after this
+                    ability is played.
+                </li>
+                <li>If multiple effects have been played that claim the first casualty, the player selecting that
+                    casualty
+                    can select which applies. Once that first casualty has been chosen, any other effects currently in
+                    play that require a dude to be selected as the first casualty are ignored.
+                </li>
+            </ul>
+            <h4 id="whatever"><a href="{{ path('cards_zoom', { card_code: "09030" }) }}" class="card card-title"
+                                 data-index="09030"><span
+                            style="color: red;">Idol of Tlazolteotl</span></a></h4>
+            <ul style="color: red;">
+                <li>To determine whether the new deed is legal, examine whether the card could attach to the deed
+                    when it first entered play. If it could, it is legal to move the attached card to that deed.
+                </li>
+            </ul>
+            <h4 id="outlawmask"><a href="{{ path('cards_zoom', { card_code: "05024" }) }}" class="card card-title"
+                                   data-index="05024">Outlaw
+                    Mask</a></h4>
+            <ul>
+                <li>A dude may equip more than one Outlaw Mask.</li>
+            </ul>
+            <h4 id="6shooters"><a href="{{ path('cards_zoom', { card_code: "01081" }) }}" class="card card-title"
+                                  data-index="01081">Pair of
+                    Six-Shooters</a></h4>
+            <ul>
+                <li>If this makes your hand illegal and you have not been hit by a Cheatin' card this resolution phase,
+                    you may now be.
+                </li>
+                <li>Can be used during Lowball.</li>
+                <li style="color: red;">If the modified card is discarded, it immediately reverts to its original value
+                    for the purposes of any
+                    effects that check the value of the discarded card.
+                </li>
+            </ul>
+            <h4 id="plasmadrill"><a href="{{ path('cards_zoom', { card_code: "02015" }) }}" class="card card-title"
+                                    data-index="02015">Plasma
+                    Drill</a></h4>
+            <ul>
+                <li>If a player Plasma Drills a 0 production deed, the owner cannot refuse to pay zero ghost rock in
+                    order to discard the deed.
+                </li>
+            </ul>
+            <h4 id="quickdraw"><a href="{{ path('cards_zoom', { card_code: "01093" }) }}" class="card card-title"
+                                  data-index="01093"><span
+                            style="color: red;">Quickdraw Handgun</span></a></h4>
+            <ul style="color: red;">
+                <li>Any bonuses applied to your hand rank before this switches hands are applied to your new hand - they
+                    do not follow your draw hand to the other player.
+                </li>
+            </ul>
+            <h4 id="backtothefuture"><a href="{{ path('cards_zoom', { card_code: "02013" }) }}" class="card card-title"
+                                        data-index="02013">Telepathy
+                    Helmet</a></h4>
+            <ul>
+                <li>If a dude wearing this is hit by Unprepared, the dude is not affected but the Helmet is now blanked.
+                    Subsequent shootout actions can therefore affect this dude, including a second Unprepared.
+                </li>
+            </ul>
+            <h3 id="spells">Spells</h3>
+            <h4 id="aceinthehole"><a href="{{ path('cards_zoom', { card_code: "01101" }) }}" class="card card-title"
+                                     data-index="01101">Ace
+                    in the Hole</a></h4>
+            <ul>
+                <li>Can be used as a reaction during a shootout by a Huckster not in the shootout, the rule of presence
+                    only applies to Resolution and Shootout actions.
+                </li>
+            </ul>
+            <h4 id="fetch"><a href="{{ path('cards_zoom', { card_code: "03018" }) }}" class="card card-title"
+                              data-index="03018">Fetch</a>
+            </h4>
+            <ul>
+                <li>If used to bring a Joker into your hand, the Joker is not aced.</li>
+                <li>Cannot be used to put another player's card into your play hand.</li>
+                <li>Can be used to put Ghostly Gun, Doyle's Hoyle, and similar cards that have been added to your
+                    draw hand via Resolution plays, back into your play hand.
+                </li>
+            </ul>
+            <h4 id="holyroller"><a href="{{ path('cards_zoom', { card_code: "05030" }) }}" class="card card-title"
+                                   data-index="05030">Holy
+                    Roller</a></h4>
+            <ul>
+                <li>The +1 bullets applies for the duration of the shootout.</li>
+                <li>Protection from being chosen as a casualty applies to the current round only.</li>
+            </ul>
+            <h4 id="layonhands"><a href="{{ path('cards_zoom', { card_code: "05029" }) }}" class="card card-title"
+                                   data-index="05029">Lay On
+                    Hands</a></h4>
+            <ul>
+                <li>The dude must always be at or adjacent to the Blessed's location.</li>
+            </ul>
+            <h4 id="mirror"><a href="{{ path('cards_zoom', { card_code: "05028" }) }}" class="card card-title"
+                               data-index="05028">Mirror,
+                    Mirror</a></h4>
+            <ul>
+                <li>Can be cast on a dude with the same bullet type as the Huckster.</li>
+            </ul>
+            <h4 id="puppet"><a href="{{ path('cards_zoom', { card_code: "04017" }) }}" class="card card-title"
+                               data-index="04017">Puppet</a>
+            </h4>
+            <ul>
+                <li>Can be used to take control of an opposing dude that you already have a copy of in play.</li>
+                <li>If you have puppeted an opposing dude, you can still play your own copy of that dude as you don't
+                    have a copy in play that you own.
+                </li>
+                <li>If you puppet an opposing dude, and then overlay it with an experienced version, you retain control
+                    of that dude after Sundown because control reverts to the owner, which is now you.
+                </li>
+            </ul>
+            <h4 id="raisinghell"><a href="{{ path('cards_zoom', { card_code: "01104" }) }}" class="card card-title"
+                                    data-index="01104">Raising
+                    Hell</a></h4>
+            <ul>
+                <li>If your Boot Hill contains multiple copies of the same unique Abomination (e.g. through Ace in the
+                    Hole) then that Abomination cannot enter play.
+                </li>
+                <li>The Abomination that enters play may be the card aced from your draw hand.</li>
+                <li>The Abomination joins the hucksters posse therefore enters play at the location of the shootout.
+                </li>
+            </ul>
+            <h4 id="shield_of_faith"><a href="{{ path('cards_zoom', { card_code: "06018" }) }}" class="card card-title"
+                                        data-index="06018"><span
+                            style="color: red;">Shield of Faith</span></a></h4>
+            <ul style="color: red;">
+                <li>Cannot prevent dude cards in a draw or play hand from being aced.</li>
+            </ul>
+        </article>
+    </div>
+{% endblock %}

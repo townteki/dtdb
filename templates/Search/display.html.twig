@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+    <script type="text/javascript">
+        var Url_GangImage = '{{ asset('/images/xxx-20.png') }}';
+    </script>
+{% endblock %}
+{% block body %}
+    <div class="container main">
+        {{ searchbar|raw }}
+        <div id="list">
+            {{ pagination|raw }}
+            <div class="row">
+                {% if cards|length > 0 %}
+                    {% block main %}{% endblock %}
+                {% else %}
+                    <div class="col-sm-12" style="margin-top:10px">
+                        <p class="alert alert-warning">Your query didn't match any card.</p>
+                    </div>
+                {% endif %}
+            </div>
+            {{ pagination|raw }}
+        </div>
+    </div>
+{% endblock %}

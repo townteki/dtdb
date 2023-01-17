@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    <script type="text/javascript">
+        var Url_GangImage = '{{ asset('/images/xxx-20.png') }}';
+    </script>
+{% endblock %}
+{% block body %}
+    <div class="container main">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading"><b>Choose your outfit</b></div>
+                    <!-- List group -->
+                    <div class="list-group">
+                        {% for outfit in identities %}
+                            <div class="list-group-item">
+                                <a href="{{ path('deck_initbuild', {card_code:outfit.code}) }}"
+                                   data-index="{{ outfit.code }}">
+                                    {% if outfit.gang %}
+                                        <img src="{{ asset('/images/' ~ outfit.gang.code ~ '-20.png') }}"
+                                             alt="{{ outfit.gang.name }}"
+                                             title="{{ outfit.gang.name }}">
+                                    {% endif %}
+                                    <span>{{ outfit.title(app.request.locale) }}</span> <span
+                                            class="small">({{ outfit.pack.name }})</span>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <img src="" class="img-responsive" id="cardimg">
+            </div>
+        </div>
+    </div>
+{% endblock %}

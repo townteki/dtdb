@@ -1,54 +1,25 @@
-# Quick notes for installation
+# DoomtownDB
 
-- Go into the directory where your server will reside
-- Fork the repo and clone it: `git clone https://yourname@bitbucket.org/yourname/dtdb.git`
-- This creates a directory named dtdb. This has to be your apache DOCROOT. 
-- Go into it.
-- Install Composer: `curl -s http://getcomposer.org/installer | php`
-- Install the vendor libs: `php composer.phar install`
-- Create the database: `php app/console doctrine:database:create`
-- Create the tables: `php app/console doctrine:schema:update --force`
-- If the above command fails, edit app/config/parameters.yml and try again
-- execute `php app/console assets:install --symlink`
-- Import the data: mysql -u root -p dtdb< dtdb-cards.sql
-- Configure your web server with the correct DocRoot
-- Point your browser to `/web/app_dev.php`
+## Installation
 
-# Quick notes for update
+This guide assumes you know how to use the command-line,
+and that your machine has PHP (7.4), MySQL (5.7+), and a web-server (e.g. Apache 2) installed.
 
-When you update your repository, run the following commands:
+- Install [composer](https://getcomposer.org/download/).
+- Clone this repo.
+- `cd` to it.
+- Run `composer install` to install package dependencies
+- Copy the `.env` file to `.env.local` and modify its configuration settings to your needs.
+- Run `php bin/console doctrine:database:create` to create the  database, it will be empty.
+- Run `php bin/console doctrine:migrations:migrate` to set up the database structure (e.g. tables).
+- Load the default data set. See [install/README.md](install/README.md) for instructions.
+- Run `php bin/console assets:install` to install web assets from bundles.
+- Run `php bin/console bazinga:js-translation:dump public/js` to export translation files for the frontend.
+- Run `php bin/console fos:js-routing:dump --target=public/js/fos_js_routes.js` to export routes for the frontend.
+- Configure your web server to point to the `/public` directory as your web root.
 
-- `php composer.phar self-update`
-- `php composer.phar update`
-- `php app/console doctrine:schema:update --force`
-- `php app/console cache:clear --env=dev`
+## Set up an admin account
 
-## Deck of the Week
-
-To update the deck of the week on the front page:
-
-- `php app/console highlight` 
-
-## Setup an admin account
-
-- register
-- if you haven't setup mail delivery, manually activate your account
-- run `php app/console fos:user:promote --super <username>`
-
-## Add cards
-
-- login with admin-level account
-- go to `/admin/card`, `/admin/pack`, `/admin/cycle`, etc.
-
-## Add cards with Excel on existing pack
-
-- note the code of the pack (ntnr for New Town New Rules, etc.). let's say it's xxx
-- login with admin-level account
-- go to /api/set/xxx.xls
-- open the downloaded file and add your cards
-- go to /admin/excel/form and upload your file, click 'Validate' on confirmation screen
-- actually the excel file can be the one from another pack, just replace the 2nd column
-
-# Misc Notes
-
-- your php module must be configured with `mbstring.internal_encoding = UTF-8`
+- Run `php bin/console fos:user:create <username> <email> <password>` to create a new user account.
+- Run `php bin/console fos:user:activate <username>` to activate the new user account.
+- Run `php bin/console fos:user:promote --super <username>` to grant the user super-administrative powers.

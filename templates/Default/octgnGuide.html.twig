@@ -1,0 +1,245 @@
+{% extends 'base.html.twig' %}
+{% block title %}Doomtown: Reloaded on OCTGN{% endblock %}
+{% block body %}
+    <div class="container main">
+        <h1>{{ block('title') }}</h1>
+        <article class="rules">
+            <p>You can play <b>Doomtown: Reloaded</b> online using the OCTGN platform. Doomtown plugin is coded by db0,
+                most cards and actions are scripted, you can upload images, and it's generally pretty quick and easy to
+                play online, once you're familiar with the interface. This guide will help you with that, it covers
+                everything from installation to hotkeys.</p>
+            <nav>
+                <ul>
+                    <li><a href="#1">Installation</a></li>
+                    <li><a href="#2">Gettin' Started</a></li>
+                    <li><a href="#3">Gamblin' & Upkeep</a></li>
+                    <li><a href="#4">High Noon</a></li>
+                    <li><a href="#5">Shootouts</a></li>
+                    <li><a href="#6">Sundown</a></li>
+                    <li><a href="#7">List of hotkeys</a></li>
+                </ul>
+            </nav>
+            <h2 id="1">Installation</h2>
+
+            <p>First read the <a href="http://octgngames.com/doomtown/installation/">general instructions</a> on how to
+                install OCTGN.</p>
+
+            <p>Once you're done, go to 'Play or Spectate' and see if there are any open games of Doomtown available. If
+                yes, Join, and if no, Create a game and wait for someone to join.</p>
+
+            <h2 id="2">Gettin' Started</h2>
+
+            <img src="{{ asset('/images/OCTGN.jpg') }}"><img>
+
+            <p style="border:1px solid black; padding:10px"><b>The Golden Rule of playing on OCTGN:</b>
+                <br>
+                <br>
+                If hotkeys are not working, make sure that the game board is active, not the chat window. Just click
+                anywhere on the game board, and press the hotkey again.</p>
+
+            <p>Once you're in the game, open "File -- Load a deck". Wait for your opponent to do the same and see what
+                faction they're playing. See if you're okay with your starting posse. If not, right-click your Deck and
+                choose "Look at -- All cards". Now manually drag the dudes you want into your hand, making sure that
+                their combined cost does not exceed you starting wealth. When you're ready, press:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+R - Ready!</li>
+            </ul>
+
+            <p>Check the chat window to see if your opponent is also ready, say hi, and then press:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+SHIFT+S - Setup</li>
+            </ul>
+
+            <p>Look at the cards in your hand. Now is your chance to use your Grifter's ability, if you have one in your
+                starting posse. For that, hover the mouse cursor over the Grifter and press:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+Z - Use ability</li>
+            </ul>
+
+            <p>You're all set now, so let's move on to the next phase:</p>
+
+            <h2 id="3">Gamblin' & Upkeep</h2>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+Q - Lowball</li>
+            </ul>
+
+            <p>When you and your opponent play lowball, if the hand ranks are different, the system announces the
+                winner. If both players have the same hand rank, you need to determine the winner yourselves (i.e. four
+                Aces beat four Kings in lowball; if both values are the same, compare the highest card).</p>
+
+            <p>Now, if you see a red circle with an exclamation mark, it means that player cheated, and their opponent
+                may punish them for it by playing a Cheatin' Resolution. Note that regular Resolutions cannot be played
+                during lowball. If you cannot or do not want to play anything, pass:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+Space - Pass</li>
+            </ul>
+
+            <p>After both players pass consequtivel, the lowball winner claims 2 ghost rock by pressing:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+W - Win lowball</li>
+            </ul>
+
+            <p>Then both players need to pay their upkeep:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+U - Upkeep</li>
+            </ul>
+
+            <p>If you have a dude with upkeep (say, Steven Wiles or Bobo) and you don't want to pay their salary, you
+                need to discard them. Either right-click a dude and choose "Discard dude", or just hover the cursor over
+                them and press DEL. Note that if you actually cannot afford their upkeep, a pop-up window will ask which
+                dude you want discard.</p>
+
+            <h2 id="4">High Noon</h2>
+
+            <p>The lowball winner gets a special red marker on their outfit card. They can now make the first noon
+                play.</p>
+
+            <p>To play a dude, a deed, or an action, just double-click a card in your hand. If you played an action,
+                give the opponent some time to read the card, then discard it from the table (hover + press DEL). If
+                it's a job, don't remove it until it's fully resolved. Some actions (and all goods and spells) require a
+                target:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">SHIFT+Click - Target</li>
+            </ul>
+
+            <p>To move a dude, right-click them and choose "Announce move without booting" or "Announce move by
+                booting", then manually drag the card to its new location.</p>
+
+            <p>If you happen to take control of an opponent's deed after moving, right-click it and choose "Take
+                Control". If it's the other way around, "Pass Control" to the opponent.</p>
+
+            <p>To use a location (say, Morgan Cattle Co. or General Store), target a card in your hand (deed / goods),
+                target a dude, then hover over a location and use its ability by pressing CTRL+Z.</p>
+
+            <p>To trade goods between dudes, target the recipient and the goods, then right-click the current owner and
+                choose "Trade goods to another dude" (or press CTRL+T). Remember that each goods can only change hands
+                once per turn!</p>
+
+            <h2 id="5">Shootouts</h2>
+
+            <p>To call out a dude, target them, then double-click your unbooted dude at the same location (or
+                right-click your dude and choose "Call out target dude".)</p>
+
+            <p>If your dude has been called out, double-click him to accept, or press ESC to refuse and run home
+                booted.</p>
+
+            <p>If the callout is accepted, the attacker forms a posse by double-clicking on any dudes in this location,
+                plus any unbooted dudes in adjacent locations (double-click them again to boot them, and drag them to
+                the location of the shootout). Once you're done, inform your opponent by pressing CTRL+R ("I'm Ready!").
+                The defender then does the same.</p>
+
+            <p>If you made a dude join but then decided that he shouldn't be in the posse, right-click him and choose
+                "Posse/Job/Callout reactions - Remove dude from posse" (or press CTRL+N).</p>
+
+            <p>If the shootout takes place in a private location, all intruders get a bounty on their heads. Hover over
+                each dude and press:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">ALT+W - Bounty</li>
+            </ul>
+
+            <p>The lowball winner has the first chance to make a shootout play. Select any necessary targets, then
+                double-click a card in your hand, or hover over a card in play and press CTRL+Z. If you've got nothing,
+                pass. The opponent then does the same.</p>
+
+            <p>Once both players have passed consecutively, choose your lead shooter (target your dude, usually a stud
+                with the highest bullet rating) and announce the amount of bullets you've got in your posse in the
+                following format:</p>
+
+            <ul>[5 base + X] stud + Y draw</ul>
+
+            <p>So, if you choose a 2-stud as the shooter, and you've got three more dudes in your posse, one stud and
+                two draws, then you should say: "8+2".</p>
+
+            <p>Now, right-click your Deck and choose "Draw cards to Draw Hand" (or press CTRL+X), and enter the
+                corresponding number. Then, right-click your Draw Hand (in between your Play Hand and your Deck) and
+                choose "Look at -- All card". Target (shift+click) any card than you want to redraw, then double-clicke
+                of them. This will replace all targeted cards with new ones. To discard without redrawing, double-click
+                any cards without targeting them. Discard down to five cards in hand, then close the window and
+                double-click your Draw Hand (right-click it and choose "Reveal shootout hand").</p>
+
+            <p>Once both players do this, draw hands are revealed. If the ranks are different, the winner is anounced in
+                the log, along with the number of casualties the loser has to take. If the ranks are the same, both
+                players have to take a single casualty, but you still need to determine the winner by comparing hands
+                (four Kings beat four Aces).</p>
+
+            <p>The lowball winner gets the first opportunity to play Resolutions or pass. Things can get nasty here,
+                hand ranks might change and dudes might get aced before the final outcome of the shootout is determined.
+                Remember that if during this phase one posse becomes empty (e.g. wiped out completely by Coachwhip! or
+                Point Blank) then the shootout immediately ends without the opposing party taking any casualties at
+                all!</p>
+
+            <p>After both players pass consequtively during the Resolution phase, the loser of the shootout takes
+                casualties first - hover over a dude and press DEL (discard) or CTRL+A (ace). Then the winner takes
+                casualties if they must (if the hand ranks are tied, or if the loser plays Takin' Ya With Me or Hot Lead
+                Flyin').</p>
+
+            <p>After that, the loser chooses to either stay and keep fighting (say "Staying" or press CTRL+R) or flee
+                (right-click any surviving dudes and choose "Posse/Job/Callout reactions -- Run home booted", or press
+                ESC and move your dudes home booted manually). Then the winner makes that choice (even if the loser's
+                posse flees or is wiped out). Remember that you can choose some dudes to flee and others to stay.</p>
+
+            <p>If both players decide to stay, proceed to the new round of shootout (start with making Shootout plays).
+                If either posse fled or was wiped out, press:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">F10 - End the shootout</li>
+            </ul>
+
+            <p>Back to High Noon. If both players have nothing else to do and pass consecutively, it's time to move to
+                the final phase:</p>
+
+            <h2 id="6">Sundown</h2>
+
+            <p>First, check the control state of deeds in case you forgot to change it after the last shootout or
+                maneuvering. If you did, you can press:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+C - Calculate control &
+                    influence
+                </li>
+            </ul>
+
+            <p>Finally, choose a card in your play hand that you don't want to keep (if any) and discard it. Then
+                press:</p>
+
+            <ul>
+                <li style="border:1px solid black; padding:10px; display:inline-block">CTRL+S - Sundown</li>
+            </ul>
+
+            <p>This will refill your hand and unboot all of your cards in play. Wait for the opponent to do the same,
+                then proceed to lowball (CTRL+Q). A new day has come to Gomorra!</p>
+
+            <div style="border:1px solid black; padding:0 10px 0 10px; display:inline-block">
+                <h2 id="7">List of hotkeys</h2>
+                <ul>
+                    <li>CTRL+SHIFT+S - Setup</li>
+                    <li>CTRL+R - Ready!</li>
+                    <li>CTRL+Space - Pass</li>
+                    <li>CTRL+Q - Lowball</li>
+                    <li>CTRL+W - Win lowball</li>
+                    <li>CTRL+U - Upkeep</li>
+                    <li>CTRL+Z - Use ability</li>
+                    <li>CTRL+C - Calculate control & influence</li>
+                    <li>CTRL+S - Sundown</li>
+                    <li>ALT+W - Bounty</li>
+                    <li>F10 - End the shootout</li>
+                </ul>
+                <p>NEW!</p>
+                <ul>
+                    <li>CTRL+N - Remove from posse</li>
+                    <li>CTRL+T - Trade Goods to target dude</li>
+                    <li>CTRL+X - Draw a draw hand</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+{% endblock %}
