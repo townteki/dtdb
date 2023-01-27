@@ -410,7 +410,7 @@ function update_tag_toggles() {
     }
     var container = $('#tag_toggles').empty();
     tags.sort().forEach(function (tag) {
-        $('<button type="button" class="btn btn-default btn-xs" data-toggle="button">' + tag + '</button>').data('deck_id', tag_dict[tag].join(' ')).appendTo(container);
+        $('<button type="button" class="btn btn-default btn-xs tag-' + tag + '" data-toggle="button">' + tag + '</button>').data('deck_id', tag_dict[tag].join(' ')).appendTo(container);
     });
 
 }

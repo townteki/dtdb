@@ -301,7 +301,8 @@ function update_deck(options) {
     }
 
 
-    var latestpack = DTDB.data.sets({name: Outfit.pack}).first();
+    LatestPack = DTDB.data.sets({name: Outfit.pack}).first();
+    EarliestPack = LatestPack;
     if (DisplaySort === 'type') {
         var preSort = 'value,title';
     } else if (DisplaySort === 'gang') {
@@ -317,7 +318,8 @@ function update_deck(options) {
     }
     DTDB.data.cards({indeck: {'gt': 0}, type_code: {'!is': 'outfit'}}).order(preSort).each(function (record) {
         var pack = DTDB.data.sets({name: record.pack}).first();
-        if (latestpack.cyclenumber < pack.cyclenumber || (latestpack.cyclenumber == pack.cyclenumber && latestpack.number < pack.number)) latestpack = pack;
+        if (LatestPack.cyclenumber < pack.cyclenumber || (LatestPack.cyclenumber == pack.cyclenumber && LatestPack.number < pack.number)) LatestPack = pack;
+        if (EarliestPack.cyclenumber > pack.cyclenumber || (EarliestPack.cyclenumber == pack.cyclenumber && EarliestPack.number > pack.number)) EarliestPack = pack;
 
         var criteria = null;
         var additional_info = '';
@@ -382,9 +384,14 @@ function update_deck(options) {
             }
         }
     });
-    $('#latestpack').html('Cards up to <i>' + latestpack.name + '</i>');
+    $('#latestpack').html('Cards up to <i>' + LatestPack.name + '</i>');
     check_composition();
     check_distribution();
+    var format = 'Old Timer';
+    if (EarliestPack.cyclenumber > PBEfirstPack.cyclenumber || (EarliestPack.cyclenumber == PBEfirstPack.cyclenumber && EarliestPack.number >= PBEfirstPack.number)) {
+        format = 'Weird West Edition';
+    }
+    $('#wweformat').html('Format is <b>' + format + '</b>');
     $('#deck').show();
 }
 
@@ -522,6 +529,9 @@ var DudeStarter = [];
 var SuitNumbers = {Spades: 0, Diams: 1, Hearts: 2, Clubs: 3};
 var SuitNames = ['Spades', 'Diams', 'Hearts', 'Clubs'];
 var RankNames = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+var EarliestPack = null;
+var LatestPack = null;
+var PBEfirstPack = {cyclenumber: 11, number: 1};
 $(function () {
 
     if (Modernizr.touch) {

@@ -16,6 +16,7 @@ class Decks
     protected Judge $judge;
     protected Diff $diff;
     protected LoggerInterface $logger;
+    protected array $tcar;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -27,6 +28,10 @@ class Decks
         $this->judge = $judge;
         $this->diff = $diff;
         $this->logger = $logger;
+        $this->tcar = array(
+            'cyclenumber' => 11,
+            'number' => 1
+        );
     }
 
 
@@ -196,6 +201,7 @@ class Decks
         $cards = array();
         /* @var Pack $latestPack */
         $latestPack = null;
+        $earliestPack = null;
         foreach ($content as $card_code => $info) {
             $card = $this->entityManager->getRepository(Card::class)->findOneBy(array(
                     "code" => $card_code
@@ -211,6 +217,13 @@ class Decks
             } elseif ($latestPack->getCycle()->getNumber() == $pack->getCycle()->getNumber() && $latestPack->getNumber() < $pack->getNumber()) {
                 $latestPack = $pack;
             }
+            if (! $earliestPack) {
+                $earliestPack = $pack;
+            } elseif ($earliestPack->getCycle()->getNumber() > $pack->getCycle()->getNumber()) {
+                $earliestPack = $pack;
+            } elseif ($earliestPack->getCycle()->getNumber() == $pack->getCycle()->getNumber() && $earliestPack->getNumber() > $pack->getNumber()) {
+                $earliestPack = $pack;
+            }            
             if ($card->getType()->getName() == "Outfit") {
                 $outfit = $card;
             }
@@ -229,6 +242,25 @@ class Decks
             // tags can never be empty. if it is we put gang in
             $gang_code = $outfit->getGang()->getCode();
             $tags = array($gang_code);
+        } elseif (!is_array($tags)) {
+            $tags = array($tags);
+        }
+        $formattag = 'oldtimer';
+        if ($earliestPack->getCycle()->getNumber() > $this->tcar['cyclenumber'] || ($earliestPack->getCycle()->getNumber() == $this->tcar['cyclenumber'] && $earliestPack->getNumber() >= $this->tcar['number'])) {
+            $formattag = 'wwe';
+        }
+        $addtag = true;
+        foreach ($tags as $tag) {
+            if ($tag == 'wwe' || $tag == 'oldtimer') {
+                if ($tag != $formattag) {
+                    unset($tags[$tag]);
+                } else {
+                    $addtag = false;
+                }
+            }
+        }
+        if ($addtag) {
+            array_push($tags, $formattag);
         }
         if (is_array($tags)) {
             $tags = implode(' ', $tags);

@@ -204,7 +204,24 @@ h1, #index_page .section {
 }
 
 #tag_toggles button {
-    margin: 0 1px 1px 0
+    margin: 0 1px 1px 0;   
+}
+
+
+#tag_toggles .tag-wwe {
+    background-color: rgba(1, 177, 1, 0.2);
+}
+
+#tag_toggles .tag-oldtimer {
+    background-color: rgba(177, 123, 1, 0.2);
+} 
+
+.deck-list-tags .tag-wwe {
+    background-color: darkgreen;
+}
+
+.deck-list-tags .tag-oldtimer {
+    background-color: darkgoldenrod;
 }
 
 .label {
