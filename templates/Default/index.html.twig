@@ -128,21 +128,17 @@
                                 src="{{ asset('/images/pineboxentertainment.png') }}" width="214" height="60"
                                 alt="Pine Box Entertainment"></a>
                 </div>
-                <div id="discord" style="padding:10px">
-                    <script type="text/javascript">
-                        discordWidget.init({
-                            serverId: '643518732999589892',
-                            title: '<img src=' + "{{ asset('/images/doomtown-reloaded-logo2.png') }}" + ' width="66" height="30"> on Discord',
-                            join: true,
-                            alphabetical: false,
-                            theme: 'light',
-                            showAllUsers: false,
-                            hideChannels: true
-                        });
-                        discordWidget.render();
-                    </script>
+                <div class="discord-widget">
+                    <h3 class="discord-title">
+                        <img src="{{ asset('/images/doomtown-reloaded-logo2.png') }}" alt="Doomtown logo">
+                        <span>on Discord</span>
+                    </h3>
+                    <div class="discord-content">
+                        <form action="https://discordapp.com/invite/Svx54HTj" target="_blank">
+                            <button class="btn btn-primary" type="submit">Join Chat/App and Find Opponents</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="discord-widget"></div>
                 <div id="recent_other">
                     <h3 class="section">Card reviews <a href="{{ path('card_reviews_list') }}" class="small">more</a>
                     </h3>

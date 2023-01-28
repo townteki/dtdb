@@ -45,20 +45,47 @@ h1, #index_page .section {
     padding-right: 5px
 }
 
-/* Override Discord External CSS */
-#right-column > div.discord-widget > p.discord-users-online {
-    font-size: 1em !important;
-    text-align: left;
-}
-
 /*RSS*/
 .RSS {
     font-family: 'Anaheim', sans-serif;
     border-style: solid;
     border-radius: 5px;
     border-width: 2px;
-    border-color: lightgray;
+    border-color: #ddd;
     list-style-image: url('../images/neutral-20.png');
+    margin-bottom: 20px;
+}
+
+/* Homepage - Discord Widget */
+.discord-widget {
+    border-color:  #2461b2 #ddd #ddd #ddd;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 3px 2px 2px 2px;
+}
+
+.discord-widget .discord-title {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.discord-widget .discord-title img {
+    height: 30px;
+    vertical-align: middle;
+    width: 66px;
+}
+
+.discord-widget .discord-title span {
+    vertical-align: middle;
+}
+
+.discord-widget .discord-content {
+    padding: 10px;
+    text-align: center;
 }
 
 /* decklist names and user names */
