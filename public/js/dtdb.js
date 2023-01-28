@@ -290,9 +290,9 @@ function update_deck(options) {
             '<a href="'
             + Routing.generate('cards_zoom', {card_code: Legend.code})
             + '" data-target="#cardModal" data-remote="false" class="card" data-toggle="modal" data-index="' + Legend.code + '">'
+            + Legend.title
             + (Legend.isMultiple ? (' [' + Legend.pack_code  + ']') : '')
-            + Legend.title +
-            '</a>'
+            + '</a>'
         );
         $('#img_legend').prop('src', Legend.imagesrc);
     } else {
