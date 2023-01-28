@@ -9,6 +9,7 @@ parameters:
   short_cache: '%env(int:APP_CACHE_SHORT)%'
   supported_locales: en
   allow_search_engine_tracking: "%env(bool:APP_ALLOW_SEARCH_ENGINE_TRACKING)%"
+  discord_invite: "%env(default::APP_DISCORD_INVITE)%"
 services:
     # default configuration for services in *this* file
     _defaults:

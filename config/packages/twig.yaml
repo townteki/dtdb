@@ -10,5 +10,6 @@ twig:
         supported_locales: '%supported_locales%'
         texts: '@App\Services\Texts'
         allow_search_engine_tracking: '%allow_search_engine_tracking%'
+        discord_invite: '%discord_invite%'
     form_themes:
         - 'bootstrap_3_layout.html.twig'
