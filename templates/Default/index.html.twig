@@ -128,21 +128,20 @@
                                 src="{{ asset('/images/pineboxentertainment.png') }}" width="214" height="60"
                                 alt="Pine Box Entertainment"></a>
                 </div>
-                <div id="discord" style="padding:10px">
-                    <script type="text/javascript">
-                        discordWidget.init({
-                            serverId: '643518732999589892',
-                            title: '<img src=' + "{{ asset('/images/doomtown-reloaded-logo2.png') }}" + ' width="66" height="30"> on Discord',
-                            join: true,
-                            alphabetical: false,
-                            theme: 'light',
-                            showAllUsers: false,
-                            hideChannels: true
-                        });
-                        discordWidget.render();
-                    </script>
-                </div>
-                <div class="discord-widget"></div>
+                {# show a widget with a call-to-action button if there's a discord invitation link configured #}
+                {% if discord_invite %}
+                    <div class="discord-widget">
+                        <h3 class="discord-title">
+                            <img src="{{ asset('/images/doomtown-reloaded-logo2.png') }}" alt="Doomtown logo">
+                            <span>on Discord</span>
+                        </h3>
+                        <div class="discord-content">
+                            <form action="{{ discord_invite }}" target="_blank">
+                                <button class="btn btn-primary" type="submit">Join Chat/App and Find Opponents</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
                 <div id="recent_other">
                     <h3 class="section">Card reviews <a href="{{ path('card_reviews_list') }}" class="small">more</a>
                     </h3>
@@ -167,7 +166,7 @@
                             </article>
                         {% endfor %}
                     </div>
-                </div><!-- #recent_other} -->
+                </div><!-- #recent_other}} -->
             </div><!-- #right-column -->
         </div> <!-- .row -->
     </div> <!-- .container -->
