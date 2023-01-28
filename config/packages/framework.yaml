@@ -1,7 +1,7 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     assets:
-        version: '2023011000'
+        version: '2023012700'
         # json_manifest_path: "%kernel.project_dir%/public/manifest.json"
     default_locale: '%locale%'
     translator: { fallbacks: ['%locale%'] }
