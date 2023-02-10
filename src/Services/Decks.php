@@ -10,13 +10,18 @@ use App\Entity\Pack;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
+// TCaR (There Comes a Reckoning) is a first expansion published by PBE
+const TCAR = array(
+    'cyclenumber' => 11,
+    'number' => 1
+);
+
 class Decks
 {
     protected EntityManagerInterface $entityManager;
     protected Judge $judge;
     protected Diff $diff;
     protected LoggerInterface $logger;
-    protected array $tcar;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -28,10 +33,6 @@ class Decks
         $this->judge = $judge;
         $this->diff = $diff;
         $this->logger = $logger;
-        $this->tcar = array(
-            'cyclenumber' => 11,
-            'number' => 1
-        );
     }
 
 
@@ -245,8 +246,9 @@ class Decks
         } elseif (!is_array($tags)) {
             $tags = array($tags);
         }
+        // TCaR is used to distinguish between WWE (standard) format and Old Timer (legacy) format
         $formattag = 'oldtimer';
-        if ($earliestPack->getCycle()->getNumber() > $this->tcar['cyclenumber'] || ($earliestPack->getCycle()->getNumber() == $this->tcar['cyclenumber'] && $earliestPack->getNumber() >= $this->tcar['number'])) {
+        if ($earliestPack->getCycle()->getNumber() > TCAR['cyclenumber'] || ($earliestPack->getCycle()->getNumber() == TCAR['cyclenumber'] && $earliestPack->getNumber() >= TCAR['number'])) {
             $formattag = 'wwe';
         }
         $addtag = true;

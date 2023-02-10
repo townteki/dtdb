@@ -387,8 +387,10 @@ function update_deck(options) {
     $('#latestpack').html('Cards up to <i>' + LatestPack.name + '</i>');
     check_composition();
     check_distribution();
+    // TCaR is used to distinguish between WWE (standard) format and
+    // Old Timer (legacy) format    
     var format = 'Old Timer';
-    if (EarliestPack.cyclenumber > PBEfirstPack.cyclenumber || (EarliestPack.cyclenumber == PBEfirstPack.cyclenumber && EarliestPack.number >= PBEfirstPack.number)) {
+    if (EarliestPack.cyclenumber > TCaRPack.cyclenumber || (EarliestPack.cyclenumber == TCaRPack.cyclenumber && EarliestPack.number >= TCaRPack.number)) {
         format = 'Weird West Edition';
     }
     $('#wweformat').html('Format is <b>' + format + '</b>');
@@ -531,7 +533,8 @@ var SuitNames = ['Spades', 'Diams', 'Hearts', 'Clubs'];
 var RankNames = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 var EarliestPack = null;
 var LatestPack = null;
-var PBEfirstPack = {cyclenumber: 11, number: 1};
+// TCaR (There Comes a Reckoning) is the first pack published by PBE
+var TCaRPack = {cyclenumber: 11, number: 1};
 $(function () {
 
     if (Modernizr.touch) {
