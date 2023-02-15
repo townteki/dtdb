@@ -10,18 +10,19 @@ use App\Entity\Pack;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
-// TCaR (There Comes a Reckoning) is a first expansion published by PBE
-const TCAR = array(
-    'cyclenumber' => 11,
-    'number' => 1
-);
-
 class Decks
 {
     protected EntityManagerInterface $entityManager;
     protected Judge $judge;
     protected Diff $diff;
     protected LoggerInterface $logger;
+
+    // TCaR (There Comes a Reckoning) is a first expansion published by PBE
+    public const TCAR_CYCLENUMBER = 11;
+    public const TCAR_NUMBER = 1;
+
+    public const FORMAT_TAG_OLDTIMER = 'oldtimer';
+    public const FORMAT_TAG_WWE = 'wwe';
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -224,7 +225,7 @@ class Decks
                 $earliestPack = $pack;
             } elseif ($earliestPack->getCycle()->getNumber() == $pack->getCycle()->getNumber() && $earliestPack->getNumber() > $pack->getNumber()) {
                 $earliestPack = $pack;
-            }            
+            }
             if ($card->getType()->getName() == "Outfit") {
                 $outfit = $card;
             }
@@ -244,29 +245,25 @@ class Decks
             $gang_code = $outfit->getGang()->getCode();
             $tags = array($gang_code);
         } elseif (!is_array($tags)) {
-            $tags = array($tags);
+            $tags = explode(' ', $tags);
         }
+
+        // remove any pre-existing format tags
+        $tags = array_diff($tags, [self::FORMAT_TAG_OLDTIMER, self::FORMAT_TAG_WWE]);
+
         // TCaR is used to distinguish between WWE (standard) format and Old Timer (legacy) format
-        $formattag = 'oldtimer';
-        if ($earliestPack->getCycle()->getNumber() > TCAR['cyclenumber'] || ($earliestPack->getCycle()->getNumber() == TCAR['cyclenumber'] && $earliestPack->getNumber() >= TCAR['number'])) {
-            $formattag = 'wwe';
+        $formattag = self::FORMAT_TAG_OLDTIMER;
+        if (
+            $earliestPack->getCycle()->getNumber() > self::TCAR_CYCLENUMBER
+            || ($earliestPack->getCycle()->getNumber() == self::TCAR_CYCLENUMBER
+                && $earliestPack->getNumber() >= self::TCAR_NUMBER
+            )
+        ) {
+            $formattag = self::FORMAT_TAG_WWE;
         }
-        $addtag = true;
-        foreach ($tags as $tag) {
-            if ($tag == 'wwe' || $tag == 'oldtimer') {
-                if ($tag != $formattag) {
-                    unset($tags[$tag]);
-                } else {
-                    $addtag = false;
-                }
-            }
-        }
-        if ($addtag) {
-            array_push($tags, $formattag);
-        }
-        if (is_array($tags)) {
-            $tags = implode(' ', $tags);
-        }
+        $tags[] = $formattag;
+
+        $tags = implode(' ', $tags);
         $deck->setTags($tags);
         $this->entityManager->persist($deck);
 
