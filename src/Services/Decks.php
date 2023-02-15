@@ -17,6 +17,13 @@ class Decks
     protected Diff $diff;
     protected LoggerInterface $logger;
 
+    // TCaR (There Comes a Reckoning) is a first expansion published by PBE
+    public const TCAR_CYCLENUMBER = 11;
+    public const TCAR_NUMBER = 1;
+
+    public const FORMAT_TAG_OLDTIMER = 'oldtimer';
+    public const FORMAT_TAG_WWE = 'wwe';
+
     public function __construct(
         EntityManagerInterface $entityManager,
         Judge $judge,
@@ -196,6 +203,7 @@ class Decks
         $cards = array();
         /* @var Pack $latestPack */
         $latestPack = null;
+        $earliestPack = null;
         foreach ($content as $card_code => $info) {
             $card = $this->entityManager->getRepository(Card::class)->findOneBy(array(
                     "code" => $card_code
@@ -210,6 +218,13 @@ class Decks
                 $latestPack = $pack;
             } elseif ($latestPack->getCycle()->getNumber() == $pack->getCycle()->getNumber() && $latestPack->getNumber() < $pack->getNumber()) {
                 $latestPack = $pack;
+            }
+            if (! $earliestPack) {
+                $earliestPack = $pack;
+            } elseif ($earliestPack->getCycle()->getNumber() > $pack->getCycle()->getNumber()) {
+                $earliestPack = $pack;
+            } elseif ($earliestPack->getCycle()->getNumber() == $pack->getCycle()->getNumber() && $earliestPack->getNumber() > $pack->getNumber()) {
+                $earliestPack = $pack;
             }
             if ($card->getType()->getName() == "Outfit") {
                 $outfit = $card;
@@ -229,10 +244,26 @@ class Decks
             // tags can never be empty. if it is we put gang in
             $gang_code = $outfit->getGang()->getCode();
             $tags = array($gang_code);
+        } elseif (!is_array($tags)) {
+            $tags = explode(' ', $tags);
         }
-        if (is_array($tags)) {
-            $tags = implode(' ', $tags);
+
+        // remove any pre-existing format tags
+        $tags = array_diff($tags, [self::FORMAT_TAG_OLDTIMER, self::FORMAT_TAG_WWE]);
+
+        // TCaR is used to distinguish between WWE (standard) format and Old Timer (legacy) format
+        $formattag = self::FORMAT_TAG_OLDTIMER;
+        if (
+            $earliestPack->getCycle()->getNumber() > self::TCAR_CYCLENUMBER
+            || ($earliestPack->getCycle()->getNumber() == self::TCAR_CYCLENUMBER
+                && $earliestPack->getNumber() >= self::TCAR_NUMBER
+            )
+        ) {
+            $formattag = self::FORMAT_TAG_WWE;
         }
+        $tags[] = $formattag;
+
+        $tags = implode(' ', $tags);
         $deck->setTags($tags);
         $this->entityManager->persist($deck);
 
