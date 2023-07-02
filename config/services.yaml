@@ -45,10 +45,12 @@ services:
         arguments:
           $formFactory: '@fos_user.registration.form.factory'
 
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
     # Commands
     App\Command\:
       resource: '../src/Command/*'
+
+    ## Event listeners
+    App\EventListener\DecklistListener:
+      tags:
+        - { name: doctrine.event_listener, event: preUpdate }
+        - { name: doctrine.event_listener, event: prePersist }
