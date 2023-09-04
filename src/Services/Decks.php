@@ -242,8 +242,7 @@ class Decks
         }
         if (empty($tags)) {
             // tags can never be empty. if it is we put gang in
-            $gang_code = $outfit->getGang()->getCode();
-            $tags = array($gang_code);
+            $tags = $outfit->getGangCodes();
         } elseif (!is_array($tags)) {
             $tags = explode(' ', $tags);
         }

@@ -43,7 +43,15 @@ class Gang
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="gang")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Card", inversedBy="gangs")
+     * @ORM\JoinTable(name="card_gang",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="gang_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="card_id", referencedColumnName="id")
+     *   }
+     * )
      */
     protected $cards;
 

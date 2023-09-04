@@ -36,8 +36,6 @@ class Judge
             if ($type == "Outfit") {
                 continue;
             }
-            $elt['gang'] = str_replace(' ', '-', mb_strtolower(($card->getGang() ? $card->getGang()->getName() : '')));
-
             if (!isset($classeur[$type])) {
                 $classeur[$type] = array("qty" => 0, "slots" => array(), "start" => 0);
             }
@@ -72,6 +70,7 @@ class Judge
 
         $nb_jokers = 0;
         foreach ($cards as $elt) {
+            /** @var Card $card */
             $card = $elt['card'];
             $qty = $elt['qty'];
             $start = $elt['start'];
@@ -87,8 +86,8 @@ class Judge
                 $deckSize += $qty;
                 if ($start != 0) {
                     $startGR -= $card->getCost();
-                    if ($card->getGang() != null) {
-                        $gangStarting[$card->getGang()->getName()] = $card->getGang();
+                    if ($card->hasGangAffiliations()) {
+                        $gangStarting[] = $card->getGangCodes();
                     }
                 }
                 if ($card->getType()->getName() == "Dude") {
@@ -140,8 +139,9 @@ class Judge
                 return 'copies';
             }
         }
-        foreach ($gangStarting as $gang) {
-            if ($gang != $outfit->getGang()) {
+        $outfitGangCodes = $outfit->getGangCodes();
+        foreach ($gangStarting as $startingDudeGangCodes) {
+            if (! count(array_intersect($startingDudeGangCodes, $outfitGangCodes))) {
                 return 'startingposse';
             }
         }
