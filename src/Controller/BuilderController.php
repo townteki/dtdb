@@ -115,7 +115,7 @@ class BuilderController extends AbstractController
                     "slots" => $arr,
                     "name" => "New Deck",
                     "description" => "",
-                    "tags" => $card->getGang()->getCode(),
+                    "tags" => implode(' ', $card->getGangCodes()),
                     "id" => "",
                     "history" => [],
                     "unsaved" => 0,
