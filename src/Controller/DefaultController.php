@@ -156,25 +156,6 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/floorRules",
-     *     name="cards_floor",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function floorRulesAction()
-    {
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/floorRules.html.twig', ["pagetitle" => "Tournament Rules"], $response);
-    }
-
-    /**
-     * @Route(
      *     "/{_locale}/apidoc",
      *     name="cards_api",
      *     locale="en",
