@@ -194,25 +194,6 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/collectedRulings",
-     *     name="cards_collectedRulings",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function collectedRulingsAction()
-    {
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/collectedRulings.html.twig', ["pagetitle" => "Collected Rulings"], $response);
-    }
-
-    /**
-     * @Route(
      *     "/{_locale}/apidoc",
      *     name="cards_api",
      *     locale="en",
