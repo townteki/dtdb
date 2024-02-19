@@ -175,25 +175,6 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/octgnGuide",
-     *     name="cards_octgnGuide",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function octgnGuideAction()
-    {
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/octgnGuide.html.twig', ["pagetitle" => "Guide to OCTGN"], $response);
-    }
-
-    /**
-     * @Route(
      *     "/{_locale}/apidoc",
      *     name="cards_api",
      *     locale="en",
