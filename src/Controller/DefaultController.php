@@ -156,25 +156,6 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/structure",
-     *     name="cards_structure",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function structureAction()
-    {
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/structure.html.twig', ["pagetitle" => "Turn Structure"], $response);
-    }
-
-    /**
-     * @Route(
      *     "/{_locale}/faq",
      *     name="cards_faq",
      *     locale="en",
