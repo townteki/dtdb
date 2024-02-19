@@ -156,25 +156,6 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/extraRules",
-     *     name="cards_extraRules",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function extraRulesAction()
-    {
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/extraRules.html.twig', ["pagetitle" => "Additional Rules"], $response);
-    }
-
-    /**
-     * @Route(
      *     "/{_locale}/structure",
      *     name="cards_structure",
      *     locale="en",
