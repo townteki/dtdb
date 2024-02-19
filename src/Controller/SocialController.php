@@ -1303,38 +1303,6 @@ class SocialController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     "/{_locale}/donators",
-     *     name="donators",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl"
-     *     }
-     * )
-     * @param EntityManagerInterface $entityManager
-     * @param $shortCache
-     * @return Response
-     */
-    public function donatorsAction(EntityManagerInterface $entityManager, $shortCache)
-    {
-        $response = new Response();
-        $response->setPublic();
-        $response->setMaxAge($shortCache);
-        $dbh = $entityManager->getConnection();
-        $users = $dbh->executeQuery("SELECT * FROM user WHERE donation > 0 ORDER BY donation DESC, username", [])
-            ->fetchAll(PDO::FETCH_ASSOC);
-        return $this->render(
-            'Default/donators.html.twig',
-            [
-                'pagetitle' => 'The Gracious Donators',
-                'donators' => $users
-            ],
-            $response
-        );
-    }
-
-    /**
      * @param $filename
      * @param $outfit
      * @param $legend
