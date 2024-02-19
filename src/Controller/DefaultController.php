@@ -213,25 +213,6 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/oldRules",
-     *     name="cards_oldRules",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function oldRulesAction()
-    {
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/oldRules.html.twig', ["pagetitle" => "Rules Archives"], $response);
-    }
-
-    /**
-     * @Route(
      *     "/{_locale}/apidoc",
      *     name="cards_api",
      *     locale="en",
