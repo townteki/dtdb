@@ -156,25 +156,6 @@ class DefaultController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/faq",
-     *     name="cards_faq",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function faqAction()
-    {
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/faq.html.twig', ["pagetitle" => "FAQ"], $response);
-    }
-
-    /**
-     * @Route(
      *     "/{_locale}/floorRules",
      *     name="cards_floor",
      *     locale="en",
@@ -247,25 +228,6 @@ class DefaultController extends AbstractController
         $response = new Response();
         $response->setPrivate();
         return $this->render('Default/oldRules.html.twig', ["pagetitle" => "Rules Archives"], $response);
-    }
-
-    /**
-     * @Route(
-     *     "/{_locale}/oldFaqs",
-     *     name="cards_oldFaqs",
-     *     locale="en",
-     *     methods={"GET"},
-     *     requirements={
-     *         "_locale"="en|fr|de|es|it|pl",
-     *     }
-     * )
-     * @return Response
-     */
-    public function oldFaqsAction()
-    {
-        $response = new Response();
-        $response->setPrivate();
-        return $this->render('Default/oldFaqs.html.twig', ["pagetitle" => "FAQs Archives"], $response);
     }
 
     /**
