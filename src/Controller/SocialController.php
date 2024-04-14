@@ -137,7 +137,7 @@ class SocialController extends AbstractController
         $decklist->setTs(new DateTime());
         $decklist->setSignature($new_signature);
         $decklist->setOutfit($deck->getOutfit());
-        $decklist->setGang($deck->getOutfit()->getGang());
+        $decklist->setGang($deck->getOutfit()->getGangs()->first());
         $decklist->setLastPack($deck->getLastPack());
         $decklist->setNbvotes(0);
         $decklist->setNbfavorites(0);
