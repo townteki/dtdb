@@ -33,13 +33,7 @@
                     <li>
                         <a href="{{ path('admin_cycle_edit', { 'id': entity.id }) }}">Edit</a>
                     </li>
-                    <li>
-                        <form action="{{ path('admin_cycle_delete', { 'id': entity.id }) }}" method="post">
-                            <input type="hidden" name="_method" value="DELETE"/>
-                            {{ form_widget(delete_form) }}
-                            <button type="submit">Delete</button>
-                        </form>
-                    </li>
+                    <li>{{ form(delete_form) }}</li>
                 </ul>
             </div>
         </div>

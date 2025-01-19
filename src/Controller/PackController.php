@@ -6,6 +6,7 @@ use App\Entity\Pack;
 use App\Form\Type\PackType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,9 +35,8 @@ class PackController extends AbstractController
     public function createAction(EntityManagerInterface $entityManager, Request $request)
     {
         $entity = new Pack();
-        $form = $this->createForm(PackType::class, $entity);
+        $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $entityManager->persist($entity);
             $entityManager->flush();
@@ -56,8 +56,7 @@ class PackController extends AbstractController
     public function newAction()
     {
         $entity = new Pack();
-        $form = $this->createForm(PackType::class, $entity);
-
+        $form = $this->createCreateForm($entity);
         return $this->render('Pack/new.html.twig', [
             'entity' => $entity,
             'form' => $form->createView(),
@@ -94,14 +93,11 @@ class PackController extends AbstractController
     public function editAction(EntityManagerInterface $entityManager, $id)
     {
         $entity = $entityManager->getRepository(Pack::class)->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pack entity.');
         }
-
-        $editForm = $this->createForm(PackType::class, $entity);
+        $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('Pack/edit.html.twig', [
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
@@ -119,21 +115,17 @@ class PackController extends AbstractController
     public function updateAction(EntityManagerInterface $entityManager, Request $request, $id)
     {
         $entity = $entityManager->getRepository(Pack::class)->find($id);
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pack entity.');
         }
-
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(PackType::class, $entity);
+        $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
         if ($editForm->isValid()) {
             $entityManager->persist($entity);
             $entityManager->flush();
             return $this->redirect($this->generateUrl('admin_pack_edit', ['id' => $id]));
         }
-
         return $this->render('Pack/edit.html.twig', [
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
@@ -152,7 +144,6 @@ class PackController extends AbstractController
     {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $entity = $entityManager->getRepository(Pack::class)->find($id);
             if (!$entity) {
@@ -161,8 +152,36 @@ class PackController extends AbstractController
             $entityManager->remove($entity);
             $entityManager->flush();
         }
-
         return $this->redirect($this->generateUrl('admin_pack'));
+    }
+
+
+    /**
+     * @param Pack $entity
+     * @return FormInterface
+     */
+    protected function createCreateForm(Pack $entity)
+    {
+        $form = $this->createForm(PackType::class, $entity, [
+            'action' => $this->generateUrl('admin_pack_create'),
+            'method' => 'POST',
+        ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
+        return $form;
+    }
+
+    /**
+     * @param Pack $entity
+     * @return FormInterface
+     */
+    protected function createEditForm(Pack $entity)
+    {
+        $form = $this->createForm(PackType::class, $entity, [
+            'action' => $this->generateUrl('admin_pack_update', ['id' => $entity->getId()]),
+            'method' => 'PUT',
+        ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
+        return $form;
     }
 
     /**
@@ -171,8 +190,10 @@ class PackController extends AbstractController
      */
     protected function createDeleteForm($id)
     {
-        return $this->createFormBuilder(['id' => $id])
-            ->add('id', 'hidden')
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_pack_delete', ['id' => $id]))
+            ->setMethod('DELETE')
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 }
