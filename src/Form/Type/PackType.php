@@ -4,6 +4,7 @@ namespace App\Form\Type;
 
 use App\Entity\Cycle;
 use App\Entity\Pack;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +19,7 @@ class PackType extends AbstractType
             ->add('released')
             ->add('size')
             ->add('number')
-            ->add('cycle', 'entity', array('class' => Cycle::class, 'choice_label' => 'name'));
+            ->add('cycle', EntityType::class, array('class' => Cycle::class, 'choice_label' => 'name'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

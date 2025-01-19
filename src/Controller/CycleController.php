@@ -6,6 +6,7 @@ use App\Entity\Cycle;
 use App\Form\Type\CycleType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,14 +37,13 @@ class CycleController extends AbstractController
     public function createAction(EntityManagerInterface $entityManager, Request $request)
     {
         $entity  = new Cycle();
-        $form = $this->createForm(CycleType::class, $entity);
+        $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $entityManager->persist($entity);
             $entityManager->flush();
             return $this->redirect($this->generateUrl('admin_cycle_show', ['id' => $entity->getId()]));
         }
-
         return $this->render('Cycle/new.html.twig', [
             'entity' => $entity,
             'form' => $form->createView(),
@@ -57,7 +57,7 @@ class CycleController extends AbstractController
     public function newAction()
     {
         $entity = new Cycle();
-        $form = $this->createForm(CycleType::class, $entity);
+        $form = $this->createCreateForm($entity);
         return $this->render('Cycle/new.html.twig', [
             'entity' => $entity,
             'form' => $form->createView(),
@@ -95,7 +95,7 @@ class CycleController extends AbstractController
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Cycle entity.');
         }
-        $editForm = $this->createForm(CycleType::class, $entity);
+        $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
         return $this->render('Cycle/edit.html.twig', [
             'entity' => $entity,
@@ -118,7 +118,7 @@ class CycleController extends AbstractController
             throw $this->createNotFoundException('Unable to find Cycle entity.');
         }
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(CycleType::class, $entity);
+        $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
         if ($editForm->isValid()) {
             $entityManager->persist($entity);
@@ -155,14 +155,43 @@ class CycleController extends AbstractController
     }
 
     /**
+     * @param Cycle $entity
+     * @return FormInterface
+     */
+    protected function createCreateForm(Cycle $entity)
+    {
+        $form = $this->createForm(CycleType::class, $entity, [
+            'action' => $this->generateUrl('admin_cycle_create'),
+            'method' => 'POST',
+        ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
+        return $form;
+    }
+
+    /**
+     * @param Cycle $entity
+     * @return FormInterface
+     */
+    protected function createEditForm(Cycle $entity)
+    {
+        $form = $this->createForm(CycleType::class, $entity, [
+            'action' => $this->generateUrl('admin_cycle_update', ['id' => $entity->getId()]),
+            'method' => 'PUT',
+        ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
+        return $form;
+    }
+
+    /**
      * @param $id
      * @return FormInterface
      */
     protected function createDeleteForm($id)
     {
-        return $this->createFormBuilder(['id' => $id])
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('admin_cycle_delete', ['id' => $id]))
+            ->setMethod('DELETE')
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
+            ->getForm();
     }
 }
