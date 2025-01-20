@@ -210,14 +210,11 @@ class Card
     protected $shooter;
 
     /**
-     * @var Gang
+     * @var Collection
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Gang", inversedBy="cards")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="gang_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToMany(targetEntity="App\Entity\Gang", mappedBy="cards")
      */
-    protected $gang;
+    protected $gangs;
 
     /**
      * Constructor
@@ -226,6 +223,7 @@ class Card
     {
         $this->decklists = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->gangs = new ArrayCollection();
     }
 
     /**
@@ -711,24 +709,62 @@ class Card
     /**
      * Set gang
      *
-     * @param Gang|null $gang
+     * @param Gang
      * @return Card
      */
-    public function setGang(Gang $gang = null)
+    public function addGang(Gang $gang)
     {
-        $this->gang = $gang;
+        $this->gangs[] = $gang;
 
         return $this;
     }
 
     /**
-     * Get gang
+     * Get gangs
      *
-     * @return Gang
+     * @return Collection
      */
-    public function getGang()
+    public function getGangs()
     {
-        return $this->gang;
+        return $this->gangs;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasGangAffiliations()
+    {
+        return !$this->gangs->isEmpty();
+    }
+
+    /**
+     * @return array
+     */
+    public function getGangCodes()
+    {
+        return $this->gangs->map(function (Gang $gang) {
+            return $gang->getCode();
+        })->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getGangNames()
+    {
+        return $this->gangs->map(function (Gang $gang) {
+            return $gang->getName();
+        })->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getGangLetters()
+    {
+        return $this->gangs->map(function (Gang $gang) {
+            return substr($gang->getCode(), 0, 1);
+        })->toArray();
     }
 
     /**

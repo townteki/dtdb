@@ -715,7 +715,7 @@ class ApiController extends AbstractController
         $decklist->setSignature($new_signature);
         $decklist->setOutfit($deck->getOutfit());
         $decklist->setGang($deck->getOutfit()
-            ->getGang());
+            ->getGangs()->first());
         $decklist->setLastPack($deck->getLastPack());
         $decklist->setNbvotes(0);
         $decklist->setNbfavorites(0);

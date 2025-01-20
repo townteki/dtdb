@@ -6,7 +6,7 @@
             {% for col in 0..3 %}
                 {% if row*4+col < cards|length %}
                     {% set card = cards[row*4+col] %}
-                    <div class="col-sm-3 icon-bg icon-{{ card.gang_code }}">
+                    <div class="col-sm-3">
                         <h5>
                             {{ suits.display_card_face(card.rank, card.suit|lower) }}
                             <a href="{{ card.url }}"
@@ -35,10 +35,14 @@
                             {{ card.illustrator }}
                         </p>
                         <p style="font-size:12px">
-                            {% if not card.gang is null %}<img
-                                src="{{ asset('/images/' ~ card.gang_code ~ '-20.png') }}"
-                                alt="{{ card.gang }}"
-                                title="{{ card.gang }}"> &bull; {% endif %}{{ card.pack }} #{{ card.number }}
+                            {% for i in 0..card.gangs|length-1 %}
+                                <img
+                                    src="{{ asset('/images/' ~ card.gang_codes[i] ~ '-20.png') }}"
+                                    alt="{{ card.gangs[i] }}"
+                                    title="{{ card.gangs[i] }}"
+                                >
+                            {% endfor %}
+                            &bull; {{ card.pack }} #{{ card.number }}
                         </p>
                     </div>
                 {% endif %}
