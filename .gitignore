@@ -27,6 +27,8 @@
 # Symfony v2 related
 # Todo: remove after upgrade to SF v4.
 web/bundles/
+#squatted image directroy for 7s5s
+public/images/7s5s
 
 # workspace gunk, ignore
 .settings/
