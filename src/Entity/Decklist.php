@@ -225,6 +225,13 @@ class Decklist
      */
     protected $tournament;
 
+
+    /**
+     * @var boolean isWwe;
+     * @ORM\Column(name="is_wwe", type="boolean", nullable=false,  options={"default"="0"})
+     */
+    protected $isWwe;
+
     public function __construct()
     {
         $this->slots = new ArrayCollection();
@@ -915,5 +922,21 @@ class Decklist
     public function getTournament()
     {
          return $this->tournament;
+    }
+
+    /**
+     * @param bool $isWwe
+     * @return $this
+     */
+    public function setIsWwe(bool $isWwe) {
+        $this->isWwe = $isWwe;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsWwe() {
+        return $this->isWwe;
     }
 }
