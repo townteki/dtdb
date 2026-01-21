@@ -21,10 +21,15 @@
                        class="card card-title{% if card.available == false %} card-preview{% endif %}"
                        data-index="{{ card.code }}">{{ card.title }}</a>
                 </td>
-                <td data-th="{% trans %}Gang{% endtrans %}">{% if card.gang %}<img
-                        src="{{ asset('/images/' ~ card.gang_code ~ '-20.png') }}"
-                        alt="{{ card.gang }}"
-                        title="{{ card.gang }}">{% endif %}</td>
+                <td data-th="{% trans %}Gang{% endtrans %}">
+                    {% for i in 0..card.gangs|length-1 %}
+                        <img
+                            src="{{ asset('/images/' ~ card.gang_codes[i] ~ '-20.png') }}"
+                            alt="{{ card.gangs[i] }}"
+                            title="{{ card.gangs[i] }}"
+                        >
+                    {% endfor %}
+                </td>
                 <td data-th="Type">{{ card.type }}</td>
                 <td data-th="Value">{{ suits.display_card_face(card.rank, card.suit|lower) }}</td>
                 <td data-th="Cost">{{ card.cost }}</td>

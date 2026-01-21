@@ -120,7 +120,7 @@ class CardsData
         $qb->leftJoin('c.pack', 'p')
             ->leftJoin('p.cycle', 'y')
             ->leftJoin('c.type', 't')
-            ->leftJoin('c.gang', 'g')
+            ->leftJoin('c.gangs', 'g')
             ->leftJoin('t.suit', 's')
             ->leftJoin('c.shooter', 'h');
 
@@ -507,7 +507,7 @@ class CardsData
                 $qb->orderBy('c.code');
                 break;
             case 'gang':
-                $qb->addOrderBy('c.gang')->addOrderBy('c.type');
+                $qb->addOrderBy('g.name')->addOrderBy('c.type');
                 break;
             case 'type':
                 $qb->addOrderBy('c.type')->addOrderBy('c.gang');
@@ -595,9 +595,9 @@ class CardsData
             "keywords" => $card->getKeywords() ? $card->getKeywords() : '',
             "text" => $card->getText() ? $card->getText() : '',
             "cost" => $card->getCost(),
-            "gang" => $card->getGang() ? $card->getGang()->getName() : 'Neutral',
-            "gang_code" => $card->getGang() ? $card->getGang()->getCode() : 'neutral',
-            "gang_letter" => $card->getGang() ? substr($card->getGang()->getCode(), 0, 1) : '-',
+            "gangs" => $card->hasGangAffiliations() ? $card->getGangNames() : ['Neutral'],
+            "gang_codes" => $card->hasGangAffiliations() ? $card->getGangCodes() : ['neutral'],
+            "gang_letters" => $card->hasGangAffiliations() ? $card->getGangLetters() : ['-'],
             "flavor" => $card->getFlavor($locale) ? $card->getFlavor($locale) : '',
             "illustrator" => $card->getIllustrator() ? $card->getIllustrator() : '',
             "number" => $card->getNumber(),

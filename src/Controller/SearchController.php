@@ -43,12 +43,10 @@ class SearchController extends AbstractController
         }
         $meta = $card->getTitle()
             . ", a "
-            . ($card->getGang() ? $card->getGang()->getName() : '')
-            . " "
             . $card->getType()->getName()
             . " card for Doomtown from the set "
             . $card->getPack()->getName()
-            . " published by AEG.";
+            . ".";
         return $this->forward(
             'App\Controller\SearchController::displayAction',
             [
@@ -413,7 +411,7 @@ class SearchController extends AbstractController
                 $sortfields = [
                     'set' => 'pack',
                     'name' => 'title',
-                    'gang' => 'gang',
+                    'gang' => 'gangs',
                     'type' => 'type',
                     'cost' => 'cost',
                     'rank' => 'rank',
@@ -421,14 +419,26 @@ class SearchController extends AbstractController
 
                 $brokenlist = [];
                 for ($i = 0; $i < count($cards); $i++) {
-                    $val = $cards[$i][$sortfields[$sort]];
-                    if ($sort == "name") {
-                        $val = substr($val, 0, 1);
+                    switch ($sort) {
+                        case 'gang':
+                            $vals = $cards[$i]['gangs'];
+                            foreach ($vals as $val) {
+                                if (!isset($brokenlist[$val])) {
+                                    $brokenlist[$val] = [];
+                                }
+                                array_push($brokenlist[$val], $cards[$i]);
+                            }
+                            break;
+                        default:
+                            $val = $cards[$i][$sortfields[$sort]];
+                            if ($sort == "name") {
+                                $val = substr($val, 0, 1);
+                            }
+                            if (!isset($brokenlist[$val])) {
+                                $brokenlist[$val] = [];
+                            }
+                            array_push($brokenlist[$val], $cards[$i]);
                     }
-                    if (!isset($brokenlist[$val])) {
-                        $brokenlist[$val] = [];
-                    }
-                    array_push($brokenlist[$val], $cards[$i]);
                 }
                 $cards = $brokenlist;
             }

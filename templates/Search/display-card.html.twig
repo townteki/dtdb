@@ -37,10 +37,13 @@
                                 </div>
                                 <div class="card-illustrator">
                                     <small>
-                                        {% if card.gang %}<img
-                                            src="{{ asset('/images/' ~ card.gang_code ~ '-20.png') }}"
-                                            alt="{{ card.gang}}"
-                                            title="{{ card.gang }}">{% endif %} &bull;
+                                        {% for i in 0..card.gangs|length-1 %}
+                                            <img
+                                                src="{{ asset('/images/' ~ card.gang_codes[i] ~ '-20.png') }}"
+                                                alt="{{ card.gangs[i] }}"
+                                                title="{{ card.gangs[i] }}"
+                                            >
+                                        {% endfor %} &bull;
                                         {% if card.illustrator %}{{ card.illustrator }} &bull; {% endif %}{{ card.pack }}
                                         #{{ card.number }}
                                         {% for alternative in card.alternatives %}

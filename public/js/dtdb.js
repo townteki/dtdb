@@ -327,8 +327,8 @@ function update_deck(options) {
         if (DisplaySort === 'type') {
             criteria = record.type_code;
         } else if (DisplaySort === 'gang') {
-            criteria = record.gang_code;
-            if (record.gang_code === 'neutral' && record.type === "Dude") criteria = 'drifters'
+            criteria = record.gang_codes[0];
+            if (record.gang_codes[0] === 'neutral' && record.type === "Dude") criteria = 'drifters'
             if (record.type_code == 'joker') criteria = 'Joker';
         } else if (DisplaySort === 'suit') {
             criteria = record.suit;
@@ -388,7 +388,7 @@ function update_deck(options) {
     check_composition();
     check_distribution();
     // TCaR is used to distinguish between WWE (standard) format and
-    // Old Timer (legacy) format    
+    // Old Timer (legacy) format
     var format = 'Old Timer';
     if (EarliestPack.cyclenumber > TCaRPack.cyclenumber || (EarliestPack.cyclenumber == TCaRPack.cyclenumber && EarliestPack.number >= TCaRPack.number)) {
         format = 'Weird West Edition';
